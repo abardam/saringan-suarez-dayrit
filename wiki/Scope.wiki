@@ -48,13 +48,7 @@ For the web client, the system must allow all visitors to view the world map whi
    * Show events of a particular category only
 
 
-For the web service we will be providing the following information to 
-
-the third party. Note that we shall not be providing the map engine 
-
-because what matters are the events and its location (latitude and 
-
-longitude) which can be used using any map. 
+For the web service we will be providing the following information to the third party. Note that we shall not be providing the map engine because what matters are the events and its location (latitude and longitude) which can be used using any map. 
 
 *a.)	Events information*
 
