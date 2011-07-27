@@ -33,6 +33,8 @@ For the web client, the system must allow all visitors to view the world map whi
 
    * Choosing the category of an event
 
+   * Commenting on an event
+
 *e.)	Filtering pushpins on the map*
 
    * Show friends’ events only
@@ -42,3 +44,5 @@ For the web client, the system must allow all visitors to view the world map whi
    * Show events within a particular region only
 
    * Show hot events only (default)
+
+   * Show events of a particular category only
