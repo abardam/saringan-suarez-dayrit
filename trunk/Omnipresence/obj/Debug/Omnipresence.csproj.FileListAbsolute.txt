@@ -1,0 +1,5 @@
+C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence\bin\Omnipresence.dll
+C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence\bin\Omnipresence.pdb
+C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence\obj\Debug\Omnipresence.dll
+C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence\obj\Debug\Omnipresence.pdb
