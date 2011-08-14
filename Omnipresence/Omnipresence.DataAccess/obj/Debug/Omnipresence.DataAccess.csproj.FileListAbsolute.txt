@@ -1,0 +1,12 @@
+C:\Users\f205\Desktop\Omnipresence\Omnipresence.DataAccess\bin\Debug\Omnipresence.DataAccess.dll.config
+C:\Users\f205\Desktop\Omnipresence\Omnipresence.DataAccess\bin\Debug\Omnipresence.DataAccess.dll
+C:\Users\f205\Desktop\Omnipresence\Omnipresence.DataAccess\bin\Debug\Omnipresence.DataAccess.pdb
+C:\Users\f205\Desktop\Omnipresence\Omnipresence.DataAccess\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\f205\Desktop\Omnipresence\Omnipresence.DataAccess\obj\Debug\Omnipresence.DataAccess.dll
+C:\Users\f205\Desktop\Omnipresence\Omnipresence.DataAccess\obj\Debug\Omnipresence.DataAccess.pdb
+C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence.DataAccess\bin\Debug\Omnipresence.DataAccess.dll.config
+C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence.DataAccess\bin\Debug\Omnipresence.DataAccess.dll
+C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence.DataAccess\bin\Debug\Omnipresence.DataAccess.pdb
+C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence.DataAccess\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence.DataAccess\obj\Debug\Omnipresence.DataAccess.dll
+C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence.DataAccess\obj\Debug\Omnipresence.DataAccess.pdb

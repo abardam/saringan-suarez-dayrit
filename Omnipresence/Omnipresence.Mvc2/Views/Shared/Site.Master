@@ -1,0 +1,92 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../../Scripts/jquery-1.4.1.min.js"></script>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</head>
+
+<body>
+    <%--<div class="page">
+        <div id="header">
+            <div id="title">
+                <h1>Omnipresence: A Location Based Social Network</h1>
+            </div>
+            
+            <div id="logindisplay">
+                <% Html.RenderPartial("LogOnUserControl"); %>
+            </div> 
+            
+            <div id="menucontainer">
+                <ul id="menu">              
+                    <li><%: Html.ActionLink("Home", "Index", "Home")%></li>
+                    <li><%: Html.ActionLink("Profile", "Profile", "Home") %></li>
+                    <li><%: Html.ActionLink("About", "About", "Home")%></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="main">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </div>
+
+        <div id="footer">
+            <asp:ContentPlaceHolder ID="FooterContent" runat="server" />
+            Brought to you by the Omni Team 2011-2012
+        </div>
+    </div>--%>
+
+    <div class="page">
+        <div class="tile" id="top">
+                <div class="tile" id="topLeft">
+                    <asp:ContentPlaceHolder ID="TopLeftContent" runat="server"/>
+                </div>
+
+                <div class="tile" id="topCenter">
+                    <asp:ContentPlaceHolder ID="TopCenterContent" runat="server"/>
+                </div>
+
+                <div class="tile" id="topRight">
+                    <asp:ContentPlaceHolder ID="TopRightContent" runat="server"/>
+                    <div id="menucontainer">
+                        <ul id="menu">
+                            <% Html.RenderPartial("TabItemsUserControl"); %>
+                        </ul>
+                    </div>
+                </div>
+        </div>
+
+        <div class="tile" id="middle">
+                <div class="tile" id="middleLeft">
+                    <asp:ContentPlaceHolder ID="MiddleLeftContent" runat="server" />
+                </div>
+
+                <div class="tile" id="middleCenter">
+                    <asp:ContentPlaceHolder ID="MiddleCenterContent" runat="server" />
+                </div>
+
+                <div class="tile" id="middleRight">
+                    <asp:ContentPlaceHolder ID="MiddleRightContent" runat="server" />
+                </div>
+        </div>
+
+        <div class="tile" id="bottom">
+                <div class="tile" id="bottomLeft">
+                    Brought to you by the Omni Team 2011-2012
+                    <asp:ContentPlaceHolder ID="BottomLeftContent" runat="server" />
+                </div>
+
+                <div class="tile" id="bottomCenter">
+                    <asp:ContentPlaceHolder ID="BottomCenterContent" runat="server" />
+                </div>
+
+                <div class="tile" id="bottomRight">
+                    <asp:ContentPlaceHolder ID="BottomRightContent" runat="server" />
+                </div>
+        </div>
+    </div>
+</body>
+</html>
