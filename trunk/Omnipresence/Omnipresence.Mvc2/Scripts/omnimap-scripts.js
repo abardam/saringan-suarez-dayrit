@@ -114,12 +114,20 @@ function displayInfoWindow(markerNum) {
         var comment = markerArray[markerNum].comments[i];
         contentString += "<p> <strong>" + comment.username + ": </strong>" + comment.content + "</p>";
     };
-
-    contentString += '<p><form name="comment' + markerNum
-				+ '" action="" > <textarea id="comment'
+    
+    /*contentString += '<p><form name="comment"'
+                + 'action="/Home/Comment" > <textarea id="comment'
 				+ '">Add new comment</textarea> '
 				+ '<input value ="Comment!" type="button" onclick="addComment(' + markerNum
-				+ ', this.form)"/></form></p>'
+				+ ', this.form)"/>'
+                + '<input type="hidden" name="markerNum" value="' + markerNum + '">'
+                + '</form></p>'*/
+
+    contentString += '<p><form name="comment" action="/Home/About" method="post">'
+                + '<textarea id="comment" name="comm">HARHAR</textarea> '
+                + '<input type="hidden" name="markerNum" value="' + markerNum + '">'
+				+ '<input type="submit"/>'
+                + '</form></p>'
 
     contentString +=
 				'<p><video width="300" height="250" controls="controls" autoplay="autoplay">'
@@ -147,7 +155,7 @@ function addComment(markerNum, form) {
     var comment = new Comment("Enzo");
     comment.content = form.comment.value;
     markerArray[markerNum].comments.push(comment);
-    closeBoxes();
+    //closeBoxes();
     return false;
 }
 

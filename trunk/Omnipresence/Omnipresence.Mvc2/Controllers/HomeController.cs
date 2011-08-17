@@ -32,5 +32,11 @@ namespace Omnipresence.Mvc2.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult About(string comm, int markerNum)
+        {
+            return null;
+        }
     }
 }
