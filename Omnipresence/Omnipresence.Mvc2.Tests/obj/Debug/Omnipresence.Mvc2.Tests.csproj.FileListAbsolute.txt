@@ -22,3 +22,11 @@ C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence
 C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.Mvc2.pdb
 C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence.Mvc2.Tests\obj\Debug\Omnipresence.Mvc2.Tests.dll
 C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence.Mvc2.Tests\obj\Debug\Omnipresence.Mvc2.Tests.pdb
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.Mvc2.Tests.dll.config
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.Mvc2.Tests.dll
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.Mvc2.Tests.pdb
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.Mvc2.dll
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.Mvc2.pdb
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\obj\Debug\Omnipresence.Mvc2.Tests.dll
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\obj\Debug\Omnipresence.Mvc2.Tests.pdb

@@ -12,3 +12,10 @@ C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence
 C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence.Processing\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence.Processing\obj\Debug\Omnipresence.Processing.dll
 C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence.Processing\obj\Debug\Omnipresence.Processing.pdb
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Processing\bin\Debug\Omnipresence.Processing.dll
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Processing\bin\Debug\Omnipresence.Processing.pdb
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Processing\bin\Debug\Omnipresence.DataAccess.dll
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Processing\bin\Debug\Omnipresence.DataAccess.pdb
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Processing\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Processing\obj\Debug\Omnipresence.Processing.dll
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Processing\obj\Debug\Omnipresence.Processing.pdb
