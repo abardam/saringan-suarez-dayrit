@@ -66,7 +66,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -76,8 +79,12 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Scripts\omnimap-scripts.js" />
-    <Content Include="Views\Home\Friends.aspx" />
-    <Content Include="Views\Home\Profile.aspx" />
+    <Content Include="Views\Friends\Add.aspx" />
+    <Content Include="Views\Friends\Delete.aspx" />
+    <Content Include="Views\Friends\Index.aspx" />
+    <Content Include="Views\Map\Index.aspx" />
+    <Content Include="Views\Profile\Edit.aspx" />
+    <Content Include="Views\Profile\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

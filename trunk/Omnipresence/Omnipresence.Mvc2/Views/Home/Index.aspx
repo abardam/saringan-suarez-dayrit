@@ -10,19 +10,6 @@
     <script type="text/javascript" src="../../Scripts/omnimap-scripts.js"></script>
 </asp:Content>
 
-<%--<asp:Content ID="indexMain" ContentPlaceHolderID="MiddleCenterContent" runat="server">
-    <h2><%: ViewData["Message"] %></h2>
-    <p>
-        <div id="map_canvas">
-        </div>
-    </p>
-</asp:Content>--%>
-
-<%--<asp:Content ID="indexFooter" ContentPlaceHolderID="FootContent" runat="server">
-    Brought to you by the Omni Team 2011-2012
-</asp:Content>--%>
-
-
 <asp:Content ID="TopLeftContent" ContentPlaceHolderID="TopLeftContent" runat="server">
     <div class="banner">
         <h1>Omnipresence: A Location Based Social Network</h1>

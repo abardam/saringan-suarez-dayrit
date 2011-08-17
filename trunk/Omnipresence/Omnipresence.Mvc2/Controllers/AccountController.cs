@@ -148,6 +148,5 @@ namespace Omnipresence.Mvc2.Controllers
         {
             return View();
         }
-
     }
 }
