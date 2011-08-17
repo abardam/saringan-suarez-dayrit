@@ -51,5 +51,13 @@ namespace Omnipresence.Processing
                 coreContainer.SaveChanges();
             }
         }
+
+        public UserAccount GetUserAccountByEmail(string email)
+        {
+            using (CoreContainer coreContainer = new CoreContainer())
+            {
+                return coreContainer.UserAccounts.Where(account => account.EmailAddress == email).FirstOrDefault();
+            }
+        }
     }
 }

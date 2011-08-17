@@ -115,12 +115,9 @@ function displayInfoWindow(markerNum) {
         contentString += "<p> <strong>" + comment.username + ": </strong>" + comment.content + "</p>";
     };
     
-    /*contentString += '<p><form name="comment"'
-                + 'action="/Home/Comment" > <textarea id="comment'
-				+ '">Add new comment</textarea> '
-				+ '<input value ="Comment!" type="button" onclick="addComment(' + markerNum
-				+ ', this.form)"/>'
-                + '<input type="hidden" name="markerNum" value="' + markerNum + '">'
+   /*contentString += '<p><form name="comment" action="">'
+                + '<textarea id="comment">Add new comment</textarea>'
+				+ '<input value ="Comment!" type="button" onclick="addComment(' + markerNum + ', this.form)"/>'
                 + '</form></p>'*/
 
     contentString += '<p><form name="comment" action="/Home/About" method="post">'

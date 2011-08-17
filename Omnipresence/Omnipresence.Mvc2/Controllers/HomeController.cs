@@ -16,18 +16,6 @@ namespace Omnipresence.Mvc2.Controllers
             return View();
         }
 
-        public ActionResult Profile()
-        {
-            ViewData["Name"] = "Emanuel Saringan";
-
-            return View();
-        }
-
-        public ActionResult Friends()
-        {
-            return View();
-        }
-
         public ActionResult About()
         {
             return View();
