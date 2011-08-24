@@ -7,7 +7,7 @@ using Omnipresence.DataAccess.Core;
 
 namespace Omnipresence.Processing
 {
-    public class AccountServices
+    public class AccountServices:IDisposable
     {
         public void CreateUserAccount(string username, string password, DateTime birthdate, string firstName, string lastName, 
             Gender gender, string emailAddress, string alternateEmailAddress, int reputation, string description, Country country, 
@@ -58,6 +58,11 @@ namespace Omnipresence.Processing
             {
                 return coreContainer.UserAccounts.Where(account => account.EmailAddress == email).FirstOrDefault();
             }
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

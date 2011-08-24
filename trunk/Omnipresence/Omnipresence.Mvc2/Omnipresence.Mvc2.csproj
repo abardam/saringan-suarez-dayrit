@@ -74,10 +74,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="OmniResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OmniResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Resource Include="Content\Images\circle.png" />
+    <Content Include="Scripts\json.js" />
+    <Content Include="Scripts\omnimap-scripts-old.js" />
     <Content Include="Scripts\omnimap-scripts.js" />
     <Content Include="Views\Friends\Add.aspx" />
     <Content Include="Views\Friends\Delete.aspx" />
@@ -85,7 +93,9 @@
     <Content Include="Views\Map\Index.aspx" />
     <Content Include="Views\Profile\Edit.aspx" />
     <Content Include="Views\Profile\Index.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -118,6 +128,22 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="OmniResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OmniResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Omnipresence.DataAccess\Omnipresence.DataAccess.csproj">
+      <Project>{949E77BD-AC15-45C5-85C7-45C23FFE0B51}</Project>
+      <Name>Omnipresence.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Omnipresence.Processing\Omnipresence.Processing.csproj">
+      <Project>{E96277E9-56FC-42BA-B725-FE603E235A5B}</Project>
+      <Name>Omnipresence.Processing</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

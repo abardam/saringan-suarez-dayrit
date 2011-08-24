@@ -5,361 +5,696 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Core.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-  <EntityContainer Name="CoreStoreContainer">
-    <EntitySet Name="Countries" EntityType="Core.Store.Countries" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Events" EntityType="Core.Store.Events" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="EventCategories" EntityType="Core.Store.EventCategories" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="EventComments" EntityType="Core.Store.EventComments" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Genders" EntityType="Core.Store.Genders" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Locations" EntityType="Core.Store.Locations" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="LogEvents" EntityType="Core.Store.LogEvents" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="LogEventTypes" EntityType="Core.Store.LogEventTypes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="MediaElements" EntityType="Core.Store.MediaElements" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UserAccounts" EntityType="Core.Store.UserAccounts" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UserAccountTypes" EntityType="Core.Store.UserAccountTypes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="VisibilityTypes" EntityType="Core.Store.VisibilityTypes" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_Country_UserAccount" Association="Core.Store.FK_Country_UserAccount">
-      <End Role="Country" EntitySet="Countries" />
-      <End Role="UserAccount" EntitySet="UserAccounts" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Event_EventComment" Association="Core.Store.FK_Event_EventComment">
-      <End Role="Event" EntitySet="Events" />
-      <End Role="EventComment" EntitySet="EventComments" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Event_Location" Association="Core.Store.FK_Event_Location">
-      <End Role="Event" EntitySet="Events" />
-      <End Role="Location" EntitySet="Locations" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Event_MediaElement" Association="Core.Store.FK_Event_MediaElement">
-      <End Role="Event" EntitySet="Events" />
-      <End Role="MediaElement" EntitySet="MediaElements" />
-    </AssociationSet>
-    <AssociationSet Name="FK_EventCategory_Event" Association="Core.Store.FK_EventCategory_Event">
-      <End Role="EventCategory" EntitySet="EventCategories" />
-      <End Role="Event" EntitySet="Events" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_Event" Association="Core.Store.FK_UserAccount_Event">
-      <End Role="UserAccount" EntitySet="UserAccounts" />
-      <End Role="Event" EntitySet="Events" />
-    </AssociationSet>
-    <AssociationSet Name="FK_VisibilityType_Event" Association="Core.Store.FK_VisibilityType_Event">
-      <End Role="VisibilityType" EntitySet="VisibilityTypes" />
-      <End Role="Event" EntitySet="Events" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_EventCategory" Association="Core.Store.FK_UserAccount_EventCategory">
-      <End Role="UserAccount" EntitySet="UserAccounts" />
-      <End Role="EventCategory" EntitySet="EventCategories" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_EventComment" Association="Core.Store.FK_UserAccount_EventComment">
-      <End Role="UserAccount" EntitySet="UserAccounts" />
-      <End Role="EventComment" EntitySet="EventComments" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_Gender" Association="Core.Store.FK_UserAccount_Gender">
-      <End Role="Gender" EntitySet="Genders" />
-      <End Role="UserAccount" EntitySet="UserAccounts" />
-    </AssociationSet>
-    <AssociationSet Name="FK_LogEventType_LogEvent" Association="Core.Store.FK_LogEventType_LogEvent">
-      <End Role="LogEventType" EntitySet="LogEventTypes" />
-      <End Role="LogEvent" EntitySet="LogEvents" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_LogEventType" Association="Core.Store.FK_UserAccount_LogEventType">
-      <End Role="UserAccount" EntitySet="UserAccounts" />
-      <End Role="LogEventType" EntitySet="LogEventTypes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserAccountType_UserAccount" Association="Core.Store.FK_UserAccountType_UserAccount">
-      <End Role="UserAccountType" EntitySet="UserAccountTypes" />
-      <End Role="UserAccount" EntitySet="UserAccounts" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Countries">
-    <Key>
-      <PropertyRef Name="CountryId" />
-    </Key>
-    <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CountryName" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="CountryFlag" Type="varbinary(max)" Nullable="true" />
-    <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Events">
-    <Key>
-      <PropertyRef Name="EventId" />
-    </Key>
-    <Property Name="EventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="varchar" Nullable="true" MaxLength="50" />
-    <Property Name="Description" Type="varchar" Nullable="false" MaxLength="300" />
-    <Property Name="StartTime" Type="time" Nullable="true" />
-    <Property Name="EndTime" Type="time" Nullable="true" />
-    <Property Name="Reputation" Type="int" Nullable="false" />
-    <Property Name="Duration" Type="int" Nullable="true" />
-    <Property Name="CreationTime" Type="datetime" Nullable="true" />
-    <Property Name="DeletionTime" Type="datetime" Nullable="false" />
-    <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
-    <Property Name="EventCategoryId" Type="int" Nullable="true" />
-    <Property Name="VisibilityTypeId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="EventCategories">
-    <Key>
-      <PropertyRef Name="EventCategoryId" />
-    </Key>
-    <Property Name="EventCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CategoryName" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="Icon" Type="varbinary(max)" Nullable="false" />
-    <Property Name="Description" Type="varchar" Nullable="true" MaxLength="200" />
-    <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="EventComments">
-    <Key>
-      <PropertyRef Name="EventCommentId" />
-    </Key>
-    <Property Name="EventCommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Comment" Type="varchar(max)" Nullable="false" />
-    <Property Name="Timestamp" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
-    <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
-    <Property Name="EventId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Genders">
-    <Key>
-      <PropertyRef Name="GenderId" />
-    </Key>
-    <Property Name="GenderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="GenderText" Type="varchar" Nullable="false" MaxLength="20" />
-    <Property Name="GenderDescription" Type="varchar" Nullable="true" MaxLength="100" />
-    <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Locations">
-    <Key>
-      <PropertyRef Name="LocationId" />
-    </Key>
-    <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Longitude" Type="float" Nullable="false" />
-    <Property Name="Latitude" Type="float" Nullable="false" />
-    <Property Name="Name" Type="varchar" Nullable="true" MaxLength="100" />
-    <Property Name="EventId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="LogEvents">
-    <Key>
-      <PropertyRef Name="LogEventId" />
-    </Key>
-    <Property Name="LogEventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Timestamp" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
-    <Property Name="LogMessage" Type="varchar" Nullable="false" MaxLength="1000" />
-    <Property Name="LogEventTypeId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="LogEventTypes">
-    <Key>
-      <PropertyRef Name="LogEventTypeId" />
-    </Key>
-    <Property Name="LogEventTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="LogEventTypeText" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="CreatedByUserAccountId" Type="int" Nullable="true" />
-  </EntityType>
-  <EntityType Name="MediaElements">
-    <Key>
-      <PropertyRef Name="MediaElementId" />
-    </Key>
-    <Property Name="MediaElementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MediaUrl" Type="varchar" Nullable="false" MaxLength="200" />
-    <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="Type" Type="int" Nullable="false" />
-    <Property Name="Size" Type="float" Nullable="false" />
-    <Property Name="EventId" Type="int" Nullable="false" />
-    <Property Name="UserAccountId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="UserAccounts">
-    <Key>
-      <PropertyRef Name="UserAccountId" />
-    </Key>
-    <Property Name="UserAccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Username" Type="varchar" Nullable="false" MaxLength="32" />
-    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="32" />
-    <Property Name="Birthdate" Type="datetime" Nullable="false" />
-    <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="32" />
-    <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="32" />
-    <Property Name="GenderId" Type="int" Nullable="false" />
-    <Property Name="EmailAddress" Type="varchar" Nullable="false" MaxLength="32" />
-    <Property Name="AlternateEmailAddress" Type="varchar" Nullable="true" MaxLength="32" />
-    <Property Name="Reputation" Type="int" Nullable="false" />
-    <Property Name="AvatarImage" Type="varbinary(max)" Nullable="true" />
-    <Property Name="Description" Type="varchar" Nullable="true" MaxLength="2000" />
-    <Property Name="CountryId" Type="int" Nullable="true" />
-    <Property Name="Timezone" Type="int" Nullable="true" />
-    <Property Name="UserAccountTypeId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="UserAccountTypes">
-    <Key>
-      <PropertyRef Name="UserAccountTypeId" />
-    </Key>
-    <Property Name="UserAccountTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserTypeText" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="UserTypeDescription" Type="varchar" Nullable="true" MaxLength="100" />
-    <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="VisibilityTypes">
-    <Key>
-      <PropertyRef Name="VisibilityTypeId" />
-    </Key>
-    <Property Name="VisibilityTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="VisibilityText" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="VisibilityDescription" Type="varchar" Nullable="true" MaxLength="100" />
-    <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_Country_UserAccount">
-    <End Role="Country" Type="Core.Store.Countries" Multiplicity="0..1" />
-    <End Role="UserAccount" Type="Core.Store.UserAccounts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Country">
-        <PropertyRef Name="CountryId" />
-      </Principal>
-      <Dependent Role="UserAccount">
-        <PropertyRef Name="CountryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Event_EventComment">
-    <End Role="Event" Type="Core.Store.Events" Multiplicity="1" />
-    <End Role="EventComment" Type="Core.Store.EventComments" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Event">
-        <PropertyRef Name="EventId" />
-      </Principal>
-      <Dependent Role="EventComment">
-        <PropertyRef Name="EventId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Event_Location">
-    <End Role="Event" Type="Core.Store.Events" Multiplicity="1" />
-    <End Role="Location" Type="Core.Store.Locations" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Event">
-        <PropertyRef Name="EventId" />
-      </Principal>
-      <Dependent Role="Location">
-        <PropertyRef Name="LocationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Event_MediaElement">
-    <End Role="Event" Type="Core.Store.Events" Multiplicity="1" />
-    <End Role="MediaElement" Type="Core.Store.MediaElements" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Event">
-        <PropertyRef Name="EventId" />
-      </Principal>
-      <Dependent Role="MediaElement">
-        <PropertyRef Name="EventId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_EventCategory_Event">
-    <End Role="EventCategory" Type="Core.Store.EventCategories" Multiplicity="0..1" />
-    <End Role="Event" Type="Core.Store.Events" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EventCategory">
-        <PropertyRef Name="EventCategoryId" />
-      </Principal>
-      <Dependent Role="Event">
-        <PropertyRef Name="EventCategoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccount_Event">
-    <End Role="UserAccount" Type="Core.Store.UserAccounts" Multiplicity="1" />
-    <End Role="Event" Type="Core.Store.Events" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserAccount">
-        <PropertyRef Name="UserAccountId" />
-      </Principal>
-      <Dependent Role="Event">
-        <PropertyRef Name="CreatedByUserAccountId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_VisibilityType_Event">
-    <End Role="VisibilityType" Type="Core.Store.VisibilityTypes" Multiplicity="1" />
-    <End Role="Event" Type="Core.Store.Events" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="VisibilityType">
-        <PropertyRef Name="VisibilityTypeId" />
-      </Principal>
-      <Dependent Role="Event">
-        <PropertyRef Name="VisibilityTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccount_EventCategory">
-    <End Role="UserAccount" Type="Core.Store.UserAccounts" Multiplicity="1" />
-    <End Role="EventCategory" Type="Core.Store.EventCategories" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserAccount">
-        <PropertyRef Name="UserAccountId" />
-      </Principal>
-      <Dependent Role="EventCategory">
-        <PropertyRef Name="CreatedByUserAccountId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccount_EventComment">
-    <End Role="UserAccount" Type="Core.Store.UserAccounts" Multiplicity="1" />
-    <End Role="EventComment" Type="Core.Store.EventComments" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserAccount">
-        <PropertyRef Name="UserAccountId" />
-      </Principal>
-      <Dependent Role="EventComment">
-        <PropertyRef Name="CreatedByUserAccountId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccount_Gender">
-    <End Role="Gender" Type="Core.Store.Genders" Multiplicity="1" />
-    <End Role="UserAccount" Type="Core.Store.UserAccounts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Gender">
-        <PropertyRef Name="GenderId" />
-      </Principal>
-      <Dependent Role="UserAccount">
-        <PropertyRef Name="GenderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_LogEventType_LogEvent">
-    <End Role="LogEventType" Type="Core.Store.LogEventTypes" Multiplicity="1" />
-    <End Role="LogEvent" Type="Core.Store.LogEvents" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="LogEventType">
-        <PropertyRef Name="LogEventTypeId" />
-      </Principal>
-      <Dependent Role="LogEvent">
-        <PropertyRef Name="LogEventTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccount_LogEventType">
-    <End Role="UserAccount" Type="Core.Store.UserAccounts" Multiplicity="0..1" />
-    <End Role="LogEventType" Type="Core.Store.LogEventTypes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserAccount">
-        <PropertyRef Name="UserAccountId" />
-      </Principal>
-      <Dependent Role="LogEventType">
-        <PropertyRef Name="CreatedByUserAccountId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccountType_UserAccount">
-    <End Role="UserAccountType" Type="Core.Store.UserAccountTypes" Multiplicity="1" />
-    <End Role="UserAccount" Type="Core.Store.UserAccounts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserAccountType">
-        <PropertyRef Name="UserAccountTypeId" />
-      </Principal>
-      <Dependent Role="UserAccount">
-        <PropertyRef Name="UserAccountTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
+        <EntityContainer Name="CoreStoreContainer">
+          <EntitySet Name="aspnet_Applications" EntityType="Core.Store.aspnet_Applications" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_Membership" EntityType="Core.Store.aspnet_Membership" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_Paths" EntityType="Core.Store.aspnet_Paths" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_PersonalizationAllUsers" EntityType="Core.Store.aspnet_PersonalizationAllUsers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_PersonalizationPerUser" EntityType="Core.Store.aspnet_PersonalizationPerUser" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_Profile" EntityType="Core.Store.aspnet_Profile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_Roles" EntityType="Core.Store.aspnet_Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_SchemaVersions" EntityType="Core.Store.aspnet_SchemaVersions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_Users" EntityType="Core.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_UsersInRoles" EntityType="Core.Store.aspnet_UsersInRoles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_WebEvent_Events" EntityType="Core.Store.aspnet_WebEvent_Events" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Countries" EntityType="Core.Store.Countries" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EventCategories" EntityType="Core.Store.EventCategories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EventComments" EntityType="Core.Store.EventComments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Events" EntityType="Core.Store.Events" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Genders" EntityType="Core.Store.Genders" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Locations" EntityType="Core.Store.Locations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LogEvents" EntityType="Core.Store.LogEvents" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LogEventTypes" EntityType="Core.Store.LogEventTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MediaElements" EntityType="Core.Store.MediaElements" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserAccounts" EntityType="Core.Store.UserAccounts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserAccountTypes" EntityType="Core.Store.UserAccountTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VisibilityTypes" EntityType="Core.Store.VisibilityTypes" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__aspnet_Me__Appli__44FF419A" Association="Core.Store.FK__aspnet_Me__Appli__44FF419A">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Me__UserI__45F365D3" Association="Core.Store.FK__aspnet_Me__UserI__45F365D3">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pa__Appli__7E37BEF6" Association="Core.Store.FK__aspnet_Pa__Appli__7E37BEF6">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__PathI__05D8E0BE" Association="Core.Store.FK__aspnet_Pe__PathI__05D8E0BE">
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+            <End Role="aspnet_PersonalizationAllUsers" EntitySet="aspnet_PersonalizationAllUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__PathI__0B91BA14" Association="Core.Store.FK__aspnet_Pe__PathI__0B91BA14">
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+            <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__UserI__0C85DE4D" Association="Core.Store.FK__aspnet_Pe__UserI__0C85DE4D">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pr__UserI__5BE2A6F2" Association="Core.Store.FK__aspnet_Pr__UserI__5BE2A6F2">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Ro__Appli__6754599E" Association="Core.Store.FK__aspnet_Ro__Appli__6754599E">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Us__Appli__30F848ED" Association="Core.Store.FK__aspnet_Us__Appli__30F848ED">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aspnet_UsersInRoles_aspnet_Roles" Association="Core.Store.FK_aspnet_UsersInRoles_aspnet_Roles">
+            <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+            <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aspnet_UsersInRoles_aspnet_Users" Association="Core.Store.FK_aspnet_UsersInRoles_aspnet_Users">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aspnet_UsersUserAccount" Association="Core.Store.FK_aspnet_UsersUserAccount">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Country_UserAccount" Association="Core.Store.FK_Country_UserAccount">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_EventComment" Association="Core.Store.FK_Event_EventComment">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="EventComments" EntitySet="EventComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Location" Association="Core.Store.FK_Event_Location">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_MediaElement" Association="Core.Store.FK_Event_MediaElement">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="MediaElements" EntitySet="MediaElements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventCategory_Event" Association="Core.Store.FK_EventCategory_Event">
+            <End Role="EventCategories" EntitySet="EventCategories" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LogEventType_LogEvent" Association="Core.Store.FK_LogEventType_LogEvent">
+            <End Role="LogEventTypes" EntitySet="LogEventTypes" />
+            <End Role="LogEvents" EntitySet="LogEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccount_Event" Association="Core.Store.FK_UserAccount_Event">
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccount_EventCategory" Association="Core.Store.FK_UserAccount_EventCategory">
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+            <End Role="EventCategories" EntitySet="EventCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccount_EventComment" Association="Core.Store.FK_UserAccount_EventComment">
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+            <End Role="EventComments" EntitySet="EventComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccount_Gender" Association="Core.Store.FK_UserAccount_Gender">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccount_LogEventType" Association="Core.Store.FK_UserAccount_LogEventType">
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+            <End Role="LogEventTypes" EntitySet="LogEventTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccountType_UserAccount" Association="Core.Store.FK_UserAccountType_UserAccount">
+            <End Role="UserAccountTypes" EntitySet="UserAccountTypes" />
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisibilityType_Event" Association="Core.Store.FK_VisibilityType_Event">
+            <End Role="VisibilityTypes" EntitySet="VisibilityTypes" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="aspnet_Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="LoweredApplicationName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="aspnet_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordFormat" Type="int" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="MobilePIN" Type="nvarchar" MaxLength="16" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="LoweredEmail" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowStart" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="aspnet_Paths">
+          <Key>
+            <PropertyRef Name="PathId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PathId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Path" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="LoweredPath" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="aspnet_PersonalizationAllUsers">
+          <Key>
+            <PropertyRef Name="PathId" />
+          </Key>
+          <Property Name="PathId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PageSettings" Type="varbinary(max)" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_PersonalizationPerUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PathId" Type="uniqueidentifier" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="PageSettings" Type="varbinary(max)" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Profile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PropertyNames" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PropertyValuesString" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PropertyValuesBinary" Type="varbinary(max)" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="LoweredRoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="aspnet_SchemaVersions">
+          <Key>
+            <PropertyRef Name="Feature" />
+            <PropertyRef Name="CompatibleSchemaVersion" />
+          </Key>
+          <Property Name="Feature" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="CompatibleSchemaVersion" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="IsCurrentVersion" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="LoweredUserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="MobileAlias" Type="nvarchar" MaxLength="16" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_UsersInRoles">
+          <Key>
+            <PropertyRef Name="aspnet_Roles_RoleId" />
+            <PropertyRef Name="aspnet_Users_UserId" />
+          </Key>
+          <Property Name="aspnet_Roles_RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="aspnet_Users_UserId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_WebEvent_Events">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="char" Nullable="false" MaxLength="32" />
+          <Property Name="EventTimeUtc" Type="datetime" Nullable="false" />
+          <Property Name="EventTime" Type="datetime" Nullable="false" />
+          <Property Name="EventType" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="EventSequence" Type="decimal" Nullable="false" Precision="19" />
+          <Property Name="EventOccurrence" Type="decimal" Nullable="false" Precision="19" />
+          <Property Name="EventCode" Type="int" Nullable="false" />
+          <Property Name="EventDetailCode" Type="int" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ApplicationPath" Type="nvarchar" MaxLength="256" />
+          <Property Name="ApplicationVirtualPath" Type="nvarchar" MaxLength="256" />
+          <Property Name="MachineName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="RequestUrl" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ExceptionType" Type="nvarchar" MaxLength="256" />
+          <Property Name="Details" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CountryFlag" Type="varbinary(max)" />
+          <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EventCategories">
+          <Key>
+            <PropertyRef Name="EventCategoryId" />
+          </Key>
+          <Property Name="EventCategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Icon" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="200" />
+          <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EventComments">
+          <Key>
+            <PropertyRef Name="EventCommentId" />
+          </Key>
+          <Property Name="EventCommentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Comment" Type="varchar(max)" Nullable="false" />
+          <Property Name="Timestamp" Type="binary" Nullable="false" MaxLength="8" />
+          <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="300" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="Reputation" Type="int" Nullable="false" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="CreationTime" Type="datetime" />
+          <Property Name="DeletionTime" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
+          <Property Name="EventCategoryId" Type="int" />
+          <Property Name="VisibilityTypeId" Type="int" Nullable="false" />
+          <Property Name="LocationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genders">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GenderText" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="GenderDescription" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="LogEvents">
+          <Key>
+            <PropertyRef Name="LogEventId" />
+          </Key>
+          <Property Name="LogEventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Timestamp" Type="binary" Nullable="false" MaxLength="8" />
+          <Property Name="LogMessage" Type="varchar" Nullable="false" MaxLength="1000" />
+          <Property Name="LogEventTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LogEventTypes">
+          <Key>
+            <PropertyRef Name="LogEventTypeId" />
+          </Key>
+          <Property Name="LogEventTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LogEventTypeText" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreatedByUserAccountId" Type="int" />
+        </EntityType>
+        <EntityType Name="MediaElements">
+          <Key>
+            <PropertyRef Name="MediaElementId" />
+          </Key>
+          <Property Name="MediaElementId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MediaUrl" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Size" Type="float" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="UserAccountId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAccounts">
+          <Key>
+            <PropertyRef Name="UserAccountId" />
+          </Key>
+          <Property Name="UserAccountId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="Birthdate" Type="datetime" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="GenderId" Type="int" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="AlternateEmailAddress" Type="varchar" MaxLength="32" />
+          <Property Name="Reputation" Type="int" Nullable="false" />
+          <Property Name="AvatarImage" Type="varbinary(max)" />
+          <Property Name="Description" Type="varchar" MaxLength="2000" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="Timezone" Type="int" />
+          <Property Name="UserAccountTypeId" Type="int" Nullable="false" />
+          <Property Name="aspnet_UserId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAccountTypes">
+          <Key>
+            <PropertyRef Name="UserAccountTypeId" />
+          </Key>
+          <Property Name="UserAccountTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserTypeText" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="UserTypeDescription" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VisibilityTypes">
+          <Key>
+            <PropertyRef Name="VisibilityTypeId" />
+          </Key>
+          <Property Name="VisibilityTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="VisibilityText" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="VisibilityDescription" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__aspnet_Me__Appli__44FF419A">
+          <End Role="aspnet_Applications" Type="Core.Store.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Membership" Type="Core.Store.aspnet_Membership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Membership">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Me__UserI__45F365D3">
+          <End Role="aspnet_Users" Type="Core.Store.aspnet_Users" Multiplicity="1" />
+          <End Role="aspnet_Membership" Type="Core.Store.aspnet_Membership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_Membership">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pa__Appli__7E37BEF6">
+          <End Role="aspnet_Applications" Type="Core.Store.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Paths" Type="Core.Store.aspnet_Paths" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Paths">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__PathI__05D8E0BE">
+          <End Role="aspnet_Paths" Type="Core.Store.aspnet_Paths" Multiplicity="1" />
+          <End Role="aspnet_PersonalizationAllUsers" Type="Core.Store.aspnet_PersonalizationAllUsers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Paths">
+              <PropertyRef Name="PathId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationAllUsers">
+              <PropertyRef Name="PathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__PathI__0B91BA14">
+          <End Role="aspnet_Paths" Type="Core.Store.aspnet_Paths" Multiplicity="0..1" />
+          <End Role="aspnet_PersonalizationPerUser" Type="Core.Store.aspnet_PersonalizationPerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Paths">
+              <PropertyRef Name="PathId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationPerUser">
+              <PropertyRef Name="PathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__UserI__0C85DE4D">
+          <End Role="aspnet_Users" Type="Core.Store.aspnet_Users" Multiplicity="0..1" />
+          <End Role="aspnet_PersonalizationPerUser" Type="Core.Store.aspnet_PersonalizationPerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationPerUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pr__UserI__5BE2A6F2">
+          <End Role="aspnet_Users" Type="Core.Store.aspnet_Users" Multiplicity="1" />
+          <End Role="aspnet_Profile" Type="Core.Store.aspnet_Profile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_Profile">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Ro__Appli__6754599E">
+          <End Role="aspnet_Applications" Type="Core.Store.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Roles" Type="Core.Store.aspnet_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Roles">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Us__Appli__30F848ED">
+          <End Role="aspnet_Applications" Type="Core.Store.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Users" Type="Core.Store.aspnet_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aspnet_UsersInRoles_aspnet_Roles">
+          <End Role="aspnet_Roles" Type="Core.Store.aspnet_Roles" Multiplicity="1" />
+          <End Role="aspnet_UsersInRoles" Type="Core.Store.aspnet_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="aspnet_UsersInRoles">
+              <PropertyRef Name="aspnet_Roles_RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aspnet_UsersInRoles_aspnet_Users">
+          <End Role="aspnet_Users" Type="Core.Store.aspnet_Users" Multiplicity="1" />
+          <End Role="aspnet_UsersInRoles" Type="Core.Store.aspnet_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_UsersInRoles">
+              <PropertyRef Name="aspnet_Users_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aspnet_UsersUserAccount">
+          <End Role="aspnet_Users" Type="Core.Store.aspnet_Users" Multiplicity="1" />
+          <End Role="UserAccounts" Type="Core.Store.UserAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserAccounts">
+              <PropertyRef Name="aspnet_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Country_UserAccount">
+          <End Role="Countries" Type="Core.Store.Countries" Multiplicity="0..1" />
+          <End Role="UserAccounts" Type="Core.Store.UserAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="UserAccounts">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_EventComment">
+          <End Role="Events" Type="Core.Store.Events" Multiplicity="1" />
+          <End Role="EventComments" Type="Core.Store.EventComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="EventComments">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Location">
+          <End Role="Locations" Type="Core.Store.Locations" Multiplicity="1" />
+          <End Role="Events" Type="Core.Store.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_MediaElement">
+          <End Role="Events" Type="Core.Store.Events" Multiplicity="1" />
+          <End Role="MediaElements" Type="Core.Store.MediaElements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="MediaElements">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventCategory_Event">
+          <End Role="EventCategories" Type="Core.Store.EventCategories" Multiplicity="0..1" />
+          <End Role="Events" Type="Core.Store.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventCategories">
+              <PropertyRef Name="EventCategoryId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="EventCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LogEventType_LogEvent">
+          <End Role="LogEventTypes" Type="Core.Store.LogEventTypes" Multiplicity="1" />
+          <End Role="LogEvents" Type="Core.Store.LogEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LogEventTypes">
+              <PropertyRef Name="LogEventTypeId" />
+            </Principal>
+            <Dependent Role="LogEvents">
+              <PropertyRef Name="LogEventTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAccount_Event">
+          <End Role="UserAccounts" Type="Core.Store.UserAccounts" Multiplicity="1" />
+          <End Role="Events" Type="Core.Store.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccounts">
+              <PropertyRef Name="UserAccountId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="CreatedByUserAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAccount_EventCategory">
+          <End Role="UserAccounts" Type="Core.Store.UserAccounts" Multiplicity="1" />
+          <End Role="EventCategories" Type="Core.Store.EventCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccounts">
+              <PropertyRef Name="UserAccountId" />
+            </Principal>
+            <Dependent Role="EventCategories">
+              <PropertyRef Name="CreatedByUserAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAccount_EventComment">
+          <End Role="UserAccounts" Type="Core.Store.UserAccounts" Multiplicity="1" />
+          <End Role="EventComments" Type="Core.Store.EventComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccounts">
+              <PropertyRef Name="UserAccountId" />
+            </Principal>
+            <Dependent Role="EventComments">
+              <PropertyRef Name="CreatedByUserAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAccount_Gender">
+          <End Role="Genders" Type="Core.Store.Genders" Multiplicity="1" />
+          <End Role="UserAccounts" Type="Core.Store.UserAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="UserAccounts">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAccount_LogEventType">
+          <End Role="UserAccounts" Type="Core.Store.UserAccounts" Multiplicity="0..1" />
+          <End Role="LogEventTypes" Type="Core.Store.LogEventTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccounts">
+              <PropertyRef Name="UserAccountId" />
+            </Principal>
+            <Dependent Role="LogEventTypes">
+              <PropertyRef Name="CreatedByUserAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAccountType_UserAccount">
+          <End Role="UserAccountTypes" Type="Core.Store.UserAccountTypes" Multiplicity="1" />
+          <End Role="UserAccounts" Type="Core.Store.UserAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccountTypes">
+              <PropertyRef Name="UserAccountTypeId" />
+            </Principal>
+            <Dependent Role="UserAccounts">
+              <PropertyRef Name="UserAccountTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisibilityType_Event">
+          <End Role="VisibilityTypes" Type="Core.Store.VisibilityTypes" Multiplicity="1" />
+          <End Role="Events" Type="Core.Store.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisibilityTypes">
+              <PropertyRef Name="VisibilityTypeId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="VisibilityTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Core" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
@@ -385,8 +720,8 @@
             <End Role="EventComment" EntitySet="EventComments" />
           </AssociationSet>
           <AssociationSet Name="FK_Event_Location" Association="Core.FK_Event_Location">
-            <End Role="Event" EntitySet="Events" />
-            <End Role="Location" EntitySet="Locations" />
+            <End EntitySet="Events" Role="Event" />
+            <End EntitySet="Locations" Role="Location" />
           </AssociationSet>
           <AssociationSet Name="FK_Event_MediaElement" Association="Core.FK_Event_MediaElement">
             <End Role="Event" EntitySet="Events" />
@@ -428,6 +763,60 @@
             <End Role="UserAccountType" EntitySet="UserAccountTypes" />
             <End Role="UserAccount" EntitySet="UserAccounts" />
           </AssociationSet>
+          <EntitySet Name="aspnet_Applications" EntityType="Core.aspnet_Applications" />
+          <EntitySet Name="aspnet_Membership" EntityType="Core.aspnet_Membership" />
+          <EntitySet Name="aspnet_Paths" EntityType="Core.aspnet_Paths" />
+          <EntitySet Name="aspnet_PersonalizationAllUsers" EntityType="Core.aspnet_PersonalizationAllUsers" />
+          <EntitySet Name="aspnet_PersonalizationPerUser" EntityType="Core.aspnet_PersonalizationPerUser" />
+          <EntitySet Name="aspnet_Profile" EntityType="Core.aspnet_Profile" />
+          <EntitySet Name="aspnet_Roles" EntityType="Core.aspnet_Roles" />
+          <EntitySet Name="aspnet_SchemaVersions" EntityType="Core.aspnet_SchemaVersions" />
+          <EntitySet Name="aspnet_Users" EntityType="Core.aspnet_Users" />
+          <EntitySet Name="aspnet_WebEvent_Events" EntityType="Core.aspnet_WebEvent_Events" />
+          <AssociationSet Name="FK__aspnet_Me__Appli__44FF419A" Association="Core.FK__aspnet_Me__Appli__44FF419A">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pa__Appli__7E37BEF6" Association="Core.FK__aspnet_Pa__Appli__7E37BEF6">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Ro__Appli__6754599E" Association="Core.FK__aspnet_Ro__Appli__6754599E">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Us__Appli__30F848ED" Association="Core.FK__aspnet_Us__Appli__30F848ED">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Me__UserI__45F365D3" Association="Core.FK__aspnet_Me__UserI__45F365D3">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__PathI__05D8E0BE" Association="Core.FK__aspnet_Pe__PathI__05D8E0BE">
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+            <End Role="aspnet_PersonalizationAllUsers" EntitySet="aspnet_PersonalizationAllUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__PathI__0B91BA14" Association="Core.FK__aspnet_Pe__PathI__0B91BA14">
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+            <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__UserI__0C85DE4D" Association="Core.FK__aspnet_Pe__UserI__0C85DE4D">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pr__UserI__5BE2A6F2" Association="Core.FK__aspnet_Pr__UserI__5BE2A6F2">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="aspnet_UsersInRoles" Association="Core.aspnet_UsersInRoles">
+            <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+          </AssociationSet>
+          <AssociationSet Name="aspnet_UsersUserAccount" Association="Core.aspnet_UsersUserAccount">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Country">
           <Key>
@@ -446,8 +835,8 @@
           <Property Type="Int32" Name="EventId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Description" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Type="Time" Name="StartTime" />
-          <Property Type="Time" Name="EndTime" />
+          <Property Type="DateTime" Name="StartTime" Nullable="false" />
+          <Property Type="DateTime" Name="EndTime" Nullable="false" />
           <Property Type="Int32" Name="Reputation" Nullable="false" />
           <Property Type="Int32" Name="Duration" />
           <Property Type="DateTime" Name="CreationTime" />
@@ -461,6 +850,7 @@
           <NavigationProperty Name="EventCategory" Relationship="Core.FK_EventCategory_Event" FromRole="Event" ToRole="EventCategory" />
           <NavigationProperty Name="UserAccount" Relationship="Core.FK_UserAccount_Event" FromRole="Event" ToRole="UserAccount" />
           <NavigationProperty Name="VisibilityType" Relationship="Core.FK_VisibilityType_Event" FromRole="Event" ToRole="VisibilityType" />
+          <Property Type="Int32" Name="LocationId" Nullable="false" />
         </EntityType>
         <EntityType Name="EventCategory">
           <Key>
@@ -504,8 +894,7 @@
           <Property Type="Double" Name="Longitude" Nullable="false" />
           <Property Type="Double" Name="Latitude" Nullable="false" />
           <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="EventId" Nullable="false" />
-          <NavigationProperty Name="Event" Relationship="Core.FK_Event_Location" FromRole="Location" ToRole="Event" />
+          <NavigationProperty Name="Events" Relationship="Core.FK_Event_Location" FromRole="Location" ToRole="Event" />
         </EntityType>
         <EntityType Name="LogEvent">
           <Key>
@@ -566,6 +955,8 @@
           <NavigationProperty Name="Gender" Relationship="Core.FK_UserAccount_Gender" FromRole="UserAccount" ToRole="Gender" />
           <NavigationProperty Name="LogEventTypes" Relationship="Core.FK_UserAccount_LogEventType" FromRole="UserAccount" ToRole="LogEventType" />
           <NavigationProperty Name="UserAccountType" Relationship="Core.FK_UserAccountType_UserAccount" FromRole="UserAccount" ToRole="UserAccountType" />
+          <NavigationProperty Name="aspnet_User" Relationship="Core.aspnet_UsersUserAccount" FromRole="UserAccount" ToRole="aspnet_Users" />
+          <Property Type="Guid" Name="aspnet_UserId" Nullable="false" />
         </EntityType>
         <EntityType Name="UserAccountType">
           <Key>
@@ -612,13 +1003,13 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Event_Location">
-          <End Type="Core.Event" Role="Event" Multiplicity="1" />
-          <End Type="Core.Location" Role="Location" Multiplicity="0..1" />
+          <End Type="Core.Event" Multiplicity="*" Role="Event" />
+          <End Type="Core.Location" Multiplicity="1" Role="Location" />
           <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="EventId" />
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
             </Principal>
-            <Dependent Role="Location">
+            <Dependent Role="Event">
               <PropertyRef Name="LocationId" />
             </Dependent>
           </ReferentialConstraint>
@@ -743,6 +1134,274 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="aspnet_Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Type="String" Name="ApplicationName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LoweredApplicationName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="String" Name="Description" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="aspnet_Membership" Relationship="Core.FK__aspnet_Me__Appli__44FF419A" FromRole="aspnet_Applications" ToRole="aspnet_Membership" />
+          <NavigationProperty Name="aspnet_Paths" Relationship="Core.FK__aspnet_Pa__Appli__7E37BEF6" FromRole="aspnet_Applications" ToRole="aspnet_Paths" />
+          <NavigationProperty Name="aspnet_Roles" Relationship="Core.FK__aspnet_Ro__Appli__6754599E" FromRole="aspnet_Applications" ToRole="aspnet_Roles" />
+          <NavigationProperty Name="aspnet_Users" Relationship="Core.FK__aspnet_Us__Appli__30F848ED" FromRole="aspnet_Applications" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="PasswordFormat" Nullable="false" />
+          <Property Type="String" Name="PasswordSalt" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MobilePIN" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LoweredEmail" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PasswordQuestion" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PasswordAnswer" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsApproved" Nullable="false" />
+          <Property Type="Boolean" Name="IsLockedOut" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastLoginDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastPasswordChangedDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastLockoutDate" Nullable="false" />
+          <Property Type="Int32" Name="FailedPasswordAttemptCount" Nullable="false" />
+          <Property Type="DateTime" Name="FailedPasswordAttemptWindowStart" Nullable="false" />
+          <Property Type="Int32" Name="FailedPasswordAnswerAttemptCount" Nullable="false" />
+          <Property Type="DateTime" Name="FailedPasswordAnswerAttemptWindowStart" Nullable="false" />
+          <Property Type="String" Name="Comment" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="aspnet_Applications" Relationship="Core.FK__aspnet_Me__Appli__44FF419A" FromRole="aspnet_Membership" ToRole="aspnet_Applications" />
+          <NavigationProperty Name="aspnet_Users" Relationship="Core.FK__aspnet_Me__UserI__45F365D3" FromRole="aspnet_Membership" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_Paths">
+          <Key>
+            <PropertyRef Name="PathId" />
+          </Key>
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="Guid" Name="PathId" Nullable="false" />
+          <Property Type="String" Name="Path" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LoweredPath" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="aspnet_Applications" Relationship="Core.FK__aspnet_Pa__Appli__7E37BEF6" FromRole="aspnet_Paths" ToRole="aspnet_Applications" />
+          <NavigationProperty Name="aspnet_PersonalizationAllUsers" Relationship="Core.FK__aspnet_Pe__PathI__05D8E0BE" FromRole="aspnet_Paths" ToRole="aspnet_PersonalizationAllUsers" />
+          <NavigationProperty Name="aspnet_PersonalizationPerUser" Relationship="Core.FK__aspnet_Pe__PathI__0B91BA14" FromRole="aspnet_Paths" ToRole="aspnet_PersonalizationPerUser" />
+        </EntityType>
+        <EntityType Name="aspnet_PersonalizationAllUsers">
+          <Key>
+            <PropertyRef Name="PathId" />
+          </Key>
+          <Property Type="Guid" Name="PathId" Nullable="false" />
+          <Property Type="Binary" Name="PageSettings" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="false" />
+          <NavigationProperty Name="aspnet_Paths" Relationship="Core.FK__aspnet_Pe__PathI__05D8E0BE" FromRole="aspnet_PersonalizationAllUsers" ToRole="aspnet_Paths" />
+        </EntityType>
+        <EntityType Name="aspnet_PersonalizationPerUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="PathId" />
+          <Property Type="Guid" Name="UserId" />
+          <Property Type="Binary" Name="PageSettings" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="false" />
+          <NavigationProperty Name="aspnet_Paths" Relationship="Core.FK__aspnet_Pe__PathI__0B91BA14" FromRole="aspnet_PersonalizationPerUser" ToRole="aspnet_Paths" />
+          <NavigationProperty Name="aspnet_Users" Relationship="Core.FK__aspnet_Pe__UserI__0C85DE4D" FromRole="aspnet_PersonalizationPerUser" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_Profile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="PropertyNames" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PropertyValuesString" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="PropertyValuesBinary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="false" />
+          <NavigationProperty Name="aspnet_Users" Relationship="Core.FK__aspnet_Pr__UserI__5BE2A6F2" FromRole="aspnet_Profile" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="Guid" Name="RoleId" Nullable="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LoweredRoleName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="aspnet_Applications" Relationship="Core.FK__aspnet_Ro__Appli__6754599E" FromRole="aspnet_Roles" ToRole="aspnet_Applications" />
+          <NavigationProperty Name="aspnet_Users" Relationship="Core.aspnet_UsersInRoles" FromRole="aspnet_Roles" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_SchemaVersions">
+          <Key>
+            <PropertyRef Name="Feature" />
+            <PropertyRef Name="CompatibleSchemaVersion" />
+          </Key>
+          <Property Type="String" Name="Feature" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CompatibleSchemaVersion" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsCurrentVersion" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LoweredUserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MobileAlias" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsAnonymous" Nullable="false" />
+          <Property Type="DateTime" Name="LastActivityDate" Nullable="false" />
+          <NavigationProperty Name="aspnet_Applications" Relationship="Core.FK__aspnet_Us__Appli__30F848ED" FromRole="aspnet_Users" ToRole="aspnet_Applications" />
+          <NavigationProperty Name="aspnet_Membership" Relationship="Core.FK__aspnet_Me__UserI__45F365D3" FromRole="aspnet_Users" ToRole="aspnet_Membership" />
+          <NavigationProperty Name="aspnet_PersonalizationPerUser" Relationship="Core.FK__aspnet_Pe__UserI__0C85DE4D" FromRole="aspnet_Users" ToRole="aspnet_PersonalizationPerUser" />
+          <NavigationProperty Name="aspnet_Profile" Relationship="Core.FK__aspnet_Pr__UserI__5BE2A6F2" FromRole="aspnet_Users" ToRole="aspnet_Profile" />
+          <NavigationProperty Name="aspnet_Roles" Relationship="Core.aspnet_UsersInRoles" FromRole="aspnet_Users" ToRole="aspnet_Roles" />
+          <NavigationProperty Name="UserAccounts" Relationship="Core.aspnet_UsersUserAccount" FromRole="aspnet_Users" ToRole="UserAccount" />
+        </EntityType>
+        <EntityType Name="aspnet_WebEvent_Events">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Type="String" Name="EventId" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="EventTimeUtc" Nullable="false" />
+          <Property Type="DateTime" Name="EventTime" Nullable="false" />
+          <Property Type="String" Name="EventType" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="EventSequence" Nullable="false" Precision="19" Scale="0" />
+          <Property Type="Decimal" Name="EventOccurrence" Nullable="false" Precision="19" Scale="0" />
+          <Property Type="Int32" Name="EventCode" Nullable="false" />
+          <Property Type="Int32" Name="EventDetailCode" Nullable="false" />
+          <Property Type="String" Name="Message" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ApplicationPath" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ApplicationVirtualPath" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MachineName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RequestUrl" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ExceptionType" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Details" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__aspnet_Me__Appli__44FF419A">
+          <End Type="Core.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
+          <End Type="Core.aspnet_Membership" Role="aspnet_Membership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Membership">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pa__Appli__7E37BEF6">
+          <End Type="Core.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
+          <End Type="Core.aspnet_Paths" Role="aspnet_Paths" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Paths">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Ro__Appli__6754599E">
+          <End Type="Core.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
+          <End Type="Core.aspnet_Roles" Role="aspnet_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Roles">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Us__Appli__30F848ED">
+          <End Type="Core.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
+          <End Type="Core.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Me__UserI__45F365D3">
+          <End Type="Core.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+          <End Type="Core.aspnet_Membership" Role="aspnet_Membership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_Membership">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__PathI__05D8E0BE">
+          <End Type="Core.aspnet_Paths" Role="aspnet_Paths" Multiplicity="1" />
+          <End Type="Core.aspnet_PersonalizationAllUsers" Role="aspnet_PersonalizationAllUsers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Paths">
+              <PropertyRef Name="PathId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationAllUsers">
+              <PropertyRef Name="PathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__PathI__0B91BA14">
+          <End Type="Core.aspnet_Paths" Role="aspnet_Paths" Multiplicity="0..1" />
+          <End Type="Core.aspnet_PersonalizationPerUser" Role="aspnet_PersonalizationPerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Paths">
+              <PropertyRef Name="PathId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationPerUser">
+              <PropertyRef Name="PathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__UserI__0C85DE4D">
+          <End Type="Core.aspnet_Users" Role="aspnet_Users" Multiplicity="0..1" />
+          <End Type="Core.aspnet_PersonalizationPerUser" Role="aspnet_PersonalizationPerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationPerUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pr__UserI__5BE2A6F2">
+          <End Type="Core.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+          <End Type="Core.aspnet_Profile" Role="aspnet_Profile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_Profile">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="aspnet_UsersInRoles">
+          <End Type="Core.aspnet_Roles" Role="aspnet_Roles" Multiplicity="*" />
+          <End Type="Core.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
+        </Association>
+        <Association Name="aspnet_UsersUserAccount">
+          <End Type="Core.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+          <End Type="Core.UserAccount" Role="UserAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserAccount">
+              <PropertyRef Name="aspnet_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -774,6 +1433,7 @@
           <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
           <ScalarProperty Name="EventCategoryId" ColumnName="EventCategoryId" />
           <ScalarProperty Name="VisibilityTypeId" ColumnName="VisibilityTypeId" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -816,7 +1476,6 @@
           <ScalarProperty Name="Longitude" ColumnName="Longitude" />
           <ScalarProperty Name="Latitude" ColumnName="Latitude" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="EventId" ColumnName="EventId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -870,6 +1529,7 @@
           <ScalarProperty Name="CountryId" ColumnName="CountryId" />
           <ScalarProperty Name="Timezone" ColumnName="Timezone" />
           <ScalarProperty Name="UserAccountTypeId" ColumnName="UserAccountTypeId" />
+          <ScalarProperty Name="aspnet_UserId" ColumnName="aspnet_UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -893,6 +1553,146 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Applications">
+      <EntityTypeMapping TypeName="IsTypeOf(Core.aspnet_Applications)">
+        <MappingFragment StoreEntitySet="aspnet_Applications">
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+          <ScalarProperty Name="LoweredApplicationName" ColumnName="LoweredApplicationName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Membership">
+      <EntityTypeMapping TypeName="IsTypeOf(Core.aspnet_Membership)">
+        <MappingFragment StoreEntitySet="aspnet_Membership">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="MobilePIN" ColumnName="MobilePIN" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LoweredEmail" ColumnName="LoweredEmail" />
+          <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+          <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+          <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+          <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+          <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptWindowStart" ColumnName="FailedPasswordAnswerAttemptWindowStart" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Paths">
+      <EntityTypeMapping TypeName="IsTypeOf(Core.aspnet_Paths)">
+        <MappingFragment StoreEntitySet="aspnet_Paths">
+          <ScalarProperty Name="PathId" ColumnName="PathId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="LoweredPath" ColumnName="LoweredPath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_PersonalizationAllUsers">
+      <EntityTypeMapping TypeName="IsTypeOf(Core.aspnet_PersonalizationAllUsers)">
+        <MappingFragment StoreEntitySet="aspnet_PersonalizationAllUsers">
+          <ScalarProperty Name="PathId" ColumnName="PathId" />
+          <ScalarProperty Name="PageSettings" ColumnName="PageSettings" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_PersonalizationPerUser">
+      <EntityTypeMapping TypeName="IsTypeOf(Core.aspnet_PersonalizationPerUser)">
+        <MappingFragment StoreEntitySet="aspnet_PersonalizationPerUser">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PathId" ColumnName="PathId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PageSettings" ColumnName="PageSettings" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Profile">
+      <EntityTypeMapping TypeName="IsTypeOf(Core.aspnet_Profile)">
+        <MappingFragment StoreEntitySet="aspnet_Profile">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
+          <ScalarProperty Name="PropertyValuesString" ColumnName="PropertyValuesString" />
+          <ScalarProperty Name="PropertyValuesBinary" ColumnName="PropertyValuesBinary" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(Core.aspnet_Roles)">
+        <MappingFragment StoreEntitySet="aspnet_Roles">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="LoweredRoleName" ColumnName="LoweredRoleName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_SchemaVersions">
+      <EntityTypeMapping TypeName="IsTypeOf(Core.aspnet_SchemaVersions)">
+        <MappingFragment StoreEntitySet="aspnet_SchemaVersions">
+          <ScalarProperty Name="Feature" ColumnName="Feature" />
+          <ScalarProperty Name="CompatibleSchemaVersion" ColumnName="CompatibleSchemaVersion" />
+          <ScalarProperty Name="IsCurrentVersion" ColumnName="IsCurrentVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Users">
+      <EntityTypeMapping TypeName="IsTypeOf(Core.aspnet_Users)">
+        <MappingFragment StoreEntitySet="aspnet_Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+          <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_WebEvent_Events">
+      <EntityTypeMapping TypeName="IsTypeOf(Core.aspnet_WebEvent_Events)">
+        <MappingFragment StoreEntitySet="aspnet_WebEvent_Events">
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="EventTimeUtc" ColumnName="EventTimeUtc" />
+          <ScalarProperty Name="EventTime" ColumnName="EventTime" />
+          <ScalarProperty Name="EventType" ColumnName="EventType" />
+          <ScalarProperty Name="EventSequence" ColumnName="EventSequence" />
+          <ScalarProperty Name="EventOccurrence" ColumnName="EventOccurrence" />
+          <ScalarProperty Name="EventCode" ColumnName="EventCode" />
+          <ScalarProperty Name="EventDetailCode" ColumnName="EventDetailCode" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="ApplicationPath" ColumnName="ApplicationPath" />
+          <ScalarProperty Name="ApplicationVirtualPath" ColumnName="ApplicationVirtualPath" />
+          <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+          <ScalarProperty Name="RequestUrl" ColumnName="RequestUrl" />
+          <ScalarProperty Name="ExceptionType" ColumnName="ExceptionType" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="aspnet_UsersInRoles" TypeName="Core.aspnet_UsersInRoles" StoreEntitySet="aspnet_UsersInRoles">
+      <EndProperty Name="aspnet_Roles">
+        <ScalarProperty Name="RoleId" ColumnName="aspnet_Roles_RoleId" />
+      </EndProperty>
+      <EndProperty Name="aspnet_Users">
+        <ScalarProperty Name="UserId" ColumnName="aspnet_Users_UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -912,17 +1712,17 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram Name="Core" ZoomLevel="82" >
+      <Diagram Name="Core" ZoomLevel="80" >
         <EntityTypeShape EntityType="Core.Country" Width="1.5" PointX="0.75" PointY="7.75" Height="1.9802864583333246" />
-        <EntityTypeShape EntityType="Core.Event" Width="1.5" PointX="7.5" PointY="8.25" Height="4.48020507812501" />
+        <EntityTypeShape EntityType="Core.Event" Width="1.5" PointX="7.5" PointY="8.25" Height="4.6725065104166656" />
         <EntityTypeShape EntityType="Core.EventCategory" Width="1.5" PointX="5.25" PointY="12.5" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="Core.EventComment" Width="1.5" PointX="9.75" PointY="7.25" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="Core.Gender" Width="1.5" PointX="0.75" PointY="4.375" Height="1.9802864583333246" />
-        <EntityTypeShape EntityType="Core.Location" Width="1.5" PointX="9.75" PointY="10.875" Height="2.172587890624996" />
+        <EntityTypeShape EntityType="Core.Location" Width="1.5" PointX="9.75" PointY="10.875" Height="1.9802864583333317" />
         <EntityTypeShape EntityType="Core.LogEvent" Width="1.5" PointX="7.5" PointY="15.625" Height="1.9802864583333246" />
         <EntityTypeShape EntityType="Core.LogEventType" Width="1.5" PointX="5.25" PointY="15.625" Height="1.9802864583333388" />
         <EntityTypeShape EntityType="Core.MediaElement" Width="1.5" PointX="9.75" PointY="13.75" Height="2.5571907552083228" />
-        <EntityTypeShape EntityType="Core.UserAccount" Width="1.5" PointX="3" PointY="6.125" Height="5.2494108072916674" />
+        <EntityTypeShape EntityType="Core.UserAccount" Width="1.5" PointX="3" PointY="6.125" Height="5.634013671875" />
         <EntityTypeShape EntityType="Core.UserAccountType" Width="1.5" PointX="0.75" PointY="11.125" Height="1.9802864583333246" />
         <EntityTypeShape EntityType="Core.VisibilityType" Width="1.5" PointX="5.25" PointY="9.5" Height="1.9802864583333246" />
         <AssociationConnector Association="Core.FK_Country_UserAccount" >
@@ -933,20 +1733,19 @@
           <ConnectorPoint PointX="9" PointY="8.9324446614583337" />
           <ConnectorPoint PointX="9.75" PointY="8.9324446614583337" />
         </AssociationConnector>
-        <AssociationConnector Association="Core.FK_Event_Location" >
-          <ConnectorPoint PointX="9" PointY="11.802602539062505" />
-          <ConnectorPoint PointX="9.75" PointY="11.802602539062505" />
+        <AssociationConnector Association="Core.FK_Event_Location">
+          <ConnectorPoint PointX="9" PointY="11.865143229166666" />
+          <ConnectorPoint PointX="9.75" PointY="11.865143229166666" />
         </AssociationConnector>
         <AssociationConnector Association="Core.FK_Event_MediaElement" >
-          <ConnectorPoint PointX="9" PointY="12.73020507812501" />
-          <ConnectorPoint PointX="9.375" PointY="13.10520507812501" />
+          <ConnectorPoint PointX="8.9999999999999982" PointY="12.922506510416666" />
+          <ConnectorPoint PointX="9.375" PointY="13.297506510416667" />
           <ConnectorPoint PointX="9.375" PointY="15.028595377604162" />
           <ConnectorPoint PointX="9.75" PointY="15.028595377604162" />
         </AssociationConnector>
         <AssociationConnector Association="Core.FK_EventCategory_Event" >
-          <ConnectorPoint PointX="6.75" PointY="13.828799700520833" />
-          <ConnectorPoint PointX="8.2187475" PointY="13.828799700520833" />
-          <ConnectorPoint PointX="8.2187475" PointY="12.73020507812501" />
+          <ConnectorPoint PointX="6.75" PointY="12.711253255208334" />
+          <ConnectorPoint PointX="7.5" PointY="12.711253255208334" />
         </AssociationConnector>
         <AssociationConnector Association="Core.FK_UserAccount_Event" >
           <ConnectorPoint PointX="4.5" PointY="8.84375" />
@@ -957,10 +1756,10 @@
           <ConnectorPoint PointX="7.5" PointY="10.490143229166662" />
         </AssociationConnector>
         <AssociationConnector Association="Core.FK_UserAccount_EventCategory" >
-          <ConnectorPoint PointX="3.75" PointY="11.374410807291667" />
-          <ConnectorPoint PointX="3.75" PointY="13.682444661458334" />
-          <ConnectorPoint PointX="4.0729191666666669" PointY="13.682444661458334" />
-          <ConnectorPoint PointX="4.2395858333333329" PointY="13.682444661458334" />
+          <ConnectorPoint PointX="3.5445519582366942" PointY="11.759013671875" />
+          <ConnectorPoint PointX="3.5445519582366942" PointY="13.682444661458334" />
+          <ConnectorPoint PointX="3.9701951457850133" PointY="13.682444661458334" />
+          <ConnectorPoint PointX="4.13686181245168" PointY="13.682444661458334" />
           <ConnectorPoint PointX="5.25" PointY="13.682444661458334" />
         </AssociationConnector>
         <AssociationConnector Association="Core.FK_UserAccount_EventComment" >
@@ -968,23 +1767,88 @@
           <ConnectorPoint PointX="9.75" PointY="7.71875" />
         </AssociationConnector>
         <AssociationConnector Association="Core.FK_UserAccount_Gender" >
-          <ConnectorPoint PointX="2.25" PointY="5.2499994999999995" />
-          <ConnectorPoint PointX="3.75" PointY="5.2499994999999995" />
-          <ConnectorPoint PointX="3.75" PointY="6.125" />
+          <ConnectorPoint PointX="2.25" PointY="5.4203998906250028" />
+          <ConnectorPoint PointX="3.34375" PointY="5.4203998906250028" />
+          <ConnectorPoint PointX="3.34375" PointY="6.125" />
         </AssociationConnector>
         <AssociationConnector Association="Core.FK_LogEventType_LogEvent" >
           <ConnectorPoint PointX="6.75" PointY="16.615143229166662" />
           <ConnectorPoint PointX="7.5" PointY="16.615143229166662" />
         </AssociationConnector>
         <AssociationConnector Association="Core.FK_UserAccount_LogEventType" >
-          <ConnectorPoint PointX="4.1562525" PointY="11.374410807291667" />
-          <ConnectorPoint PointX="4.1562525" PointY="16.615143229166669" />
+          <ConnectorPoint PointX="4.0535284791183468" PointY="11.759013671875" />
+          <ConnectorPoint PointX="4.0535284791183468" PointY="16.615143229166669" />
           <ConnectorPoint PointX="5.25" PointY="16.615143229166669" />
         </AssociationConnector>
         <AssociationConnector Association="Core.FK_UserAccountType_UserAccount" >
-          <ConnectorPoint PointX="2.25" PointY="12.27110113281249" />
-          <ConnectorPoint PointX="3.3437475" PointY="12.27110113281249" />
-          <ConnectorPoint PointX="3.3437475" PointY="11.374410807291667" />
+          <ConnectorPoint PointX="2.25" PointY="11.4420068359375" />
+          <ConnectorPoint PointX="3" PointY="11.4420068359375" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Core.aspnet_Applications" Width="1.5" PointX="12.75" PointY="7.875" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="Core.aspnet_Membership" Width="1.5" PointX="18" PointY="9.5" Height="5.4417122395833388" />
+        <EntityTypeShape EntityType="Core.aspnet_Paths" Width="1.5" PointX="15" PointY="6.375" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="Core.aspnet_PersonalizationAllUsers" Width="1.5" PointX="17.25" PointY="6.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="Core.aspnet_PersonalizationPerUser" Width="1.5" PointX="17.25" PointY="3.375" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="Core.aspnet_Profile" Width="1.5" PointX="22.5" PointY="11.875" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="Core.aspnet_Roles" Width="1.5" PointX="15" PointY="15.75" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="Core.aspnet_SchemaVersions" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="Core.aspnet_Users" Width="1.5" PointX="20.25" PointY="11.375" Height="3.3263964843750031" />
+        <EntityTypeShape EntityType="Core.aspnet_WebEvent_Events" Width="1.5" PointX="3.75" PointY="0.75" Height="3.9033007812500067" />
+        <AssociationConnector Association="Core.FK__aspnet_Me__Appli__44FF419A" >
+          <ConnectorPoint PointX="14.25" PointY="9.96609537760417" />
+          <ConnectorPoint PointX="18" PointY="9.96609537760417" />
+        </AssociationConnector>
+        <AssociationConnector Association="Core.FK__aspnet_Pa__Appli__7E37BEF6" >
+          <ConnectorPoint PointX="14.25" PointY="8.3074446614583337" />
+          <ConnectorPoint PointX="15" PointY="8.3074446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="Core.FK__aspnet_Ro__Appli__6754599E" >
+          <ConnectorPoint PointX="13.5" PointY="10.432190755208339" />
+          <ConnectorPoint PointX="13.5" PointY="16.932444661458334" />
+          <ConnectorPoint PointX="15" PointY="16.932444661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="Core.FK__aspnet_Us__Appli__30F848ED" >
+          <ConnectorPoint PointX="14.25" PointY="9.1199446614583337" />
+          <ConnectorPoint PointX="20.596351041666669" PointY="9.1199446614583337" />
+          <ConnectorPoint PointX="20.763017708333333" PointY="9.1199446614583337" />
+          <ConnectorPoint PointX="21.17187375" PointY="9.1199446614583337" />
+          <ConnectorPoint PointX="21.17187375" PointY="11.375" />
+        </AssociationConnector>
+        <AssociationConnector Association="Core.FK__aspnet_Me__UserI__45F365D3" >
+          <ConnectorPoint PointX="20.25" PointY="13.0381982421875" />
+          <ConnectorPoint PointX="19.5" PointY="13.0381982421875" />
+        </AssociationConnector>
+        <AssociationConnector Association="Core.FK__aspnet_Pe__PathI__05D8E0BE" >
+          <ConnectorPoint PointX="16.5" PointY="7.6439925130208337" />
+          <ConnectorPoint PointX="17.25" PointY="7.6439925130208337" />
+        </AssociationConnector>
+        <AssociationConnector Association="Core.FK__aspnet_Pe__PathI__0B91BA14" >
+          <ConnectorPoint PointX="15.75" PointY="6.375" />
+          <ConnectorPoint PointX="15.75" PointY="4.5574446614583337" />
+          <ConnectorPoint PointX="17.25" PointY="4.5574446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="Core.FK__aspnet_Pe__UserI__0C85DE4D" >
+          <ConnectorPoint PointX="20.6420869921875" PointY="11.375" />
+          <ConnectorPoint PointX="20.6420869921875" PointY="4.5574446614583337" />
+          <ConnectorPoint PointX="18.75" PointY="4.5574446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="Core.FK__aspnet_Pr__UserI__5BE2A6F2" >
+          <ConnectorPoint PointX="21.75" PointY="12.961293945312502" />
+          <ConnectorPoint PointX="22.5" PointY="12.961293945312502" />
+        </AssociationConnector>
+        <AssociationConnector Association="Core.aspnet_UsersInRoles" >
+          <ConnectorPoint PointX="16.5" PointY="16.932444661458334" />
+          <ConnectorPoint PointX="21" PointY="16.932444661458334" />
+          <ConnectorPoint PointX="21" PointY="14.701396484375" />
+        </AssociationConnector>
+        <AssociationConnector Association="Core.aspnet_UsersUserAccount">
+          <ConnectorPoint PointX="21.454591992187503" PointY="11.375" />
+          <ConnectorPoint PointX="21.454591992187503" PointY="6.21875" />
+          <ConnectorPoint PointX="20.725420325520833" PointY="6.2187499999999991" />
+          <ConnectorPoint PointX="20.558753658854169" PointY="6.21875" />
+          <ConnectorPoint PointX="15.833333333333334" PointY="6.2187499999999991" />
+          <ConnectorPoint PointX="15.666666666666666" PointY="6.21875" />
+          <ConnectorPoint PointX="4.5" PointY="6.21875" />
         </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
