@@ -15,6 +15,14 @@ C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence
 C:\Users\emanuel\Documents\Visual Studio 2010\Projects\Omnipresence\Omnipresence.Mvc2\obj\Debug\Omnipresence.Mvc2.pdb
 C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2\bin\Omnipresence.Mvc2.dll
 C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2\bin\Omnipresence.Mvc2.pdb
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2\bin\Omnipresence.DataAccess.dll
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2\bin\Omnipresence.Processing.dll
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2\bin\Omnipresence.DataAccess.pdb
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2\bin\Omnipresence.Processing.pdb
 C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2\obj\Debug\Omnipresence.Mvc2.g.resources
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2\obj\Debug\Omnipresence.Mvc2.OmniResources.resources
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2\obj\Debug\GenerateResource.write.1.tlog
 C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2\obj\Debug\Omnipresence.Mvc2.dll
 C:\Users\f205\Desktop\Omni Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2\obj\Debug\Omnipresence.Mvc2.pdb

@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using Omnipresence.Mvc2.Models;
+using Omnipresence.Processing;
+using Omnipresence.DataAccess.Core;
 
 namespace Omnipresence.Mvc2.Controllers
 {
@@ -94,6 +96,11 @@ namespace Omnipresence.Mvc2.Controllers
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
+                    using (AccountServices accountService = new AccountServices())
+                    {
+                        //accountService.CreateUserAccount();   //TODO
+                    }
+
                     FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }
