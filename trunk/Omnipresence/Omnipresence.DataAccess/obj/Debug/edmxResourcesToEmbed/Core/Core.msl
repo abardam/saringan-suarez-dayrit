@@ -1,151 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="CoreStoreContainer" CdmEntityContainer="CoreContainer">
-    <EntitySetMapping Name="Countries">
-      <EntityTypeMapping TypeName="IsTypeOf(Core.Country)">
-        <MappingFragment StoreEntitySet="Countries">
-          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
-          <ScalarProperty Name="CountryFlag" ColumnName="CountryFlag" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Events">
-      <EntityTypeMapping TypeName="IsTypeOf(Core.Event)">
-        <MappingFragment StoreEntitySet="Events">
-          <ScalarProperty Name="EventId" ColumnName="EventId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-          <ScalarProperty Name="Reputation" ColumnName="Reputation" />
-          <ScalarProperty Name="Duration" ColumnName="Duration" />
-          <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
-          <ScalarProperty Name="DeletionTime" ColumnName="DeletionTime" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-          <ScalarProperty Name="EventCategoryId" ColumnName="EventCategoryId" />
-          <ScalarProperty Name="VisibilityTypeId" ColumnName="VisibilityTypeId" />
-          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EventCategories">
-      <EntityTypeMapping TypeName="IsTypeOf(Core.EventCategory)">
-        <MappingFragment StoreEntitySet="EventCategories">
-          <ScalarProperty Name="EventCategoryId" ColumnName="EventCategoryId" />
-          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-          <ScalarProperty Name="Icon" ColumnName="Icon" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EventComments">
-      <EntityTypeMapping TypeName="IsTypeOf(Core.EventComment)">
-        <MappingFragment StoreEntitySet="EventComments">
-          <ScalarProperty Name="EventCommentId" ColumnName="EventCommentId" />
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
-          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-          <ScalarProperty Name="EventId" ColumnName="EventId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Genders">
-      <EntityTypeMapping TypeName="IsTypeOf(Core.Gender)">
-        <MappingFragment StoreEntitySet="Genders">
-          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
-          <ScalarProperty Name="GenderText" ColumnName="GenderText" />
-          <ScalarProperty Name="GenderDescription" ColumnName="GenderDescription" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Locations">
-      <EntityTypeMapping TypeName="IsTypeOf(Core.Location)">
-        <MappingFragment StoreEntitySet="Locations">
-          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LogEvents">
-      <EntityTypeMapping TypeName="IsTypeOf(Core.LogEvent)">
-        <MappingFragment StoreEntitySet="LogEvents">
-          <ScalarProperty Name="LogEventId" ColumnName="LogEventId" />
-          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-          <ScalarProperty Name="LogMessage" ColumnName="LogMessage" />
-          <ScalarProperty Name="LogEventTypeId" ColumnName="LogEventTypeId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LogEventTypes">
-      <EntityTypeMapping TypeName="IsTypeOf(Core.LogEventType)">
-        <MappingFragment StoreEntitySet="LogEventTypes">
-          <ScalarProperty Name="LogEventTypeId" ColumnName="LogEventTypeId" />
-          <ScalarProperty Name="LogEventTypeText" ColumnName="LogEventTypeText" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MediaElements">
-      <EntityTypeMapping TypeName="IsTypeOf(Core.MediaElement)">
-        <MappingFragment StoreEntitySet="MediaElements">
-          <ScalarProperty Name="MediaElementId" ColumnName="MediaElementId" />
-          <ScalarProperty Name="MediaUrl" ColumnName="MediaUrl" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="Size" ColumnName="Size" />
-          <ScalarProperty Name="EventId" ColumnName="EventId" />
-          <ScalarProperty Name="UserAccountId" ColumnName="UserAccountId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UserAccounts">
-      <EntityTypeMapping TypeName="IsTypeOf(Core.UserAccount)">
-        <MappingFragment StoreEntitySet="UserAccounts">
-          <ScalarProperty Name="UserAccountId" ColumnName="UserAccountId" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
-          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-          <ScalarProperty Name="AlternateEmailAddress" ColumnName="AlternateEmailAddress" />
-          <ScalarProperty Name="Reputation" ColumnName="Reputation" />
-          <ScalarProperty Name="AvatarImage" ColumnName="AvatarImage" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-          <ScalarProperty Name="Timezone" ColumnName="Timezone" />
-          <ScalarProperty Name="UserAccountTypeId" ColumnName="UserAccountTypeId" />
-          <ScalarProperty Name="aspnet_UserId" ColumnName="aspnet_UserId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UserAccountTypes">
-      <EntityTypeMapping TypeName="IsTypeOf(Core.UserAccountType)">
-        <MappingFragment StoreEntitySet="UserAccountTypes">
-          <ScalarProperty Name="UserAccountTypeId" ColumnName="UserAccountTypeId" />
-          <ScalarProperty Name="UserTypeText" ColumnName="UserTypeText" />
-          <ScalarProperty Name="UserTypeDescription" ColumnName="UserTypeDescription" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="VisibilityTypes">
-      <EntityTypeMapping TypeName="IsTypeOf(Core.VisibilityType)">
-        <MappingFragment StoreEntitySet="VisibilityTypes">
-          <ScalarProperty Name="VisibilityTypeId" ColumnName="VisibilityTypeId" />
-          <ScalarProperty Name="VisibilityText" ColumnName="VisibilityText" />
-          <ScalarProperty Name="VisibilityDescription" ColumnName="VisibilityDescription" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="aspnet_Applications">
       <EntityTypeMapping TypeName="IsTypeOf(Core.aspnet_Applications)">
         <MappingFragment StoreEntitySet="aspnet_Applications">
@@ -278,12 +133,169 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="aspnet_UsersInRoles" TypeName="Core.aspnet_UsersInRoles" StoreEntitySet="aspnet_UsersInRoles">
-      <EndProperty Name="aspnet_Roles">
-        <ScalarProperty Name="RoleId" ColumnName="aspnet_Roles_RoleId" />
-      </EndProperty>
+    <AssociationSetMapping Name="aspnet_UsersInRoles" TypeName="Core.aspnet_UsersInRoles" StoreEntitySet="aspnet_UsersInRoles" />
+    <EntitySetMapping Name="Country1">
+      <EntityTypeMapping TypeName="Core.Country1">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
+          <ScalarProperty Name="CountryFlag" ColumnName="CountryFlag" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Event1">
+      <EntityTypeMapping TypeName="Core.Event1">
+        <MappingFragment StoreEntitySet="Event">
+          <ScalarProperty Name="VisibilityTypeId" ColumnName="VisibilityTypeId" />
+          <ScalarProperty Name="EventCategoryId" ColumnName="EventCategoryId" />
+          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
+          <ScalarProperty Name="DeletionTime" ColumnName="DeletionTime" />
+          <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Reputation" ColumnName="Reputation" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventCategory1">
+      <EntityTypeMapping TypeName="Core.EventCategory1">
+        <MappingFragment StoreEntitySet="EventCategory">
+          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="EventCategoryId" ColumnName="EventCategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventComment1">
+      <EntityTypeMapping TypeName="Core.EventComment1">
+        <MappingFragment StoreEntitySet="EventComment">
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="EventCommentId" ColumnName="EventCommentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gender1">
+      <EntityTypeMapping TypeName="Core.Gender1">
+        <MappingFragment StoreEntitySet="Gender">
+          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
+          <ScalarProperty Name="GenderDescription" ColumnName="GenderDescription" />
+          <ScalarProperty Name="GenderText" ColumnName="GenderText" />
+          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Location1">
+      <EntityTypeMapping TypeName="Core.Location1">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogEvent1">
+      <EntityTypeMapping TypeName="Core.LogEvent1">
+        <MappingFragment StoreEntitySet="LogEvent">
+          <ScalarProperty Name="LogEventTypeId" ColumnName="LogEventTypeId" />
+          <ScalarProperty Name="LogMessage" ColumnName="LogMessage" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="LogEventId" ColumnName="LogEventId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogEventType1">
+      <EntityTypeMapping TypeName="Core.LogEventType1">
+        <MappingFragment StoreEntitySet="LogEventType">
+          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
+          <ScalarProperty Name="LogEventTypeDescription" ColumnName="LogEventTypeDescription" />
+          <ScalarProperty Name="LogEventTypeText" ColumnName="LogEventTypeText" />
+          <ScalarProperty Name="LogEventTypeId" ColumnName="LogEventTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MediaElement1">
+      <EntityTypeMapping TypeName="Core.MediaElement1">
+        <MappingFragment StoreEntitySet="MediaElement">
+          <ScalarProperty Name="UserAccountId" ColumnName="UserAccountId" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="MediaUrl" ColumnName="MediaUrl" />
+          <ScalarProperty Name="MediaElementId" ColumnName="MediaElementId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="Core.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAccount1">
+      <EntityTypeMapping TypeName="Core.UserAccount1">
+        <MappingFragment StoreEntitySet="UserAccount">
+          <ScalarProperty Name="UserAccountTypeId" ColumnName="UserAccountTypeId" />
+          <ScalarProperty Name="Timezone" ColumnName="Timezone" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AvatarImage" ColumnName="AvatarImage" />
+          <ScalarProperty Name="Reputation" ColumnName="Reputation" />
+          <ScalarProperty Name="AlternateEmailAddress" ColumnName="AlternateEmailAddress" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="UserAccountId" ColumnName="UserAccountId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAccountType1">
+      <EntityTypeMapping TypeName="Core.UserAccountType1">
+        <MappingFragment StoreEntitySet="UserAccountType">
+          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
+          <ScalarProperty Name="UserTypeDescription" ColumnName="UserTypeDescription" />
+          <ScalarProperty Name="UserTypeText" ColumnName="UserTypeText" />
+          <ScalarProperty Name="UserAccountTypeId" ColumnName="UserAccountTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VisibilityType1">
+      <EntityTypeMapping TypeName="Core.VisibilityType1">
+        <MappingFragment StoreEntitySet="VisibilityType">
+          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
+          <ScalarProperty Name="VisibilityDescription" ColumnName="VisibilityDescription" />
+          <ScalarProperty Name="VisibilityText" ColumnName="VisibilityText" />
+          <ScalarProperty Name="VisibilityTypeId" ColumnName="VisibilityTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="aspnet_UsersInRoles1" TypeName="Core.aspnet_UsersInRoles1" StoreEntitySet="aspnet_UsersInRoles">
       <EndProperty Name="aspnet_Users">
-        <ScalarProperty Name="UserId" ColumnName="aspnet_Users_UserId" />
+        <ScalarProperty Name="UserId" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="aspnet_Roles">
+        <ScalarProperty Name="RoleId" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
