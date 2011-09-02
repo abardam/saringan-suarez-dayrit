@@ -71,5 +71,10 @@ namespace Omnipresence.Processing
             }
             return r;
         }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

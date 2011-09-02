@@ -51,7 +51,8 @@ namespace Omnipresence.Mvc2.Controllers
                     }
                 }
                 errorMessage += "</ul>";
-                return Json(new PersonViewModel { Message = errorMessage });
+                //return Json(new PersonViewModel { Message = errorMessage });
+                return null;
             }
         }
     }
