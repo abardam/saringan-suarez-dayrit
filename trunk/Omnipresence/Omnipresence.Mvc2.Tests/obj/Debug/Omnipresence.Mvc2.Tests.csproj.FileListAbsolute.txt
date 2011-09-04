@@ -46,3 +46,15 @@ C:\Users\emanuel\Desktop\Omnipresence_Unstable\saringan-suarez-dayrit\Omnipresen
 C:\Users\emanuel\Desktop\Omnipresence_Unstable\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\emanuel\Desktop\Omnipresence_Unstable\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\obj\Debug\Omnipresence.Mvc2.Tests.dll
 C:\Users\emanuel\Desktop\Omnipresence_Unstable\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\obj\Debug\Omnipresence.Mvc2.Tests.pdb
+C:\Users\emanuel\Desktop\Acads\Computer Science\SVN Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.Mvc2.Tests.dll.config
+C:\Users\emanuel\Desktop\Acads\Computer Science\SVN Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.Mvc2.Tests.dll
+C:\Users\emanuel\Desktop\Acads\Computer Science\SVN Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.Mvc2.Tests.pdb
+C:\Users\emanuel\Desktop\Acads\Computer Science\SVN Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.Mvc2.dll
+C:\Users\emanuel\Desktop\Acads\Computer Science\SVN Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.Processing.dll
+C:\Users\emanuel\Desktop\Acads\Computer Science\SVN Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.DataAccess.dll
+C:\Users\emanuel\Desktop\Acads\Computer Science\SVN Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.Mvc2.pdb
+C:\Users\emanuel\Desktop\Acads\Computer Science\SVN Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.Processing.pdb
+C:\Users\emanuel\Desktop\Acads\Computer Science\SVN Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\bin\Debug\Omnipresence.DataAccess.pdb
+C:\Users\emanuel\Desktop\Acads\Computer Science\SVN Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\emanuel\Desktop\Acads\Computer Science\SVN Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\obj\Debug\Omnipresence.Mvc2.Tests.dll
+C:\Users\emanuel\Desktop\Acads\Computer Science\SVN Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.Mvc2.Tests\obj\Debug\Omnipresence.Mvc2.Tests.pdb
