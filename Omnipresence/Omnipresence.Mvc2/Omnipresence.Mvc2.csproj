@@ -82,6 +82,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Content\Images\disaster.png" />
+    <Resource Include="Content\Images\talk.png" />
+    <Resource Include="Content\Images\traffic.png" />
     <Content Include="Global.asax" />
     <Resource Include="Content\Images\circle.png" />
     <Content Include="Scripts\json.js" />

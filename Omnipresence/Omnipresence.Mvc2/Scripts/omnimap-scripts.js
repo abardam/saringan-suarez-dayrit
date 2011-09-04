@@ -9,6 +9,8 @@ var eventTypeDiv; //div for holding the event type filter
 var eventDateDiv; //div for holding the event date filter
 var searchDiv;
 
+var curEventType;
+
 //this thing is for the event types
 //each event has one type, with a unique icon for each
 var TypeEnum = {
@@ -78,7 +80,7 @@ function initialize() {
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(searchDiv);
 	
     eventTypeDiv = document.createElement('DIV');
-    formatWindow(eventTypeDiv, '<button>Disaster</button> <br> <button>Seminar</button> <br> <button>Traffic</button>');
+    formatWindow(eventTypeDiv, '<button id="disasterType" onclick="eventTypeButtonClicked(this)">Disaster</button> <br> <button id="seminarType" onclick="eventTypeButtonClicked(this)">Seminar</button> <br> <button id="trafficType" onclick="eventTypeButtonClicked(this)">Traffic</button>');
     eventTypeDiv.style.display = 'none';
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(eventTypeDiv);
 
@@ -102,8 +104,9 @@ function addRandomMarker(latlng) {
             title: "Hello World!",
             number: numMarkers
         });
+
         marker.setMap(map);
-        marker.setIcon("/Content/Images/circle.png");
+        marker.setIcon(getEventIcon(curEventType));
         markerArray[numMarkers] = new Node(marker);
         google.maps.event.addListener(marker, 'click', function () {
 
@@ -298,3 +301,33 @@ function formatWindow(controlUI, innerHtml) {
     controlUI.appendChild(controlText);
 }
 
+function eventTypeButtonClicked(sender) {
+    switch (sender.id)
+    {
+        case "disasterType":
+            curEventType = TypeEnum.disaster;
+            break;
+        case "seminarType":
+            curEventType = TypeEnum.talk;
+            break;
+        case "trafficType":
+            curEventType = TypeEnum.traffic;
+            break;
+        default:
+            break;
+    }
+}
+
+function getEventIcon(eventType) {
+    switch (eventType) {
+        case TypeEnum.disaster:
+            return "/Content/Images/disaster.png";
+        case TypeEnum.talk:
+            return "/Content/Images/talk.png";
+        case TypeEnum.traffic:
+            return "/Content/Images/traffic.png";
+        default:
+            return "/Content/Images/circle.png";
+            break;
+    }
+}
