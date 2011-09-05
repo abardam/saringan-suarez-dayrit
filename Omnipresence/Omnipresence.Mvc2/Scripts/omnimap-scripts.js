@@ -36,6 +36,11 @@ function Node(marker) {
 function Comment(username) {
     this.username = username;
     this.content = "...";
+    
+}
+
+function commentToHTML(comment) {
+    return "<p> <strong>" + comment.username + ": </strong>" + comment.content + "</p>";
 }
 
 function closeBoxes() {
@@ -139,7 +144,9 @@ function displayInfoWindow(markerNum) {
 
 				+ '<p class="description">'
                 + '<strong>Description: </strong>'
+                + '<div id="description">'
 				+ markerArray[markerNum].description
+                + '</div>'
 				+ '</p>'
 
 				+ '<p class="editDescription">'
@@ -150,28 +157,30 @@ function displayInfoWindow(markerNum) {
                 + '</p>'
 
 				+ '<p> <strong>Comments</strong> </p>'
-
+                + '<div id="comments">'
     for (var i = 0; i < markerArray[markerNum].comments.length; i++) {
         var comment = markerArray[markerNum].comments[i];
-        contentString += "<p> <strong>" + comment.username + ": </strong>" + comment.content + "</p>";
+        contentString += commentToHTML(comment);
     };
 
-    /*contentString += '<p><form name="comment" action="">'
+    contentString += '</div>'
+
+    contentString += '<p><form name="comment" action="">'
     + '<textarea id="comment">Add new comment</textarea>'
     + '<input value ="Comment!" type="button" onclick="addComment(' + markerNum + ', this.form)"/>'
-    + '</form></p>'*/
+    + '</form></p>'
 
-    contentString += '<p><form name="comment" action="/Home/About" method="post">'
+    /*contentString += '<p><form name="comment" action="/Home/About" method="post">'
                 + '<textarea id="comment" name="comm">HARHAR</textarea> '
                 + '<input type="hidden" name="markerNum" value="' + markerNum + '">'
 				+ '<input type="submit"/>'
-                + '</form></p>'
+                + '</form></p>'*/
 
-    contentString +=
+    /*contentString +=
 				'<p><video width="300" height="250" controls="controls" autoplay="autoplay">'
 				+ '<source src="http://upload.wikimedia.org/wikipedia/commons/9/9b/Pentagon_News_Sample.ogg" type="video/ogg" />'
 				+ '</video></p>'
-                + '</div>'
+                + '</div>'*/
 
 
     var infowindow = new google.maps.InfoWindow({
@@ -183,9 +192,10 @@ function displayInfoWindow(markerNum) {
     markerArray[markerNum].infobox = infowindow;
 }
 
+
 function editDescription(markerNum, form) {
     markerArray[markerNum].description = form.edit.value;
-    closeBoxes();
+    $('#description').html(form.edit.value);
     return false;
 }
 
@@ -193,7 +203,7 @@ function addComment(markerNum, form) {
     var comment = new Comment("Enzo");
     comment.content = form.comment.value;
     markerArray[markerNum].comments.push(comment);
-    closeBoxes();
+    $('#comments').append(commentToHTML(comment));
     return false;
 }
 
