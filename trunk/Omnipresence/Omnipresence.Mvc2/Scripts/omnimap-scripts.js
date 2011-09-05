@@ -9,8 +9,6 @@ var eventTypeDiv; //div for holding the event type filter
 var eventDateDiv; //div for holding the event date filter
 var searchDiv;
 
-var curEventType;
-
 //this thing is for the event types
 //each event has one type, with a unique icon for each
 var TypeEnum = {
@@ -20,6 +18,8 @@ var TypeEnum = {
 	talk: "Talk",
 	none: "None"
 }
+
+var curEventType = TypeEnum.none;
 
 function Node(marker) {
     this.title = "TITLE";
@@ -83,9 +83,16 @@ function initialize() {
     formatWindow(searchDiv, '<form action=""> <input type="text"></input> <input type="submit" value="Search" /> </form>');
     searchDiv.style.display = 'none';
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(searchDiv);
-	
+
     eventTypeDiv = document.createElement('DIV');
-    formatWindow(eventTypeDiv, '<button id="disasterType" onclick="eventTypeButtonClicked(this)">Disaster</button> <br> <button id="seminarType" onclick="eventTypeButtonClicked(this)">Seminar</button> <br> <button id="trafficType" onclick="eventTypeButtonClicked(this)">Traffic</button>');
+
+    var buttonRows = "";
+    for (type in TypeEnum) {
+        buttonRows += '<button id='+type+' onclick="eventTypeButtonClicked(this)">'+TypeEnum[type]+'</button> <br>';
+    }
+
+    //formatWindow(eventTypeDiv, '<button id="disaster" onclick="eventTypeButtonClicked(this)">Disaster</button> <br> <button id="talk" onclick="eventTypeButtonClicked(this)">Seminar</button> <br> <button id="traffic" onclick="eventTypeButtonClicked(this)">Traffic</button>');
+    formatWindow(eventTypeDiv, buttonRows);
     eventTypeDiv.style.display = 'none';
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(eventTypeDiv);
 
@@ -113,6 +120,7 @@ function addRandomMarker(latlng) {
         marker.setMap(map);
         marker.setIcon(getEventIcon(curEventType));
         markerArray[numMarkers] = new Node(marker);
+        markerArray[numMarkers].type = curEventType;
         google.maps.event.addListener(marker, 'click', function () {
 
             closeBoxes();
@@ -141,6 +149,27 @@ function displayInfoWindow(markerNum) {
                 + '<strong>Location: </strong><br>'
                 + markerArray[markerNum].position
                 + '</p>'
+
+                + '<div id="type_selector">'
+                + '<form name="edit_type">'
+                + '<select name="sel_type">'
+
+    for (value in TypeEnum) {
+        contentString += '<option '
+
+
+        if (markerArray[markerNum].type == TypeEnum[value]) {
+            contentString += 'selected '
+        }
+
+        contentString += 'value="' + value +'">' + TypeEnum[value]
+
+    }
+
+    contentString += '</select>'
+                + '<input type="button" value="Change" onClick="changeType(' + markerNum + ', this.form)">';
+                + '</form>'
+                + '</div>'
 
 				+ '<p class="description">'
                 + '<strong>Description: </strong>'
@@ -205,6 +234,11 @@ function addComment(markerNum, form) {
     markerArray[markerNum].comments.push(comment);
     $('#comments').append(commentToHTML(comment));
     return false;
+}
+
+function changeType(markerNum, form) {
+    markerArray[markerNum].type = form.sel_type.options[form.sel_type.selectedIndex].value;
+    markerArray[markerNum].marker.setIcon(getEventIcon(markerArray[markerNum].type));
 }
 
 function openWindow(targetWindow) {
@@ -312,7 +346,7 @@ function formatWindow(controlUI, innerHtml) {
 }
 
 function eventTypeButtonClicked(sender) {
-    switch (sender.id)
+    /*switch (sender.id)
     {
         case "disasterType":
             curEventType = TypeEnum.disaster;
@@ -325,11 +359,13 @@ function eventTypeButtonClicked(sender) {
             break;
         default:
             break;
-    }
+    }*/
+
+    curEventType = TypeEnum[sender.id];
 }
 
 function getEventIcon(eventType) {
-    switch (eventType) {
+    /*switch (eventType) {
         case TypeEnum.disaster:
             return "/Content/Images/disaster.png";
         case TypeEnum.talk:
@@ -339,5 +375,6 @@ function getEventIcon(eventType) {
         default:
             return "/Content/Images/circle.png";
             break;
-    }
+    }*/
+    return "/Content/Images/" + eventType + ".png";
 }
