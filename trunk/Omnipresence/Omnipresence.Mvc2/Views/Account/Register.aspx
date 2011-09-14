@@ -1,10 +1,17 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Omnipresence.Mvc2.Models.RegisterModel>" %>
 
-<asp:Content ID="registerTitle" ContentPlaceHolderID="TitleContent" runat="server">
+<asp:Content ID="TitleContent" ContentPlaceHolderID="Title" runat="server">
     Register
 </asp:Content>
 
-<asp:Content ID="registerContent" ContentPlaceHolderID="MiddleCenterContent" runat="server">
+<asp:Content ID="HeadContent" ContentPlaceHolderID="Head" runat="server">
+    <script type="text/javascript" src="../../Scripts/omnimap-registration.js"></script>
+</asp:Content>
+
+<asp:Content ID="HeaderContent" ContentPlaceHolderID="Header" runat="server">
+</asp:Content>
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
     <h2>Create a New Account</h2>
     <p>
         Use the form below to create a new account. 
@@ -13,79 +20,103 @@
         Passwords are required to be a minimum of <%: ViewData["PasswordLength"] %> characters in length.
     </p>
 
-    <% using (Html.BeginForm()) { %>
+    <form action="/Account/Register" method="post">
         <%: Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.") %>
         <div>
             <fieldset>
                 <legend>Account Information</legend>
                 
                 <div class="editor-label">
-                    <%: Html.LabelFor(m => m.UserName) %>
+                    <label id="username-label" for="username">
+                        Username
+                    </label>
                 </div>
                 <div class="editor-field">
-                    <%: Html.TextBoxFor(m => m.UserName) %>
-                    <%: Html.ValidationMessageFor(m => m.UserName) %>
+                    <input type="text" id="username" />
                 </div>
-                
-                <div class="editor-label">
-                    <%: Html.LabelFor(m => m.Email) %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.TextBoxFor(m => m.Email) %>
-                    <%: Html.ValidationMessageFor(m => m.Email) %>
-                </div>
-                
-                <div class="editor-label">
-                    <%: Html.LabelFor(m => m.Password) %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.PasswordFor(m => m.Password) %>
-                    <%: Html.ValidationMessageFor(m => m.Password) %>
-                </div>
-                
-                <div class="editor-label">
-                    <%: Html.LabelFor(m => m.ConfirmPassword) %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.PasswordFor(m => m.ConfirmPassword) %>
-                    <%: Html.ValidationMessageFor(m => m.ConfirmPassword) %>
-                </div>
-                
-                <div class="editor-label">
-                    <%: Html.LabelFor(m => m.FirstName) %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.TextBoxFor(m => m.FirstName) %>
-                    <%: Html.ValidationMessageFor(m => m.FirstName) %>
+                <div class="validation-field">
+                    <label id="username-validation" />
                 </div>
 
                 <div class="editor-label">
-                    <%: Html.LabelFor(m => m.LastName) %>
+                    <label id="email-label" for="email">
+                        Email
+                    </label>
                 </div>
                 <div class="editor-field">
-                    <%: Html.TextBoxFor(m => m.LastName) %>
-                    <%: Html.ValidationMessageFor(m => m.LastName) %>
+                    <input type="text" id="email" />
+                </div>
+                <div class="validation-field">
+                    <label id="email-validation" />
                 </div>
 
                 <div class="editor-label">
-                    <%: Html.LabelFor(m => m.Country) %>
+                    <label id="password-label" for="password">
+                        Password
+                    </label>
                 </div>
                 <div class="editor-field">
-                    <%: Html.TextBoxFor(m => m.Country) %>
-                    <%: Html.ValidationMessageFor(m => m.Country) %>
+                    <input type="password" id="password" />
+                </div>
+                <div id="validation-field">
+                    <label id="password-validation" />
                 </div>
 
                 <div class="editor-label">
-                    <%: Html.LabelFor(m => m.Timezone) %>
+                    <label id="confirm-password-label" for="confirm-password">
+                        Confirm Password
+                    </label>
                 </div>
                 <div class="editor-field">
-                    <%: Html.TextBoxFor(m => m.Timezone) %>
-                    <%: Html.ValidationMessageFor(m => m.Timezone) %>
+                    <input type="password" id="confirm-password" />                    
                 </div>
+                <div class="validation-field">
+                    <label id="confirm-password-validation" />
+                </div>
+
+                <div class="editor-label">
+                    <label id="first-name-label" for="first-name">
+                        First Name
+                    </label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" id="first-name" />
+                </div>
+                <div class="validation-field">
+                    <label id="first-name-validation" />
+                </div>
+
+                <div class="editor-label">
+                    <label id="last-name-label" for="last-name">
+                        Last Name
+                    </label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" id="last-name" />
+                </div>
+                <div class="validation-field">
+                    <label id="last-name-validation" />
+                </div>
+
+                <div class="editor-label">
+                    <label id="birthdate-label" for="birthdate">
+                        Birthdate
+                    </label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" id="birthdate" />
+                </div>
+                <div class="validation-field">
+                    <label id="birthdate-validation" />
+                </div>
+
                 <p>
-                    <input type="submit" value="Register" />
+                    <input id="register-button" type="submit" value="Register" disabled="disabled"/>
                 </p>
             </fieldset>
         </div>
-    <% } %>
+    </form>
+</asp:Content>
+
+<asp:Content ID="FooterContent" ContentPlaceHolderID="Footer" runat="server">
 </asp:Content>
