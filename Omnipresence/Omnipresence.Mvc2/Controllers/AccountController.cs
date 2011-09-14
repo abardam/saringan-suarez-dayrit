@@ -93,12 +93,12 @@ namespace Omnipresence.Mvc2.Controllers
             {
                 // Attempt to register the user
                 MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
-
+                
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     using (AccountServices accountService = new AccountServices())
                     {
-                        //accountService.CreateUserAccount();   //TODO
+                        accountService.CreateUserAccount(model.UserName, model.Password, DateTime.Now, model.FirstName, model.LastName, true, model.Email, null, 0, null);   //TODO
                     }
 
                     FormsService.SignIn(model.UserName, false /* createPersistentCookie */);

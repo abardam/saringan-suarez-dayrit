@@ -36,6 +36,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -85,6 +86,8 @@
     <Resource Include="Content\Images\disaster.png" />
     <Resource Include="Content\Images\talk.png" />
     <Resource Include="Content\Images\traffic.png" />
+    <Resource Include="Content\Images\none.png" />
+    <Content Include="Content\MapStyles.css" />
     <Content Include="Global.asax" />
     <Resource Include="Content\Images\circle.png" />
     <Content Include="Scripts\json.js" />

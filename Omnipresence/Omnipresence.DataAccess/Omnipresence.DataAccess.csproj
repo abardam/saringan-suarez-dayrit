@@ -55,16 +55,12 @@
     <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="Core\Core.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Core.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Core\Core.edmx.sql" />
+    <None Include="Properties\DataSources\Omnipresence.DataAccess.Core.CoreContainer.datasource" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,1107 +1,357 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Core" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-  <EntityContainer Name="CoreContainer" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Countries" EntityType="Core.Country" />
-    <EntitySet Name="Events" EntityType="Core.Event" />
-    <EntitySet Name="EventCategories" EntityType="Core.EventCategory" />
-    <EntitySet Name="EventComments" EntityType="Core.EventComment" />
-    <EntitySet Name="Genders" EntityType="Core.Gender" />
-    <EntitySet Name="Locations" EntityType="Core.Location" />
-    <EntitySet Name="LogEvents" EntityType="Core.LogEvent" />
-    <EntitySet Name="LogEventTypes" EntityType="Core.LogEventType" />
-    <EntitySet Name="MediaElements" EntityType="Core.MediaElement" />
-    <EntitySet Name="UserAccounts" EntityType="Core.UserAccount" />
-    <EntitySet Name="UserAccountTypes" EntityType="Core.UserAccountType" />
-    <EntitySet Name="VisibilityTypes" EntityType="Core.VisibilityType" />
-    <AssociationSet Name="FK_Country_UserAccount" Association="Core.FK_Country_UserAccount">
-      <End Role="Country" EntitySet="Countries" />
-      <End Role="UserAccount" EntitySet="UserAccounts" />
+<Schema Namespace="OmnipresenceModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="OmnipresenceEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Countries" EntityType="OmnipresenceModel.Country" />
+    <EntitySet Name="EventCategories" EntityType="OmnipresenceModel.EventCategory" />
+    <EntitySet Name="EventComments" EntityType="OmnipresenceModel.EventComment" />
+    <EntitySet Name="Events" EntityType="OmnipresenceModel.Event" />
+    <EntitySet Name="Locations" EntityType="OmnipresenceModel.Location" />
+    <EntitySet Name="LogEvents" EntityType="OmnipresenceModel.LogEvent" />
+    <EntitySet Name="LogEventTypes" EntityType="OmnipresenceModel.LogEventType" />
+    <EntitySet Name="MediaElements" EntityType="OmnipresenceModel.MediaElement" />
+    <EntitySet Name="UserAccounts" EntityType="OmnipresenceModel.UserAccount" />
+    <EntitySet Name="UserAccountTypes" EntityType="OmnipresenceModel.UserAccountType" />
+    <EntitySet Name="VisibilityTypes" EntityType="OmnipresenceModel.VisibilityType" />
+    <AssociationSet Name="FK_Country_UserAccount" Association="OmnipresenceModel.FK_Country_UserAccount">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="UserAccounts" EntitySet="UserAccounts" />
     </AssociationSet>
-    <AssociationSet Name="FK_Event_EventComment" Association="Core.FK_Event_EventComment">
-      <End Role="Event" EntitySet="Events" />
-      <End Role="EventComment" EntitySet="EventComments" />
+    <AssociationSet Name="FK_EventCategory_Event" Association="OmnipresenceModel.FK_EventCategory_Event">
+      <End Role="EventCategories" EntitySet="EventCategories" />
+      <End Role="Events" EntitySet="Events" />
     </AssociationSet>
-    <AssociationSet Name="FK_Event_Location" Association="Core.FK_Event_Location">
-      <End EntitySet="Events" Role="Event" />
-      <End EntitySet="Locations" Role="Location" />
+    <AssociationSet Name="FK_UserAccount_EventCategory" Association="OmnipresenceModel.FK_UserAccount_EventCategory">
+      <End Role="UserAccounts" EntitySet="UserAccounts" />
+      <End Role="EventCategories" EntitySet="EventCategories" />
     </AssociationSet>
-    <AssociationSet Name="FK_Event_MediaElement" Association="Core.FK_Event_MediaElement">
-      <End Role="Event" EntitySet="Events" />
-      <End Role="MediaElement" EntitySet="MediaElements" />
+    <AssociationSet Name="FK_Event_EventComment" Association="OmnipresenceModel.FK_Event_EventComment">
+      <End Role="Events" EntitySet="Events" />
+      <End Role="EventComments" EntitySet="EventComments" />
     </AssociationSet>
-    <AssociationSet Name="FK_EventCategory_Event" Association="Core.FK_EventCategory_Event">
-      <End Role="EventCategory" EntitySet="EventCategories" />
-      <End Role="Event" EntitySet="Events" />
+    <AssociationSet Name="FK_UserAccount_EventComment" Association="OmnipresenceModel.FK_UserAccount_EventComment">
+      <End Role="UserAccounts" EntitySet="UserAccounts" />
+      <End Role="EventComments" EntitySet="EventComments" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_Event" Association="Core.FK_UserAccount_Event">
-      <End Role="UserAccount" EntitySet="UserAccounts" />
-      <End Role="Event" EntitySet="Events" />
+    <AssociationSet Name="FK_Event_Location" Association="OmnipresenceModel.FK_Event_Location">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="Events" EntitySet="Events" />
     </AssociationSet>
-    <AssociationSet Name="FK_VisibilityType_Event" Association="Core.FK_VisibilityType_Event">
-      <End Role="VisibilityType" EntitySet="VisibilityTypes" />
-      <End Role="Event" EntitySet="Events" />
+    <AssociationSet Name="FK_Event_MediaElement" Association="OmnipresenceModel.FK_Event_MediaElement">
+      <End Role="Events" EntitySet="Events" />
+      <End Role="MediaElements" EntitySet="MediaElements" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_EventCategory" Association="Core.FK_UserAccount_EventCategory">
-      <End Role="UserAccount" EntitySet="UserAccounts" />
-      <End Role="EventCategory" EntitySet="EventCategories" />
+    <AssociationSet Name="FK_UserAccount_Event" Association="OmnipresenceModel.FK_UserAccount_Event">
+      <End Role="UserAccounts" EntitySet="UserAccounts" />
+      <End Role="Events" EntitySet="Events" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_EventComment" Association="Core.FK_UserAccount_EventComment">
-      <End Role="UserAccount" EntitySet="UserAccounts" />
-      <End Role="EventComment" EntitySet="EventComments" />
+    <AssociationSet Name="FK_VisibilityType_Event" Association="OmnipresenceModel.FK_VisibilityType_Event">
+      <End Role="VisibilityTypes" EntitySet="VisibilityTypes" />
+      <End Role="Events" EntitySet="Events" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_Gender" Association="Core.FK_UserAccount_Gender">
-      <End Role="Gender" EntitySet="Genders" />
-      <End Role="UserAccount" EntitySet="UserAccounts" />
+    <AssociationSet Name="FK_LogEventType_LogEvent" Association="OmnipresenceModel.FK_LogEventType_LogEvent">
+      <End Role="LogEventTypes" EntitySet="LogEventTypes" />
+      <End Role="LogEvents" EntitySet="LogEvents" />
     </AssociationSet>
-    <AssociationSet Name="FK_LogEventType_LogEvent" Association="Core.FK_LogEventType_LogEvent">
-      <End Role="LogEventType" EntitySet="LogEventTypes" />
-      <End Role="LogEvent" EntitySet="LogEvents" />
+    <AssociationSet Name="FK_UserAccount_LogEventType" Association="OmnipresenceModel.FK_UserAccount_LogEventType">
+      <End Role="UserAccounts" EntitySet="UserAccounts" />
+      <End Role="LogEventTypes" EntitySet="LogEventTypes" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_LogEventType" Association="Core.FK_UserAccount_LogEventType">
-      <End Role="UserAccount" EntitySet="UserAccounts" />
-      <End Role="LogEventType" EntitySet="LogEventTypes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserAccountType_UserAccount" Association="Core.FK_UserAccountType_UserAccount">
-      <End Role="UserAccountType" EntitySet="UserAccountTypes" />
-      <End Role="UserAccount" EntitySet="UserAccounts" />
-    </AssociationSet>
-    <EntitySet Name="aspnet_Applications" EntityType="Core.aspnet_Applications" />
-    <EntitySet Name="aspnet_Membership" EntityType="Core.aspnet_Membership" />
-    <EntitySet Name="aspnet_Paths" EntityType="Core.aspnet_Paths" />
-    <EntitySet Name="aspnet_PersonalizationAllUsers" EntityType="Core.aspnet_PersonalizationAllUsers" />
-    <EntitySet Name="aspnet_PersonalizationPerUser" EntityType="Core.aspnet_PersonalizationPerUser" />
-    <EntitySet Name="aspnet_Profile" EntityType="Core.aspnet_Profile" />
-    <EntitySet Name="aspnet_Roles" EntityType="Core.aspnet_Roles" />
-    <EntitySet Name="aspnet_SchemaVersions" EntityType="Core.aspnet_SchemaVersions" />
-    <EntitySet Name="aspnet_Users" EntityType="Core.aspnet_Users" />
-    <EntitySet Name="aspnet_WebEvent_Events" EntityType="Core.aspnet_WebEvent_Events" />
-    <AssociationSet Name="FK__aspnet_Me__Appli__44FF419A" Association="Core.FK__aspnet_Me__Appli__44FF419A">
-      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
-      <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Pa__Appli__7E37BEF6" Association="Core.FK__aspnet_Pa__Appli__7E37BEF6">
-      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
-      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Ro__Appli__6754599E" Association="Core.FK__aspnet_Ro__Appli__6754599E">
-      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
-      <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Us__Appli__30F848ED" Association="Core.FK__aspnet_Us__Appli__30F848ED">
-      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
-      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Me__UserI__45F365D3" Association="Core.FK__aspnet_Me__UserI__45F365D3">
-      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
-      <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Pe__PathI__05D8E0BE" Association="Core.FK__aspnet_Pe__PathI__05D8E0BE">
-      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
-      <End Role="aspnet_PersonalizationAllUsers" EntitySet="aspnet_PersonalizationAllUsers" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Pe__PathI__0B91BA14" Association="Core.FK__aspnet_Pe__PathI__0B91BA14">
-      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
-      <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Pe__UserI__0C85DE4D" Association="Core.FK__aspnet_Pe__UserI__0C85DE4D">
-      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
-      <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
-    </AssociationSet>
-    <AssociationSet Name="FK__aspnet_Pr__UserI__5BE2A6F2" Association="Core.FK__aspnet_Pr__UserI__5BE2A6F2">
-      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
-      <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
-    </AssociationSet>
-    <AssociationSet Name="aspnet_UsersInRoles" Association="Core.aspnet_UsersInRoles">
-      <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
-      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
-    </AssociationSet>
-    <AssociationSet Name="aspnet_UsersUserAccount" Association="Core.aspnet_UsersUserAccount">
-      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
-      <End Role="UserAccount" EntitySet="UserAccounts" />
-    </AssociationSet>
-    <EntitySet Name="Country1" EntityType="Core.Country1" />
-    <EntitySet Name="Event1" EntityType="Core.Event1" />
-    <EntitySet Name="EventCategory1" EntityType="Core.EventCategory1" />
-    <EntitySet Name="EventComment1" EntityType="Core.EventComment1" />
-    <EntitySet Name="Gender1" EntityType="Core.Gender1" />
-    <EntitySet Name="Location1" EntityType="Core.Location1" />
-    <EntitySet Name="LogEvent1" EntityType="Core.LogEvent1" />
-    <EntitySet Name="LogEventType1" EntityType="Core.LogEventType1" />
-    <EntitySet Name="MediaElement1" EntityType="Core.MediaElement1" />
-    <EntitySet Name="sysdiagrams" EntityType="Core.sysdiagram" />
-    <EntitySet Name="UserAccount1" EntityType="Core.UserAccount1" />
-    <EntitySet Name="UserAccountType1" EntityType="Core.UserAccountType1" />
-    <EntitySet Name="VisibilityType1" EntityType="Core.VisibilityType1" />
-    <AssociationSet Name="FK_Country_UserAccount1" Association="Core.FK_Country_UserAccount1">
-      <End Role="Country1" EntitySet="Country1" />
-      <End Role="UserAccount1" EntitySet="UserAccount1" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Event_EventComment1" Association="Core.FK_Event_EventComment1">
-      <End Role="Event1" EntitySet="Event1" />
-      <End Role="EventComment1" EntitySet="EventComment1" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Event_Location1" Association="Core.FK_Event_Location1">
-      <End Role="Event1" EntitySet="Event1" />
-      <End Role="Location1" EntitySet="Location1" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Event_MediaElement1" Association="Core.FK_Event_MediaElement1">
-      <End Role="Event1" EntitySet="Event1" />
-      <End Role="MediaElement1" EntitySet="MediaElement1" />
-    </AssociationSet>
-    <AssociationSet Name="FK_EventCategory_Event1" Association="Core.FK_EventCategory_Event1">
-      <End Role="EventCategory1" EntitySet="EventCategory1" />
-      <End Role="Event1" EntitySet="Event1" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_Event1" Association="Core.FK_UserAccount_Event1">
-      <End Role="UserAccount1" EntitySet="UserAccount1" />
-      <End Role="Event1" EntitySet="Event1" />
-    </AssociationSet>
-    <AssociationSet Name="FK_VisibilityType_Event1" Association="Core.FK_VisibilityType_Event1">
-      <End Role="VisibilityType1" EntitySet="VisibilityType1" />
-      <End Role="Event1" EntitySet="Event1" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_EventCategory1" Association="Core.FK_UserAccount_EventCategory1">
-      <End Role="UserAccount1" EntitySet="UserAccount1" />
-      <End Role="EventCategory1" EntitySet="EventCategory1" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_EventComment1" Association="Core.FK_UserAccount_EventComment1">
-      <End Role="UserAccount1" EntitySet="UserAccount1" />
-      <End Role="EventComment1" EntitySet="EventComment1" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_Gender1" Association="Core.FK_UserAccount_Gender1">
-      <End Role="Gender1" EntitySet="Gender1" />
-      <End Role="UserAccount1" EntitySet="UserAccount1" />
-    </AssociationSet>
-    <AssociationSet Name="FK_LogEventType_LogEvent1" Association="Core.FK_LogEventType_LogEvent1">
-      <End Role="LogEventType1" EntitySet="LogEventType1" />
-      <End Role="LogEvent1" EntitySet="LogEvent1" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_LogEventType1" Association="Core.FK_UserAccount_LogEventType1">
-      <End Role="UserAccount1" EntitySet="UserAccount1" />
-      <End Role="LogEventType1" EntitySet="LogEventType1" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserAccountType_UserAccount1" Association="Core.FK_UserAccountType_UserAccount1">
-      <End Role="UserAccountType1" EntitySet="UserAccountType1" />
-      <End Role="UserAccount1" EntitySet="UserAccount1" />
-    </AssociationSet>
-    <AssociationSet Name="aspnet_UsersInRoles1" Association="Core.aspnet_UsersInRoles1">
-      <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
-      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+    <AssociationSet Name="FK_UserAccountType_UserAccount" Association="OmnipresenceModel.FK_UserAccountType_UserAccount">
+      <End Role="UserAccountTypes" EntitySet="UserAccountTypes" />
+      <End Role="UserAccounts" EntitySet="UserAccounts" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Country">
     <Key>
       <PropertyRef Name="CountryId" />
     </Key>
-    <Property Type="Int32" Name="CountryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="CountryName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Binary" Name="CountryFlag" MaxLength="Max" FixedLength="false" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <NavigationProperty Name="UserAccounts" Relationship="Core.FK_Country_UserAccount" FromRole="Country" ToRole="UserAccount" />
-  </EntityType>
-  <EntityType Name="Event">
-    <Key>
-      <PropertyRef Name="EventId" />
-    </Key>
-    <Property Type="Int32" Name="EventId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Description" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="StartTime" Nullable="false" />
-    <Property Type="DateTime" Name="EndTime" Nullable="false" />
-    <Property Type="Int32" Name="Reputation" Nullable="false" />
-    <Property Type="Int32" Name="Duration" />
-    <Property Type="DateTime" Name="CreationTime" />
-    <Property Type="DateTime" Name="DeletionTime" Nullable="false" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <Property Type="Int32" Name="EventCategoryId" />
-    <Property Type="Int32" Name="VisibilityTypeId" Nullable="false" />
-    <NavigationProperty Name="EventComments" Relationship="Core.FK_Event_EventComment" FromRole="Event" ToRole="EventComment" />
-    <NavigationProperty Name="Location" Relationship="Core.FK_Event_Location" FromRole="Event" ToRole="Location" />
-    <NavigationProperty Name="MediaElements" Relationship="Core.FK_Event_MediaElement" FromRole="Event" ToRole="MediaElement" />
-    <NavigationProperty Name="EventCategory" Relationship="Core.FK_EventCategory_Event" FromRole="Event" ToRole="EventCategory" />
-    <NavigationProperty Name="UserAccount" Relationship="Core.FK_UserAccount_Event" FromRole="Event" ToRole="UserAccount" />
-    <NavigationProperty Name="VisibilityType" Relationship="Core.FK_VisibilityType_Event" FromRole="Event" ToRole="VisibilityType" />
-    <Property Type="Int32" Name="LocationId" Nullable="false" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="CountryFlag" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="CreatedByUserAccountId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UserAccounts" Relationship="OmnipresenceModel.FK_Country_UserAccount" FromRole="Countries" ToRole="UserAccounts" />
   </EntityType>
   <EntityType Name="EventCategory">
     <Key>
       <PropertyRef Name="EventCategoryId" />
     </Key>
-    <Property Type="Int32" Name="EventCategoryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Binary" Name="Icon" Nullable="false" MaxLength="Max" FixedLength="false" />
-    <Property Type="String" Name="Description" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <NavigationProperty Name="Events" Relationship="Core.FK_EventCategory_Event" FromRole="EventCategory" ToRole="Event" />
-    <NavigationProperty Name="UserAccount" Relationship="Core.FK_UserAccount_EventCategory" FromRole="EventCategory" ToRole="UserAccount" />
+    <Property Name="EventCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Icon" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="CreatedByUserAccountId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_EventCategory_Event" FromRole="EventCategories" ToRole="Events" />
+    <NavigationProperty Name="UserAccount" Relationship="OmnipresenceModel.FK_UserAccount_EventCategory" FromRole="EventCategories" ToRole="UserAccounts" />
   </EntityType>
   <EntityType Name="EventComment">
     <Key>
       <PropertyRef Name="EventCommentId" />
     </Key>
-    <Property Type="Int32" Name="EventCommentId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="Comment" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Type="Binary" Name="Timestamp" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <Property Type="Int32" Name="EventId" Nullable="false" />
-    <NavigationProperty Name="Event" Relationship="Core.FK_Event_EventComment" FromRole="EventComment" ToRole="Event" />
-    <NavigationProperty Name="UserAccount" Relationship="Core.FK_UserAccount_EventComment" FromRole="EventComment" ToRole="UserAccount" />
+    <Property Name="EventCommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" />
+    <Property Name="CreatedByUserAccountId" Type="Int32" Nullable="false" />
+    <Property Name="EventId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Event" Relationship="OmnipresenceModel.FK_Event_EventComment" FromRole="EventComments" ToRole="Events" />
+    <NavigationProperty Name="UserAccount" Relationship="OmnipresenceModel.FK_UserAccount_EventComment" FromRole="EventComments" ToRole="UserAccounts" />
   </EntityType>
-  <EntityType Name="Gender">
+  <EntityType Name="Event">
     <Key>
-      <PropertyRef Name="GenderId" />
+      <PropertyRef Name="EventId" />
     </Key>
-    <Property Type="Int32" Name="GenderId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="GenderText" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="GenderDescription" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <NavigationProperty Name="UserAccounts" Relationship="Core.FK_UserAccount_Gender" FromRole="Gender" ToRole="UserAccount" />
+    <Property Name="EventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
+    <Property Name="StartTime" Type="DateTime" Nullable="false" />
+    <Property Name="EndTime" Type="DateTime" Nullable="false" />
+    <Property Name="Reputation" Type="Int32" Nullable="false" />
+    <Property Name="Duration" Type="Int32" />
+    <Property Name="CreationTime" Type="DateTime" />
+    <Property Name="DeletionTime" Type="DateTime" Nullable="false" />
+    <Property Name="CreatedByUserAccountId" Type="Int32" Nullable="false" />
+    <Property Name="EventCategoryId" Type="Int32" />
+    <Property Name="VisibilityTypeId" Type="Int32" Nullable="false" />
+    <Property Name="LocationId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EventCategory" Relationship="OmnipresenceModel.FK_EventCategory_Event" FromRole="Events" ToRole="EventCategories" />
+    <NavigationProperty Name="EventComments" Relationship="OmnipresenceModel.FK_Event_EventComment" FromRole="Events" ToRole="EventComments" />
+    <NavigationProperty Name="Location" Relationship="OmnipresenceModel.FK_Event_Location" FromRole="Events" ToRole="Locations" />
+    <NavigationProperty Name="MediaElements" Relationship="OmnipresenceModel.FK_Event_MediaElement" FromRole="Events" ToRole="MediaElements" />
+    <NavigationProperty Name="UserAccount" Relationship="OmnipresenceModel.FK_UserAccount_Event" FromRole="Events" ToRole="UserAccounts" />
+    <NavigationProperty Name="VisibilityType" Relationship="OmnipresenceModel.FK_VisibilityType_Event" FromRole="Events" ToRole="VisibilityTypes" />
   </EntityType>
   <EntityType Name="Location">
     <Key>
       <PropertyRef Name="LocationId" />
     </Key>
-    <Property Type="Int32" Name="LocationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Double" Name="Longitude" Nullable="false" />
-    <Property Type="Double" Name="Latitude" Nullable="false" />
-    <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Events" Relationship="Core.FK_Event_Location" FromRole="Location" ToRole="Event" />
+    <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_Event_Location" FromRole="Locations" ToRole="Events" />
   </EntityType>
   <EntityType Name="LogEvent">
     <Key>
       <PropertyRef Name="LogEventId" />
     </Key>
-    <Property Type="Int32" Name="LogEventId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Binary" Name="Timestamp" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
-    <Property Type="String" Name="LogMessage" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="LogEventTypeId" Nullable="false" />
-    <NavigationProperty Name="LogEventType" Relationship="Core.FK_LogEventType_LogEvent" FromRole="LogEvent" ToRole="LogEventType" />
+    <Property Name="LogEventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" />
+    <Property Name="LogMessage" Type="String" Nullable="false" MaxLength="1000" Unicode="false" FixedLength="false" />
+    <Property Name="LogEventTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="LogEventType" Relationship="OmnipresenceModel.FK_LogEventType_LogEvent" FromRole="LogEvents" ToRole="LogEventTypes" />
   </EntityType>
   <EntityType Name="LogEventType">
     <Key>
       <PropertyRef Name="LogEventTypeId" />
     </Key>
-    <Property Type="Int32" Name="LogEventTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="LogEventTypeText" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" />
-    <NavigationProperty Name="LogEvents" Relationship="Core.FK_LogEventType_LogEvent" FromRole="LogEventType" ToRole="LogEvent" />
-    <NavigationProperty Name="UserAccount" Relationship="Core.FK_UserAccount_LogEventType" FromRole="LogEventType" ToRole="UserAccount" />
+    <Property Name="LogEventTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LogEventTypeText" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="CreatedByUserAccountId" Type="Int32" />
+    <NavigationProperty Name="LogEvents" Relationship="OmnipresenceModel.FK_LogEventType_LogEvent" FromRole="LogEventTypes" ToRole="LogEvents" />
+    <NavigationProperty Name="UserAccount" Relationship="OmnipresenceModel.FK_UserAccount_LogEventType" FromRole="LogEventTypes" ToRole="UserAccounts" />
   </EntityType>
   <EntityType Name="MediaElement">
     <Key>
       <PropertyRef Name="MediaElementId" />
     </Key>
-    <Property Type="Int32" Name="MediaElementId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="MediaUrl" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="Type" Nullable="false" />
-    <Property Type="Double" Name="Size" Nullable="false" />
-    <Property Type="Int32" Name="EventId" Nullable="false" />
-    <Property Type="Int32" Name="UserAccountId" Nullable="false" />
-    <NavigationProperty Name="Event" Relationship="Core.FK_Event_MediaElement" FromRole="MediaElement" ToRole="Event" />
+    <Property Name="MediaElementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MediaUrl" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="Size" Type="Double" Nullable="false" />
+    <Property Name="EventId" Type="Int32" Nullable="false" />
+    <Property Name="UserAccountId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Event" Relationship="OmnipresenceModel.FK_Event_MediaElement" FromRole="MediaElements" ToRole="Events" />
   </EntityType>
   <EntityType Name="UserAccount">
     <Key>
       <PropertyRef Name="UserAccountId" />
     </Key>
-    <Property Type="Int32" Name="UserAccountId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="Username" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Password" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="Birthdate" Nullable="false" />
-    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="LastName" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="GenderId" Nullable="false" />
-    <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="AlternateEmailAddress" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="Reputation" Nullable="false" />
-    <Property Type="Binary" Name="AvatarImage" MaxLength="Max" FixedLength="false" />
-    <Property Type="String" Name="Description" MaxLength="2000" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CountryId" />
-    <Property Type="Int32" Name="Timezone" />
-    <Property Type="Int32" Name="UserAccountTypeId" Nullable="false" />
-    <NavigationProperty Name="Country" Relationship="Core.FK_Country_UserAccount" FromRole="UserAccount" ToRole="Country" />
-    <NavigationProperty Name="Events" Relationship="Core.FK_UserAccount_Event" FromRole="UserAccount" ToRole="Event" />
-    <NavigationProperty Name="EventCategories" Relationship="Core.FK_UserAccount_EventCategory" FromRole="UserAccount" ToRole="EventCategory" />
-    <NavigationProperty Name="EventComments" Relationship="Core.FK_UserAccount_EventComment" FromRole="UserAccount" ToRole="EventComment" />
-    <NavigationProperty Name="Gender" Relationship="Core.FK_UserAccount_Gender" FromRole="UserAccount" ToRole="Gender" />
-    <NavigationProperty Name="LogEventTypes" Relationship="Core.FK_UserAccount_LogEventType" FromRole="UserAccount" ToRole="LogEventType" />
-    <NavigationProperty Name="UserAccountType" Relationship="Core.FK_UserAccountType_UserAccount" FromRole="UserAccount" ToRole="UserAccountType" />
-    <NavigationProperty Name="aspnet_User" Relationship="Core.aspnet_UsersUserAccount" FromRole="UserAccount" ToRole="aspnet_Users" />
-    <Property Type="Guid" Name="aspnet_UserId" Nullable="false" />
+    <Property Name="UserAccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="Birthdate" Type="DateTime" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="GenderId" Type="Int32" />
+    <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="AlternateEmailAddress" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="Reputation" Type="Int32" Nullable="false" />
+    <Property Name="AvatarImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="2000" Unicode="false" FixedLength="false" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="Timezone" Type="Int32" />
+    <Property Name="UserAccountTypeId" Type="Int32" Nullable="false" />
+    <Property Name="aspnet_UserId" Type="Guid" Nullable="false" />
+    <Property Name="Gender" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Country" Relationship="OmnipresenceModel.FK_Country_UserAccount" FromRole="UserAccounts" ToRole="Countries" />
+    <NavigationProperty Name="EventCategories" Relationship="OmnipresenceModel.FK_UserAccount_EventCategory" FromRole="UserAccounts" ToRole="EventCategories" />
+    <NavigationProperty Name="EventComments" Relationship="OmnipresenceModel.FK_UserAccount_EventComment" FromRole="UserAccounts" ToRole="EventComments" />
+    <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_UserAccount_Event" FromRole="UserAccounts" ToRole="Events" />
+    <NavigationProperty Name="LogEventTypes" Relationship="OmnipresenceModel.FK_UserAccount_LogEventType" FromRole="UserAccounts" ToRole="LogEventTypes" />
+    <NavigationProperty Name="UserAccountType" Relationship="OmnipresenceModel.FK_UserAccountType_UserAccount" FromRole="UserAccounts" ToRole="UserAccountTypes" />
   </EntityType>
   <EntityType Name="UserAccountType">
     <Key>
       <PropertyRef Name="UserAccountTypeId" />
     </Key>
-    <Property Type="Int32" Name="UserAccountTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="UserTypeText" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="UserTypeDescription" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <NavigationProperty Name="UserAccounts" Relationship="Core.FK_UserAccountType_UserAccount" FromRole="UserAccountType" ToRole="UserAccount" />
+    <Property Name="UserAccountTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserTypeText" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="UserTypeDescription" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="CreatedByUserAccountId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UserAccounts" Relationship="OmnipresenceModel.FK_UserAccountType_UserAccount" FromRole="UserAccountTypes" ToRole="UserAccounts" />
   </EntityType>
   <EntityType Name="VisibilityType">
     <Key>
       <PropertyRef Name="VisibilityTypeId" />
     </Key>
-    <Property Type="Int32" Name="VisibilityTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="VisibilityText" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="VisibilityDescription" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <NavigationProperty Name="Events" Relationship="Core.FK_VisibilityType_Event" FromRole="VisibilityType" ToRole="Event" />
+    <Property Name="VisibilityTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VisibilityText" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="VisibilityDescription" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="CreatedByUserAccountId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_VisibilityType_Event" FromRole="VisibilityTypes" ToRole="Events" />
   </EntityType>
   <Association Name="FK_Country_UserAccount">
-    <End Type="Core.Country" Role="Country" Multiplicity="0..1" />
-    <End Type="Core.UserAccount" Role="UserAccount" Multiplicity="*" />
+    <End Role="Countries" Type="OmnipresenceModel.Country" Multiplicity="0..1" />
+    <End Role="UserAccounts" Type="OmnipresenceModel.UserAccount" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Country">
+      <Principal Role="Countries">
         <PropertyRef Name="CountryId" />
       </Principal>
-      <Dependent Role="UserAccount">
+      <Dependent Role="UserAccounts">
         <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EventCategory_Event">
+    <End Role="EventCategories" Type="OmnipresenceModel.EventCategory" Multiplicity="0..1" />
+    <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventCategories">
+        <PropertyRef Name="EventCategoryId" />
+      </Principal>
+      <Dependent Role="Events">
+        <PropertyRef Name="EventCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAccount_EventCategory">
+    <End Role="UserAccounts" Type="OmnipresenceModel.UserAccount" Multiplicity="1" />
+    <End Role="EventCategories" Type="OmnipresenceModel.EventCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccounts">
+        <PropertyRef Name="UserAccountId" />
+      </Principal>
+      <Dependent Role="EventCategories">
+        <PropertyRef Name="CreatedByUserAccountId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Event_EventComment">
-    <End Type="Core.Event" Role="Event" Multiplicity="1" />
-    <End Type="Core.EventComment" Role="EventComment" Multiplicity="*" />
+    <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="1" />
+    <End Role="EventComments" Type="OmnipresenceModel.EventComment" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Event">
+      <Principal Role="Events">
         <PropertyRef Name="EventId" />
       </Principal>
-      <Dependent Role="EventComment">
+      <Dependent Role="EventComments">
         <PropertyRef Name="EventId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Event_Location">
-    <End Type="Core.Event" Multiplicity="*" Role="Event" />
-    <End Type="Core.Location" Multiplicity="1" Role="Location" />
+  <Association Name="FK_UserAccount_EventComment">
+    <End Role="UserAccounts" Type="OmnipresenceModel.UserAccount" Multiplicity="1" />
+    <End Role="EventComments" Type="OmnipresenceModel.EventComment" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Location">
+      <Principal Role="UserAccounts">
+        <PropertyRef Name="UserAccountId" />
+      </Principal>
+      <Dependent Role="EventComments">
+        <PropertyRef Name="CreatedByUserAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Event_Location">
+    <End Role="Locations" Type="OmnipresenceModel.Location" Multiplicity="1" />
+    <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
         <PropertyRef Name="LocationId" />
       </Principal>
-      <Dependent Role="Event">
+      <Dependent Role="Events">
         <PropertyRef Name="LocationId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Event_MediaElement">
-    <End Type="Core.Event" Role="Event" Multiplicity="1" />
-    <End Type="Core.MediaElement" Role="MediaElement" Multiplicity="*" />
+    <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="1" />
+    <End Role="MediaElements" Type="OmnipresenceModel.MediaElement" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Event">
+      <Principal Role="Events">
         <PropertyRef Name="EventId" />
       </Principal>
-      <Dependent Role="MediaElement">
+      <Dependent Role="MediaElements">
         <PropertyRef Name="EventId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_EventCategory_Event">
-    <End Type="Core.EventCategory" Role="EventCategory" Multiplicity="0..1" />
-    <End Type="Core.Event" Role="Event" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EventCategory">
-        <PropertyRef Name="EventCategoryId" />
-      </Principal>
-      <Dependent Role="Event">
-        <PropertyRef Name="EventCategoryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_UserAccount_Event">
-    <End Type="Core.UserAccount" Role="UserAccount" Multiplicity="1" />
-    <End Type="Core.Event" Role="Event" Multiplicity="*" />
+    <End Role="UserAccounts" Type="OmnipresenceModel.UserAccount" Multiplicity="1" />
+    <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="UserAccount">
+      <Principal Role="UserAccounts">
         <PropertyRef Name="UserAccountId" />
       </Principal>
-      <Dependent Role="Event">
+      <Dependent Role="Events">
         <PropertyRef Name="CreatedByUserAccountId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_VisibilityType_Event">
-    <End Type="Core.VisibilityType" Role="VisibilityType" Multiplicity="1" />
-    <End Type="Core.Event" Role="Event" Multiplicity="*" />
+    <End Role="VisibilityTypes" Type="OmnipresenceModel.VisibilityType" Multiplicity="1" />
+    <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="VisibilityType">
+      <Principal Role="VisibilityTypes">
         <PropertyRef Name="VisibilityTypeId" />
       </Principal>
-      <Dependent Role="Event">
+      <Dependent Role="Events">
         <PropertyRef Name="VisibilityTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccount_EventCategory">
-    <End Type="Core.UserAccount" Role="UserAccount" Multiplicity="1" />
-    <End Type="Core.EventCategory" Role="EventCategory" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserAccount">
-        <PropertyRef Name="UserAccountId" />
-      </Principal>
-      <Dependent Role="EventCategory">
-        <PropertyRef Name="CreatedByUserAccountId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccount_EventComment">
-    <End Type="Core.UserAccount" Role="UserAccount" Multiplicity="1" />
-    <End Type="Core.EventComment" Role="EventComment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserAccount">
-        <PropertyRef Name="UserAccountId" />
-      </Principal>
-      <Dependent Role="EventComment">
-        <PropertyRef Name="CreatedByUserAccountId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccount_Gender">
-    <End Type="Core.Gender" Role="Gender" Multiplicity="1" />
-    <End Type="Core.UserAccount" Role="UserAccount" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Gender">
-        <PropertyRef Name="GenderId" />
-      </Principal>
-      <Dependent Role="UserAccount">
-        <PropertyRef Name="GenderId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_LogEventType_LogEvent">
-    <End Type="Core.LogEventType" Role="LogEventType" Multiplicity="1" />
-    <End Type="Core.LogEvent" Role="LogEvent" Multiplicity="*" />
+    <End Role="LogEventTypes" Type="OmnipresenceModel.LogEventType" Multiplicity="1" />
+    <End Role="LogEvents" Type="OmnipresenceModel.LogEvent" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="LogEventType">
+      <Principal Role="LogEventTypes">
         <PropertyRef Name="LogEventTypeId" />
       </Principal>
-      <Dependent Role="LogEvent">
+      <Dependent Role="LogEvents">
         <PropertyRef Name="LogEventTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_UserAccount_LogEventType">
-    <End Type="Core.UserAccount" Role="UserAccount" Multiplicity="0..1" />
-    <End Type="Core.LogEventType" Role="LogEventType" Multiplicity="*" />
+    <End Role="UserAccounts" Type="OmnipresenceModel.UserAccount" Multiplicity="0..1" />
+    <End Role="LogEventTypes" Type="OmnipresenceModel.LogEventType" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="UserAccount">
+      <Principal Role="UserAccounts">
         <PropertyRef Name="UserAccountId" />
       </Principal>
-      <Dependent Role="LogEventType">
+      <Dependent Role="LogEventTypes">
         <PropertyRef Name="CreatedByUserAccountId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_UserAccountType_UserAccount">
-    <End Type="Core.UserAccountType" Role="UserAccountType" Multiplicity="1" />
-    <End Type="Core.UserAccount" Role="UserAccount" Multiplicity="*" />
+    <End Role="UserAccountTypes" Type="OmnipresenceModel.UserAccountType" Multiplicity="1" />
+    <End Role="UserAccounts" Type="OmnipresenceModel.UserAccount" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="UserAccountType">
+      <Principal Role="UserAccountTypes">
         <PropertyRef Name="UserAccountTypeId" />
       </Principal>
-      <Dependent Role="UserAccount">
-        <PropertyRef Name="UserAccountTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="aspnet_Applications">
-    <Key>
-      <PropertyRef Name="ApplicationId" />
-    </Key>
-    <Property Type="String" Name="ApplicationName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="LoweredApplicationName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="Guid" Name="ApplicationId" Nullable="false" />
-    <Property Type="String" Name="Description" MaxLength="256" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="aspnet_Membership" Relationship="Core.FK__aspnet_Me__Appli__44FF419A" FromRole="aspnet_Applications" ToRole="aspnet_Membership" />
-    <NavigationProperty Name="aspnet_Paths" Relationship="Core.FK__aspnet_Pa__Appli__7E37BEF6" FromRole="aspnet_Applications" ToRole="aspnet_Paths" />
-    <NavigationProperty Name="aspnet_Roles" Relationship="Core.FK__aspnet_Ro__Appli__6754599E" FromRole="aspnet_Applications" ToRole="aspnet_Roles" />
-    <NavigationProperty Name="aspnet_Users" Relationship="Core.FK__aspnet_Us__Appli__30F848ED" FromRole="aspnet_Applications" ToRole="aspnet_Users" />
-  </EntityType>
-  <EntityType Name="aspnet_Membership">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Type="Guid" Name="ApplicationId" Nullable="false" />
-    <Property Type="Guid" Name="UserId" Nullable="false" />
-    <Property Type="String" Name="Password" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Type="Int32" Name="PasswordFormat" Nullable="false" />
-    <Property Type="String" Name="PasswordSalt" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="MobilePIN" MaxLength="16" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="Email" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="LoweredEmail" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="PasswordQuestion" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="PasswordAnswer" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Type="Boolean" Name="IsApproved" Nullable="false" />
-    <Property Type="Boolean" Name="IsLockedOut" Nullable="false" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" />
-    <Property Type="DateTime" Name="LastLoginDate" Nullable="false" />
-    <Property Type="DateTime" Name="LastPasswordChangedDate" Nullable="false" />
-    <Property Type="DateTime" Name="LastLockoutDate" Nullable="false" />
-    <Property Type="Int32" Name="FailedPasswordAttemptCount" Nullable="false" />
-    <Property Type="DateTime" Name="FailedPasswordAttemptWindowStart" Nullable="false" />
-    <Property Type="Int32" Name="FailedPasswordAnswerAttemptCount" Nullable="false" />
-    <Property Type="DateTime" Name="FailedPasswordAnswerAttemptWindowStart" Nullable="false" />
-    <Property Type="String" Name="Comment" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="aspnet_Applications" Relationship="Core.FK__aspnet_Me__Appli__44FF419A" FromRole="aspnet_Membership" ToRole="aspnet_Applications" />
-    <NavigationProperty Name="aspnet_Users" Relationship="Core.FK__aspnet_Me__UserI__45F365D3" FromRole="aspnet_Membership" ToRole="aspnet_Users" />
-  </EntityType>
-  <EntityType Name="aspnet_Paths">
-    <Key>
-      <PropertyRef Name="PathId" />
-    </Key>
-    <Property Type="Guid" Name="ApplicationId" Nullable="false" />
-    <Property Type="Guid" Name="PathId" Nullable="false" />
-    <Property Type="String" Name="Path" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="LoweredPath" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="aspnet_Applications" Relationship="Core.FK__aspnet_Pa__Appli__7E37BEF6" FromRole="aspnet_Paths" ToRole="aspnet_Applications" />
-    <NavigationProperty Name="aspnet_PersonalizationAllUsers" Relationship="Core.FK__aspnet_Pe__PathI__05D8E0BE" FromRole="aspnet_Paths" ToRole="aspnet_PersonalizationAllUsers" />
-    <NavigationProperty Name="aspnet_PersonalizationPerUser" Relationship="Core.FK__aspnet_Pe__PathI__0B91BA14" FromRole="aspnet_Paths" ToRole="aspnet_PersonalizationPerUser" />
-  </EntityType>
-  <EntityType Name="aspnet_PersonalizationAllUsers">
-    <Key>
-      <PropertyRef Name="PathId" />
-    </Key>
-    <Property Type="Guid" Name="PathId" Nullable="false" />
-    <Property Type="Binary" Name="PageSettings" Nullable="false" MaxLength="Max" FixedLength="false" />
-    <Property Type="DateTime" Name="LastUpdatedDate" Nullable="false" />
-    <NavigationProperty Name="aspnet_Paths" Relationship="Core.FK__aspnet_Pe__PathI__05D8E0BE" FromRole="aspnet_PersonalizationAllUsers" ToRole="aspnet_Paths" />
-  </EntityType>
-  <EntityType Name="aspnet_PersonalizationPerUser">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Type="Guid" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="PathId" />
-    <Property Type="Guid" Name="UserId" />
-    <Property Type="Binary" Name="PageSettings" Nullable="false" MaxLength="Max" FixedLength="false" />
-    <Property Type="DateTime" Name="LastUpdatedDate" Nullable="false" />
-    <NavigationProperty Name="aspnet_Paths" Relationship="Core.FK__aspnet_Pe__PathI__0B91BA14" FromRole="aspnet_PersonalizationPerUser" ToRole="aspnet_Paths" />
-    <NavigationProperty Name="aspnet_Users" Relationship="Core.FK__aspnet_Pe__UserI__0C85DE4D" FromRole="aspnet_PersonalizationPerUser" ToRole="aspnet_Users" />
-  </EntityType>
-  <EntityType Name="aspnet_Profile">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Type="Guid" Name="UserId" Nullable="false" />
-    <Property Type="String" Name="PropertyNames" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="PropertyValuesString" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="Binary" Name="PropertyValuesBinary" Nullable="false" MaxLength="Max" FixedLength="false" />
-    <Property Type="DateTime" Name="LastUpdatedDate" Nullable="false" />
-    <NavigationProperty Name="aspnet_Users" Relationship="Core.FK__aspnet_Pr__UserI__5BE2A6F2" FromRole="aspnet_Profile" ToRole="aspnet_Users" />
-  </EntityType>
-  <EntityType Name="aspnet_Roles">
-    <Key>
-      <PropertyRef Name="RoleId" />
-    </Key>
-    <Property Type="Guid" Name="ApplicationId" Nullable="false" />
-    <Property Type="Guid" Name="RoleId" Nullable="false" />
-    <Property Type="String" Name="RoleName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="LoweredRoleName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="Description" MaxLength="256" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="aspnet_Applications" Relationship="Core.FK__aspnet_Ro__Appli__6754599E" FromRole="aspnet_Roles" ToRole="aspnet_Applications" />
-    <NavigationProperty Name="aspnet_Users" Relationship="Core.aspnet_UsersInRoles" FromRole="aspnet_Roles" ToRole="aspnet_Users" />
-    <NavigationProperty Name="aspnet_Users_1" Relationship="Core.aspnet_UsersInRoles1" FromRole="aspnet_Roles" ToRole="aspnet_Users" />
-  </EntityType>
-  <EntityType Name="aspnet_SchemaVersions">
-    <Key>
-      <PropertyRef Name="Feature" />
-      <PropertyRef Name="CompatibleSchemaVersion" />
-    </Key>
-    <Property Type="String" Name="Feature" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="CompatibleSchemaVersion" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Type="Boolean" Name="IsCurrentVersion" Nullable="false" />
-  </EntityType>
-  <EntityType Name="aspnet_Users">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Type="Guid" Name="ApplicationId" Nullable="false" />
-    <Property Type="Guid" Name="UserId" Nullable="false" />
-    <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="LoweredUserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="MobileAlias" MaxLength="16" FixedLength="false" Unicode="true" />
-    <Property Type="Boolean" Name="IsAnonymous" Nullable="false" />
-    <Property Type="DateTime" Name="LastActivityDate" Nullable="false" />
-    <NavigationProperty Name="aspnet_Applications" Relationship="Core.FK__aspnet_Us__Appli__30F848ED" FromRole="aspnet_Users" ToRole="aspnet_Applications" />
-    <NavigationProperty Name="aspnet_Membership" Relationship="Core.FK__aspnet_Me__UserI__45F365D3" FromRole="aspnet_Users" ToRole="aspnet_Membership" />
-    <NavigationProperty Name="aspnet_PersonalizationPerUser" Relationship="Core.FK__aspnet_Pe__UserI__0C85DE4D" FromRole="aspnet_Users" ToRole="aspnet_PersonalizationPerUser" />
-    <NavigationProperty Name="aspnet_Profile" Relationship="Core.FK__aspnet_Pr__UserI__5BE2A6F2" FromRole="aspnet_Users" ToRole="aspnet_Profile" />
-    <NavigationProperty Name="aspnet_Roles" Relationship="Core.aspnet_UsersInRoles" FromRole="aspnet_Users" ToRole="aspnet_Roles" />
-    <NavigationProperty Name="UserAccounts" Relationship="Core.aspnet_UsersUserAccount" FromRole="aspnet_Users" ToRole="UserAccount" />
-    <NavigationProperty Name="aspnet_Roles_1" Relationship="Core.aspnet_UsersInRoles1" FromRole="aspnet_Users" ToRole="aspnet_Roles" />
-  </EntityType>
-  <EntityType Name="aspnet_WebEvent_Events">
-    <Key>
-      <PropertyRef Name="EventId" />
-    </Key>
-    <Property Type="String" Name="EventId" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
-    <Property Type="DateTime" Name="EventTimeUtc" Nullable="false" />
-    <Property Type="DateTime" Name="EventTime" Nullable="false" />
-    <Property Type="String" Name="EventType" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="Decimal" Name="EventSequence" Nullable="false" Precision="19" Scale="0" />
-    <Property Type="Decimal" Name="EventOccurrence" Nullable="false" Precision="19" Scale="0" />
-    <Property Type="Int32" Name="EventCode" Nullable="false" />
-    <Property Type="Int32" Name="EventDetailCode" Nullable="false" />
-    <Property Type="String" Name="Message" MaxLength="1024" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="ApplicationPath" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="ApplicationVirtualPath" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="MachineName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="RequestUrl" MaxLength="1024" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="ExceptionType" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="Details" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <Association Name="FK__aspnet_Me__Appli__44FF419A">
-    <End Type="Core.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
-    <End Type="Core.aspnet_Membership" Role="aspnet_Membership" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Applications">
-        <PropertyRef Name="ApplicationId" />
-      </Principal>
-      <Dependent Role="aspnet_Membership">
-        <PropertyRef Name="ApplicationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Pa__Appli__7E37BEF6">
-    <End Type="Core.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
-    <End Type="Core.aspnet_Paths" Role="aspnet_Paths" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Applications">
-        <PropertyRef Name="ApplicationId" />
-      </Principal>
-      <Dependent Role="aspnet_Paths">
-        <PropertyRef Name="ApplicationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Ro__Appli__6754599E">
-    <End Type="Core.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
-    <End Type="Core.aspnet_Roles" Role="aspnet_Roles" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Applications">
-        <PropertyRef Name="ApplicationId" />
-      </Principal>
-      <Dependent Role="aspnet_Roles">
-        <PropertyRef Name="ApplicationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Us__Appli__30F848ED">
-    <End Type="Core.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
-    <End Type="Core.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Applications">
-        <PropertyRef Name="ApplicationId" />
-      </Principal>
-      <Dependent Role="aspnet_Users">
-        <PropertyRef Name="ApplicationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Me__UserI__45F365D3">
-    <End Type="Core.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
-    <End Type="Core.aspnet_Membership" Role="aspnet_Membership" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="aspnet_Membership">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Pe__PathI__05D8E0BE">
-    <End Type="Core.aspnet_Paths" Role="aspnet_Paths" Multiplicity="1" />
-    <End Type="Core.aspnet_PersonalizationAllUsers" Role="aspnet_PersonalizationAllUsers" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Paths">
-        <PropertyRef Name="PathId" />
-      </Principal>
-      <Dependent Role="aspnet_PersonalizationAllUsers">
-        <PropertyRef Name="PathId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Pe__PathI__0B91BA14">
-    <End Type="Core.aspnet_Paths" Role="aspnet_Paths" Multiplicity="0..1" />
-    <End Type="Core.aspnet_PersonalizationPerUser" Role="aspnet_PersonalizationPerUser" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Paths">
-        <PropertyRef Name="PathId" />
-      </Principal>
-      <Dependent Role="aspnet_PersonalizationPerUser">
-        <PropertyRef Name="PathId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Pe__UserI__0C85DE4D">
-    <End Type="Core.aspnet_Users" Role="aspnet_Users" Multiplicity="0..1" />
-    <End Type="Core.aspnet_PersonalizationPerUser" Role="aspnet_PersonalizationPerUser" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="aspnet_PersonalizationPerUser">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__aspnet_Pr__UserI__5BE2A6F2">
-    <End Type="Core.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
-    <End Type="Core.aspnet_Profile" Role="aspnet_Profile" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="aspnet_Profile">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="aspnet_UsersInRoles">
-    <End Type="Core.aspnet_Roles" Role="aspnet_Roles" Multiplicity="*" />
-    <End Type="Core.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
-  </Association>
-  <Association Name="aspnet_UsersUserAccount">
-    <End Type="Core.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
-    <End Type="Core.UserAccount" Role="UserAccount" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="UserAccount">
-        <PropertyRef Name="aspnet_UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="Country1">
-    <Key>
-      <PropertyRef Name="CountryId" />
-    </Key>
-    <Property Type="Int32" Name="CountryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="CountryName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Binary" Name="CountryFlag" MaxLength="Max" FixedLength="false" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <NavigationProperty Name="UserAccounts" Relationship="Core.FK_Country_UserAccount1" FromRole="Country1" ToRole="UserAccount1" />
-  </EntityType>
-  <EntityType Name="Event1">
-    <Key>
-      <PropertyRef Name="EventId" />
-    </Key>
-    <Property Type="Int32" Name="EventId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Description" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-    <Property Type="Time" Name="StartTime" />
-    <Property Type="Time" Name="EndTime" />
-    <Property Type="Int32" Name="Reputation" Nullable="false" />
-    <Property Type="Int32" Name="Duration" />
-    <Property Type="DateTime" Name="CreationTime" />
-    <Property Type="DateTime" Name="DeletionTime" Nullable="false" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <Property Type="Int32" Name="EventCategoryId" />
-    <Property Type="Int32" Name="VisibilityTypeId" Nullable="false" />
-    <NavigationProperty Name="EventComments" Relationship="Core.FK_Event_EventComment1" FromRole="Event1" ToRole="EventComment1" />
-    <NavigationProperty Name="Location" Relationship="Core.FK_Event_Location1" FromRole="Event1" ToRole="Location1" />
-    <NavigationProperty Name="MediaElements" Relationship="Core.FK_Event_MediaElement1" FromRole="Event1" ToRole="MediaElement1" />
-    <NavigationProperty Name="EventCategory" Relationship="Core.FK_EventCategory_Event1" FromRole="Event1" ToRole="EventCategory1" />
-    <NavigationProperty Name="UserAccount" Relationship="Core.FK_UserAccount_Event1" FromRole="Event1" ToRole="UserAccount1" />
-    <NavigationProperty Name="VisibilityType" Relationship="Core.FK_VisibilityType_Event1" FromRole="Event1" ToRole="VisibilityType1" />
-  </EntityType>
-  <EntityType Name="EventCategory1">
-    <Key>
-      <PropertyRef Name="EventCategoryId" />
-    </Key>
-    <Property Type="Int32" Name="EventCategoryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Binary" Name="Icon" Nullable="false" MaxLength="Max" FixedLength="false" />
-    <Property Type="String" Name="Description" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <NavigationProperty Name="Events" Relationship="Core.FK_EventCategory_Event1" FromRole="EventCategory1" ToRole="Event1" />
-    <NavigationProperty Name="UserAccount" Relationship="Core.FK_UserAccount_EventCategory1" FromRole="EventCategory1" ToRole="UserAccount1" />
-  </EntityType>
-  <EntityType Name="EventComment1">
-    <Key>
-      <PropertyRef Name="EventCommentId" />
-    </Key>
-    <Property Type="Int32" Name="EventCommentId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="Comment" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Type="Binary" Name="Timestamp" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <Property Type="Int32" Name="EventId" Nullable="false" />
-    <NavigationProperty Name="Event" Relationship="Core.FK_Event_EventComment1" FromRole="EventComment1" ToRole="Event1" />
-    <NavigationProperty Name="UserAccount" Relationship="Core.FK_UserAccount_EventComment1" FromRole="EventComment1" ToRole="UserAccount1" />
-  </EntityType>
-  <EntityType Name="Gender1">
-    <Key>
-      <PropertyRef Name="GenderId" />
-    </Key>
-    <Property Type="Int32" Name="GenderId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="GenderText" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="GenderDescription" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <NavigationProperty Name="UserAccounts" Relationship="Core.FK_UserAccount_Gender1" FromRole="Gender1" ToRole="UserAccount1" />
-  </EntityType>
-  <EntityType Name="Location1">
-    <Key>
-      <PropertyRef Name="LocationId" />
-    </Key>
-    <Property Type="Int32" Name="LocationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Double" Name="Longitude" Nullable="false" />
-    <Property Type="Double" Name="Latitude" Nullable="false" />
-    <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="EventId" Nullable="false" />
-    <NavigationProperty Name="Event" Relationship="Core.FK_Event_Location1" FromRole="Location1" ToRole="Event1" />
-  </EntityType>
-  <EntityType Name="LogEvent1">
-    <Key>
-      <PropertyRef Name="LogEventId" />
-    </Key>
-    <Property Type="Int32" Name="LogEventId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Binary" Name="Timestamp" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
-    <Property Type="String" Name="LogMessage" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="LogEventTypeId" Nullable="false" />
-    <NavigationProperty Name="LogEventType" Relationship="Core.FK_LogEventType_LogEvent1" FromRole="LogEvent1" ToRole="LogEventType1" />
-  </EntityType>
-  <EntityType Name="LogEventType1">
-    <Key>
-      <PropertyRef Name="LogEventTypeId" />
-    </Key>
-    <Property Type="Int32" Name="LogEventTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="LogEventTypeText" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="LogEventTypeDescription" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <NavigationProperty Name="LogEvents" Relationship="Core.FK_LogEventType_LogEvent1" FromRole="LogEventType1" ToRole="LogEvent1" />
-    <NavigationProperty Name="UserAccount" Relationship="Core.FK_UserAccount_LogEventType1" FromRole="LogEventType1" ToRole="UserAccount1" />
-  </EntityType>
-  <EntityType Name="MediaElement1">
-    <Key>
-      <PropertyRef Name="MediaElementId" />
-    </Key>
-    <Property Type="Int32" Name="MediaElementId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="MediaUrl" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="Type" Nullable="false" />
-    <Property Type="Double" Name="Size" Nullable="false" />
-    <Property Type="Int32" Name="EventId" Nullable="false" />
-    <Property Type="Int32" Name="UserAccountId" Nullable="false" />
-    <NavigationProperty Name="Event" Relationship="Core.FK_Event_MediaElement1" FromRole="MediaElement1" ToRole="Event1" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Type="Int32" Name="principal_id" Nullable="false" />
-    <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="version" />
-    <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
-  </EntityType>
-  <EntityType Name="UserAccount1">
-    <Key>
-      <PropertyRef Name="UserAccountId" />
-    </Key>
-    <Property Type="Int32" Name="UserAccountId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="Username" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Password" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="Birthdate" Nullable="false" />
-    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="LastName" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="GenderId" Nullable="false" />
-    <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="AlternateEmailAddress" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="Reputation" Nullable="false" />
-    <Property Type="Binary" Name="AvatarImage" MaxLength="Max" FixedLength="false" />
-    <Property Type="String" Name="Description" MaxLength="2000" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CountryId" />
-    <Property Type="Int32" Name="Timezone" />
-    <Property Type="Int32" Name="UserAccountTypeId" Nullable="false" />
-    <NavigationProperty Name="Country" Relationship="Core.FK_Country_UserAccount1" FromRole="UserAccount1" ToRole="Country1" />
-    <NavigationProperty Name="Events" Relationship="Core.FK_UserAccount_Event1" FromRole="UserAccount1" ToRole="Event1" />
-    <NavigationProperty Name="EventCategories" Relationship="Core.FK_UserAccount_EventCategory1" FromRole="UserAccount1" ToRole="EventCategory1" />
-    <NavigationProperty Name="EventComments" Relationship="Core.FK_UserAccount_EventComment1" FromRole="UserAccount1" ToRole="EventComment1" />
-    <NavigationProperty Name="Gender" Relationship="Core.FK_UserAccount_Gender1" FromRole="UserAccount1" ToRole="Gender1" />
-    <NavigationProperty Name="LogEventTypes" Relationship="Core.FK_UserAccount_LogEventType1" FromRole="UserAccount1" ToRole="LogEventType1" />
-    <NavigationProperty Name="UserAccountType" Relationship="Core.FK_UserAccountType_UserAccount1" FromRole="UserAccount1" ToRole="UserAccountType1" />
-  </EntityType>
-  <EntityType Name="UserAccountType1">
-    <Key>
-      <PropertyRef Name="UserAccountTypeId" />
-    </Key>
-    <Property Type="Int32" Name="UserAccountTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="UserTypeText" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="UserTypeDescription" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <NavigationProperty Name="UserAccounts" Relationship="Core.FK_UserAccountType_UserAccount1" FromRole="UserAccountType1" ToRole="UserAccount1" />
-  </EntityType>
-  <EntityType Name="VisibilityType1">
-    <Key>
-      <PropertyRef Name="VisibilityTypeId" />
-    </Key>
-    <Property Type="Int32" Name="VisibilityTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="VisibilityText" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="VisibilityDescription" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="CreatedByUserAccountId" Nullable="false" />
-    <NavigationProperty Name="Events" Relationship="Core.FK_VisibilityType_Event1" FromRole="VisibilityType1" ToRole="Event1" />
-  </EntityType>
-  <Association Name="FK_Country_UserAccount1">
-    <End Type="Core.Country1" Role="Country1" Multiplicity="0..1" />
-    <End Type="Core.UserAccount1" Role="UserAccount1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Country1">
-        <PropertyRef Name="CountryId" />
-      </Principal>
-      <Dependent Role="UserAccount1">
-        <PropertyRef Name="CountryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Event_EventComment1">
-    <End Type="Core.Event1" Role="Event1" Multiplicity="1" />
-    <End Type="Core.EventComment1" Role="EventComment1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Event1">
-        <PropertyRef Name="EventId" />
-      </Principal>
-      <Dependent Role="EventComment1">
-        <PropertyRef Name="EventId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Event_Location1">
-    <End Type="Core.Event1" Role="Event1" Multiplicity="1" />
-    <End Type="Core.Location1" Role="Location1" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Event1">
-        <PropertyRef Name="EventId" />
-      </Principal>
-      <Dependent Role="Location1">
-        <PropertyRef Name="LocationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Event_MediaElement1">
-    <End Type="Core.Event1" Role="Event1" Multiplicity="1" />
-    <End Type="Core.MediaElement1" Role="MediaElement1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Event1">
-        <PropertyRef Name="EventId" />
-      </Principal>
-      <Dependent Role="MediaElement1">
-        <PropertyRef Name="EventId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_EventCategory_Event1">
-    <End Type="Core.EventCategory1" Role="EventCategory1" Multiplicity="0..1" />
-    <End Type="Core.Event1" Role="Event1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EventCategory1">
-        <PropertyRef Name="EventCategoryId" />
-      </Principal>
-      <Dependent Role="Event1">
-        <PropertyRef Name="EventCategoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccount_Event1">
-    <End Type="Core.UserAccount1" Role="UserAccount1" Multiplicity="1" />
-    <End Type="Core.Event1" Role="Event1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserAccount1">
-        <PropertyRef Name="UserAccountId" />
-      </Principal>
-      <Dependent Role="Event1">
-        <PropertyRef Name="CreatedByUserAccountId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_VisibilityType_Event1">
-    <End Type="Core.VisibilityType1" Role="VisibilityType1" Multiplicity="1" />
-    <End Type="Core.Event1" Role="Event1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="VisibilityType1">
-        <PropertyRef Name="VisibilityTypeId" />
-      </Principal>
-      <Dependent Role="Event1">
-        <PropertyRef Name="VisibilityTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccount_EventCategory1">
-    <End Type="Core.UserAccount1" Role="UserAccount1" Multiplicity="1" />
-    <End Type="Core.EventCategory1" Role="EventCategory1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserAccount1">
-        <PropertyRef Name="UserAccountId" />
-      </Principal>
-      <Dependent Role="EventCategory1">
-        <PropertyRef Name="CreatedByUserAccountId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccount_EventComment1">
-    <End Type="Core.UserAccount1" Role="UserAccount1" Multiplicity="1" />
-    <End Type="Core.EventComment1" Role="EventComment1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserAccount1">
-        <PropertyRef Name="UserAccountId" />
-      </Principal>
-      <Dependent Role="EventComment1">
-        <PropertyRef Name="CreatedByUserAccountId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccount_Gender1">
-    <End Type="Core.Gender1" Role="Gender1" Multiplicity="1" />
-    <End Type="Core.UserAccount1" Role="UserAccount1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Gender1">
-        <PropertyRef Name="GenderId" />
-      </Principal>
-      <Dependent Role="UserAccount1">
-        <PropertyRef Name="GenderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_LogEventType_LogEvent1">
-    <End Type="Core.LogEventType1" Role="LogEventType1" Multiplicity="1" />
-    <End Type="Core.LogEvent1" Role="LogEvent1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="LogEventType1">
-        <PropertyRef Name="LogEventTypeId" />
-      </Principal>
-      <Dependent Role="LogEvent1">
-        <PropertyRef Name="LogEventTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccount_LogEventType1">
-    <End Type="Core.UserAccount1" Role="UserAccount1" Multiplicity="1" />
-    <End Type="Core.LogEventType1" Role="LogEventType1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserAccount1">
-        <PropertyRef Name="UserAccountId" />
-      </Principal>
-      <Dependent Role="LogEventType1">
-        <PropertyRef Name="CreatedByUserAccountId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserAccountType_UserAccount1">
-    <End Type="Core.UserAccountType1" Role="UserAccountType1" Multiplicity="1" />
-    <End Type="Core.UserAccount1" Role="UserAccount1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserAccountType1">
-        <PropertyRef Name="UserAccountTypeId" />
-      </Principal>
-      <Dependent Role="UserAccount1">
+      <Dependent Role="UserAccounts">
         <PropertyRef Name="UserAccountTypeId" />
       </Dependent>
     </ReferentialConstraint>
-  </Association>
-  <Association Name="aspnet_UsersInRoles1">
-    <End Type="Core.aspnet_Roles" Role="aspnet_Roles" Multiplicity="*" />
-    <End Type="Core.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
   </Association>
 </Schema>

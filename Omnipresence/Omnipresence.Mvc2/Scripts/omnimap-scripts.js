@@ -1,4 +1,52 @@
-﻿var map;
+﻿//Jay New Code
+$(document).ready(
+    function () {
+        $('#changeEventTypeButton').click(
+            function () { changeEventTypeButtonClicked(); }
+        );
+
+        $('#editDescriptionTextArea').focusin(
+            function (event) {
+                textAreaFocusIn($(event.target));
+            }
+        );
+
+        $('#editDescriptionTextArea').focusout(
+            function (event) {
+                textAreaFocusOut($(event.target), "Enter new description");
+            }
+        );
+
+        $('#commentTextArea').focusin(
+            function (event) {
+                textAreaFocusIn($(event.target));
+            }
+        );
+
+        $('#commentTextArea').focusout(
+            function (event) {
+                textAreaFocusOut($(event.target), "Enter new comment");
+            }
+        );
+    }
+);
+
+function textAreaFocusIn(textArea) {
+    textArea.text('');
+}
+
+function textAreaFocusOut(textArea, what) {
+    if (textArea.text() == '') {
+        textArea.text(what);
+    }
+}
+
+function changeEventTypeButtonClicked() {
+    alert("haha");
+}
+
+//Enzo Original Code
+var map;
 var myLatlng;
 var numMarkers = 0;
 var markerArray = new Array();
@@ -59,7 +107,7 @@ function initialize() {
     var myOptions = {
         zoom: 16,
         center: myLatlng,
-        mapTypeId: google.maps.MapTypeId.HYBRID
+        mapTypeId: google.maps.MapTypeId.ROADMAP
     }
 
 
@@ -125,6 +173,7 @@ function addRandomMarker(latlng) {
 
             closeBoxes();
             displayInfoWindow(marker.number);
+            updateRightPanel(marker.number);
 
         });
         numMarkers++;
@@ -140,7 +189,7 @@ function displayInfoWindow(markerNum) {
     var contentString = '<div id = "content">'
                 + '<p class="title">'
                 + '<h1>' + markerArray[markerNum].title
-                + '<button name="upvoteButton" type="button">++</button>'
+                + '<button id="upVote" name="upvoteButton" type="button">++</button>'
                 + '<button name="downvoteButton" type="buttom">--</button>'
                 + '</h1>'
                 + '</p>'
@@ -171,7 +220,7 @@ function displayInfoWindow(markerNum) {
                 + '</form>'
                 + '</div>'
 
-				+ '<p class="description">'
+	contentString += '<p class="description">'
                 + '<strong>Description: </strong>'
                 + '<div id="description">'
 				+ markerArray[markerNum].description
@@ -185,7 +234,7 @@ function displayInfoWindow(markerNum) {
                 + '</form>'
                 + '</p>'
 
-				+ '<p> <strong>Comments</strong> </p>'
+				+ '<div> <strong>Comments</strong> </div>'
                 + '<div id="comments">'
     for (var i = 0; i < markerArray[markerNum].comments.length; i++) {
         var comment = markerArray[markerNum].comments[i];
@@ -219,6 +268,19 @@ function displayInfoWindow(markerNum) {
     infowindow.open(map, markerArray[markerNum].marker);
 
     markerArray[markerNum].infobox = infowindow;
+
+    $('#comment').focus(
+            function focused() {
+                alert("adsg");
+                this.text = "";
+            }
+        );
+
+    $('#upVote').click(
+            function clicked() {
+                alert("hahahaha");
+            }
+        );
 }
 
 

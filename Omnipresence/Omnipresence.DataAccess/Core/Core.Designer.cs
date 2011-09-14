@@ -18,44 +18,18 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("Core", "FK_Country_UserAccount", "Country", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.Country), "UserAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.UserAccount), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_Event_EventComment", "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event), "EventComment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.EventComment), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_Event_Location", "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), "Location", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Location), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_Event_MediaElement", "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event), "MediaElement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.MediaElement), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_EventCategory_Event", "EventCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.EventCategory), "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_UserAccount_Event", "UserAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserAccount), "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_VisibilityType_Event", "VisibilityType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.VisibilityType), "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_UserAccount_EventCategory", "UserAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserAccount), "EventCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.EventCategory), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_UserAccount_EventComment", "UserAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserAccount), "EventComment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.EventComment), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_UserAccount_Gender", "Gender", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Gender), "UserAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.UserAccount), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_LogEventType_LogEvent", "LogEventType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.LogEventType), "LogEvent", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.LogEvent), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_UserAccount_LogEventType", "UserAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.UserAccount), "LogEventType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.LogEventType), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_UserAccountType_UserAccount", "UserAccountType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserAccountType), "UserAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.UserAccount), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK__aspnet_Me__Appli__44FF419A", "aspnet_Applications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.aspnet_Applications), "aspnet_Membership", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.aspnet_Membership), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK__aspnet_Pa__Appli__7E37BEF6", "aspnet_Applications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.aspnet_Applications), "aspnet_Paths", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.aspnet_Paths), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK__aspnet_Ro__Appli__6754599E", "aspnet_Applications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.aspnet_Applications), "aspnet_Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.aspnet_Roles), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK__aspnet_Us__Appli__30F848ED", "aspnet_Applications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.aspnet_Applications), "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.aspnet_Users), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK__aspnet_Me__UserI__45F365D3", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.aspnet_Users), "aspnet_Membership", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.aspnet_Membership), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK__aspnet_Pe__PathI__05D8E0BE", "aspnet_Paths", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.aspnet_Paths), "aspnet_PersonalizationAllUsers", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.aspnet_PersonalizationAllUsers), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK__aspnet_Pe__PathI__0B91BA14", "aspnet_Paths", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.aspnet_Paths), "aspnet_PersonalizationPerUser", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.aspnet_PersonalizationPerUser), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK__aspnet_Pe__UserI__0C85DE4D", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.aspnet_Users), "aspnet_PersonalizationPerUser", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.aspnet_PersonalizationPerUser), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK__aspnet_Pr__UserI__5BE2A6F2", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.aspnet_Users), "aspnet_Profile", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.aspnet_Profile), true)]
-[assembly: EdmRelationshipAttribute("Core", "aspnet_UsersInRoles", "aspnet_Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.aspnet_Roles), "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.aspnet_Users))]
-[assembly: EdmRelationshipAttribute("Core", "aspnet_UsersUserAccount", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.aspnet_Users), "UserAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.UserAccount), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_Country_UserAccount1", "Country1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.Country1), "UserAccount1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.UserAccount1), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_Event_EventComment1", "Event1", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event1), "EventComment1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.EventComment1), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_Event_Location1", "Event1", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event1), "Location1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.Location1), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_Event_MediaElement1", "Event1", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event1), "MediaElement1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.MediaElement1), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_EventCategory_Event1", "EventCategory1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.EventCategory1), "Event1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event1), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_UserAccount_Event1", "UserAccount1", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserAccount1), "Event1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event1), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_VisibilityType_Event1", "VisibilityType1", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.VisibilityType1), "Event1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event1), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_UserAccount_EventCategory1", "UserAccount1", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserAccount1), "EventCategory1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.EventCategory1), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_UserAccount_EventComment1", "UserAccount1", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserAccount1), "EventComment1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.EventComment1), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_UserAccount_Gender1", "Gender1", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Gender1), "UserAccount1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.UserAccount1), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_LogEventType_LogEvent1", "LogEventType1", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.LogEventType1), "LogEvent1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.LogEvent1), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_UserAccount_LogEventType1", "UserAccount1", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserAccount1), "LogEventType1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.LogEventType1), true)]
-[assembly: EdmRelationshipAttribute("Core", "FK_UserAccountType_UserAccount1", "UserAccountType1", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserAccountType1), "UserAccount1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.UserAccount1), true)]
-[assembly: EdmRelationshipAttribute("Core", "aspnet_UsersInRoles1", "aspnet_Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.aspnet_Roles), "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.aspnet_Users))]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Country_UserAccount", "Countries", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.Country), "UserAccounts", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.UserAccount), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_EventCategory_Event", "EventCategories", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.EventCategory), "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_UserAccount_EventCategory", "UserAccounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserAccount), "EventCategories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.EventCategory), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Event_EventComment", "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event), "EventComments", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.EventComment), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_UserAccount_EventComment", "UserAccounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserAccount), "EventComments", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.EventComment), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Event_Location", "Locations", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Location), "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Event_MediaElement", "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event), "MediaElements", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.MediaElement), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_UserAccount_Event", "UserAccounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserAccount), "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_VisibilityType_Event", "VisibilityTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.VisibilityType), "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_LogEventType_LogEvent", "LogEventTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.LogEventType), "LogEvents", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.LogEvent), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_UserAccount_LogEventType", "UserAccounts", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.UserAccount), "LogEventTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.LogEventType), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_UserAccountType_UserAccount", "UserAccountTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserAccountType), "UserAccounts", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.UserAccount), true)]
 
 #endregion
 
@@ -66,32 +40,32 @@ namespace Omnipresence.DataAccess.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class CoreContainer : ObjectContext
+    public partial class OmnipresenceEntities : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new CoreContainer object using the connection string found in the 'CoreContainer' section of the application configuration file.
+        /// Initializes a new OmnipresenceEntities object using the connection string found in the 'OmnipresenceEntities' section of the application configuration file.
         /// </summary>
-        public CoreContainer() : base("name=CoreContainer", "CoreContainer")
+        public OmnipresenceEntities() : base("name=OmnipresenceEntities", "OmnipresenceEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new CoreContainer object.
+        /// Initialize a new OmnipresenceEntities object.
         /// </summary>
-        public CoreContainer(string connectionString) : base(connectionString, "CoreContainer")
+        public OmnipresenceEntities(string connectionString) : base(connectionString, "OmnipresenceEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new CoreContainer object.
+        /// Initialize a new OmnipresenceEntities object.
         /// </summary>
-        public CoreContainer(EntityConnection connection) : base(connection, "CoreContainer")
+        public OmnipresenceEntities(EntityConnection connection) : base(connection, "OmnipresenceEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -122,22 +96,6 @@ namespace Omnipresence.DataAccess.Core
             }
         }
         private ObjectSet<Country> _Countries;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Event> Events
-        {
-            get
-            {
-                if ((_Events == null))
-                {
-                    _Events = base.CreateObjectSet<Event>("Events");
-                }
-                return _Events;
-            }
-        }
-        private ObjectSet<Event> _Events;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -174,18 +132,18 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Gender> Genders
+        public ObjectSet<Event> Events
         {
             get
             {
-                if ((_Genders == null))
+                if ((_Events == null))
                 {
-                    _Genders = base.CreateObjectSet<Gender>("Genders");
+                    _Events = base.CreateObjectSet<Event>("Events");
                 }
-                return _Genders;
+                return _Events;
             }
         }
-        private ObjectSet<Gender> _Genders;
+        private ObjectSet<Event> _Events;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -298,374 +256,6 @@ namespace Omnipresence.DataAccess.Core
             }
         }
         private ObjectSet<VisibilityType> _VisibilityTypes;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<aspnet_Applications> aspnet_Applications
-        {
-            get
-            {
-                if ((_aspnet_Applications == null))
-                {
-                    _aspnet_Applications = base.CreateObjectSet<aspnet_Applications>("aspnet_Applications");
-                }
-                return _aspnet_Applications;
-            }
-        }
-        private ObjectSet<aspnet_Applications> _aspnet_Applications;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<aspnet_Membership> aspnet_Membership
-        {
-            get
-            {
-                if ((_aspnet_Membership == null))
-                {
-                    _aspnet_Membership = base.CreateObjectSet<aspnet_Membership>("aspnet_Membership");
-                }
-                return _aspnet_Membership;
-            }
-        }
-        private ObjectSet<aspnet_Membership> _aspnet_Membership;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<aspnet_Paths> aspnet_Paths
-        {
-            get
-            {
-                if ((_aspnet_Paths == null))
-                {
-                    _aspnet_Paths = base.CreateObjectSet<aspnet_Paths>("aspnet_Paths");
-                }
-                return _aspnet_Paths;
-            }
-        }
-        private ObjectSet<aspnet_Paths> _aspnet_Paths;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<aspnet_PersonalizationAllUsers> aspnet_PersonalizationAllUsers
-        {
-            get
-            {
-                if ((_aspnet_PersonalizationAllUsers == null))
-                {
-                    _aspnet_PersonalizationAllUsers = base.CreateObjectSet<aspnet_PersonalizationAllUsers>("aspnet_PersonalizationAllUsers");
-                }
-                return _aspnet_PersonalizationAllUsers;
-            }
-        }
-        private ObjectSet<aspnet_PersonalizationAllUsers> _aspnet_PersonalizationAllUsers;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<aspnet_PersonalizationPerUser> aspnet_PersonalizationPerUser
-        {
-            get
-            {
-                if ((_aspnet_PersonalizationPerUser == null))
-                {
-                    _aspnet_PersonalizationPerUser = base.CreateObjectSet<aspnet_PersonalizationPerUser>("aspnet_PersonalizationPerUser");
-                }
-                return _aspnet_PersonalizationPerUser;
-            }
-        }
-        private ObjectSet<aspnet_PersonalizationPerUser> _aspnet_PersonalizationPerUser;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<aspnet_Profile> aspnet_Profile
-        {
-            get
-            {
-                if ((_aspnet_Profile == null))
-                {
-                    _aspnet_Profile = base.CreateObjectSet<aspnet_Profile>("aspnet_Profile");
-                }
-                return _aspnet_Profile;
-            }
-        }
-        private ObjectSet<aspnet_Profile> _aspnet_Profile;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<aspnet_Roles> aspnet_Roles
-        {
-            get
-            {
-                if ((_aspnet_Roles == null))
-                {
-                    _aspnet_Roles = base.CreateObjectSet<aspnet_Roles>("aspnet_Roles");
-                }
-                return _aspnet_Roles;
-            }
-        }
-        private ObjectSet<aspnet_Roles> _aspnet_Roles;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<aspnet_SchemaVersions> aspnet_SchemaVersions
-        {
-            get
-            {
-                if ((_aspnet_SchemaVersions == null))
-                {
-                    _aspnet_SchemaVersions = base.CreateObjectSet<aspnet_SchemaVersions>("aspnet_SchemaVersions");
-                }
-                return _aspnet_SchemaVersions;
-            }
-        }
-        private ObjectSet<aspnet_SchemaVersions> _aspnet_SchemaVersions;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<aspnet_Users> aspnet_Users
-        {
-            get
-            {
-                if ((_aspnet_Users == null))
-                {
-                    _aspnet_Users = base.CreateObjectSet<aspnet_Users>("aspnet_Users");
-                }
-                return _aspnet_Users;
-            }
-        }
-        private ObjectSet<aspnet_Users> _aspnet_Users;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<aspnet_WebEvent_Events> aspnet_WebEvent_Events
-        {
-            get
-            {
-                if ((_aspnet_WebEvent_Events == null))
-                {
-                    _aspnet_WebEvent_Events = base.CreateObjectSet<aspnet_WebEvent_Events>("aspnet_WebEvent_Events");
-                }
-                return _aspnet_WebEvent_Events;
-            }
-        }
-        private ObjectSet<aspnet_WebEvent_Events> _aspnet_WebEvent_Events;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Country1> Country1
-        {
-            get
-            {
-                if ((_Country1 == null))
-                {
-                    _Country1 = base.CreateObjectSet<Country1>("Country1");
-                }
-                return _Country1;
-            }
-        }
-        private ObjectSet<Country1> _Country1;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Event1> Event1
-        {
-            get
-            {
-                if ((_Event1 == null))
-                {
-                    _Event1 = base.CreateObjectSet<Event1>("Event1");
-                }
-                return _Event1;
-            }
-        }
-        private ObjectSet<Event1> _Event1;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<EventCategory1> EventCategory1
-        {
-            get
-            {
-                if ((_EventCategory1 == null))
-                {
-                    _EventCategory1 = base.CreateObjectSet<EventCategory1>("EventCategory1");
-                }
-                return _EventCategory1;
-            }
-        }
-        private ObjectSet<EventCategory1> _EventCategory1;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<EventComment1> EventComment1
-        {
-            get
-            {
-                if ((_EventComment1 == null))
-                {
-                    _EventComment1 = base.CreateObjectSet<EventComment1>("EventComment1");
-                }
-                return _EventComment1;
-            }
-        }
-        private ObjectSet<EventComment1> _EventComment1;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Gender1> Gender1
-        {
-            get
-            {
-                if ((_Gender1 == null))
-                {
-                    _Gender1 = base.CreateObjectSet<Gender1>("Gender1");
-                }
-                return _Gender1;
-            }
-        }
-        private ObjectSet<Gender1> _Gender1;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Location1> Location1
-        {
-            get
-            {
-                if ((_Location1 == null))
-                {
-                    _Location1 = base.CreateObjectSet<Location1>("Location1");
-                }
-                return _Location1;
-            }
-        }
-        private ObjectSet<Location1> _Location1;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<LogEvent1> LogEvent1
-        {
-            get
-            {
-                if ((_LogEvent1 == null))
-                {
-                    _LogEvent1 = base.CreateObjectSet<LogEvent1>("LogEvent1");
-                }
-                return _LogEvent1;
-            }
-        }
-        private ObjectSet<LogEvent1> _LogEvent1;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<LogEventType1> LogEventType1
-        {
-            get
-            {
-                if ((_LogEventType1 == null))
-                {
-                    _LogEventType1 = base.CreateObjectSet<LogEventType1>("LogEventType1");
-                }
-                return _LogEventType1;
-            }
-        }
-        private ObjectSet<LogEventType1> _LogEventType1;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<MediaElement1> MediaElement1
-        {
-            get
-            {
-                if ((_MediaElement1 == null))
-                {
-                    _MediaElement1 = base.CreateObjectSet<MediaElement1>("MediaElement1");
-                }
-                return _MediaElement1;
-            }
-        }
-        private ObjectSet<MediaElement1> _MediaElement1;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<sysdiagram> sysdiagrams
-        {
-            get
-            {
-                if ((_sysdiagrams == null))
-                {
-                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
-                }
-                return _sysdiagrams;
-            }
-        }
-        private ObjectSet<sysdiagram> _sysdiagrams;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<UserAccount1> UserAccount1
-        {
-            get
-            {
-                if ((_UserAccount1 == null))
-                {
-                    _UserAccount1 = base.CreateObjectSet<UserAccount1>("UserAccount1");
-                }
-                return _UserAccount1;
-            }
-        }
-        private ObjectSet<UserAccount1> _UserAccount1;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<UserAccountType1> UserAccountType1
-        {
-            get
-            {
-                if ((_UserAccountType1 == null))
-                {
-                    _UserAccountType1 = base.CreateObjectSet<UserAccountType1>("UserAccountType1");
-                }
-                return _UserAccountType1;
-            }
-        }
-        private ObjectSet<UserAccountType1> _UserAccountType1;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<VisibilityType1> VisibilityType1
-        {
-            get
-            {
-                if ((_VisibilityType1 == null))
-                {
-                    _VisibilityType1 = base.CreateObjectSet<VisibilityType1>("VisibilityType1");
-                }
-                return _VisibilityType1;
-            }
-        }
-        private ObjectSet<VisibilityType1> _VisibilityType1;
 
         #endregion
         #region AddTo Methods
@@ -676,14 +266,6 @@ namespace Omnipresence.DataAccess.Core
         public void AddToCountries(Country country)
         {
             base.AddObject("Countries", country);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Events EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToEvents(Event @event)
-        {
-            base.AddObject("Events", @event);
         }
     
         /// <summary>
@@ -703,11 +285,11 @@ namespace Omnipresence.DataAccess.Core
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Genders EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Events EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToGenders(Gender gender)
+        public void AddToEvents(Event @event)
         {
-            base.AddObject("Genders", gender);
+            base.AddObject("Events", @event);
         }
     
         /// <summary>
@@ -765,190 +347,6 @@ namespace Omnipresence.DataAccess.Core
         {
             base.AddObject("VisibilityTypes", visibilityType);
         }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the aspnet_Applications EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToaspnet_Applications(aspnet_Applications aspnet_Applications)
-        {
-            base.AddObject("aspnet_Applications", aspnet_Applications);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the aspnet_Membership EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToaspnet_Membership(aspnet_Membership aspnet_Membership)
-        {
-            base.AddObject("aspnet_Membership", aspnet_Membership);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the aspnet_Paths EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToaspnet_Paths(aspnet_Paths aspnet_Paths)
-        {
-            base.AddObject("aspnet_Paths", aspnet_Paths);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the aspnet_PersonalizationAllUsers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToaspnet_PersonalizationAllUsers(aspnet_PersonalizationAllUsers aspnet_PersonalizationAllUsers)
-        {
-            base.AddObject("aspnet_PersonalizationAllUsers", aspnet_PersonalizationAllUsers);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the aspnet_PersonalizationPerUser EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToaspnet_PersonalizationPerUser(aspnet_PersonalizationPerUser aspnet_PersonalizationPerUser)
-        {
-            base.AddObject("aspnet_PersonalizationPerUser", aspnet_PersonalizationPerUser);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the aspnet_Profile EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToaspnet_Profile(aspnet_Profile aspnet_Profile)
-        {
-            base.AddObject("aspnet_Profile", aspnet_Profile);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the aspnet_Roles EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToaspnet_Roles(aspnet_Roles aspnet_Roles)
-        {
-            base.AddObject("aspnet_Roles", aspnet_Roles);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the aspnet_SchemaVersions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToaspnet_SchemaVersions(aspnet_SchemaVersions aspnet_SchemaVersions)
-        {
-            base.AddObject("aspnet_SchemaVersions", aspnet_SchemaVersions);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the aspnet_Users EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToaspnet_Users(aspnet_Users aspnet_Users)
-        {
-            base.AddObject("aspnet_Users", aspnet_Users);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the aspnet_WebEvent_Events EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToaspnet_WebEvent_Events(aspnet_WebEvent_Events aspnet_WebEvent_Events)
-        {
-            base.AddObject("aspnet_WebEvent_Events", aspnet_WebEvent_Events);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Country1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToCountry1(Country1 country1)
-        {
-            base.AddObject("Country1", country1);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Event1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToEvent1(Event1 event1)
-        {
-            base.AddObject("Event1", event1);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the EventCategory1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToEventCategory1(EventCategory1 eventCategory1)
-        {
-            base.AddObject("EventCategory1", eventCategory1);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the EventComment1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToEventComment1(EventComment1 eventComment1)
-        {
-            base.AddObject("EventComment1", eventComment1);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Gender1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToGender1(Gender1 gender1)
-        {
-            base.AddObject("Gender1", gender1);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Location1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToLocation1(Location1 location1)
-        {
-            base.AddObject("Location1", location1);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the LogEvent1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToLogEvent1(LogEvent1 logEvent1)
-        {
-            base.AddObject("LogEvent1", logEvent1);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the LogEventType1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToLogEventType1(LogEventType1 logEventType1)
-        {
-            base.AddObject("LogEventType1", logEventType1);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the MediaElement1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToMediaElement1(MediaElement1 mediaElement1)
-        {
-            base.AddObject("MediaElement1", mediaElement1);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTosysdiagrams(sysdiagram sysdiagram)
-        {
-            base.AddObject("sysdiagrams", sysdiagram);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the UserAccount1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToUserAccount1(UserAccount1 userAccount1)
-        {
-            base.AddObject("UserAccount1", userAccount1);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the UserAccountType1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToUserAccountType1(UserAccountType1 userAccountType1)
-        {
-            base.AddObject("UserAccountType1", userAccountType1);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the VisibilityType1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToVisibilityType1(VisibilityType1 visibilityType1)
-        {
-            base.AddObject("VisibilityType1", visibilityType1);
-        }
 
         #endregion
     }
@@ -961,2860 +359,7 @@ namespace Omnipresence.DataAccess.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="aspnet_Applications")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class aspnet_Applications : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new aspnet_Applications object.
-        /// </summary>
-        /// <param name="applicationName">Initial value of the ApplicationName property.</param>
-        /// <param name="loweredApplicationName">Initial value of the LoweredApplicationName property.</param>
-        /// <param name="applicationId">Initial value of the ApplicationId property.</param>
-        public static aspnet_Applications Createaspnet_Applications(global::System.String applicationName, global::System.String loweredApplicationName, global::System.Guid applicationId)
-        {
-            aspnet_Applications aspnet_Applications = new aspnet_Applications();
-            aspnet_Applications.ApplicationName = applicationName;
-            aspnet_Applications.LoweredApplicationName = loweredApplicationName;
-            aspnet_Applications.ApplicationId = applicationId;
-            return aspnet_Applications;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String ApplicationName
-        {
-            get
-            {
-                return _ApplicationName;
-            }
-            set
-            {
-                OnApplicationNameChanging(value);
-                ReportPropertyChanging("ApplicationName");
-                _ApplicationName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("ApplicationName");
-                OnApplicationNameChanged();
-            }
-        }
-        private global::System.String _ApplicationName;
-        partial void OnApplicationNameChanging(global::System.String value);
-        partial void OnApplicationNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String LoweredApplicationName
-        {
-            get
-            {
-                return _LoweredApplicationName;
-            }
-            set
-            {
-                OnLoweredApplicationNameChanging(value);
-                ReportPropertyChanging("LoweredApplicationName");
-                _LoweredApplicationName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("LoweredApplicationName");
-                OnLoweredApplicationNameChanged();
-            }
-        }
-        private global::System.String _LoweredApplicationName;
-        partial void OnLoweredApplicationNameChanging(global::System.String value);
-        partial void OnLoweredApplicationNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid ApplicationId
-        {
-            get
-            {
-                return _ApplicationId;
-            }
-            set
-            {
-                if (_ApplicationId != value)
-                {
-                    OnApplicationIdChanging(value);
-                    ReportPropertyChanging("ApplicationId");
-                    _ApplicationId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("ApplicationId");
-                    OnApplicationIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _ApplicationId;
-        partial void OnApplicationIdChanging(global::System.Guid value);
-        partial void OnApplicationIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                OnDescriptionChanging(value);
-                ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Description");
-                OnDescriptionChanged();
-            }
-        }
-        private global::System.String _Description;
-        partial void OnDescriptionChanging(global::System.String value);
-        partial void OnDescriptionChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Me__Appli__44FF419A", "aspnet_Membership")]
-        public EntityCollection<aspnet_Membership> aspnet_Membership
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Membership>("Core.FK__aspnet_Me__Appli__44FF419A", "aspnet_Membership");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Membership>("Core.FK__aspnet_Me__Appli__44FF419A", "aspnet_Membership", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Pa__Appli__7E37BEF6", "aspnet_Paths")]
-        public EntityCollection<aspnet_Paths> aspnet_Paths
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Paths>("Core.FK__aspnet_Pa__Appli__7E37BEF6", "aspnet_Paths");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Paths>("Core.FK__aspnet_Pa__Appli__7E37BEF6", "aspnet_Paths", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Ro__Appli__6754599E", "aspnet_Roles")]
-        public EntityCollection<aspnet_Roles> aspnet_Roles
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Roles>("Core.FK__aspnet_Ro__Appli__6754599E", "aspnet_Roles");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Roles>("Core.FK__aspnet_Ro__Appli__6754599E", "aspnet_Roles", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Us__Appli__30F848ED", "aspnet_Users")]
-        public EntityCollection<aspnet_Users> aspnet_Users
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Users>("Core.FK__aspnet_Us__Appli__30F848ED", "aspnet_Users");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Users>("Core.FK__aspnet_Us__Appli__30F848ED", "aspnet_Users", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="aspnet_Membership")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class aspnet_Membership : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new aspnet_Membership object.
-        /// </summary>
-        /// <param name="applicationId">Initial value of the ApplicationId property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
-        /// <param name="password">Initial value of the Password property.</param>
-        /// <param name="passwordFormat">Initial value of the PasswordFormat property.</param>
-        /// <param name="passwordSalt">Initial value of the PasswordSalt property.</param>
-        /// <param name="isApproved">Initial value of the IsApproved property.</param>
-        /// <param name="isLockedOut">Initial value of the IsLockedOut property.</param>
-        /// <param name="createDate">Initial value of the CreateDate property.</param>
-        /// <param name="lastLoginDate">Initial value of the LastLoginDate property.</param>
-        /// <param name="lastPasswordChangedDate">Initial value of the LastPasswordChangedDate property.</param>
-        /// <param name="lastLockoutDate">Initial value of the LastLockoutDate property.</param>
-        /// <param name="failedPasswordAttemptCount">Initial value of the FailedPasswordAttemptCount property.</param>
-        /// <param name="failedPasswordAttemptWindowStart">Initial value of the FailedPasswordAttemptWindowStart property.</param>
-        /// <param name="failedPasswordAnswerAttemptCount">Initial value of the FailedPasswordAnswerAttemptCount property.</param>
-        /// <param name="failedPasswordAnswerAttemptWindowStart">Initial value of the FailedPasswordAnswerAttemptWindowStart property.</param>
-        public static aspnet_Membership Createaspnet_Membership(global::System.Guid applicationId, global::System.Guid userId, global::System.String password, global::System.Int32 passwordFormat, global::System.String passwordSalt, global::System.Boolean isApproved, global::System.Boolean isLockedOut, global::System.DateTime createDate, global::System.DateTime lastLoginDate, global::System.DateTime lastPasswordChangedDate, global::System.DateTime lastLockoutDate, global::System.Int32 failedPasswordAttemptCount, global::System.DateTime failedPasswordAttemptWindowStart, global::System.Int32 failedPasswordAnswerAttemptCount, global::System.DateTime failedPasswordAnswerAttemptWindowStart)
-        {
-            aspnet_Membership aspnet_Membership = new aspnet_Membership();
-            aspnet_Membership.ApplicationId = applicationId;
-            aspnet_Membership.UserId = userId;
-            aspnet_Membership.Password = password;
-            aspnet_Membership.PasswordFormat = passwordFormat;
-            aspnet_Membership.PasswordSalt = passwordSalt;
-            aspnet_Membership.IsApproved = isApproved;
-            aspnet_Membership.IsLockedOut = isLockedOut;
-            aspnet_Membership.CreateDate = createDate;
-            aspnet_Membership.LastLoginDate = lastLoginDate;
-            aspnet_Membership.LastPasswordChangedDate = lastPasswordChangedDate;
-            aspnet_Membership.LastLockoutDate = lastLockoutDate;
-            aspnet_Membership.FailedPasswordAttemptCount = failedPasswordAttemptCount;
-            aspnet_Membership.FailedPasswordAttemptWindowStart = failedPasswordAttemptWindowStart;
-            aspnet_Membership.FailedPasswordAnswerAttemptCount = failedPasswordAnswerAttemptCount;
-            aspnet_Membership.FailedPasswordAnswerAttemptWindowStart = failedPasswordAnswerAttemptWindowStart;
-            return aspnet_Membership;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid ApplicationId
-        {
-            get
-            {
-                return _ApplicationId;
-            }
-            set
-            {
-                OnApplicationIdChanging(value);
-                ReportPropertyChanging("ApplicationId");
-                _ApplicationId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ApplicationId");
-                OnApplicationIdChanged();
-            }
-        }
-        private global::System.Guid _ApplicationId;
-        partial void OnApplicationIdChanging(global::System.Guid value);
-        partial void OnApplicationIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid UserId
-        {
-            get
-            {
-                return _UserId;
-            }
-            set
-            {
-                if (_UserId != value)
-                {
-                    OnUserIdChanging(value);
-                    ReportPropertyChanging("UserId");
-                    _UserId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("UserId");
-                    OnUserIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _UserId;
-        partial void OnUserIdChanging(global::System.Guid value);
-        partial void OnUserIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Password
-        {
-            get
-            {
-                return _Password;
-            }
-            set
-            {
-                OnPasswordChanging(value);
-                ReportPropertyChanging("Password");
-                _Password = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Password");
-                OnPasswordChanged();
-            }
-        }
-        private global::System.String _Password;
-        partial void OnPasswordChanging(global::System.String value);
-        partial void OnPasswordChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 PasswordFormat
-        {
-            get
-            {
-                return _PasswordFormat;
-            }
-            set
-            {
-                OnPasswordFormatChanging(value);
-                ReportPropertyChanging("PasswordFormat");
-                _PasswordFormat = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("PasswordFormat");
-                OnPasswordFormatChanged();
-            }
-        }
-        private global::System.Int32 _PasswordFormat;
-        partial void OnPasswordFormatChanging(global::System.Int32 value);
-        partial void OnPasswordFormatChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String PasswordSalt
-        {
-            get
-            {
-                return _PasswordSalt;
-            }
-            set
-            {
-                OnPasswordSaltChanging(value);
-                ReportPropertyChanging("PasswordSalt");
-                _PasswordSalt = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("PasswordSalt");
-                OnPasswordSaltChanged();
-            }
-        }
-        private global::System.String _PasswordSalt;
-        partial void OnPasswordSaltChanging(global::System.String value);
-        partial void OnPasswordSaltChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String MobilePIN
-        {
-            get
-            {
-                return _MobilePIN;
-            }
-            set
-            {
-                OnMobilePINChanging(value);
-                ReportPropertyChanging("MobilePIN");
-                _MobilePIN = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("MobilePIN");
-                OnMobilePINChanged();
-            }
-        }
-        private global::System.String _MobilePIN;
-        partial void OnMobilePINChanging(global::System.String value);
-        partial void OnMobilePINChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Email
-        {
-            get
-            {
-                return _Email;
-            }
-            set
-            {
-                OnEmailChanging(value);
-                ReportPropertyChanging("Email");
-                _Email = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Email");
-                OnEmailChanged();
-            }
-        }
-        private global::System.String _Email;
-        partial void OnEmailChanging(global::System.String value);
-        partial void OnEmailChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String LoweredEmail
-        {
-            get
-            {
-                return _LoweredEmail;
-            }
-            set
-            {
-                OnLoweredEmailChanging(value);
-                ReportPropertyChanging("LoweredEmail");
-                _LoweredEmail = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("LoweredEmail");
-                OnLoweredEmailChanged();
-            }
-        }
-        private global::System.String _LoweredEmail;
-        partial void OnLoweredEmailChanging(global::System.String value);
-        partial void OnLoweredEmailChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String PasswordQuestion
-        {
-            get
-            {
-                return _PasswordQuestion;
-            }
-            set
-            {
-                OnPasswordQuestionChanging(value);
-                ReportPropertyChanging("PasswordQuestion");
-                _PasswordQuestion = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("PasswordQuestion");
-                OnPasswordQuestionChanged();
-            }
-        }
-        private global::System.String _PasswordQuestion;
-        partial void OnPasswordQuestionChanging(global::System.String value);
-        partial void OnPasswordQuestionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String PasswordAnswer
-        {
-            get
-            {
-                return _PasswordAnswer;
-            }
-            set
-            {
-                OnPasswordAnswerChanging(value);
-                ReportPropertyChanging("PasswordAnswer");
-                _PasswordAnswer = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("PasswordAnswer");
-                OnPasswordAnswerChanged();
-            }
-        }
-        private global::System.String _PasswordAnswer;
-        partial void OnPasswordAnswerChanging(global::System.String value);
-        partial void OnPasswordAnswerChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsApproved
-        {
-            get
-            {
-                return _IsApproved;
-            }
-            set
-            {
-                OnIsApprovedChanging(value);
-                ReportPropertyChanging("IsApproved");
-                _IsApproved = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsApproved");
-                OnIsApprovedChanged();
-            }
-        }
-        private global::System.Boolean _IsApproved;
-        partial void OnIsApprovedChanging(global::System.Boolean value);
-        partial void OnIsApprovedChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsLockedOut
-        {
-            get
-            {
-                return _IsLockedOut;
-            }
-            set
-            {
-                OnIsLockedOutChanging(value);
-                ReportPropertyChanging("IsLockedOut");
-                _IsLockedOut = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsLockedOut");
-                OnIsLockedOutChanged();
-            }
-        }
-        private global::System.Boolean _IsLockedOut;
-        partial void OnIsLockedOutChanging(global::System.Boolean value);
-        partial void OnIsLockedOutChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime CreateDate
-        {
-            get
-            {
-                return _CreateDate;
-            }
-            set
-            {
-                OnCreateDateChanging(value);
-                ReportPropertyChanging("CreateDate");
-                _CreateDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreateDate");
-                OnCreateDateChanged();
-            }
-        }
-        private global::System.DateTime _CreateDate;
-        partial void OnCreateDateChanging(global::System.DateTime value);
-        partial void OnCreateDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime LastLoginDate
-        {
-            get
-            {
-                return _LastLoginDate;
-            }
-            set
-            {
-                OnLastLoginDateChanging(value);
-                ReportPropertyChanging("LastLoginDate");
-                _LastLoginDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LastLoginDate");
-                OnLastLoginDateChanged();
-            }
-        }
-        private global::System.DateTime _LastLoginDate;
-        partial void OnLastLoginDateChanging(global::System.DateTime value);
-        partial void OnLastLoginDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime LastPasswordChangedDate
-        {
-            get
-            {
-                return _LastPasswordChangedDate;
-            }
-            set
-            {
-                OnLastPasswordChangedDateChanging(value);
-                ReportPropertyChanging("LastPasswordChangedDate");
-                _LastPasswordChangedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LastPasswordChangedDate");
-                OnLastPasswordChangedDateChanged();
-            }
-        }
-        private global::System.DateTime _LastPasswordChangedDate;
-        partial void OnLastPasswordChangedDateChanging(global::System.DateTime value);
-        partial void OnLastPasswordChangedDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime LastLockoutDate
-        {
-            get
-            {
-                return _LastLockoutDate;
-            }
-            set
-            {
-                OnLastLockoutDateChanging(value);
-                ReportPropertyChanging("LastLockoutDate");
-                _LastLockoutDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LastLockoutDate");
-                OnLastLockoutDateChanged();
-            }
-        }
-        private global::System.DateTime _LastLockoutDate;
-        partial void OnLastLockoutDateChanging(global::System.DateTime value);
-        partial void OnLastLockoutDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 FailedPasswordAttemptCount
-        {
-            get
-            {
-                return _FailedPasswordAttemptCount;
-            }
-            set
-            {
-                OnFailedPasswordAttemptCountChanging(value);
-                ReportPropertyChanging("FailedPasswordAttemptCount");
-                _FailedPasswordAttemptCount = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("FailedPasswordAttemptCount");
-                OnFailedPasswordAttemptCountChanged();
-            }
-        }
-        private global::System.Int32 _FailedPasswordAttemptCount;
-        partial void OnFailedPasswordAttemptCountChanging(global::System.Int32 value);
-        partial void OnFailedPasswordAttemptCountChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime FailedPasswordAttemptWindowStart
-        {
-            get
-            {
-                return _FailedPasswordAttemptWindowStart;
-            }
-            set
-            {
-                OnFailedPasswordAttemptWindowStartChanging(value);
-                ReportPropertyChanging("FailedPasswordAttemptWindowStart");
-                _FailedPasswordAttemptWindowStart = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("FailedPasswordAttemptWindowStart");
-                OnFailedPasswordAttemptWindowStartChanged();
-            }
-        }
-        private global::System.DateTime _FailedPasswordAttemptWindowStart;
-        partial void OnFailedPasswordAttemptWindowStartChanging(global::System.DateTime value);
-        partial void OnFailedPasswordAttemptWindowStartChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 FailedPasswordAnswerAttemptCount
-        {
-            get
-            {
-                return _FailedPasswordAnswerAttemptCount;
-            }
-            set
-            {
-                OnFailedPasswordAnswerAttemptCountChanging(value);
-                ReportPropertyChanging("FailedPasswordAnswerAttemptCount");
-                _FailedPasswordAnswerAttemptCount = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("FailedPasswordAnswerAttemptCount");
-                OnFailedPasswordAnswerAttemptCountChanged();
-            }
-        }
-        private global::System.Int32 _FailedPasswordAnswerAttemptCount;
-        partial void OnFailedPasswordAnswerAttemptCountChanging(global::System.Int32 value);
-        partial void OnFailedPasswordAnswerAttemptCountChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime FailedPasswordAnswerAttemptWindowStart
-        {
-            get
-            {
-                return _FailedPasswordAnswerAttemptWindowStart;
-            }
-            set
-            {
-                OnFailedPasswordAnswerAttemptWindowStartChanging(value);
-                ReportPropertyChanging("FailedPasswordAnswerAttemptWindowStart");
-                _FailedPasswordAnswerAttemptWindowStart = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("FailedPasswordAnswerAttemptWindowStart");
-                OnFailedPasswordAnswerAttemptWindowStartChanged();
-            }
-        }
-        private global::System.DateTime _FailedPasswordAnswerAttemptWindowStart;
-        partial void OnFailedPasswordAnswerAttemptWindowStartChanging(global::System.DateTime value);
-        partial void OnFailedPasswordAnswerAttemptWindowStartChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Comment
-        {
-            get
-            {
-                return _Comment;
-            }
-            set
-            {
-                OnCommentChanging(value);
-                ReportPropertyChanging("Comment");
-                _Comment = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Comment");
-                OnCommentChanged();
-            }
-        }
-        private global::System.String _Comment;
-        partial void OnCommentChanging(global::System.String value);
-        partial void OnCommentChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Me__Appli__44FF419A", "aspnet_Applications")]
-        public aspnet_Applications aspnet_Applications
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("Core.FK__aspnet_Me__Appli__44FF419A", "aspnet_Applications").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("Core.FK__aspnet_Me__Appli__44FF419A", "aspnet_Applications").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Applications> aspnet_ApplicationsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("Core.FK__aspnet_Me__Appli__44FF419A", "aspnet_Applications");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Applications>("Core.FK__aspnet_Me__Appli__44FF419A", "aspnet_Applications", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Me__UserI__45F365D3", "aspnet_Users")]
-        public aspnet_Users aspnet_Users
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("Core.FK__aspnet_Me__UserI__45F365D3", "aspnet_Users").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("Core.FK__aspnet_Me__UserI__45F365D3", "aspnet_Users").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Users> aspnet_UsersReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("Core.FK__aspnet_Me__UserI__45F365D3", "aspnet_Users");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Users>("Core.FK__aspnet_Me__UserI__45F365D3", "aspnet_Users", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="aspnet_Paths")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class aspnet_Paths : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new aspnet_Paths object.
-        /// </summary>
-        /// <param name="applicationId">Initial value of the ApplicationId property.</param>
-        /// <param name="pathId">Initial value of the PathId property.</param>
-        /// <param name="path">Initial value of the Path property.</param>
-        /// <param name="loweredPath">Initial value of the LoweredPath property.</param>
-        public static aspnet_Paths Createaspnet_Paths(global::System.Guid applicationId, global::System.Guid pathId, global::System.String path, global::System.String loweredPath)
-        {
-            aspnet_Paths aspnet_Paths = new aspnet_Paths();
-            aspnet_Paths.ApplicationId = applicationId;
-            aspnet_Paths.PathId = pathId;
-            aspnet_Paths.Path = path;
-            aspnet_Paths.LoweredPath = loweredPath;
-            return aspnet_Paths;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid ApplicationId
-        {
-            get
-            {
-                return _ApplicationId;
-            }
-            set
-            {
-                OnApplicationIdChanging(value);
-                ReportPropertyChanging("ApplicationId");
-                _ApplicationId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ApplicationId");
-                OnApplicationIdChanged();
-            }
-        }
-        private global::System.Guid _ApplicationId;
-        partial void OnApplicationIdChanging(global::System.Guid value);
-        partial void OnApplicationIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid PathId
-        {
-            get
-            {
-                return _PathId;
-            }
-            set
-            {
-                if (_PathId != value)
-                {
-                    OnPathIdChanging(value);
-                    ReportPropertyChanging("PathId");
-                    _PathId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("PathId");
-                    OnPathIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _PathId;
-        partial void OnPathIdChanging(global::System.Guid value);
-        partial void OnPathIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Path
-        {
-            get
-            {
-                return _Path;
-            }
-            set
-            {
-                OnPathChanging(value);
-                ReportPropertyChanging("Path");
-                _Path = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Path");
-                OnPathChanged();
-            }
-        }
-        private global::System.String _Path;
-        partial void OnPathChanging(global::System.String value);
-        partial void OnPathChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String LoweredPath
-        {
-            get
-            {
-                return _LoweredPath;
-            }
-            set
-            {
-                OnLoweredPathChanging(value);
-                ReportPropertyChanging("LoweredPath");
-                _LoweredPath = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("LoweredPath");
-                OnLoweredPathChanged();
-            }
-        }
-        private global::System.String _LoweredPath;
-        partial void OnLoweredPathChanging(global::System.String value);
-        partial void OnLoweredPathChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Pa__Appli__7E37BEF6", "aspnet_Applications")]
-        public aspnet_Applications aspnet_Applications
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("Core.FK__aspnet_Pa__Appli__7E37BEF6", "aspnet_Applications").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("Core.FK__aspnet_Pa__Appli__7E37BEF6", "aspnet_Applications").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Applications> aspnet_ApplicationsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("Core.FK__aspnet_Pa__Appli__7E37BEF6", "aspnet_Applications");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Applications>("Core.FK__aspnet_Pa__Appli__7E37BEF6", "aspnet_Applications", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Pe__PathI__05D8E0BE", "aspnet_PersonalizationAllUsers")]
-        public aspnet_PersonalizationAllUsers aspnet_PersonalizationAllUsers
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_PersonalizationAllUsers>("Core.FK__aspnet_Pe__PathI__05D8E0BE", "aspnet_PersonalizationAllUsers").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_PersonalizationAllUsers>("Core.FK__aspnet_Pe__PathI__05D8E0BE", "aspnet_PersonalizationAllUsers").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_PersonalizationAllUsers> aspnet_PersonalizationAllUsersReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_PersonalizationAllUsers>("Core.FK__aspnet_Pe__PathI__05D8E0BE", "aspnet_PersonalizationAllUsers");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_PersonalizationAllUsers>("Core.FK__aspnet_Pe__PathI__05D8E0BE", "aspnet_PersonalizationAllUsers", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Pe__PathI__0B91BA14", "aspnet_PersonalizationPerUser")]
-        public EntityCollection<aspnet_PersonalizationPerUser> aspnet_PersonalizationPerUser
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_PersonalizationPerUser>("Core.FK__aspnet_Pe__PathI__0B91BA14", "aspnet_PersonalizationPerUser");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_PersonalizationPerUser>("Core.FK__aspnet_Pe__PathI__0B91BA14", "aspnet_PersonalizationPerUser", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="aspnet_PersonalizationAllUsers")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class aspnet_PersonalizationAllUsers : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new aspnet_PersonalizationAllUsers object.
-        /// </summary>
-        /// <param name="pathId">Initial value of the PathId property.</param>
-        /// <param name="pageSettings">Initial value of the PageSettings property.</param>
-        /// <param name="lastUpdatedDate">Initial value of the LastUpdatedDate property.</param>
-        public static aspnet_PersonalizationAllUsers Createaspnet_PersonalizationAllUsers(global::System.Guid pathId, global::System.Byte[] pageSettings, global::System.DateTime lastUpdatedDate)
-        {
-            aspnet_PersonalizationAllUsers aspnet_PersonalizationAllUsers = new aspnet_PersonalizationAllUsers();
-            aspnet_PersonalizationAllUsers.PathId = pathId;
-            aspnet_PersonalizationAllUsers.PageSettings = pageSettings;
-            aspnet_PersonalizationAllUsers.LastUpdatedDate = lastUpdatedDate;
-            return aspnet_PersonalizationAllUsers;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid PathId
-        {
-            get
-            {
-                return _PathId;
-            }
-            set
-            {
-                if (_PathId != value)
-                {
-                    OnPathIdChanging(value);
-                    ReportPropertyChanging("PathId");
-                    _PathId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("PathId");
-                    OnPathIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _PathId;
-        partial void OnPathIdChanging(global::System.Guid value);
-        partial void OnPathIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] PageSettings
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_PageSettings);
-            }
-            set
-            {
-                OnPageSettingsChanging(value);
-                ReportPropertyChanging("PageSettings");
-                _PageSettings = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("PageSettings");
-                OnPageSettingsChanged();
-            }
-        }
-        private global::System.Byte[] _PageSettings;
-        partial void OnPageSettingsChanging(global::System.Byte[] value);
-        partial void OnPageSettingsChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime LastUpdatedDate
-        {
-            get
-            {
-                return _LastUpdatedDate;
-            }
-            set
-            {
-                OnLastUpdatedDateChanging(value);
-                ReportPropertyChanging("LastUpdatedDate");
-                _LastUpdatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LastUpdatedDate");
-                OnLastUpdatedDateChanged();
-            }
-        }
-        private global::System.DateTime _LastUpdatedDate;
-        partial void OnLastUpdatedDateChanging(global::System.DateTime value);
-        partial void OnLastUpdatedDateChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Pe__PathI__05D8E0BE", "aspnet_Paths")]
-        public aspnet_Paths aspnet_Paths
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Paths>("Core.FK__aspnet_Pe__PathI__05D8E0BE", "aspnet_Paths").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Paths>("Core.FK__aspnet_Pe__PathI__05D8E0BE", "aspnet_Paths").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Paths> aspnet_PathsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Paths>("Core.FK__aspnet_Pe__PathI__05D8E0BE", "aspnet_Paths");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Paths>("Core.FK__aspnet_Pe__PathI__05D8E0BE", "aspnet_Paths", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="aspnet_PersonalizationPerUser")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class aspnet_PersonalizationPerUser : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new aspnet_PersonalizationPerUser object.
-        /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="pageSettings">Initial value of the PageSettings property.</param>
-        /// <param name="lastUpdatedDate">Initial value of the LastUpdatedDate property.</param>
-        public static aspnet_PersonalizationPerUser Createaspnet_PersonalizationPerUser(global::System.Guid id, global::System.Byte[] pageSettings, global::System.DateTime lastUpdatedDate)
-        {
-            aspnet_PersonalizationPerUser aspnet_PersonalizationPerUser = new aspnet_PersonalizationPerUser();
-            aspnet_PersonalizationPerUser.Id = id;
-            aspnet_PersonalizationPerUser.PageSettings = pageSettings;
-            aspnet_PersonalizationPerUser.LastUpdatedDate = lastUpdatedDate;
-            return aspnet_PersonalizationPerUser;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid Id
-        {
-            get
-            {
-                return _Id;
-            }
-            set
-            {
-                if (_Id != value)
-                {
-                    OnIdChanging(value);
-                    ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Id");
-                    OnIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _Id;
-        partial void OnIdChanging(global::System.Guid value);
-        partial void OnIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Guid> PathId
-        {
-            get
-            {
-                return _PathId;
-            }
-            set
-            {
-                OnPathIdChanging(value);
-                ReportPropertyChanging("PathId");
-                _PathId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("PathId");
-                OnPathIdChanged();
-            }
-        }
-        private Nullable<global::System.Guid> _PathId;
-        partial void OnPathIdChanging(Nullable<global::System.Guid> value);
-        partial void OnPathIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Guid> UserId
-        {
-            get
-            {
-                return _UserId;
-            }
-            set
-            {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
-            }
-        }
-        private Nullable<global::System.Guid> _UserId;
-        partial void OnUserIdChanging(Nullable<global::System.Guid> value);
-        partial void OnUserIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] PageSettings
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_PageSettings);
-            }
-            set
-            {
-                OnPageSettingsChanging(value);
-                ReportPropertyChanging("PageSettings");
-                _PageSettings = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("PageSettings");
-                OnPageSettingsChanged();
-            }
-        }
-        private global::System.Byte[] _PageSettings;
-        partial void OnPageSettingsChanging(global::System.Byte[] value);
-        partial void OnPageSettingsChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime LastUpdatedDate
-        {
-            get
-            {
-                return _LastUpdatedDate;
-            }
-            set
-            {
-                OnLastUpdatedDateChanging(value);
-                ReportPropertyChanging("LastUpdatedDate");
-                _LastUpdatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LastUpdatedDate");
-                OnLastUpdatedDateChanged();
-            }
-        }
-        private global::System.DateTime _LastUpdatedDate;
-        partial void OnLastUpdatedDateChanging(global::System.DateTime value);
-        partial void OnLastUpdatedDateChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Pe__PathI__0B91BA14", "aspnet_Paths")]
-        public aspnet_Paths aspnet_Paths
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Paths>("Core.FK__aspnet_Pe__PathI__0B91BA14", "aspnet_Paths").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Paths>("Core.FK__aspnet_Pe__PathI__0B91BA14", "aspnet_Paths").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Paths> aspnet_PathsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Paths>("Core.FK__aspnet_Pe__PathI__0B91BA14", "aspnet_Paths");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Paths>("Core.FK__aspnet_Pe__PathI__0B91BA14", "aspnet_Paths", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Pe__UserI__0C85DE4D", "aspnet_Users")]
-        public aspnet_Users aspnet_Users
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("Core.FK__aspnet_Pe__UserI__0C85DE4D", "aspnet_Users").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("Core.FK__aspnet_Pe__UserI__0C85DE4D", "aspnet_Users").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Users> aspnet_UsersReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("Core.FK__aspnet_Pe__UserI__0C85DE4D", "aspnet_Users");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Users>("Core.FK__aspnet_Pe__UserI__0C85DE4D", "aspnet_Users", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="aspnet_Profile")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class aspnet_Profile : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new aspnet_Profile object.
-        /// </summary>
-        /// <param name="userId">Initial value of the UserId property.</param>
-        /// <param name="propertyNames">Initial value of the PropertyNames property.</param>
-        /// <param name="propertyValuesString">Initial value of the PropertyValuesString property.</param>
-        /// <param name="propertyValuesBinary">Initial value of the PropertyValuesBinary property.</param>
-        /// <param name="lastUpdatedDate">Initial value of the LastUpdatedDate property.</param>
-        public static aspnet_Profile Createaspnet_Profile(global::System.Guid userId, global::System.String propertyNames, global::System.String propertyValuesString, global::System.Byte[] propertyValuesBinary, global::System.DateTime lastUpdatedDate)
-        {
-            aspnet_Profile aspnet_Profile = new aspnet_Profile();
-            aspnet_Profile.UserId = userId;
-            aspnet_Profile.PropertyNames = propertyNames;
-            aspnet_Profile.PropertyValuesString = propertyValuesString;
-            aspnet_Profile.PropertyValuesBinary = propertyValuesBinary;
-            aspnet_Profile.LastUpdatedDate = lastUpdatedDate;
-            return aspnet_Profile;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid UserId
-        {
-            get
-            {
-                return _UserId;
-            }
-            set
-            {
-                if (_UserId != value)
-                {
-                    OnUserIdChanging(value);
-                    ReportPropertyChanging("UserId");
-                    _UserId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("UserId");
-                    OnUserIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _UserId;
-        partial void OnUserIdChanging(global::System.Guid value);
-        partial void OnUserIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String PropertyNames
-        {
-            get
-            {
-                return _PropertyNames;
-            }
-            set
-            {
-                OnPropertyNamesChanging(value);
-                ReportPropertyChanging("PropertyNames");
-                _PropertyNames = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("PropertyNames");
-                OnPropertyNamesChanged();
-            }
-        }
-        private global::System.String _PropertyNames;
-        partial void OnPropertyNamesChanging(global::System.String value);
-        partial void OnPropertyNamesChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String PropertyValuesString
-        {
-            get
-            {
-                return _PropertyValuesString;
-            }
-            set
-            {
-                OnPropertyValuesStringChanging(value);
-                ReportPropertyChanging("PropertyValuesString");
-                _PropertyValuesString = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("PropertyValuesString");
-                OnPropertyValuesStringChanged();
-            }
-        }
-        private global::System.String _PropertyValuesString;
-        partial void OnPropertyValuesStringChanging(global::System.String value);
-        partial void OnPropertyValuesStringChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] PropertyValuesBinary
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_PropertyValuesBinary);
-            }
-            set
-            {
-                OnPropertyValuesBinaryChanging(value);
-                ReportPropertyChanging("PropertyValuesBinary");
-                _PropertyValuesBinary = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("PropertyValuesBinary");
-                OnPropertyValuesBinaryChanged();
-            }
-        }
-        private global::System.Byte[] _PropertyValuesBinary;
-        partial void OnPropertyValuesBinaryChanging(global::System.Byte[] value);
-        partial void OnPropertyValuesBinaryChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime LastUpdatedDate
-        {
-            get
-            {
-                return _LastUpdatedDate;
-            }
-            set
-            {
-                OnLastUpdatedDateChanging(value);
-                ReportPropertyChanging("LastUpdatedDate");
-                _LastUpdatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LastUpdatedDate");
-                OnLastUpdatedDateChanged();
-            }
-        }
-        private global::System.DateTime _LastUpdatedDate;
-        partial void OnLastUpdatedDateChanging(global::System.DateTime value);
-        partial void OnLastUpdatedDateChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Pr__UserI__5BE2A6F2", "aspnet_Users")]
-        public aspnet_Users aspnet_Users
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("Core.FK__aspnet_Pr__UserI__5BE2A6F2", "aspnet_Users").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("Core.FK__aspnet_Pr__UserI__5BE2A6F2", "aspnet_Users").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Users> aspnet_UsersReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("Core.FK__aspnet_Pr__UserI__5BE2A6F2", "aspnet_Users");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Users>("Core.FK__aspnet_Pr__UserI__5BE2A6F2", "aspnet_Users", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="aspnet_Roles")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class aspnet_Roles : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new aspnet_Roles object.
-        /// </summary>
-        /// <param name="applicationId">Initial value of the ApplicationId property.</param>
-        /// <param name="roleId">Initial value of the RoleId property.</param>
-        /// <param name="roleName">Initial value of the RoleName property.</param>
-        /// <param name="loweredRoleName">Initial value of the LoweredRoleName property.</param>
-        public static aspnet_Roles Createaspnet_Roles(global::System.Guid applicationId, global::System.Guid roleId, global::System.String roleName, global::System.String loweredRoleName)
-        {
-            aspnet_Roles aspnet_Roles = new aspnet_Roles();
-            aspnet_Roles.ApplicationId = applicationId;
-            aspnet_Roles.RoleId = roleId;
-            aspnet_Roles.RoleName = roleName;
-            aspnet_Roles.LoweredRoleName = loweredRoleName;
-            return aspnet_Roles;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid ApplicationId
-        {
-            get
-            {
-                return _ApplicationId;
-            }
-            set
-            {
-                OnApplicationIdChanging(value);
-                ReportPropertyChanging("ApplicationId");
-                _ApplicationId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ApplicationId");
-                OnApplicationIdChanged();
-            }
-        }
-        private global::System.Guid _ApplicationId;
-        partial void OnApplicationIdChanging(global::System.Guid value);
-        partial void OnApplicationIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid RoleId
-        {
-            get
-            {
-                return _RoleId;
-            }
-            set
-            {
-                if (_RoleId != value)
-                {
-                    OnRoleIdChanging(value);
-                    ReportPropertyChanging("RoleId");
-                    _RoleId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("RoleId");
-                    OnRoleIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _RoleId;
-        partial void OnRoleIdChanging(global::System.Guid value);
-        partial void OnRoleIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String RoleName
-        {
-            get
-            {
-                return _RoleName;
-            }
-            set
-            {
-                OnRoleNameChanging(value);
-                ReportPropertyChanging("RoleName");
-                _RoleName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("RoleName");
-                OnRoleNameChanged();
-            }
-        }
-        private global::System.String _RoleName;
-        partial void OnRoleNameChanging(global::System.String value);
-        partial void OnRoleNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String LoweredRoleName
-        {
-            get
-            {
-                return _LoweredRoleName;
-            }
-            set
-            {
-                OnLoweredRoleNameChanging(value);
-                ReportPropertyChanging("LoweredRoleName");
-                _LoweredRoleName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("LoweredRoleName");
-                OnLoweredRoleNameChanged();
-            }
-        }
-        private global::System.String _LoweredRoleName;
-        partial void OnLoweredRoleNameChanging(global::System.String value);
-        partial void OnLoweredRoleNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                OnDescriptionChanging(value);
-                ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Description");
-                OnDescriptionChanged();
-            }
-        }
-        private global::System.String _Description;
-        partial void OnDescriptionChanging(global::System.String value);
-        partial void OnDescriptionChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Ro__Appli__6754599E", "aspnet_Applications")]
-        public aspnet_Applications aspnet_Applications
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("Core.FK__aspnet_Ro__Appli__6754599E", "aspnet_Applications").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("Core.FK__aspnet_Ro__Appli__6754599E", "aspnet_Applications").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Applications> aspnet_ApplicationsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("Core.FK__aspnet_Ro__Appli__6754599E", "aspnet_Applications");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Applications>("Core.FK__aspnet_Ro__Appli__6754599E", "aspnet_Applications", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "aspnet_UsersInRoles", "aspnet_Users")]
-        public EntityCollection<aspnet_Users> aspnet_Users
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Users>("Core.aspnet_UsersInRoles", "aspnet_Users");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Users>("Core.aspnet_UsersInRoles", "aspnet_Users", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "aspnet_UsersInRoles1", "aspnet_Users")]
-        public EntityCollection<aspnet_Users> aspnet_Users_1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Users>("Core.aspnet_UsersInRoles1", "aspnet_Users");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Users>("Core.aspnet_UsersInRoles1", "aspnet_Users", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="aspnet_SchemaVersions")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class aspnet_SchemaVersions : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new aspnet_SchemaVersions object.
-        /// </summary>
-        /// <param name="feature">Initial value of the Feature property.</param>
-        /// <param name="compatibleSchemaVersion">Initial value of the CompatibleSchemaVersion property.</param>
-        /// <param name="isCurrentVersion">Initial value of the IsCurrentVersion property.</param>
-        public static aspnet_SchemaVersions Createaspnet_SchemaVersions(global::System.String feature, global::System.String compatibleSchemaVersion, global::System.Boolean isCurrentVersion)
-        {
-            aspnet_SchemaVersions aspnet_SchemaVersions = new aspnet_SchemaVersions();
-            aspnet_SchemaVersions.Feature = feature;
-            aspnet_SchemaVersions.CompatibleSchemaVersion = compatibleSchemaVersion;
-            aspnet_SchemaVersions.IsCurrentVersion = isCurrentVersion;
-            return aspnet_SchemaVersions;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Feature
-        {
-            get
-            {
-                return _Feature;
-            }
-            set
-            {
-                if (_Feature != value)
-                {
-                    OnFeatureChanging(value);
-                    ReportPropertyChanging("Feature");
-                    _Feature = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Feature");
-                    OnFeatureChanged();
-                }
-            }
-        }
-        private global::System.String _Feature;
-        partial void OnFeatureChanging(global::System.String value);
-        partial void OnFeatureChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String CompatibleSchemaVersion
-        {
-            get
-            {
-                return _CompatibleSchemaVersion;
-            }
-            set
-            {
-                if (_CompatibleSchemaVersion != value)
-                {
-                    OnCompatibleSchemaVersionChanging(value);
-                    ReportPropertyChanging("CompatibleSchemaVersion");
-                    _CompatibleSchemaVersion = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("CompatibleSchemaVersion");
-                    OnCompatibleSchemaVersionChanged();
-                }
-            }
-        }
-        private global::System.String _CompatibleSchemaVersion;
-        partial void OnCompatibleSchemaVersionChanging(global::System.String value);
-        partial void OnCompatibleSchemaVersionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsCurrentVersion
-        {
-            get
-            {
-                return _IsCurrentVersion;
-            }
-            set
-            {
-                OnIsCurrentVersionChanging(value);
-                ReportPropertyChanging("IsCurrentVersion");
-                _IsCurrentVersion = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsCurrentVersion");
-                OnIsCurrentVersionChanged();
-            }
-        }
-        private global::System.Boolean _IsCurrentVersion;
-        partial void OnIsCurrentVersionChanging(global::System.Boolean value);
-        partial void OnIsCurrentVersionChanged();
-
-        #endregion
-    
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="aspnet_Users")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class aspnet_Users : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new aspnet_Users object.
-        /// </summary>
-        /// <param name="applicationId">Initial value of the ApplicationId property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
-        /// <param name="userName">Initial value of the UserName property.</param>
-        /// <param name="loweredUserName">Initial value of the LoweredUserName property.</param>
-        /// <param name="isAnonymous">Initial value of the IsAnonymous property.</param>
-        /// <param name="lastActivityDate">Initial value of the LastActivityDate property.</param>
-        public static aspnet_Users Createaspnet_Users(global::System.Guid applicationId, global::System.Guid userId, global::System.String userName, global::System.String loweredUserName, global::System.Boolean isAnonymous, global::System.DateTime lastActivityDate)
-        {
-            aspnet_Users aspnet_Users = new aspnet_Users();
-            aspnet_Users.ApplicationId = applicationId;
-            aspnet_Users.UserId = userId;
-            aspnet_Users.UserName = userName;
-            aspnet_Users.LoweredUserName = loweredUserName;
-            aspnet_Users.IsAnonymous = isAnonymous;
-            aspnet_Users.LastActivityDate = lastActivityDate;
-            return aspnet_Users;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid ApplicationId
-        {
-            get
-            {
-                return _ApplicationId;
-            }
-            set
-            {
-                OnApplicationIdChanging(value);
-                ReportPropertyChanging("ApplicationId");
-                _ApplicationId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ApplicationId");
-                OnApplicationIdChanged();
-            }
-        }
-        private global::System.Guid _ApplicationId;
-        partial void OnApplicationIdChanging(global::System.Guid value);
-        partial void OnApplicationIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid UserId
-        {
-            get
-            {
-                return _UserId;
-            }
-            set
-            {
-                if (_UserId != value)
-                {
-                    OnUserIdChanging(value);
-                    ReportPropertyChanging("UserId");
-                    _UserId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("UserId");
-                    OnUserIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _UserId;
-        partial void OnUserIdChanging(global::System.Guid value);
-        partial void OnUserIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String UserName
-        {
-            get
-            {
-                return _UserName;
-            }
-            set
-            {
-                OnUserNameChanging(value);
-                ReportPropertyChanging("UserName");
-                _UserName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("UserName");
-                OnUserNameChanged();
-            }
-        }
-        private global::System.String _UserName;
-        partial void OnUserNameChanging(global::System.String value);
-        partial void OnUserNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String LoweredUserName
-        {
-            get
-            {
-                return _LoweredUserName;
-            }
-            set
-            {
-                OnLoweredUserNameChanging(value);
-                ReportPropertyChanging("LoweredUserName");
-                _LoweredUserName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("LoweredUserName");
-                OnLoweredUserNameChanged();
-            }
-        }
-        private global::System.String _LoweredUserName;
-        partial void OnLoweredUserNameChanging(global::System.String value);
-        partial void OnLoweredUserNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String MobileAlias
-        {
-            get
-            {
-                return _MobileAlias;
-            }
-            set
-            {
-                OnMobileAliasChanging(value);
-                ReportPropertyChanging("MobileAlias");
-                _MobileAlias = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("MobileAlias");
-                OnMobileAliasChanged();
-            }
-        }
-        private global::System.String _MobileAlias;
-        partial void OnMobileAliasChanging(global::System.String value);
-        partial void OnMobileAliasChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsAnonymous
-        {
-            get
-            {
-                return _IsAnonymous;
-            }
-            set
-            {
-                OnIsAnonymousChanging(value);
-                ReportPropertyChanging("IsAnonymous");
-                _IsAnonymous = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsAnonymous");
-                OnIsAnonymousChanged();
-            }
-        }
-        private global::System.Boolean _IsAnonymous;
-        partial void OnIsAnonymousChanging(global::System.Boolean value);
-        partial void OnIsAnonymousChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime LastActivityDate
-        {
-            get
-            {
-                return _LastActivityDate;
-            }
-            set
-            {
-                OnLastActivityDateChanging(value);
-                ReportPropertyChanging("LastActivityDate");
-                _LastActivityDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LastActivityDate");
-                OnLastActivityDateChanged();
-            }
-        }
-        private global::System.DateTime _LastActivityDate;
-        partial void OnLastActivityDateChanging(global::System.DateTime value);
-        partial void OnLastActivityDateChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Us__Appli__30F848ED", "aspnet_Applications")]
-        public aspnet_Applications aspnet_Applications
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("Core.FK__aspnet_Us__Appli__30F848ED", "aspnet_Applications").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("Core.FK__aspnet_Us__Appli__30F848ED", "aspnet_Applications").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Applications> aspnet_ApplicationsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Applications>("Core.FK__aspnet_Us__Appli__30F848ED", "aspnet_Applications");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Applications>("Core.FK__aspnet_Us__Appli__30F848ED", "aspnet_Applications", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Me__UserI__45F365D3", "aspnet_Membership")]
-        public aspnet_Membership aspnet_Membership
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Membership>("Core.FK__aspnet_Me__UserI__45F365D3", "aspnet_Membership").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Membership>("Core.FK__aspnet_Me__UserI__45F365D3", "aspnet_Membership").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Membership> aspnet_MembershipReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Membership>("Core.FK__aspnet_Me__UserI__45F365D3", "aspnet_Membership");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Membership>("Core.FK__aspnet_Me__UserI__45F365D3", "aspnet_Membership", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Pe__UserI__0C85DE4D", "aspnet_PersonalizationPerUser")]
-        public EntityCollection<aspnet_PersonalizationPerUser> aspnet_PersonalizationPerUser
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_PersonalizationPerUser>("Core.FK__aspnet_Pe__UserI__0C85DE4D", "aspnet_PersonalizationPerUser");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_PersonalizationPerUser>("Core.FK__aspnet_Pe__UserI__0C85DE4D", "aspnet_PersonalizationPerUser", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK__aspnet_Pr__UserI__5BE2A6F2", "aspnet_Profile")]
-        public aspnet_Profile aspnet_Profile
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Profile>("Core.FK__aspnet_Pr__UserI__5BE2A6F2", "aspnet_Profile").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Profile>("Core.FK__aspnet_Pr__UserI__5BE2A6F2", "aspnet_Profile").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Profile> aspnet_ProfileReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Profile>("Core.FK__aspnet_Pr__UserI__5BE2A6F2", "aspnet_Profile");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Profile>("Core.FK__aspnet_Pr__UserI__5BE2A6F2", "aspnet_Profile", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "aspnet_UsersInRoles", "aspnet_Roles")]
-        public EntityCollection<aspnet_Roles> aspnet_Roles
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Roles>("Core.aspnet_UsersInRoles", "aspnet_Roles");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Roles>("Core.aspnet_UsersInRoles", "aspnet_Roles", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "aspnet_UsersUserAccount", "UserAccount")]
-        public EntityCollection<UserAccount> UserAccounts
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserAccount>("Core.aspnet_UsersUserAccount", "UserAccount");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserAccount>("Core.aspnet_UsersUserAccount", "UserAccount", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "aspnet_UsersInRoles1", "aspnet_Roles")]
-        public EntityCollection<aspnet_Roles> aspnet_Roles_1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<aspnet_Roles>("Core.aspnet_UsersInRoles1", "aspnet_Roles");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<aspnet_Roles>("Core.aspnet_UsersInRoles1", "aspnet_Roles", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="aspnet_WebEvent_Events")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class aspnet_WebEvent_Events : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new aspnet_WebEvent_Events object.
-        /// </summary>
-        /// <param name="eventId">Initial value of the EventId property.</param>
-        /// <param name="eventTimeUtc">Initial value of the EventTimeUtc property.</param>
-        /// <param name="eventTime">Initial value of the EventTime property.</param>
-        /// <param name="eventType">Initial value of the EventType property.</param>
-        /// <param name="eventSequence">Initial value of the EventSequence property.</param>
-        /// <param name="eventOccurrence">Initial value of the EventOccurrence property.</param>
-        /// <param name="eventCode">Initial value of the EventCode property.</param>
-        /// <param name="eventDetailCode">Initial value of the EventDetailCode property.</param>
-        /// <param name="machineName">Initial value of the MachineName property.</param>
-        public static aspnet_WebEvent_Events Createaspnet_WebEvent_Events(global::System.String eventId, global::System.DateTime eventTimeUtc, global::System.DateTime eventTime, global::System.String eventType, global::System.Decimal eventSequence, global::System.Decimal eventOccurrence, global::System.Int32 eventCode, global::System.Int32 eventDetailCode, global::System.String machineName)
-        {
-            aspnet_WebEvent_Events aspnet_WebEvent_Events = new aspnet_WebEvent_Events();
-            aspnet_WebEvent_Events.EventId = eventId;
-            aspnet_WebEvent_Events.EventTimeUtc = eventTimeUtc;
-            aspnet_WebEvent_Events.EventTime = eventTime;
-            aspnet_WebEvent_Events.EventType = eventType;
-            aspnet_WebEvent_Events.EventSequence = eventSequence;
-            aspnet_WebEvent_Events.EventOccurrence = eventOccurrence;
-            aspnet_WebEvent_Events.EventCode = eventCode;
-            aspnet_WebEvent_Events.EventDetailCode = eventDetailCode;
-            aspnet_WebEvent_Events.MachineName = machineName;
-            return aspnet_WebEvent_Events;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String EventId
-        {
-            get
-            {
-                return _EventId;
-            }
-            set
-            {
-                if (_EventId != value)
-                {
-                    OnEventIdChanging(value);
-                    ReportPropertyChanging("EventId");
-                    _EventId = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("EventId");
-                    OnEventIdChanged();
-                }
-            }
-        }
-        private global::System.String _EventId;
-        partial void OnEventIdChanging(global::System.String value);
-        partial void OnEventIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime EventTimeUtc
-        {
-            get
-            {
-                return _EventTimeUtc;
-            }
-            set
-            {
-                OnEventTimeUtcChanging(value);
-                ReportPropertyChanging("EventTimeUtc");
-                _EventTimeUtc = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EventTimeUtc");
-                OnEventTimeUtcChanged();
-            }
-        }
-        private global::System.DateTime _EventTimeUtc;
-        partial void OnEventTimeUtcChanging(global::System.DateTime value);
-        partial void OnEventTimeUtcChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime EventTime
-        {
-            get
-            {
-                return _EventTime;
-            }
-            set
-            {
-                OnEventTimeChanging(value);
-                ReportPropertyChanging("EventTime");
-                _EventTime = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EventTime");
-                OnEventTimeChanged();
-            }
-        }
-        private global::System.DateTime _EventTime;
-        partial void OnEventTimeChanging(global::System.DateTime value);
-        partial void OnEventTimeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String EventType
-        {
-            get
-            {
-                return _EventType;
-            }
-            set
-            {
-                OnEventTypeChanging(value);
-                ReportPropertyChanging("EventType");
-                _EventType = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("EventType");
-                OnEventTypeChanged();
-            }
-        }
-        private global::System.String _EventType;
-        partial void OnEventTypeChanging(global::System.String value);
-        partial void OnEventTypeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal EventSequence
-        {
-            get
-            {
-                return _EventSequence;
-            }
-            set
-            {
-                OnEventSequenceChanging(value);
-                ReportPropertyChanging("EventSequence");
-                _EventSequence = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EventSequence");
-                OnEventSequenceChanged();
-            }
-        }
-        private global::System.Decimal _EventSequence;
-        partial void OnEventSequenceChanging(global::System.Decimal value);
-        partial void OnEventSequenceChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal EventOccurrence
-        {
-            get
-            {
-                return _EventOccurrence;
-            }
-            set
-            {
-                OnEventOccurrenceChanging(value);
-                ReportPropertyChanging("EventOccurrence");
-                _EventOccurrence = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EventOccurrence");
-                OnEventOccurrenceChanged();
-            }
-        }
-        private global::System.Decimal _EventOccurrence;
-        partial void OnEventOccurrenceChanging(global::System.Decimal value);
-        partial void OnEventOccurrenceChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 EventCode
-        {
-            get
-            {
-                return _EventCode;
-            }
-            set
-            {
-                OnEventCodeChanging(value);
-                ReportPropertyChanging("EventCode");
-                _EventCode = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EventCode");
-                OnEventCodeChanged();
-            }
-        }
-        private global::System.Int32 _EventCode;
-        partial void OnEventCodeChanging(global::System.Int32 value);
-        partial void OnEventCodeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 EventDetailCode
-        {
-            get
-            {
-                return _EventDetailCode;
-            }
-            set
-            {
-                OnEventDetailCodeChanging(value);
-                ReportPropertyChanging("EventDetailCode");
-                _EventDetailCode = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EventDetailCode");
-                OnEventDetailCodeChanged();
-            }
-        }
-        private global::System.Int32 _EventDetailCode;
-        partial void OnEventDetailCodeChanging(global::System.Int32 value);
-        partial void OnEventDetailCodeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Message
-        {
-            get
-            {
-                return _Message;
-            }
-            set
-            {
-                OnMessageChanging(value);
-                ReportPropertyChanging("Message");
-                _Message = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Message");
-                OnMessageChanged();
-            }
-        }
-        private global::System.String _Message;
-        partial void OnMessageChanging(global::System.String value);
-        partial void OnMessageChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ApplicationPath
-        {
-            get
-            {
-                return _ApplicationPath;
-            }
-            set
-            {
-                OnApplicationPathChanging(value);
-                ReportPropertyChanging("ApplicationPath");
-                _ApplicationPath = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ApplicationPath");
-                OnApplicationPathChanged();
-            }
-        }
-        private global::System.String _ApplicationPath;
-        partial void OnApplicationPathChanging(global::System.String value);
-        partial void OnApplicationPathChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ApplicationVirtualPath
-        {
-            get
-            {
-                return _ApplicationVirtualPath;
-            }
-            set
-            {
-                OnApplicationVirtualPathChanging(value);
-                ReportPropertyChanging("ApplicationVirtualPath");
-                _ApplicationVirtualPath = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ApplicationVirtualPath");
-                OnApplicationVirtualPathChanged();
-            }
-        }
-        private global::System.String _ApplicationVirtualPath;
-        partial void OnApplicationVirtualPathChanging(global::System.String value);
-        partial void OnApplicationVirtualPathChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String MachineName
-        {
-            get
-            {
-                return _MachineName;
-            }
-            set
-            {
-                OnMachineNameChanging(value);
-                ReportPropertyChanging("MachineName");
-                _MachineName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("MachineName");
-                OnMachineNameChanged();
-            }
-        }
-        private global::System.String _MachineName;
-        partial void OnMachineNameChanging(global::System.String value);
-        partial void OnMachineNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String RequestUrl
-        {
-            get
-            {
-                return _RequestUrl;
-            }
-            set
-            {
-                OnRequestUrlChanging(value);
-                ReportPropertyChanging("RequestUrl");
-                _RequestUrl = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("RequestUrl");
-                OnRequestUrlChanged();
-            }
-        }
-        private global::System.String _RequestUrl;
-        partial void OnRequestUrlChanging(global::System.String value);
-        partial void OnRequestUrlChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ExceptionType
-        {
-            get
-            {
-                return _ExceptionType;
-            }
-            set
-            {
-                OnExceptionTypeChanging(value);
-                ReportPropertyChanging("ExceptionType");
-                _ExceptionType = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ExceptionType");
-                OnExceptionTypeChanged();
-            }
-        }
-        private global::System.String _ExceptionType;
-        partial void OnExceptionTypeChanging(global::System.String value);
-        partial void OnExceptionTypeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Details
-        {
-            get
-            {
-                return _Details;
-            }
-            set
-            {
-                OnDetailsChanging(value);
-                ReportPropertyChanging("Details");
-                _Details = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Details");
-                OnDetailsChanged();
-            }
-        }
-        private global::System.String _Details;
-        partial void OnDetailsChanging(global::System.String value);
-        partial void OnDetailsChanged();
-
-        #endregion
-    
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="Country")]
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="Country")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Country : EntityObject
@@ -3948,18 +493,18 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Country_UserAccount", "UserAccount")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Country_UserAccount", "UserAccounts")]
         public EntityCollection<UserAccount> UserAccounts
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserAccount>("Core.FK_Country_UserAccount", "UserAccount");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserAccount>("OmnipresenceModel.FK_Country_UserAccount", "UserAccounts");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserAccount>("Core.FK_Country_UserAccount", "UserAccount", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserAccount>("OmnipresenceModel.FK_Country_UserAccount", "UserAccounts", value);
                 }
             }
         }
@@ -3970,163 +515,7 @@ namespace Omnipresence.DataAccess.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="Country1")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Country1 : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Country1 object.
-        /// </summary>
-        /// <param name="countryId">Initial value of the CountryId property.</param>
-        /// <param name="countryName">Initial value of the CountryName property.</param>
-        /// <param name="createdByUserAccountId">Initial value of the CreatedByUserAccountId property.</param>
-        public static Country1 CreateCountry1(global::System.Int32 countryId, global::System.String countryName, global::System.Int32 createdByUserAccountId)
-        {
-            Country1 country1 = new Country1();
-            country1.CountryId = countryId;
-            country1.CountryName = countryName;
-            country1.CreatedByUserAccountId = createdByUserAccountId;
-            return country1;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CountryId
-        {
-            get
-            {
-                return _CountryId;
-            }
-            set
-            {
-                if (_CountryId != value)
-                {
-                    OnCountryIdChanging(value);
-                    ReportPropertyChanging("CountryId");
-                    _CountryId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("CountryId");
-                    OnCountryIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _CountryId;
-        partial void OnCountryIdChanging(global::System.Int32 value);
-        partial void OnCountryIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String CountryName
-        {
-            get
-            {
-                return _CountryName;
-            }
-            set
-            {
-                OnCountryNameChanging(value);
-                ReportPropertyChanging("CountryName");
-                _CountryName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("CountryName");
-                OnCountryNameChanged();
-            }
-        }
-        private global::System.String _CountryName;
-        partial void OnCountryNameChanging(global::System.String value);
-        partial void OnCountryNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] CountryFlag
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_CountryFlag);
-            }
-            set
-            {
-                OnCountryFlagChanging(value);
-                ReportPropertyChanging("CountryFlag");
-                _CountryFlag = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("CountryFlag");
-                OnCountryFlagChanged();
-            }
-        }
-        private global::System.Byte[] _CountryFlag;
-        partial void OnCountryFlagChanging(global::System.Byte[] value);
-        partial void OnCountryFlagChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CreatedByUserAccountId
-        {
-            get
-            {
-                return _CreatedByUserAccountId;
-            }
-            set
-            {
-                OnCreatedByUserAccountIdChanging(value);
-                ReportPropertyChanging("CreatedByUserAccountId");
-                _CreatedByUserAccountId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedByUserAccountId");
-                OnCreatedByUserAccountIdChanged();
-            }
-        }
-        private global::System.Int32 _CreatedByUserAccountId;
-        partial void OnCreatedByUserAccountIdChanging(global::System.Int32 value);
-        partial void OnCreatedByUserAccountIdChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Country_UserAccount1", "UserAccount1")]
-        public EntityCollection<UserAccount1> UserAccounts
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserAccount1>("Core.FK_Country_UserAccount1", "UserAccount1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserAccount1>("Core.FK_Country_UserAccount1", "UserAccount1", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="Event")]
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="Event")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Event : EntityObject
@@ -4488,98 +877,16 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Event_EventComment", "EventComment")]
-        public EntityCollection<EventComment> EventComments
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EventComment>("Core.FK_Event_EventComment", "EventComment");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EventComment>("Core.FK_Event_EventComment", "EventComment", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Event_Location", "Location")]
-        public Location Location
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("Core.FK_Event_Location", "Location").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("Core.FK_Event_Location", "Location").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Location> LocationReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("Core.FK_Event_Location", "Location");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Location>("Core.FK_Event_Location", "Location", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Event_MediaElement", "MediaElement")]
-        public EntityCollection<MediaElement> MediaElements
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MediaElement>("Core.FK_Event_MediaElement", "MediaElement");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MediaElement>("Core.FK_Event_MediaElement", "MediaElement", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_EventCategory_Event", "EventCategory")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_EventCategory_Event", "EventCategories")]
         public EventCategory EventCategory
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EventCategory>("Core.FK_EventCategory_Event", "EventCategory").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EventCategory>("OmnipresenceModel.FK_EventCategory_Event", "EventCategories").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EventCategory>("Core.FK_EventCategory_Event", "EventCategory").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EventCategory>("OmnipresenceModel.FK_EventCategory_Event", "EventCategories").Value = value;
             }
         }
         /// <summary>
@@ -4591,13 +898,13 @@ namespace Omnipresence.DataAccess.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EventCategory>("Core.FK_EventCategory_Event", "EventCategory");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EventCategory>("OmnipresenceModel.FK_EventCategory_Event", "EventCategories");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<EventCategory>("Core.FK_EventCategory_Event", "EventCategory", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<EventCategory>("OmnipresenceModel.FK_EventCategory_Event", "EventCategories", value);
                 }
             }
         }
@@ -4608,16 +915,98 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_Event", "UserAccount")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Event_EventComment", "EventComments")]
+        public EntityCollection<EventComment> EventComments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EventComment>("OmnipresenceModel.FK_Event_EventComment", "EventComments");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EventComment>("OmnipresenceModel.FK_Event_EventComment", "EventComments", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Event_Location", "Locations")]
+        public Location Location
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("OmnipresenceModel.FK_Event_Location", "Locations").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("OmnipresenceModel.FK_Event_Location", "Locations").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Location> LocationReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("OmnipresenceModel.FK_Event_Location", "Locations");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Location>("OmnipresenceModel.FK_Event_Location", "Locations", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Event_MediaElement", "MediaElements")]
+        public EntityCollection<MediaElement> MediaElements
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MediaElement>("OmnipresenceModel.FK_Event_MediaElement", "MediaElements");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MediaElement>("OmnipresenceModel.FK_Event_MediaElement", "MediaElements", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_UserAccount_Event", "UserAccounts")]
         public UserAccount UserAccount
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("Core.FK_UserAccount_Event", "UserAccount").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_Event", "UserAccounts").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("Core.FK_UserAccount_Event", "UserAccount").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_Event", "UserAccounts").Value = value;
             }
         }
         /// <summary>
@@ -4629,13 +1018,13 @@ namespace Omnipresence.DataAccess.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("Core.FK_UserAccount_Event", "UserAccount");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_Event", "UserAccounts");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccount>("Core.FK_UserAccount_Event", "UserAccount", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_Event", "UserAccounts", value);
                 }
             }
         }
@@ -4646,16 +1035,16 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_VisibilityType_Event", "VisibilityType")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_VisibilityType_Event", "VisibilityTypes")]
         public VisibilityType VisibilityType
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VisibilityType>("Core.FK_VisibilityType_Event", "VisibilityType").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VisibilityType>("OmnipresenceModel.FK_VisibilityType_Event", "VisibilityTypes").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VisibilityType>("Core.FK_VisibilityType_Event", "VisibilityType").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VisibilityType>("OmnipresenceModel.FK_VisibilityType_Event", "VisibilityTypes").Value = value;
             }
         }
         /// <summary>
@@ -4667,13 +1056,13 @@ namespace Omnipresence.DataAccess.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VisibilityType>("Core.FK_VisibilityType_Event", "VisibilityType");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VisibilityType>("OmnipresenceModel.FK_VisibilityType_Event", "VisibilityTypes");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<VisibilityType>("Core.FK_VisibilityType_Event", "VisibilityType", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<VisibilityType>("OmnipresenceModel.FK_VisibilityType_Event", "VisibilityTypes", value);
                 }
             }
         }
@@ -4684,535 +1073,7 @@ namespace Omnipresence.DataAccess.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="Event1")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Event1 : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Event1 object.
-        /// </summary>
-        /// <param name="eventId">Initial value of the EventId property.</param>
-        /// <param name="description">Initial value of the Description property.</param>
-        /// <param name="reputation">Initial value of the Reputation property.</param>
-        /// <param name="deletionTime">Initial value of the DeletionTime property.</param>
-        /// <param name="createdByUserAccountId">Initial value of the CreatedByUserAccountId property.</param>
-        /// <param name="visibilityTypeId">Initial value of the VisibilityTypeId property.</param>
-        public static Event1 CreateEvent1(global::System.Int32 eventId, global::System.String description, global::System.Int32 reputation, global::System.DateTime deletionTime, global::System.Int32 createdByUserAccountId, global::System.Int32 visibilityTypeId)
-        {
-            Event1 event1 = new Event1();
-            event1.EventId = eventId;
-            event1.Description = description;
-            event1.Reputation = reputation;
-            event1.DeletionTime = deletionTime;
-            event1.CreatedByUserAccountId = createdByUserAccountId;
-            event1.VisibilityTypeId = visibilityTypeId;
-            return event1;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 EventId
-        {
-            get
-            {
-                return _EventId;
-            }
-            set
-            {
-                if (_EventId != value)
-                {
-                    OnEventIdChanging(value);
-                    ReportPropertyChanging("EventId");
-                    _EventId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("EventId");
-                    OnEventIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _EventId;
-        partial void OnEventIdChanging(global::System.Int32 value);
-        partial void OnEventIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
-            }
-        }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                OnDescriptionChanging(value);
-                ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Description");
-                OnDescriptionChanged();
-            }
-        }
-        private global::System.String _Description;
-        partial void OnDescriptionChanging(global::System.String value);
-        partial void OnDescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.TimeSpan> StartTime
-        {
-            get
-            {
-                return _StartTime;
-            }
-            set
-            {
-                OnStartTimeChanging(value);
-                ReportPropertyChanging("StartTime");
-                _StartTime = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("StartTime");
-                OnStartTimeChanged();
-            }
-        }
-        private Nullable<global::System.TimeSpan> _StartTime;
-        partial void OnStartTimeChanging(Nullable<global::System.TimeSpan> value);
-        partial void OnStartTimeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.TimeSpan> EndTime
-        {
-            get
-            {
-                return _EndTime;
-            }
-            set
-            {
-                OnEndTimeChanging(value);
-                ReportPropertyChanging("EndTime");
-                _EndTime = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EndTime");
-                OnEndTimeChanged();
-            }
-        }
-        private Nullable<global::System.TimeSpan> _EndTime;
-        partial void OnEndTimeChanging(Nullable<global::System.TimeSpan> value);
-        partial void OnEndTimeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Reputation
-        {
-            get
-            {
-                return _Reputation;
-            }
-            set
-            {
-                OnReputationChanging(value);
-                ReportPropertyChanging("Reputation");
-                _Reputation = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Reputation");
-                OnReputationChanged();
-            }
-        }
-        private global::System.Int32 _Reputation;
-        partial void OnReputationChanging(global::System.Int32 value);
-        partial void OnReputationChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Duration
-        {
-            get
-            {
-                return _Duration;
-            }
-            set
-            {
-                OnDurationChanging(value);
-                ReportPropertyChanging("Duration");
-                _Duration = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Duration");
-                OnDurationChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _Duration;
-        partial void OnDurationChanging(Nullable<global::System.Int32> value);
-        partial void OnDurationChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> CreationTime
-        {
-            get
-            {
-                return _CreationTime;
-            }
-            set
-            {
-                OnCreationTimeChanging(value);
-                ReportPropertyChanging("CreationTime");
-                _CreationTime = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreationTime");
-                OnCreationTimeChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _CreationTime;
-        partial void OnCreationTimeChanging(Nullable<global::System.DateTime> value);
-        partial void OnCreationTimeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime DeletionTime
-        {
-            get
-            {
-                return _DeletionTime;
-            }
-            set
-            {
-                OnDeletionTimeChanging(value);
-                ReportPropertyChanging("DeletionTime");
-                _DeletionTime = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("DeletionTime");
-                OnDeletionTimeChanged();
-            }
-        }
-        private global::System.DateTime _DeletionTime;
-        partial void OnDeletionTimeChanging(global::System.DateTime value);
-        partial void OnDeletionTimeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CreatedByUserAccountId
-        {
-            get
-            {
-                return _CreatedByUserAccountId;
-            }
-            set
-            {
-                OnCreatedByUserAccountIdChanging(value);
-                ReportPropertyChanging("CreatedByUserAccountId");
-                _CreatedByUserAccountId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedByUserAccountId");
-                OnCreatedByUserAccountIdChanged();
-            }
-        }
-        private global::System.Int32 _CreatedByUserAccountId;
-        partial void OnCreatedByUserAccountIdChanging(global::System.Int32 value);
-        partial void OnCreatedByUserAccountIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> EventCategoryId
-        {
-            get
-            {
-                return _EventCategoryId;
-            }
-            set
-            {
-                OnEventCategoryIdChanging(value);
-                ReportPropertyChanging("EventCategoryId");
-                _EventCategoryId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EventCategoryId");
-                OnEventCategoryIdChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _EventCategoryId;
-        partial void OnEventCategoryIdChanging(Nullable<global::System.Int32> value);
-        partial void OnEventCategoryIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 VisibilityTypeId
-        {
-            get
-            {
-                return _VisibilityTypeId;
-            }
-            set
-            {
-                OnVisibilityTypeIdChanging(value);
-                ReportPropertyChanging("VisibilityTypeId");
-                _VisibilityTypeId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("VisibilityTypeId");
-                OnVisibilityTypeIdChanged();
-            }
-        }
-        private global::System.Int32 _VisibilityTypeId;
-        partial void OnVisibilityTypeIdChanging(global::System.Int32 value);
-        partial void OnVisibilityTypeIdChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Event_EventComment1", "EventComment1")]
-        public EntityCollection<EventComment1> EventComments
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EventComment1>("Core.FK_Event_EventComment1", "EventComment1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EventComment1>("Core.FK_Event_EventComment1", "EventComment1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Event_Location1", "Location1")]
-        public Location1 Location
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location1>("Core.FK_Event_Location1", "Location1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location1>("Core.FK_Event_Location1", "Location1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Location1> LocationReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location1>("Core.FK_Event_Location1", "Location1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Location1>("Core.FK_Event_Location1", "Location1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Event_MediaElement1", "MediaElement1")]
-        public EntityCollection<MediaElement1> MediaElements
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MediaElement1>("Core.FK_Event_MediaElement1", "MediaElement1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MediaElement1>("Core.FK_Event_MediaElement1", "MediaElement1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_EventCategory_Event1", "EventCategory1")]
-        public EventCategory1 EventCategory
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EventCategory1>("Core.FK_EventCategory_Event1", "EventCategory1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EventCategory1>("Core.FK_EventCategory_Event1", "EventCategory1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<EventCategory1> EventCategoryReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EventCategory1>("Core.FK_EventCategory_Event1", "EventCategory1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<EventCategory1>("Core.FK_EventCategory_Event1", "EventCategory1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_Event1", "UserAccount1")]
-        public UserAccount1 UserAccount
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount1>("Core.FK_UserAccount_Event1", "UserAccount1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount1>("Core.FK_UserAccount_Event1", "UserAccount1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<UserAccount1> UserAccountReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount1>("Core.FK_UserAccount_Event1", "UserAccount1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccount1>("Core.FK_UserAccount_Event1", "UserAccount1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_VisibilityType_Event1", "VisibilityType1")]
-        public VisibilityType1 VisibilityType
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VisibilityType1>("Core.FK_VisibilityType_Event1", "VisibilityType1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VisibilityType1>("Core.FK_VisibilityType_Event1", "VisibilityType1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<VisibilityType1> VisibilityTypeReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VisibilityType1>("Core.FK_VisibilityType_Event1", "VisibilityType1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<VisibilityType1>("Core.FK_VisibilityType_Event1", "VisibilityType1", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="EventCategory")]
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="EventCategory")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class EventCategory : EntityObject
@@ -5372,18 +1233,18 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_EventCategory_Event", "Event")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_EventCategory_Event", "Events")]
         public EntityCollection<Event> Events
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event>("Core.FK_EventCategory_Event", "Event");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event>("OmnipresenceModel.FK_EventCategory_Event", "Events");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("Core.FK_EventCategory_Event", "Event", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("OmnipresenceModel.FK_EventCategory_Event", "Events", value);
                 }
             }
         }
@@ -5394,16 +1255,16 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_EventCategory", "UserAccount")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_UserAccount_EventCategory", "UserAccounts")]
         public UserAccount UserAccount
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("Core.FK_UserAccount_EventCategory", "UserAccount").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_EventCategory", "UserAccounts").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("Core.FK_UserAccount_EventCategory", "UserAccount").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_EventCategory", "UserAccounts").Value = value;
             }
         }
         /// <summary>
@@ -5415,13 +1276,13 @@ namespace Omnipresence.DataAccess.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("Core.FK_UserAccount_EventCategory", "UserAccount");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_EventCategory", "UserAccounts");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccount>("Core.FK_UserAccount_EventCategory", "UserAccount", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_EventCategory", "UserAccounts", value);
                 }
             }
         }
@@ -5432,227 +1293,7 @@ namespace Omnipresence.DataAccess.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="EventCategory1")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class EventCategory1 : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new EventCategory1 object.
-        /// </summary>
-        /// <param name="eventCategoryId">Initial value of the EventCategoryId property.</param>
-        /// <param name="categoryName">Initial value of the CategoryName property.</param>
-        /// <param name="icon">Initial value of the Icon property.</param>
-        /// <param name="createdByUserAccountId">Initial value of the CreatedByUserAccountId property.</param>
-        public static EventCategory1 CreateEventCategory1(global::System.Int32 eventCategoryId, global::System.String categoryName, global::System.Byte[] icon, global::System.Int32 createdByUserAccountId)
-        {
-            EventCategory1 eventCategory1 = new EventCategory1();
-            eventCategory1.EventCategoryId = eventCategoryId;
-            eventCategory1.CategoryName = categoryName;
-            eventCategory1.Icon = icon;
-            eventCategory1.CreatedByUserAccountId = createdByUserAccountId;
-            return eventCategory1;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 EventCategoryId
-        {
-            get
-            {
-                return _EventCategoryId;
-            }
-            set
-            {
-                if (_EventCategoryId != value)
-                {
-                    OnEventCategoryIdChanging(value);
-                    ReportPropertyChanging("EventCategoryId");
-                    _EventCategoryId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("EventCategoryId");
-                    OnEventCategoryIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _EventCategoryId;
-        partial void OnEventCategoryIdChanging(global::System.Int32 value);
-        partial void OnEventCategoryIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String CategoryName
-        {
-            get
-            {
-                return _CategoryName;
-            }
-            set
-            {
-                OnCategoryNameChanging(value);
-                ReportPropertyChanging("CategoryName");
-                _CategoryName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("CategoryName");
-                OnCategoryNameChanged();
-            }
-        }
-        private global::System.String _CategoryName;
-        partial void OnCategoryNameChanging(global::System.String value);
-        partial void OnCategoryNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] Icon
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_Icon);
-            }
-            set
-            {
-                OnIconChanging(value);
-                ReportPropertyChanging("Icon");
-                _Icon = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Icon");
-                OnIconChanged();
-            }
-        }
-        private global::System.Byte[] _Icon;
-        partial void OnIconChanging(global::System.Byte[] value);
-        partial void OnIconChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                OnDescriptionChanging(value);
-                ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Description");
-                OnDescriptionChanged();
-            }
-        }
-        private global::System.String _Description;
-        partial void OnDescriptionChanging(global::System.String value);
-        partial void OnDescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CreatedByUserAccountId
-        {
-            get
-            {
-                return _CreatedByUserAccountId;
-            }
-            set
-            {
-                OnCreatedByUserAccountIdChanging(value);
-                ReportPropertyChanging("CreatedByUserAccountId");
-                _CreatedByUserAccountId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedByUserAccountId");
-                OnCreatedByUserAccountIdChanged();
-            }
-        }
-        private global::System.Int32 _CreatedByUserAccountId;
-        partial void OnCreatedByUserAccountIdChanging(global::System.Int32 value);
-        partial void OnCreatedByUserAccountIdChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_EventCategory_Event1", "Event1")]
-        public EntityCollection<Event1> Events
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event1>("Core.FK_EventCategory_Event1", "Event1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event1>("Core.FK_EventCategory_Event1", "Event1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_EventCategory1", "UserAccount1")]
-        public UserAccount1 UserAccount
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount1>("Core.FK_UserAccount_EventCategory1", "UserAccount1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount1>("Core.FK_UserAccount_EventCategory1", "UserAccount1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<UserAccount1> UserAccountReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount1>("Core.FK_UserAccount_EventCategory1", "UserAccount1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccount1>("Core.FK_UserAccount_EventCategory1", "UserAccount1", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="EventComment")]
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="EventComment")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class EventComment : EntityObject
@@ -5747,7 +1388,7 @@ namespace Omnipresence.DataAccess.Core
             {
                 OnTimestampChanging(value);
                 ReportPropertyChanging("Timestamp");
-                _Timestamp = StructuralObject.SetValidValue(value, true);
+                _Timestamp = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Timestamp");
                 OnTimestampChanged();
             }
@@ -5814,16 +1455,16 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Event_EventComment", "Event")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Event_EventComment", "Events")]
         public Event Event
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("Core.FK_Event_EventComment", "Event").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.FK_Event_EventComment", "Events").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("Core.FK_Event_EventComment", "Event").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.FK_Event_EventComment", "Events").Value = value;
             }
         }
         /// <summary>
@@ -5835,13 +1476,13 @@ namespace Omnipresence.DataAccess.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("Core.FK_Event_EventComment", "Event");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.FK_Event_EventComment", "Events");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Event>("Core.FK_Event_EventComment", "Event", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Event>("OmnipresenceModel.FK_Event_EventComment", "Events", value);
                 }
             }
         }
@@ -5852,16 +1493,16 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_EventComment", "UserAccount")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_UserAccount_EventComment", "UserAccounts")]
         public UserAccount UserAccount
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("Core.FK_UserAccount_EventComment", "UserAccount").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_EventComment", "UserAccounts").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("Core.FK_UserAccount_EventComment", "UserAccount").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_EventComment", "UserAccounts").Value = value;
             }
         }
         /// <summary>
@@ -5873,13 +1514,13 @@ namespace Omnipresence.DataAccess.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("Core.FK_UserAccount_EventComment", "UserAccount");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_EventComment", "UserAccounts");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccount>("Core.FK_UserAccount_EventComment", "UserAccount", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_EventComment", "UserAccounts", value);
                 }
             }
         }
@@ -5890,557 +1531,7 @@ namespace Omnipresence.DataAccess.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="EventComment1")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class EventComment1 : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new EventComment1 object.
-        /// </summary>
-        /// <param name="eventCommentId">Initial value of the EventCommentId property.</param>
-        /// <param name="comment">Initial value of the Comment property.</param>
-        /// <param name="timestamp">Initial value of the Timestamp property.</param>
-        /// <param name="createdByUserAccountId">Initial value of the CreatedByUserAccountId property.</param>
-        /// <param name="eventId">Initial value of the EventId property.</param>
-        public static EventComment1 CreateEventComment1(global::System.Int32 eventCommentId, global::System.String comment, global::System.Byte[] timestamp, global::System.Int32 createdByUserAccountId, global::System.Int32 eventId)
-        {
-            EventComment1 eventComment1 = new EventComment1();
-            eventComment1.EventCommentId = eventCommentId;
-            eventComment1.Comment = comment;
-            eventComment1.Timestamp = timestamp;
-            eventComment1.CreatedByUserAccountId = createdByUserAccountId;
-            eventComment1.EventId = eventId;
-            return eventComment1;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 EventCommentId
-        {
-            get
-            {
-                return _EventCommentId;
-            }
-            set
-            {
-                if (_EventCommentId != value)
-                {
-                    OnEventCommentIdChanging(value);
-                    ReportPropertyChanging("EventCommentId");
-                    _EventCommentId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("EventCommentId");
-                    OnEventCommentIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _EventCommentId;
-        partial void OnEventCommentIdChanging(global::System.Int32 value);
-        partial void OnEventCommentIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Comment
-        {
-            get
-            {
-                return _Comment;
-            }
-            set
-            {
-                OnCommentChanging(value);
-                ReportPropertyChanging("Comment");
-                _Comment = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Comment");
-                OnCommentChanged();
-            }
-        }
-        private global::System.String _Comment;
-        partial void OnCommentChanging(global::System.String value);
-        partial void OnCommentChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] Timestamp
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_Timestamp);
-            }
-            set
-            {
-                OnTimestampChanging(value);
-                ReportPropertyChanging("Timestamp");
-                _Timestamp = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Timestamp");
-                OnTimestampChanged();
-            }
-        }
-        private global::System.Byte[] _Timestamp;
-        partial void OnTimestampChanging(global::System.Byte[] value);
-        partial void OnTimestampChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CreatedByUserAccountId
-        {
-            get
-            {
-                return _CreatedByUserAccountId;
-            }
-            set
-            {
-                OnCreatedByUserAccountIdChanging(value);
-                ReportPropertyChanging("CreatedByUserAccountId");
-                _CreatedByUserAccountId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedByUserAccountId");
-                OnCreatedByUserAccountIdChanged();
-            }
-        }
-        private global::System.Int32 _CreatedByUserAccountId;
-        partial void OnCreatedByUserAccountIdChanging(global::System.Int32 value);
-        partial void OnCreatedByUserAccountIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 EventId
-        {
-            get
-            {
-                return _EventId;
-            }
-            set
-            {
-                OnEventIdChanging(value);
-                ReportPropertyChanging("EventId");
-                _EventId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EventId");
-                OnEventIdChanged();
-            }
-        }
-        private global::System.Int32 _EventId;
-        partial void OnEventIdChanging(global::System.Int32 value);
-        partial void OnEventIdChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Event_EventComment1", "Event1")]
-        public Event1 Event
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event1>("Core.FK_Event_EventComment1", "Event1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event1>("Core.FK_Event_EventComment1", "Event1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Event1> EventReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event1>("Core.FK_Event_EventComment1", "Event1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Event1>("Core.FK_Event_EventComment1", "Event1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_EventComment1", "UserAccount1")]
-        public UserAccount1 UserAccount
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount1>("Core.FK_UserAccount_EventComment1", "UserAccount1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount1>("Core.FK_UserAccount_EventComment1", "UserAccount1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<UserAccount1> UserAccountReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount1>("Core.FK_UserAccount_EventComment1", "UserAccount1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccount1>("Core.FK_UserAccount_EventComment1", "UserAccount1", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="Gender")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Gender : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Gender object.
-        /// </summary>
-        /// <param name="genderId">Initial value of the GenderId property.</param>
-        /// <param name="genderText">Initial value of the GenderText property.</param>
-        /// <param name="createdByUserAccountId">Initial value of the CreatedByUserAccountId property.</param>
-        public static Gender CreateGender(global::System.Int32 genderId, global::System.String genderText, global::System.Int32 createdByUserAccountId)
-        {
-            Gender gender = new Gender();
-            gender.GenderId = genderId;
-            gender.GenderText = genderText;
-            gender.CreatedByUserAccountId = createdByUserAccountId;
-            return gender;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 GenderId
-        {
-            get
-            {
-                return _GenderId;
-            }
-            set
-            {
-                if (_GenderId != value)
-                {
-                    OnGenderIdChanging(value);
-                    ReportPropertyChanging("GenderId");
-                    _GenderId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("GenderId");
-                    OnGenderIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _GenderId;
-        partial void OnGenderIdChanging(global::System.Int32 value);
-        partial void OnGenderIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String GenderText
-        {
-            get
-            {
-                return _GenderText;
-            }
-            set
-            {
-                OnGenderTextChanging(value);
-                ReportPropertyChanging("GenderText");
-                _GenderText = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("GenderText");
-                OnGenderTextChanged();
-            }
-        }
-        private global::System.String _GenderText;
-        partial void OnGenderTextChanging(global::System.String value);
-        partial void OnGenderTextChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String GenderDescription
-        {
-            get
-            {
-                return _GenderDescription;
-            }
-            set
-            {
-                OnGenderDescriptionChanging(value);
-                ReportPropertyChanging("GenderDescription");
-                _GenderDescription = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("GenderDescription");
-                OnGenderDescriptionChanged();
-            }
-        }
-        private global::System.String _GenderDescription;
-        partial void OnGenderDescriptionChanging(global::System.String value);
-        partial void OnGenderDescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CreatedByUserAccountId
-        {
-            get
-            {
-                return _CreatedByUserAccountId;
-            }
-            set
-            {
-                OnCreatedByUserAccountIdChanging(value);
-                ReportPropertyChanging("CreatedByUserAccountId");
-                _CreatedByUserAccountId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedByUserAccountId");
-                OnCreatedByUserAccountIdChanged();
-            }
-        }
-        private global::System.Int32 _CreatedByUserAccountId;
-        partial void OnCreatedByUserAccountIdChanging(global::System.Int32 value);
-        partial void OnCreatedByUserAccountIdChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_Gender", "UserAccount")]
-        public EntityCollection<UserAccount> UserAccounts
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserAccount>("Core.FK_UserAccount_Gender", "UserAccount");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserAccount>("Core.FK_UserAccount_Gender", "UserAccount", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="Gender1")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Gender1 : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Gender1 object.
-        /// </summary>
-        /// <param name="genderId">Initial value of the GenderId property.</param>
-        /// <param name="genderText">Initial value of the GenderText property.</param>
-        /// <param name="createdByUserAccountId">Initial value of the CreatedByUserAccountId property.</param>
-        public static Gender1 CreateGender1(global::System.Int32 genderId, global::System.String genderText, global::System.Int32 createdByUserAccountId)
-        {
-            Gender1 gender1 = new Gender1();
-            gender1.GenderId = genderId;
-            gender1.GenderText = genderText;
-            gender1.CreatedByUserAccountId = createdByUserAccountId;
-            return gender1;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 GenderId
-        {
-            get
-            {
-                return _GenderId;
-            }
-            set
-            {
-                if (_GenderId != value)
-                {
-                    OnGenderIdChanging(value);
-                    ReportPropertyChanging("GenderId");
-                    _GenderId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("GenderId");
-                    OnGenderIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _GenderId;
-        partial void OnGenderIdChanging(global::System.Int32 value);
-        partial void OnGenderIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String GenderText
-        {
-            get
-            {
-                return _GenderText;
-            }
-            set
-            {
-                OnGenderTextChanging(value);
-                ReportPropertyChanging("GenderText");
-                _GenderText = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("GenderText");
-                OnGenderTextChanged();
-            }
-        }
-        private global::System.String _GenderText;
-        partial void OnGenderTextChanging(global::System.String value);
-        partial void OnGenderTextChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String GenderDescription
-        {
-            get
-            {
-                return _GenderDescription;
-            }
-            set
-            {
-                OnGenderDescriptionChanging(value);
-                ReportPropertyChanging("GenderDescription");
-                _GenderDescription = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("GenderDescription");
-                OnGenderDescriptionChanged();
-            }
-        }
-        private global::System.String _GenderDescription;
-        partial void OnGenderDescriptionChanging(global::System.String value);
-        partial void OnGenderDescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CreatedByUserAccountId
-        {
-            get
-            {
-                return _CreatedByUserAccountId;
-            }
-            set
-            {
-                OnCreatedByUserAccountIdChanging(value);
-                ReportPropertyChanging("CreatedByUserAccountId");
-                _CreatedByUserAccountId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedByUserAccountId");
-                OnCreatedByUserAccountIdChanged();
-            }
-        }
-        private global::System.Int32 _CreatedByUserAccountId;
-        partial void OnCreatedByUserAccountIdChanging(global::System.Int32 value);
-        partial void OnCreatedByUserAccountIdChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_Gender1", "UserAccount1")]
-        public EntityCollection<UserAccount1> UserAccounts
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserAccount1>("Core.FK_UserAccount_Gender1", "UserAccount1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserAccount1>("Core.FK_UserAccount_Gender1", "UserAccount1", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="Location")]
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="Location")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Location : EntityObject
@@ -6574,18 +1665,18 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Event_Location", "Event")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Event_Location", "Events")]
         public EntityCollection<Event> Events
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event>("Core.FK_Event_Location", "Event");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event>("OmnipresenceModel.FK_Event_Location", "Events");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("Core.FK_Event_Location", "Event", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("OmnipresenceModel.FK_Event_Location", "Events", value);
                 }
             }
         }
@@ -6596,205 +1687,7 @@ namespace Omnipresence.DataAccess.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="Location1")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Location1 : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Location1 object.
-        /// </summary>
-        /// <param name="locationId">Initial value of the LocationId property.</param>
-        /// <param name="longitude">Initial value of the Longitude property.</param>
-        /// <param name="latitude">Initial value of the Latitude property.</param>
-        /// <param name="eventId">Initial value of the EventId property.</param>
-        public static Location1 CreateLocation1(global::System.Int32 locationId, global::System.Double longitude, global::System.Double latitude, global::System.Int32 eventId)
-        {
-            Location1 location1 = new Location1();
-            location1.LocationId = locationId;
-            location1.Longitude = longitude;
-            location1.Latitude = latitude;
-            location1.EventId = eventId;
-            return location1;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 LocationId
-        {
-            get
-            {
-                return _LocationId;
-            }
-            set
-            {
-                if (_LocationId != value)
-                {
-                    OnLocationIdChanging(value);
-                    ReportPropertyChanging("LocationId");
-                    _LocationId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("LocationId");
-                    OnLocationIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _LocationId;
-        partial void OnLocationIdChanging(global::System.Int32 value);
-        partial void OnLocationIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Double Longitude
-        {
-            get
-            {
-                return _Longitude;
-            }
-            set
-            {
-                OnLongitudeChanging(value);
-                ReportPropertyChanging("Longitude");
-                _Longitude = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Longitude");
-                OnLongitudeChanged();
-            }
-        }
-        private global::System.Double _Longitude;
-        partial void OnLongitudeChanging(global::System.Double value);
-        partial void OnLongitudeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Double Latitude
-        {
-            get
-            {
-                return _Latitude;
-            }
-            set
-            {
-                OnLatitudeChanging(value);
-                ReportPropertyChanging("Latitude");
-                _Latitude = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Latitude");
-                OnLatitudeChanged();
-            }
-        }
-        private global::System.Double _Latitude;
-        partial void OnLatitudeChanging(global::System.Double value);
-        partial void OnLatitudeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
-            }
-        }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 EventId
-        {
-            get
-            {
-                return _EventId;
-            }
-            set
-            {
-                OnEventIdChanging(value);
-                ReportPropertyChanging("EventId");
-                _EventId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EventId");
-                OnEventIdChanged();
-            }
-        }
-        private global::System.Int32 _EventId;
-        partial void OnEventIdChanging(global::System.Int32 value);
-        partial void OnEventIdChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Event_Location1", "Event1")]
-        public Event1 Event
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event1>("Core.FK_Event_Location1", "Event1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event1>("Core.FK_Event_Location1", "Event1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Event1> EventReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event1>("Core.FK_Event_Location1", "Event1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Event1>("Core.FK_Event_Location1", "Event1", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="LogEvent")]
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="LogEvent")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class LogEvent : EntityObject
@@ -6863,7 +1756,7 @@ namespace Omnipresence.DataAccess.Core
             {
                 OnTimestampChanging(value);
                 ReportPropertyChanging("Timestamp");
-                _Timestamp = StructuralObject.SetValidValue(value, true);
+                _Timestamp = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Timestamp");
                 OnTimestampChanged();
             }
@@ -6930,16 +1823,16 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_LogEventType_LogEvent", "LogEventType")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_LogEventType_LogEvent", "LogEventTypes")]
         public LogEventType LogEventType
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LogEventType>("Core.FK_LogEventType_LogEvent", "LogEventType").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LogEventType>("OmnipresenceModel.FK_LogEventType_LogEvent", "LogEventTypes").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LogEventType>("Core.FK_LogEventType_LogEvent", "LogEventType").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LogEventType>("OmnipresenceModel.FK_LogEventType_LogEvent", "LogEventTypes").Value = value;
             }
         }
         /// <summary>
@@ -6951,13 +1844,13 @@ namespace Omnipresence.DataAccess.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LogEventType>("Core.FK_LogEventType_LogEvent", "LogEventType");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LogEventType>("OmnipresenceModel.FK_LogEventType_LogEvent", "LogEventTypes");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LogEventType>("Core.FK_LogEventType_LogEvent", "LogEventType", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LogEventType>("OmnipresenceModel.FK_LogEventType_LogEvent", "LogEventTypes", value);
                 }
             }
         }
@@ -6968,181 +1861,7 @@ namespace Omnipresence.DataAccess.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="LogEvent1")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class LogEvent1 : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new LogEvent1 object.
-        /// </summary>
-        /// <param name="logEventId">Initial value of the LogEventId property.</param>
-        /// <param name="timestamp">Initial value of the Timestamp property.</param>
-        /// <param name="logMessage">Initial value of the LogMessage property.</param>
-        /// <param name="logEventTypeId">Initial value of the LogEventTypeId property.</param>
-        public static LogEvent1 CreateLogEvent1(global::System.Int32 logEventId, global::System.Byte[] timestamp, global::System.String logMessage, global::System.Int32 logEventTypeId)
-        {
-            LogEvent1 logEvent1 = new LogEvent1();
-            logEvent1.LogEventId = logEventId;
-            logEvent1.Timestamp = timestamp;
-            logEvent1.LogMessage = logMessage;
-            logEvent1.LogEventTypeId = logEventTypeId;
-            return logEvent1;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 LogEventId
-        {
-            get
-            {
-                return _LogEventId;
-            }
-            set
-            {
-                if (_LogEventId != value)
-                {
-                    OnLogEventIdChanging(value);
-                    ReportPropertyChanging("LogEventId");
-                    _LogEventId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("LogEventId");
-                    OnLogEventIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _LogEventId;
-        partial void OnLogEventIdChanging(global::System.Int32 value);
-        partial void OnLogEventIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] Timestamp
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_Timestamp);
-            }
-            set
-            {
-                OnTimestampChanging(value);
-                ReportPropertyChanging("Timestamp");
-                _Timestamp = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Timestamp");
-                OnTimestampChanged();
-            }
-        }
-        private global::System.Byte[] _Timestamp;
-        partial void OnTimestampChanging(global::System.Byte[] value);
-        partial void OnTimestampChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String LogMessage
-        {
-            get
-            {
-                return _LogMessage;
-            }
-            set
-            {
-                OnLogMessageChanging(value);
-                ReportPropertyChanging("LogMessage");
-                _LogMessage = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("LogMessage");
-                OnLogMessageChanged();
-            }
-        }
-        private global::System.String _LogMessage;
-        partial void OnLogMessageChanging(global::System.String value);
-        partial void OnLogMessageChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 LogEventTypeId
-        {
-            get
-            {
-                return _LogEventTypeId;
-            }
-            set
-            {
-                OnLogEventTypeIdChanging(value);
-                ReportPropertyChanging("LogEventTypeId");
-                _LogEventTypeId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LogEventTypeId");
-                OnLogEventTypeIdChanged();
-            }
-        }
-        private global::System.Int32 _LogEventTypeId;
-        partial void OnLogEventTypeIdChanging(global::System.Int32 value);
-        partial void OnLogEventTypeIdChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_LogEventType_LogEvent1", "LogEventType1")]
-        public LogEventType1 LogEventType
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LogEventType1>("Core.FK_LogEventType_LogEvent1", "LogEventType1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LogEventType1>("Core.FK_LogEventType_LogEvent1", "LogEventType1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<LogEventType1> LogEventTypeReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LogEventType1>("Core.FK_LogEventType_LogEvent1", "LogEventType1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LogEventType1>("Core.FK_LogEventType_LogEvent1", "LogEventType1", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="LogEventType")]
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="LogEventType")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class LogEventType : EntityObject
@@ -7250,18 +1969,18 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_LogEventType_LogEvent", "LogEvent")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_LogEventType_LogEvent", "LogEvents")]
         public EntityCollection<LogEvent> LogEvents
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LogEvent>("Core.FK_LogEventType_LogEvent", "LogEvent");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LogEvent>("OmnipresenceModel.FK_LogEventType_LogEvent", "LogEvents");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LogEvent>("Core.FK_LogEventType_LogEvent", "LogEvent", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LogEvent>("OmnipresenceModel.FK_LogEventType_LogEvent", "LogEvents", value);
                 }
             }
         }
@@ -7272,16 +1991,16 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_LogEventType", "UserAccount")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_UserAccount_LogEventType", "UserAccounts")]
         public UserAccount UserAccount
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("Core.FK_UserAccount_LogEventType", "UserAccount").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_LogEventType", "UserAccounts").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("Core.FK_UserAccount_LogEventType", "UserAccount").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_LogEventType", "UserAccounts").Value = value;
             }
         }
         /// <summary>
@@ -7293,13 +2012,13 @@ namespace Omnipresence.DataAccess.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("Core.FK_UserAccount_LogEventType", "UserAccount");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_LogEventType", "UserAccounts");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccount>("Core.FK_UserAccount_LogEventType", "UserAccount", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccount>("OmnipresenceModel.FK_UserAccount_LogEventType", "UserAccounts", value);
                 }
             }
         }
@@ -7310,201 +2029,7 @@ namespace Omnipresence.DataAccess.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="LogEventType1")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class LogEventType1 : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new LogEventType1 object.
-        /// </summary>
-        /// <param name="logEventTypeId">Initial value of the LogEventTypeId property.</param>
-        /// <param name="logEventTypeText">Initial value of the LogEventTypeText property.</param>
-        /// <param name="createdByUserAccountId">Initial value of the CreatedByUserAccountId property.</param>
-        public static LogEventType1 CreateLogEventType1(global::System.Int32 logEventTypeId, global::System.String logEventTypeText, global::System.Int32 createdByUserAccountId)
-        {
-            LogEventType1 logEventType1 = new LogEventType1();
-            logEventType1.LogEventTypeId = logEventTypeId;
-            logEventType1.LogEventTypeText = logEventTypeText;
-            logEventType1.CreatedByUserAccountId = createdByUserAccountId;
-            return logEventType1;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 LogEventTypeId
-        {
-            get
-            {
-                return _LogEventTypeId;
-            }
-            set
-            {
-                if (_LogEventTypeId != value)
-                {
-                    OnLogEventTypeIdChanging(value);
-                    ReportPropertyChanging("LogEventTypeId");
-                    _LogEventTypeId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("LogEventTypeId");
-                    OnLogEventTypeIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _LogEventTypeId;
-        partial void OnLogEventTypeIdChanging(global::System.Int32 value);
-        partial void OnLogEventTypeIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String LogEventTypeText
-        {
-            get
-            {
-                return _LogEventTypeText;
-            }
-            set
-            {
-                OnLogEventTypeTextChanging(value);
-                ReportPropertyChanging("LogEventTypeText");
-                _LogEventTypeText = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("LogEventTypeText");
-                OnLogEventTypeTextChanged();
-            }
-        }
-        private global::System.String _LogEventTypeText;
-        partial void OnLogEventTypeTextChanging(global::System.String value);
-        partial void OnLogEventTypeTextChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String LogEventTypeDescription
-        {
-            get
-            {
-                return _LogEventTypeDescription;
-            }
-            set
-            {
-                OnLogEventTypeDescriptionChanging(value);
-                ReportPropertyChanging("LogEventTypeDescription");
-                _LogEventTypeDescription = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("LogEventTypeDescription");
-                OnLogEventTypeDescriptionChanged();
-            }
-        }
-        private global::System.String _LogEventTypeDescription;
-        partial void OnLogEventTypeDescriptionChanging(global::System.String value);
-        partial void OnLogEventTypeDescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CreatedByUserAccountId
-        {
-            get
-            {
-                return _CreatedByUserAccountId;
-            }
-            set
-            {
-                OnCreatedByUserAccountIdChanging(value);
-                ReportPropertyChanging("CreatedByUserAccountId");
-                _CreatedByUserAccountId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedByUserAccountId");
-                OnCreatedByUserAccountIdChanged();
-            }
-        }
-        private global::System.Int32 _CreatedByUserAccountId;
-        partial void OnCreatedByUserAccountIdChanging(global::System.Int32 value);
-        partial void OnCreatedByUserAccountIdChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_LogEventType_LogEvent1", "LogEvent1")]
-        public EntityCollection<LogEvent1> LogEvents
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LogEvent1>("Core.FK_LogEventType_LogEvent1", "LogEvent1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LogEvent1>("Core.FK_LogEventType_LogEvent1", "LogEvent1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_LogEventType1", "UserAccount1")]
-        public UserAccount1 UserAccount
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount1>("Core.FK_UserAccount_LogEventType1", "UserAccount1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount1>("Core.FK_UserAccount_LogEventType1", "UserAccount1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<UserAccount1> UserAccountReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccount1>("Core.FK_UserAccount_LogEventType1", "UserAccount1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccount1>("Core.FK_UserAccount_LogEventType1", "UserAccount1", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="MediaElement")]
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="MediaElement")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class MediaElement : EntityObject
@@ -7718,16 +2243,16 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Event_MediaElement", "Event")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Event_MediaElement", "Events")]
         public Event Event
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("Core.FK_Event_MediaElement", "Event").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.FK_Event_MediaElement", "Events").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("Core.FK_Event_MediaElement", "Event").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.FK_Event_MediaElement", "Events").Value = value;
             }
         }
         /// <summary>
@@ -7739,13 +2264,13 @@ namespace Omnipresence.DataAccess.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("Core.FK_Event_MediaElement", "Event");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.FK_Event_MediaElement", "Events");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Event>("Core.FK_Event_MediaElement", "Event", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Event>("OmnipresenceModel.FK_Event_MediaElement", "Events", value);
                 }
             }
         }
@@ -7756,414 +2281,7 @@ namespace Omnipresence.DataAccess.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="MediaElement1")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class MediaElement1 : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new MediaElement1 object.
-        /// </summary>
-        /// <param name="mediaElementId">Initial value of the MediaElementId property.</param>
-        /// <param name="mediaUrl">Initial value of the MediaUrl property.</param>
-        /// <param name="title">Initial value of the Title property.</param>
-        /// <param name="type">Initial value of the Type property.</param>
-        /// <param name="size">Initial value of the Size property.</param>
-        /// <param name="eventId">Initial value of the EventId property.</param>
-        /// <param name="userAccountId">Initial value of the UserAccountId property.</param>
-        public static MediaElement1 CreateMediaElement1(global::System.Int32 mediaElementId, global::System.String mediaUrl, global::System.String title, global::System.Int32 type, global::System.Double size, global::System.Int32 eventId, global::System.Int32 userAccountId)
-        {
-            MediaElement1 mediaElement1 = new MediaElement1();
-            mediaElement1.MediaElementId = mediaElementId;
-            mediaElement1.MediaUrl = mediaUrl;
-            mediaElement1.Title = title;
-            mediaElement1.Type = type;
-            mediaElement1.Size = size;
-            mediaElement1.EventId = eventId;
-            mediaElement1.UserAccountId = userAccountId;
-            return mediaElement1;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 MediaElementId
-        {
-            get
-            {
-                return _MediaElementId;
-            }
-            set
-            {
-                if (_MediaElementId != value)
-                {
-                    OnMediaElementIdChanging(value);
-                    ReportPropertyChanging("MediaElementId");
-                    _MediaElementId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("MediaElementId");
-                    OnMediaElementIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _MediaElementId;
-        partial void OnMediaElementIdChanging(global::System.Int32 value);
-        partial void OnMediaElementIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String MediaUrl
-        {
-            get
-            {
-                return _MediaUrl;
-            }
-            set
-            {
-                OnMediaUrlChanging(value);
-                ReportPropertyChanging("MediaUrl");
-                _MediaUrl = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("MediaUrl");
-                OnMediaUrlChanged();
-            }
-        }
-        private global::System.String _MediaUrl;
-        partial void OnMediaUrlChanging(global::System.String value);
-        partial void OnMediaUrlChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Title
-        {
-            get
-            {
-                return _Title;
-            }
-            set
-            {
-                OnTitleChanging(value);
-                ReportPropertyChanging("Title");
-                _Title = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Title");
-                OnTitleChanged();
-            }
-        }
-        private global::System.String _Title;
-        partial void OnTitleChanging(global::System.String value);
-        partial void OnTitleChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Type
-        {
-            get
-            {
-                return _Type;
-            }
-            set
-            {
-                OnTypeChanging(value);
-                ReportPropertyChanging("Type");
-                _Type = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Type");
-                OnTypeChanged();
-            }
-        }
-        private global::System.Int32 _Type;
-        partial void OnTypeChanging(global::System.Int32 value);
-        partial void OnTypeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Double Size
-        {
-            get
-            {
-                return _Size;
-            }
-            set
-            {
-                OnSizeChanging(value);
-                ReportPropertyChanging("Size");
-                _Size = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Size");
-                OnSizeChanged();
-            }
-        }
-        private global::System.Double _Size;
-        partial void OnSizeChanging(global::System.Double value);
-        partial void OnSizeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 EventId
-        {
-            get
-            {
-                return _EventId;
-            }
-            set
-            {
-                OnEventIdChanging(value);
-                ReportPropertyChanging("EventId");
-                _EventId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EventId");
-                OnEventIdChanged();
-            }
-        }
-        private global::System.Int32 _EventId;
-        partial void OnEventIdChanging(global::System.Int32 value);
-        partial void OnEventIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 UserAccountId
-        {
-            get
-            {
-                return _UserAccountId;
-            }
-            set
-            {
-                OnUserAccountIdChanging(value);
-                ReportPropertyChanging("UserAccountId");
-                _UserAccountId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserAccountId");
-                OnUserAccountIdChanged();
-            }
-        }
-        private global::System.Int32 _UserAccountId;
-        partial void OnUserAccountIdChanging(global::System.Int32 value);
-        partial void OnUserAccountIdChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Event_MediaElement1", "Event1")]
-        public Event1 Event
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event1>("Core.FK_Event_MediaElement1", "Event1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event1>("Core.FK_Event_MediaElement1", "Event1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Event1> EventReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event1>("Core.FK_Event_MediaElement1", "Event1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Event1>("Core.FK_Event_MediaElement1", "Event1", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="sysdiagram")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class sysdiagram : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new sysdiagram object.
-        /// </summary>
-        /// <param name="name">Initial value of the name property.</param>
-        /// <param name="principal_id">Initial value of the principal_id property.</param>
-        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
-        public static sysdiagram Createsysdiagram(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
-        {
-            sysdiagram sysdiagram = new sysdiagram();
-            sysdiagram.name = name;
-            sysdiagram.principal_id = principal_id;
-            sysdiagram.diagram_id = diagram_id;
-            return sysdiagram;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                OnnameChanging(value);
-                ReportPropertyChanging("name");
-                _name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("name");
-                OnnameChanged();
-            }
-        }
-        private global::System.String _name;
-        partial void OnnameChanging(global::System.String value);
-        partial void OnnameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 principal_id
-        {
-            get
-            {
-                return _principal_id;
-            }
-            set
-            {
-                Onprincipal_idChanging(value);
-                ReportPropertyChanging("principal_id");
-                _principal_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("principal_id");
-                Onprincipal_idChanged();
-            }
-        }
-        private global::System.Int32 _principal_id;
-        partial void Onprincipal_idChanging(global::System.Int32 value);
-        partial void Onprincipal_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 diagram_id
-        {
-            get
-            {
-                return _diagram_id;
-            }
-            set
-            {
-                if (_diagram_id != value)
-                {
-                    Ondiagram_idChanging(value);
-                    ReportPropertyChanging("diagram_id");
-                    _diagram_id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("diagram_id");
-                    Ondiagram_idChanged();
-                }
-            }
-        }
-        private global::System.Int32 _diagram_id;
-        partial void Ondiagram_idChanging(global::System.Int32 value);
-        partial void Ondiagram_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> version
-        {
-            get
-            {
-                return _version;
-            }
-            set
-            {
-                OnversionChanging(value);
-                ReportPropertyChanging("version");
-                _version = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("version");
-                OnversionChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _version;
-        partial void OnversionChanging(Nullable<global::System.Int32> value);
-        partial void OnversionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] definition
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_definition);
-            }
-            set
-            {
-                OndefinitionChanging(value);
-                ReportPropertyChanging("definition");
-                _definition = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("definition");
-                OndefinitionChanged();
-            }
-        }
-        private global::System.Byte[] _definition;
-        partial void OndefinitionChanging(global::System.Byte[] value);
-        partial void OndefinitionChanged();
-
-        #endregion
-    
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="UserAccount")]
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="UserAccount")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class UserAccount : EntityObject
@@ -8179,12 +2297,12 @@ namespace Omnipresence.DataAccess.Core
         /// <param name="birthdate">Initial value of the Birthdate property.</param>
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="lastName">Initial value of the LastName property.</param>
-        /// <param name="genderId">Initial value of the GenderId property.</param>
         /// <param name="emailAddress">Initial value of the EmailAddress property.</param>
         /// <param name="reputation">Initial value of the Reputation property.</param>
         /// <param name="userAccountTypeId">Initial value of the UserAccountTypeId property.</param>
         /// <param name="aspnet_UserId">Initial value of the aspnet_UserId property.</param>
-        public static UserAccount CreateUserAccount(global::System.Int32 userAccountId, global::System.String username, global::System.String password, global::System.DateTime birthdate, global::System.String firstName, global::System.String lastName, global::System.Int32 genderId, global::System.String emailAddress, global::System.Int32 reputation, global::System.Int32 userAccountTypeId, global::System.Guid aspnet_UserId)
+        /// <param name="gender">Initial value of the Gender property.</param>
+        public static UserAccount CreateUserAccount(global::System.Int32 userAccountId, global::System.String username, global::System.String password, global::System.DateTime birthdate, global::System.String firstName, global::System.String lastName, global::System.String emailAddress, global::System.Int32 reputation, global::System.Int32 userAccountTypeId, global::System.Guid aspnet_UserId, global::System.Boolean gender)
         {
             UserAccount userAccount = new UserAccount();
             userAccount.UserAccountId = userAccountId;
@@ -8193,11 +2311,11 @@ namespace Omnipresence.DataAccess.Core
             userAccount.Birthdate = birthdate;
             userAccount.FirstName = firstName;
             userAccount.LastName = lastName;
-            userAccount.GenderId = genderId;
             userAccount.EmailAddress = emailAddress;
             userAccount.Reputation = reputation;
             userAccount.UserAccountTypeId = userAccountTypeId;
             userAccount.aspnet_UserId = aspnet_UserId;
+            userAccount.Gender = gender;
             return userAccount;
         }
 
@@ -8354,9 +2472,9 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 GenderId
+        public Nullable<global::System.Int32> GenderId
         {
             get
             {
@@ -8371,8 +2489,8 @@ namespace Omnipresence.DataAccess.Core
                 OnGenderIdChanged();
             }
         }
-        private global::System.Int32 _GenderId;
-        partial void OnGenderIdChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _GenderId;
+        partial void OnGenderIdChanging(Nullable<global::System.Int32> value);
         partial void OnGenderIdChanged();
     
         /// <summary>
@@ -8590,6 +2708,30 @@ namespace Omnipresence.DataAccess.Core
         private global::System.Guid _aspnet_UserId;
         partial void Onaspnet_UserIdChanging(global::System.Guid value);
         partial void Onaspnet_UserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Gender
+        {
+            get
+            {
+                return _Gender;
+            }
+            set
+            {
+                OnGenderChanging(value);
+                ReportPropertyChanging("Gender");
+                _Gender = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Gender");
+                OnGenderChanged();
+            }
+        }
+        private global::System.Boolean _Gender;
+        partial void OnGenderChanging(global::System.Boolean value);
+        partial void OnGenderChanged();
 
         #endregion
     
@@ -8601,16 +2743,16 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Country_UserAccount", "Country")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Country_UserAccount", "Countries")]
         public Country Country
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Country>("Core.FK_Country_UserAccount", "Country").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Country>("OmnipresenceModel.FK_Country_UserAccount", "Countries").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Country>("Core.FK_Country_UserAccount", "Country").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Country>("OmnipresenceModel.FK_Country_UserAccount", "Countries").Value = value;
             }
         }
         /// <summary>
@@ -8622,13 +2764,13 @@ namespace Omnipresence.DataAccess.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Country>("Core.FK_Country_UserAccount", "Country");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Country>("OmnipresenceModel.FK_Country_UserAccount", "Countries");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Country>("Core.FK_Country_UserAccount", "Country", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Country>("OmnipresenceModel.FK_Country_UserAccount", "Countries", value);
                 }
             }
         }
@@ -8639,40 +2781,18 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_Event", "Event")]
-        public EntityCollection<Event> Events
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event>("Core.FK_UserAccount_Event", "Event");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("Core.FK_UserAccount_Event", "Event", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_EventCategory", "EventCategory")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_UserAccount_EventCategory", "EventCategories")]
         public EntityCollection<EventCategory> EventCategories
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EventCategory>("Core.FK_UserAccount_EventCategory", "EventCategory");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EventCategory>("OmnipresenceModel.FK_UserAccount_EventCategory", "EventCategories");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EventCategory>("Core.FK_UserAccount_EventCategory", "EventCategory", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EventCategory>("OmnipresenceModel.FK_UserAccount_EventCategory", "EventCategories", value);
                 }
             }
         }
@@ -8683,18 +2803,18 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_EventComment", "EventComment")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_UserAccount_EventComment", "EventComments")]
         public EntityCollection<EventComment> EventComments
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EventComment>("Core.FK_UserAccount_EventComment", "EventComment");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EventComment>("OmnipresenceModel.FK_UserAccount_EventComment", "EventComments");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EventComment>("Core.FK_UserAccount_EventComment", "EventComment", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EventComment>("OmnipresenceModel.FK_UserAccount_EventComment", "EventComments", value);
                 }
             }
         }
@@ -8705,34 +2825,18 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_Gender", "Gender")]
-        public Gender Gender
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_UserAccount_Event", "Events")]
+        public EntityCollection<Event> Events
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Gender>("Core.FK_UserAccount_Gender", "Gender").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Gender>("Core.FK_UserAccount_Gender", "Gender").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Gender> GenderReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Gender>("Core.FK_UserAccount_Gender", "Gender");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event>("OmnipresenceModel.FK_UserAccount_Event", "Events");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Gender>("Core.FK_UserAccount_Gender", "Gender", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("OmnipresenceModel.FK_UserAccount_Event", "Events", value);
                 }
             }
         }
@@ -8743,18 +2847,18 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_LogEventType", "LogEventType")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_UserAccount_LogEventType", "LogEventTypes")]
         public EntityCollection<LogEventType> LogEventTypes
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LogEventType>("Core.FK_UserAccount_LogEventType", "LogEventType");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LogEventType>("OmnipresenceModel.FK_UserAccount_LogEventType", "LogEventTypes");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LogEventType>("Core.FK_UserAccount_LogEventType", "LogEventType", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LogEventType>("OmnipresenceModel.FK_UserAccount_LogEventType", "LogEventTypes", value);
                 }
             }
         }
@@ -8765,16 +2869,16 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccountType_UserAccount", "UserAccountType")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_UserAccountType_UserAccount", "UserAccountTypes")]
         public UserAccountType UserAccountType
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccountType>("Core.FK_UserAccountType_UserAccount", "UserAccountType").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccountType>("OmnipresenceModel.FK_UserAccountType_UserAccount", "UserAccountTypes").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccountType>("Core.FK_UserAccountType_UserAccount", "UserAccountType").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccountType>("OmnipresenceModel.FK_UserAccountType_UserAccount", "UserAccountTypes").Value = value;
             }
         }
         /// <summary>
@@ -8786,51 +2890,13 @@ namespace Omnipresence.DataAccess.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccountType>("Core.FK_UserAccountType_UserAccount", "UserAccountType");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccountType>("OmnipresenceModel.FK_UserAccountType_UserAccount", "UserAccountTypes");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccountType>("Core.FK_UserAccountType_UserAccount", "UserAccountType", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "aspnet_UsersUserAccount", "aspnet_Users")]
-        public aspnet_Users aspnet_User
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("Core.aspnet_UsersUserAccount", "aspnet_Users").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("Core.aspnet_UsersUserAccount", "aspnet_Users").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<aspnet_Users> aspnet_UserReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<aspnet_Users>("Core.aspnet_UsersUserAccount", "aspnet_Users");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<aspnet_Users>("Core.aspnet_UsersUserAccount", "aspnet_Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccountType>("OmnipresenceModel.FK_UserAccountType_UserAccount", "UserAccountTypes", value);
                 }
             }
         }
@@ -8841,621 +2907,7 @@ namespace Omnipresence.DataAccess.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="UserAccount1")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class UserAccount1 : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new UserAccount1 object.
-        /// </summary>
-        /// <param name="userAccountId">Initial value of the UserAccountId property.</param>
-        /// <param name="username">Initial value of the Username property.</param>
-        /// <param name="password">Initial value of the Password property.</param>
-        /// <param name="birthdate">Initial value of the Birthdate property.</param>
-        /// <param name="firstName">Initial value of the FirstName property.</param>
-        /// <param name="lastName">Initial value of the LastName property.</param>
-        /// <param name="genderId">Initial value of the GenderId property.</param>
-        /// <param name="emailAddress">Initial value of the EmailAddress property.</param>
-        /// <param name="reputation">Initial value of the Reputation property.</param>
-        /// <param name="userAccountTypeId">Initial value of the UserAccountTypeId property.</param>
-        public static UserAccount1 CreateUserAccount1(global::System.Int32 userAccountId, global::System.String username, global::System.String password, global::System.DateTime birthdate, global::System.String firstName, global::System.String lastName, global::System.Int32 genderId, global::System.String emailAddress, global::System.Int32 reputation, global::System.Int32 userAccountTypeId)
-        {
-            UserAccount1 userAccount1 = new UserAccount1();
-            userAccount1.UserAccountId = userAccountId;
-            userAccount1.Username = username;
-            userAccount1.Password = password;
-            userAccount1.Birthdate = birthdate;
-            userAccount1.FirstName = firstName;
-            userAccount1.LastName = lastName;
-            userAccount1.GenderId = genderId;
-            userAccount1.EmailAddress = emailAddress;
-            userAccount1.Reputation = reputation;
-            userAccount1.UserAccountTypeId = userAccountTypeId;
-            return userAccount1;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 UserAccountId
-        {
-            get
-            {
-                return _UserAccountId;
-            }
-            set
-            {
-                if (_UserAccountId != value)
-                {
-                    OnUserAccountIdChanging(value);
-                    ReportPropertyChanging("UserAccountId");
-                    _UserAccountId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("UserAccountId");
-                    OnUserAccountIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _UserAccountId;
-        partial void OnUserAccountIdChanging(global::System.Int32 value);
-        partial void OnUserAccountIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Username
-        {
-            get
-            {
-                return _Username;
-            }
-            set
-            {
-                OnUsernameChanging(value);
-                ReportPropertyChanging("Username");
-                _Username = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Username");
-                OnUsernameChanged();
-            }
-        }
-        private global::System.String _Username;
-        partial void OnUsernameChanging(global::System.String value);
-        partial void OnUsernameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Password
-        {
-            get
-            {
-                return _Password;
-            }
-            set
-            {
-                OnPasswordChanging(value);
-                ReportPropertyChanging("Password");
-                _Password = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Password");
-                OnPasswordChanged();
-            }
-        }
-        private global::System.String _Password;
-        partial void OnPasswordChanging(global::System.String value);
-        partial void OnPasswordChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime Birthdate
-        {
-            get
-            {
-                return _Birthdate;
-            }
-            set
-            {
-                OnBirthdateChanging(value);
-                ReportPropertyChanging("Birthdate");
-                _Birthdate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Birthdate");
-                OnBirthdateChanged();
-            }
-        }
-        private global::System.DateTime _Birthdate;
-        partial void OnBirthdateChanging(global::System.DateTime value);
-        partial void OnBirthdateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String FirstName
-        {
-            get
-            {
-                return _FirstName;
-            }
-            set
-            {
-                OnFirstNameChanging(value);
-                ReportPropertyChanging("FirstName");
-                _FirstName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("FirstName");
-                OnFirstNameChanged();
-            }
-        }
-        private global::System.String _FirstName;
-        partial void OnFirstNameChanging(global::System.String value);
-        partial void OnFirstNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String LastName
-        {
-            get
-            {
-                return _LastName;
-            }
-            set
-            {
-                OnLastNameChanging(value);
-                ReportPropertyChanging("LastName");
-                _LastName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("LastName");
-                OnLastNameChanged();
-            }
-        }
-        private global::System.String _LastName;
-        partial void OnLastNameChanging(global::System.String value);
-        partial void OnLastNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 GenderId
-        {
-            get
-            {
-                return _GenderId;
-            }
-            set
-            {
-                OnGenderIdChanging(value);
-                ReportPropertyChanging("GenderId");
-                _GenderId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("GenderId");
-                OnGenderIdChanged();
-            }
-        }
-        private global::System.Int32 _GenderId;
-        partial void OnGenderIdChanging(global::System.Int32 value);
-        partial void OnGenderIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String EmailAddress
-        {
-            get
-            {
-                return _EmailAddress;
-            }
-            set
-            {
-                OnEmailAddressChanging(value);
-                ReportPropertyChanging("EmailAddress");
-                _EmailAddress = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("EmailAddress");
-                OnEmailAddressChanged();
-            }
-        }
-        private global::System.String _EmailAddress;
-        partial void OnEmailAddressChanging(global::System.String value);
-        partial void OnEmailAddressChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String AlternateEmailAddress
-        {
-            get
-            {
-                return _AlternateEmailAddress;
-            }
-            set
-            {
-                OnAlternateEmailAddressChanging(value);
-                ReportPropertyChanging("AlternateEmailAddress");
-                _AlternateEmailAddress = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("AlternateEmailAddress");
-                OnAlternateEmailAddressChanged();
-            }
-        }
-        private global::System.String _AlternateEmailAddress;
-        partial void OnAlternateEmailAddressChanging(global::System.String value);
-        partial void OnAlternateEmailAddressChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Reputation
-        {
-            get
-            {
-                return _Reputation;
-            }
-            set
-            {
-                OnReputationChanging(value);
-                ReportPropertyChanging("Reputation");
-                _Reputation = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Reputation");
-                OnReputationChanged();
-            }
-        }
-        private global::System.Int32 _Reputation;
-        partial void OnReputationChanging(global::System.Int32 value);
-        partial void OnReputationChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] AvatarImage
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_AvatarImage);
-            }
-            set
-            {
-                OnAvatarImageChanging(value);
-                ReportPropertyChanging("AvatarImage");
-                _AvatarImage = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("AvatarImage");
-                OnAvatarImageChanged();
-            }
-        }
-        private global::System.Byte[] _AvatarImage;
-        partial void OnAvatarImageChanging(global::System.Byte[] value);
-        partial void OnAvatarImageChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                OnDescriptionChanging(value);
-                ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Description");
-                OnDescriptionChanged();
-            }
-        }
-        private global::System.String _Description;
-        partial void OnDescriptionChanging(global::System.String value);
-        partial void OnDescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> CountryId
-        {
-            get
-            {
-                return _CountryId;
-            }
-            set
-            {
-                OnCountryIdChanging(value);
-                ReportPropertyChanging("CountryId");
-                _CountryId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CountryId");
-                OnCountryIdChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _CountryId;
-        partial void OnCountryIdChanging(Nullable<global::System.Int32> value);
-        partial void OnCountryIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Timezone
-        {
-            get
-            {
-                return _Timezone;
-            }
-            set
-            {
-                OnTimezoneChanging(value);
-                ReportPropertyChanging("Timezone");
-                _Timezone = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Timezone");
-                OnTimezoneChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _Timezone;
-        partial void OnTimezoneChanging(Nullable<global::System.Int32> value);
-        partial void OnTimezoneChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 UserAccountTypeId
-        {
-            get
-            {
-                return _UserAccountTypeId;
-            }
-            set
-            {
-                OnUserAccountTypeIdChanging(value);
-                ReportPropertyChanging("UserAccountTypeId");
-                _UserAccountTypeId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserAccountTypeId");
-                OnUserAccountTypeIdChanged();
-            }
-        }
-        private global::System.Int32 _UserAccountTypeId;
-        partial void OnUserAccountTypeIdChanging(global::System.Int32 value);
-        partial void OnUserAccountTypeIdChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_Country_UserAccount1", "Country1")]
-        public Country1 Country
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Country1>("Core.FK_Country_UserAccount1", "Country1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Country1>("Core.FK_Country_UserAccount1", "Country1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Country1> CountryReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Country1>("Core.FK_Country_UserAccount1", "Country1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Country1>("Core.FK_Country_UserAccount1", "Country1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_Event1", "Event1")]
-        public EntityCollection<Event1> Events
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event1>("Core.FK_UserAccount_Event1", "Event1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event1>("Core.FK_UserAccount_Event1", "Event1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_EventCategory1", "EventCategory1")]
-        public EntityCollection<EventCategory1> EventCategories
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EventCategory1>("Core.FK_UserAccount_EventCategory1", "EventCategory1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EventCategory1>("Core.FK_UserAccount_EventCategory1", "EventCategory1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_EventComment1", "EventComment1")]
-        public EntityCollection<EventComment1> EventComments
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EventComment1>("Core.FK_UserAccount_EventComment1", "EventComment1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EventComment1>("Core.FK_UserAccount_EventComment1", "EventComment1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_Gender1", "Gender1")]
-        public Gender1 Gender
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Gender1>("Core.FK_UserAccount_Gender1", "Gender1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Gender1>("Core.FK_UserAccount_Gender1", "Gender1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Gender1> GenderReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Gender1>("Core.FK_UserAccount_Gender1", "Gender1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Gender1>("Core.FK_UserAccount_Gender1", "Gender1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccount_LogEventType1", "LogEventType1")]
-        public EntityCollection<LogEventType1> LogEventTypes
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LogEventType1>("Core.FK_UserAccount_LogEventType1", "LogEventType1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LogEventType1>("Core.FK_UserAccount_LogEventType1", "LogEventType1", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccountType_UserAccount1", "UserAccountType1")]
-        public UserAccountType1 UserAccountType
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccountType1>("Core.FK_UserAccountType_UserAccount1", "UserAccountType1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccountType1>("Core.FK_UserAccountType_UserAccount1", "UserAccountType1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<UserAccountType1> UserAccountTypeReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserAccountType1>("Core.FK_UserAccountType_UserAccount1", "UserAccountType1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserAccountType1>("Core.FK_UserAccountType_UserAccount1", "UserAccountType1", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="UserAccountType")]
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="UserAccountType")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class UserAccountType : EntityObject
@@ -9589,18 +3041,18 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccountType_UserAccount", "UserAccount")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_UserAccountType_UserAccount", "UserAccounts")]
         public EntityCollection<UserAccount> UserAccounts
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserAccount>("Core.FK_UserAccountType_UserAccount", "UserAccount");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserAccount>("OmnipresenceModel.FK_UserAccountType_UserAccount", "UserAccounts");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserAccount>("Core.FK_UserAccountType_UserAccount", "UserAccount", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserAccount>("OmnipresenceModel.FK_UserAccountType_UserAccount", "UserAccounts", value);
                 }
             }
         }
@@ -9611,163 +3063,7 @@ namespace Omnipresence.DataAccess.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="UserAccountType1")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class UserAccountType1 : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new UserAccountType1 object.
-        /// </summary>
-        /// <param name="userAccountTypeId">Initial value of the UserAccountTypeId property.</param>
-        /// <param name="userTypeText">Initial value of the UserTypeText property.</param>
-        /// <param name="createdByUserAccountId">Initial value of the CreatedByUserAccountId property.</param>
-        public static UserAccountType1 CreateUserAccountType1(global::System.Int32 userAccountTypeId, global::System.String userTypeText, global::System.Int32 createdByUserAccountId)
-        {
-            UserAccountType1 userAccountType1 = new UserAccountType1();
-            userAccountType1.UserAccountTypeId = userAccountTypeId;
-            userAccountType1.UserTypeText = userTypeText;
-            userAccountType1.CreatedByUserAccountId = createdByUserAccountId;
-            return userAccountType1;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 UserAccountTypeId
-        {
-            get
-            {
-                return _UserAccountTypeId;
-            }
-            set
-            {
-                if (_UserAccountTypeId != value)
-                {
-                    OnUserAccountTypeIdChanging(value);
-                    ReportPropertyChanging("UserAccountTypeId");
-                    _UserAccountTypeId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("UserAccountTypeId");
-                    OnUserAccountTypeIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _UserAccountTypeId;
-        partial void OnUserAccountTypeIdChanging(global::System.Int32 value);
-        partial void OnUserAccountTypeIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String UserTypeText
-        {
-            get
-            {
-                return _UserTypeText;
-            }
-            set
-            {
-                OnUserTypeTextChanging(value);
-                ReportPropertyChanging("UserTypeText");
-                _UserTypeText = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("UserTypeText");
-                OnUserTypeTextChanged();
-            }
-        }
-        private global::System.String _UserTypeText;
-        partial void OnUserTypeTextChanging(global::System.String value);
-        partial void OnUserTypeTextChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String UserTypeDescription
-        {
-            get
-            {
-                return _UserTypeDescription;
-            }
-            set
-            {
-                OnUserTypeDescriptionChanging(value);
-                ReportPropertyChanging("UserTypeDescription");
-                _UserTypeDescription = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("UserTypeDescription");
-                OnUserTypeDescriptionChanged();
-            }
-        }
-        private global::System.String _UserTypeDescription;
-        partial void OnUserTypeDescriptionChanging(global::System.String value);
-        partial void OnUserTypeDescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CreatedByUserAccountId
-        {
-            get
-            {
-                return _CreatedByUserAccountId;
-            }
-            set
-            {
-                OnCreatedByUserAccountIdChanging(value);
-                ReportPropertyChanging("CreatedByUserAccountId");
-                _CreatedByUserAccountId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedByUserAccountId");
-                OnCreatedByUserAccountIdChanged();
-            }
-        }
-        private global::System.Int32 _CreatedByUserAccountId;
-        partial void OnCreatedByUserAccountIdChanging(global::System.Int32 value);
-        partial void OnCreatedByUserAccountIdChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_UserAccountType_UserAccount1", "UserAccount1")]
-        public EntityCollection<UserAccount1> UserAccounts
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserAccount1>("Core.FK_UserAccountType_UserAccount1", "UserAccount1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserAccount1>("Core.FK_UserAccountType_UserAccount1", "UserAccount1", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="VisibilityType")]
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="VisibilityType")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class VisibilityType : EntityObject
@@ -9901,174 +3197,18 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_VisibilityType_Event", "Event")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_VisibilityType_Event", "Events")]
         public EntityCollection<Event> Events
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event>("Core.FK_VisibilityType_Event", "Event");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event>("OmnipresenceModel.FK_VisibilityType_Event", "Events");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("Core.FK_VisibilityType_Event", "Event", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Core", Name="VisibilityType1")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class VisibilityType1 : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new VisibilityType1 object.
-        /// </summary>
-        /// <param name="visibilityTypeId">Initial value of the VisibilityTypeId property.</param>
-        /// <param name="visibilityText">Initial value of the VisibilityText property.</param>
-        /// <param name="createdByUserAccountId">Initial value of the CreatedByUserAccountId property.</param>
-        public static VisibilityType1 CreateVisibilityType1(global::System.Int32 visibilityTypeId, global::System.String visibilityText, global::System.Int32 createdByUserAccountId)
-        {
-            VisibilityType1 visibilityType1 = new VisibilityType1();
-            visibilityType1.VisibilityTypeId = visibilityTypeId;
-            visibilityType1.VisibilityText = visibilityText;
-            visibilityType1.CreatedByUserAccountId = createdByUserAccountId;
-            return visibilityType1;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 VisibilityTypeId
-        {
-            get
-            {
-                return _VisibilityTypeId;
-            }
-            set
-            {
-                if (_VisibilityTypeId != value)
-                {
-                    OnVisibilityTypeIdChanging(value);
-                    ReportPropertyChanging("VisibilityTypeId");
-                    _VisibilityTypeId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("VisibilityTypeId");
-                    OnVisibilityTypeIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _VisibilityTypeId;
-        partial void OnVisibilityTypeIdChanging(global::System.Int32 value);
-        partial void OnVisibilityTypeIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String VisibilityText
-        {
-            get
-            {
-                return _VisibilityText;
-            }
-            set
-            {
-                OnVisibilityTextChanging(value);
-                ReportPropertyChanging("VisibilityText");
-                _VisibilityText = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("VisibilityText");
-                OnVisibilityTextChanged();
-            }
-        }
-        private global::System.String _VisibilityText;
-        partial void OnVisibilityTextChanging(global::System.String value);
-        partial void OnVisibilityTextChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String VisibilityDescription
-        {
-            get
-            {
-                return _VisibilityDescription;
-            }
-            set
-            {
-                OnVisibilityDescriptionChanging(value);
-                ReportPropertyChanging("VisibilityDescription");
-                _VisibilityDescription = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("VisibilityDescription");
-                OnVisibilityDescriptionChanged();
-            }
-        }
-        private global::System.String _VisibilityDescription;
-        partial void OnVisibilityDescriptionChanging(global::System.String value);
-        partial void OnVisibilityDescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CreatedByUserAccountId
-        {
-            get
-            {
-                return _CreatedByUserAccountId;
-            }
-            set
-            {
-                OnCreatedByUserAccountIdChanging(value);
-                ReportPropertyChanging("CreatedByUserAccountId");
-                _CreatedByUserAccountId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedByUserAccountId");
-                OnCreatedByUserAccountIdChanged();
-            }
-        }
-        private global::System.Int32 _CreatedByUserAccountId;
-        partial void OnCreatedByUserAccountIdChanging(global::System.Int32 value);
-        partial void OnCreatedByUserAccountIdChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Core", "FK_VisibilityType_Event1", "Event1")]
-        public EntityCollection<Event1> Events
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event1>("Core.FK_VisibilityType_Event1", "Event1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event1>("Core.FK_VisibilityType_Event1", "Event1", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("OmnipresenceModel.FK_VisibilityType_Event", "Events", value);
                 }
             }
         }
