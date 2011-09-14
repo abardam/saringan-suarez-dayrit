@@ -24,36 +24,36 @@ namespace Omnipresence.Processing
             newEvent.UserAccount = creator;
             newEvent.CreationTime = System.DateTime.Now;
 
-            using (CoreContainer coreContainer = new CoreContainer())
+            using (OmnipresenceEntities db = new OmnipresenceEntities())
             {
-                coreContainer.AddToEvents(newEvent);
-                coreContainer.SaveChanges();
+                db.AddToEvents(newEvent);
+                db.SaveChanges();
             }
         }
 
         public IQueryable<Event> GetEvents()
         {
-            using (CoreContainer coreContainer = new CoreContainer())
+            using (OmnipresenceEntities db = new OmnipresenceEntities())
             {
-                return coreContainer.Events.AsQueryable();
+                return db.Events.AsQueryable();
             }
         }
 
         public void DeleteEvent(Event e)
         {
-            using (CoreContainer coreContainer = new CoreContainer())
+            using (OmnipresenceEntities db = new OmnipresenceEntities())
             {
-                coreContainer.Events.DeleteObject(e);
-                coreContainer.SaveChanges();
+                db.Events.DeleteObject(e);
+                db.SaveChanges();
             }
         }
 
         public IEnumerable<EventViewModelMicro> EventQuery(EventQueryModel model)
         {
             IEnumerable<EventViewModelMicro> r;
-            using (CoreContainer coreContainer = new CoreContainer())
+            using (OmnipresenceEntities db = new OmnipresenceEntities())
             {
-                r = from p in coreContainer.Events
+                r = from p in db.Events
                     select new EventViewModelMicro() { EventId = p.EventId,
                     Name = p.Name, End = p.EndTime, Start = p.StartTime, Latitude = p.Location.Latitude, Longitude = p.Location.Longitude, Type = p.EventCategory.CategoryName };
                 if (model.Type != "")

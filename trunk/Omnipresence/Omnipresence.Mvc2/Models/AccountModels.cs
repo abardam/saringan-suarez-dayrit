@@ -69,6 +69,26 @@ namespace Omnipresence.Mvc2.Models
         [DataType(DataType.Password)]
         [DisplayName("Confirm password")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [DisplayName("First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [DisplayName("Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [DisplayName("Country")]
+        public string Country { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [DisplayName("Timezone")]
+        public string Timezone { get; set; }
     }
     #endregion
 

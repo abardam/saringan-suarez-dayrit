@@ -1,0 +1,49 @@
+﻿div 
+{
+    margin:0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+#map_container 
+{
+    background-color:White;
+    display:block;
+    clear:both;
+    height:500px;
+    min-width:510px;
+    width:100%;
+}
+#map_canvas 
+{
+    float:left;
+}
+#event_info 
+{
+    float:right;
+    width:30%;
+	min-width:150px;
+    height:100%;
+    background-color: White;
+    font-family: Segoe UI , Calibri, Sans-Serif;
+}
+
+span.header 
+{
+    font-size:1.6em;
+    display:block;
+}
+
+span.header-2 
+{
+    font-size:1.4em;
+    display:block;
+}
+
+span.content 
+{
+    display:block;
+}
+
+#map_container textarea
+{
+    font-family: Calibri, Sans-Serif;
+}

@@ -10,8 +10,7 @@ namespace Omnipresence.Processing
     public class AccountServices:IDisposable
     {
         public void CreateUserAccount(string username, string password, DateTime birthdate, string firstName, string lastName, 
-            Gender gender, string emailAddress, string alternateEmailAddress, int reputation, string description, Country country, 
-            int timezone, UserAccountType userAccountType)
+            bool gender, string emailAddress, Country country, int timezone, UserAccountType userAccountType)
         {
             UserAccount userAccount = new UserAccount();
             userAccount.Username = username;
@@ -21,42 +20,39 @@ namespace Omnipresence.Processing
             userAccount.LastName = lastName;
             userAccount.Gender = gender;
             userAccount.EmailAddress = emailAddress;
-            userAccount.AlternateEmailAddress = alternateEmailAddress;
-            userAccount.Reputation = reputation;
-            userAccount.Description = description;
             userAccount.Country = country;
             userAccount.Timezone = timezone;
             userAccount.UserAccountType = userAccountType;
 
-            using (CoreContainer coreContainer = new CoreContainer())
+            using (OmnipresenceEntities db = new OmnipresenceEntities("metadata=res://*/Core.Core.csdl|res://*/Core.Core.ssdl|res://*/Core.Core.msl;provider=System.Data.SqlClient;provider connection string=\"Data Source=F205-PC;Initial Catalog=Omnipresence;Integrated Security=True;MultipleActiveResultSets=True\""))
             {
-                coreContainer.UserAccounts.AddObject(userAccount);
-                coreContainer.SaveChanges();
+                db.UserAccounts.AddObject(userAccount);
+                db.SaveChanges();
             }
         }
 
         public IQueryable<UserAccount> GetUserAccounts()
         {
-            using (CoreContainer coreContainer = new CoreContainer())
+            using (OmnipresenceEntities db = new OmnipresenceEntities())
             {
-                return coreContainer.UserAccounts.AsQueryable();
+                return db.UserAccounts.AsQueryable();
             }
         }
 
         public void DeleteUserAccount(UserAccount userAccount)
         {
-            using (CoreContainer coreContainer = new CoreContainer())
+            using (OmnipresenceEntities db = new OmnipresenceEntities())
             {
-                coreContainer.UserAccounts.DeleteObject(userAccount);
-                coreContainer.SaveChanges();
+                db.UserAccounts.DeleteObject(userAccount);
+                db.SaveChanges();
             }
         }
 
         public UserAccount GetUserAccountByEmail(string email)
         {
-            using (CoreContainer coreContainer = new CoreContainer())
+            using (OmnipresenceEntities db = new OmnipresenceEntities())
             {
-                return coreContainer.UserAccounts.Where(account => account.EmailAddress == email).FirstOrDefault();
+                return db.UserAccounts.Where(account => account.EmailAddress == email).FirstOrDefault();
             }
         }
 
