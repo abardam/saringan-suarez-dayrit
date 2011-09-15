@@ -1,6 +1,20 @@
-﻿//Jay New Code
+﻿// Leland Code to integrate Sidebar
+function eventInfo_reset() {
+}
+
+function eventInfo_newEvent(eventinfo) {
+}
+
+function eventInfo_error(headline, errormsg, otherinformation) {
+}
+
+function eventInfo_toggleFunction() {
+}
+
+//Jay New Code
 $(document).ready(
     function () {
+        $('.toggle').toggle();
         $('#changeEventTypeButton').click(
             function () { changeEventTypeButtonClicked(); }
         );
