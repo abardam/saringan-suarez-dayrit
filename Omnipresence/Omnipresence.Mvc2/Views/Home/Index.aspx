@@ -19,11 +19,19 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
 <div id="map_container">
-    <div id="event_info">
+    <div id="event_info" class="">
+    <div id="error" class="toggle">
+    <span class="header">An error has occured.</span>
+    <span class="header-2">Click anywhere to continue.</span>
+    <span class="text">I am filler text.</span>
+    </div>
+    <div id="default" class="toggled">
     <span class="header">This is the map.</span>
     <span class="header-2">Click anywhere to continue.</span>
     <span class="text">I am filler text.</span>
+    </div>
 
+    <div id="new_event" class="toggle">
     <span class="header">Name of Event</span>
     <div id="votes">
         <button id="upVote" name="upvoteButton" type="button">++</button>
@@ -66,11 +74,11 @@
     <textarea id="commentTextArea">Add new comment</textarea><br />
     <input value ="Comment!" type="button" onclick="addComment(' + markerNum + ', this.form)"/>
     </form></div>
-
+    </div>
     </div>
     <div id="map_canvas">
     </div>
-    </div>
+</div>
 </asp:Content>
 
 <asp:Content ID="FooterContent" ContentPlaceHolderID="Footer" runat="server">
