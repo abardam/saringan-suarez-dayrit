@@ -1,3 +1,22 @@
+// Leland Code to integrate Sidebar
+function eventInfo_reset() {
+}
+
+function eventInfo_newEvent(eventinfo) {
+    $('#event_name').text(eventinfo.title);
+    $('#event_location').text("" + eventinfo.position);
+    $('#event_description').text(eventinfo.description);
+    $('#sel_type').val(eventinfo.type);
+}
+
+function eventInfo_error(headline, errormsg, otherinformation) {
+}
+
+function eventInfo_toggleFunction() {
+}
+
+//Jay New Code
+=======
 ﻿// Leland Code to integrate Sidebar
 function eventInfo_reset() {
 }
@@ -42,6 +61,32 @@ $(document).ready(
                 textAreaFocusOut($(event.target), "Enter new comment");
             }
         );
+
+        $('.edit').editable('http://www.example.com/save.php', {
+            indicator: 'Saving...',
+            tooltip: 'Click to edit...'
+        });
+        $('.edit_area').editable('http://www.example.com/save.php', {
+            type: 'textarea',
+            cancel: 'Cancel',
+            submit: 'OK',
+            indicator: '<img src="img/indicator.gif">',
+            tooltip: 'Click to edit...'
+        });
+
+        for (value in TypeEnum) {
+            var newOpt = document.createElement("option");
+            newOpt.value = TypeEnum[value];
+            newOpt.text = TypeEnum[value];
+
+            $('#sel_type').append(newOpt);
+        }
+
+        $('#sel_type').change(function (event) {
+            changeType(currentMarker, $("#sel_type option:selected").val());
+        }
+        ).change();
+
     }
 );
 
@@ -65,6 +110,7 @@ var myLatlng;
 var numMarkers = 0;
 var markerArray = new Array();
 var nodeMode = false;
+var currentMarker;
 
 var currentOpenWindow; // div for holding the current open window
 var eventTypeDiv; //div for holding the event type filter
@@ -74,11 +120,11 @@ var searchDiv;
 //this thing is for the event types
 //each event has one type, with a unique icon for each
 var TypeEnum = {
-	disaster : "Disaster",
-	traffic: "Traffic",
-	party: "Party",
-	talk: "Talk",
-	none: "None"
+    disaster: "Disaster",
+    traffic: "Traffic",
+    party: "Party",
+    talk: "Talk",
+    none: "None"
 }
 
 var curEventType = TypeEnum.none;
@@ -98,7 +144,7 @@ function Node(marker) {
 function Comment(username) {
     this.username = username;
     this.content = "...";
-    
+
 }
 
 function commentToHTML(comment) {
@@ -150,7 +196,7 @@ function initialize() {
 
     var buttonRows = "";
     for (type in TypeEnum) {
-        buttonRows += '<button id='+type+' onclick="eventTypeButtonClicked(this)">'+TypeEnum[type]+'</button> <br>';
+        buttonRows += '<button id=' + type + ' onclick="eventTypeButtonClicked(this)">' + TypeEnum[type] + '</button> <br>';
     }
 
     //formatWindow(eventTypeDiv, '<button id="disaster" onclick="eventTypeButtonClicked(this)">Disaster</button> <br> <button id="talk" onclick="eventTypeButtonClicked(this)">Seminar</button> <br> <button id="traffic" onclick="eventTypeButtonClicked(this)">Traffic</button>');
@@ -185,9 +231,10 @@ function addRandomMarker(latlng) {
         markerArray[numMarkers].type = curEventType;
         google.maps.event.addListener(marker, 'click', function () {
 
-            closeBoxes();
-            displayInfoWindow(marker.number);
-            updateRightPanel(marker.number);
+            //closeBoxes();
+            //displayInfoWindow(marker.number);
+            currentMarker = marker.number;
+            updateRightPanel(markerArray[marker.number]);
 
         });
         numMarkers++;
@@ -199,60 +246,67 @@ function modifyTextArea(markerNum) {
     alert(markerNum);
 }
 
+function updateRightPanel(node) {
+    eventInfo_newEvent(node);
+}
+
 function displayInfoWindow(markerNum) {
+    //currentMarker = markerNum;
+    //eventInfo_newEvent(markerArray[markerNum]);
+    /*
     var contentString = '<div id = "content">'
-                + '<p class="title">'
-                + '<h1>' + markerArray[markerNum].title
-                + '<button id="upVote" name="upvoteButton" type="button">++</button>'
-                + '<button name="downvoteButton" type="buttom">--</button>'
-                + '</h1>'
-                + '</p>'
+    + '<p class="title">'
+    + '<h1>' + markerArray[markerNum].title
+    + '<button id="upVote" name="upvoteButton" type="button">++</button>'
+    + '<button name="downvoteButton" type="buttom">--</button>'
+    + '</h1>'
+    + '</p>'
 
-                + '<p class="position">'
-                + '<strong>Location: </strong><br>'
-                + markerArray[markerNum].position
-                + '</p>'
+    + '<p class="position">'
+    + '<strong>Location: </strong><br>'
+    + markerArray[markerNum].position
+    + '</p>'
 
-                + '<div id="type_selector">'
-                + '<form name="edit_type">'
-                + '<select name="sel_type">'
+    + '<div id="type_selector">'
+    + '<form name="edit_type">'
+    + '<select name="sel_type">'
 
     for (value in TypeEnum) {
-        contentString += '<option '
+    contentString += '<option '
 
 
-        if (markerArray[markerNum].type == TypeEnum[value]) {
-            contentString += 'selected '
-        }
+    if (markerArray[markerNum].type == TypeEnum[value]) {
+    contentString += 'selected '
+    }
 
-        contentString += 'value="' + value +'">' + TypeEnum[value]
+    contentString += 'value="' + value +'">' + TypeEnum[value]
 
     }
 
     contentString += '</select>'
-                + '<input type="button" value="Change" onClick="changeType(' + markerNum + ', this.form)">';
-                + '</form>'
-                + '</div>'
+    + '<input type="button" value="Change" onClick="changeType(' + markerNum + ', this.form)">';
+    + '</form>'
+    + '</div>'
 
-	contentString += '<p class="description">'
-                + '<strong>Description: </strong>'
-                + '<div id="description">'
-				+ markerArray[markerNum].description
-                + '</div>'
-				+ '</p>'
+    contentString += '<p class="description">'
+    + '<strong>Description: </strong>'
+    + '<div id="description">'
+    + markerArray[markerNum].description
+    + '</div>'
+    + '</p>'
 
-				+ '<p class="editDescription">'
-                + '<form name="edit' + markerNum + '" action="" >'
-                + '<textarea id="edit">Enter new description</textarea> '
-				+ '<input value ="Edit!" type="button" onclick="editDescription(' + markerNum + ', this.form)"/>'
-                + '</form>'
-                + '</p>'
+    + '<p class="editDescription">'
+    + '<form name="edit' + markerNum + '" action="" >'
+    + '<textarea id="edit">Enter new description</textarea> '
+    + '<input value ="Edit!" type="button" onclick="editDescription(' + markerNum + ', this.form)"/>'
+    + '</form>'
+    + '</p>'
 
-				+ '<div> <strong>Comments</strong> </div>'
-                + '<div id="comments">'
+    + '<div> <strong>Comments</strong> </div>'
+    + '<div id="comments">'
     for (var i = 0; i < markerArray[markerNum].comments.length; i++) {
-        var comment = markerArray[markerNum].comments[i];
-        contentString += commentToHTML(comment);
+    var comment = markerArray[markerNum].comments[i];
+    contentString += commentToHTML(comment);
     };
 
     contentString += '</div>'
@@ -263,20 +317,20 @@ function displayInfoWindow(markerNum) {
     + '</form></p>'
 
     /*contentString += '<p><form name="comment" action="/Home/About" method="post">'
-                + '<textarea id="comment" name="comm">HARHAR</textarea> '
-                + '<input type="hidden" name="markerNum" value="' + markerNum + '">'
-				+ '<input type="submit"/>'
-                + '</form></p>'*/
+    + '<textarea id="comment" name="comm">HARHAR</textarea> '
+    + '<input type="hidden" name="markerNum" value="' + markerNum + '">'
+    + '<input type="submit"/>'
+    + '</form></p>'*/
 
     /*contentString +=
-				'<p><video width="300" height="250" controls="controls" autoplay="autoplay">'
-				+ '<source src="http://upload.wikimedia.org/wikipedia/commons/9/9b/Pentagon_News_Sample.ogg" type="video/ogg" />'
-				+ '</video></p>'
-                + '</div>'*/
+    '<p><video width="300" height="250" controls="controls" autoplay="autoplay">'
+    + '<source src="http://upload.wikimedia.org/wikipedia/commons/9/9b/Pentagon_News_Sample.ogg" type="video/ogg" />'
+    + '</video></p>'
+    + '</div>'*/
 
-
+    /*
     var infowindow = new google.maps.InfoWindow({
-        content: contentString
+    content: contentString
     });
 
     infowindow.open(map, markerArray[markerNum].marker);
@@ -284,17 +338,17 @@ function displayInfoWindow(markerNum) {
     markerArray[markerNum].infobox = infowindow;
 
     $('#comment').focus(
-            function focused() {
-                alert("adsg");
-                this.text = "";
-            }
-        );
+    function focused() {
+    alert("adsg");
+    this.text = "";
+    }
+    );
 
     $('#upVote').click(
-            function clicked() {
-                alert("hahahaha");
-            }
-        );
+    function clicked() {
+    alert("hahahaha");
+    }
+    );*/
 }
 
 
@@ -312,8 +366,8 @@ function addComment(markerNum, form) {
     return false;
 }
 
-function changeType(markerNum, form) {
-    markerArray[markerNum].type = form.sel_type.options[form.sel_type.selectedIndex].value;
+function changeType(markerNum, newValue) {
+    markerArray[markerNum].type = newValue;  /*form.sel_type.options[form.sel_type.selectedIndex].value;*/
     markerArray[markerNum].marker.setIcon(getEventIcon(markerArray[markerNum].type));
 }
 
@@ -347,7 +401,7 @@ function HomeControl(controlDiv, map) {
     formatButton(controlUI, 'Search for event', 'Find by name');
     controlDiv.appendChild(controlUI);
 
-	google.maps.event.addDomListener(controlUI, 'click', function () {
+    google.maps.event.addDomListener(controlUI, 'click', function () {
         openWindow(searchDiv);
     });
 
@@ -379,21 +433,21 @@ function HomeControl(controlDiv, map) {
 
 // call this function on buttons para uniform yung style
 function formatButton(controlUI, innerHtml, title) {
-//    controlUI.style.backgroundColor = 'white';
-//    controlUI.style.borderStyle = 'solid';
-//    controlUI.style.borderWidth = '2px';
-//    controlUI.style.cursor = 'pointer';
-//    controlUI.style.textAlign = 'center';
-//    controlUI.style.margin = '5px';
-//    controlUI.style.marginBottom = '10px';
+    //    controlUI.style.backgroundColor = 'white';
+    //    controlUI.style.borderStyle = 'solid';
+    //    controlUI.style.borderWidth = '2px';
+    //    controlUI.style.cursor = 'pointer';
+    //    controlUI.style.textAlign = 'center';
+    //    controlUI.style.margin = '5px';
+    //    controlUI.style.marginBottom = '10px';
     //    controlUI.style.float = 'left';
     controlUI.className = "controlButton";
     controlUI.title = title;
     // Set CSS for the control interior
     var controlText = document.createElement('DIV');
-//    controlText.style.fontFamily = 'Arial,sans-serif';
-//    controlText.style.fontSize = '12px';
-//    controlText.style.paddingLeft = '4px';
+    //    controlText.style.fontFamily = 'Arial,sans-serif';
+    //    controlText.style.fontSize = '12px';
+    //    controlText.style.paddingLeft = '4px';
     //    controlText.style.paddingRight = '4px';
     controlText.className = "controlText";
     controlText.innerHTML = innerHtml;
@@ -402,19 +456,19 @@ function formatButton(controlUI, innerHtml, title) {
 
 //call this function on windows para uniform yung style
 function formatWindow(controlUI, innerHtml) {
-//    controlUI.style.backgroundColor = 'white';
-//    controlUI.style.borderStyle = 'solid';
-//    controlUI.style.borderWidth = '2px';
-//    controlUI.style.cursor = 'pointer';
-//    controlUI.style.textAlign = 'center';
-//    controlUI.style.margin = '50px';
-//        controlUI.style.padding = '10px';
+    //    controlUI.style.backgroundColor = 'white';
+    //    controlUI.style.borderStyle = 'solid';
+    //    controlUI.style.borderWidth = '2px';
+    //    controlUI.style.cursor = 'pointer';
+    //    controlUI.style.textAlign = 'center';
+    //    controlUI.style.margin = '50px';
+    //        controlUI.style.padding = '10px';
     controlUI.className = "controlWindow";
     // Set CSS for the control interior
     var controlText = document.createElement('DIV');
-//    controlText.style.fontFamily = 'Arial,sans-serif';
-//    controlText.style.fontSize = '12px';
-//    controlText.style.paddingLeft = '4px';
+    //    controlText.style.fontFamily = 'Arial,sans-serif';
+    //    controlText.style.fontSize = '12px';
+    //    controlText.style.paddingLeft = '4px';
     //    controlText.style.paddingRight = '4px';
     controlText.className = "controlText";
     controlText.innerHTML = innerHtml;
@@ -424,17 +478,17 @@ function formatWindow(controlUI, innerHtml) {
 function eventTypeButtonClicked(sender) {
     /*switch (sender.id)
     {
-        case "disasterType":
-            curEventType = TypeEnum.disaster;
-            break;
-        case "seminarType":
-            curEventType = TypeEnum.talk;
-            break;
-        case "trafficType":
-            curEventType = TypeEnum.traffic;
-            break;
-        default:
-            break;
+    case "disasterType":
+    curEventType = TypeEnum.disaster;
+    break;
+    case "seminarType":
+    curEventType = TypeEnum.talk;
+    break;
+    case "trafficType":
+    curEventType = TypeEnum.traffic;
+    break;
+    default:
+    break;
     }*/
 
     curEventType = TypeEnum[sender.id];
@@ -442,15 +496,15 @@ function eventTypeButtonClicked(sender) {
 
 function getEventIcon(eventType) {
     /*switch (eventType) {
-        case TypeEnum.disaster:
-            return "/Content/Images/disaster.png";
-        case TypeEnum.talk:
-            return "/Content/Images/talk.png";
-        case TypeEnum.traffic:
-            return "/Content/Images/traffic.png";
-        default:
-            return "/Content/Images/circle.png";
-            break;
+    case TypeEnum.disaster:
+    return "/Content/Images/disaster.png";
+    case TypeEnum.talk:
+    return "/Content/Images/talk.png";
+    case TypeEnum.traffic:
+    return "/Content/Images/traffic.png";
+    default:
+    return "/Content/Images/circle.png";
+    break;
     }*/
     return "/Content/Images/" + eventType + ".png";
 }
