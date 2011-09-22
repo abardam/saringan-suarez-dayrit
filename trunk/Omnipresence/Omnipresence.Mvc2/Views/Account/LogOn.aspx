@@ -1,10 +1,16 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Omnipresence.Mvc2.Models.LogOnModel>" %>
 
-<asp:Content ID="loginTitle" ContentPlaceHolderID="TitleContent" runat="server">
+<asp:Content ID="TitleContent" ContentPlaceHolderID="Title" runat="server">
     Log On
 </asp:Content>
 
-<asp:Content ID="loginContent" ContentPlaceHolderID="MiddleCenterContent" runat="server">
+<asp:Content ID="HeadContent" ContentPlaceHolderID="Head" runat="server">
+</asp:Content>
+
+<asp:Content ID="HeaderContent" ContentPlaceHolderID="Header" runat="server">
+</asp:Content>
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
     <h2>Log On</h2>
     <p>
         Please enter your username and password. <%: Html.ActionLink("Register", "Register") %> if you don't have an account.
@@ -43,4 +49,7 @@
             </fieldset>
         </div>
     <% } %>
+</asp:Content>
+
+<asp:Content ID="FooterContent" ContentPlaceHolderID="Footer" runat="server">
 </asp:Content>

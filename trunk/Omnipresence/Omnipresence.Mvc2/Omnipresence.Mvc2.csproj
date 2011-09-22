@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Data\MyMembershipProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -87,12 +88,16 @@
     <Resource Include="Content\Images\talk.png" />
     <Resource Include="Content\Images\traffic.png" />
     <Resource Include="Content\Images\none.png" />
+    <Content Include="Content\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\MapStyles.css" />
     <Content Include="Global.asax" />
     <Resource Include="Content\Images\circle.png" />
+    <Content Include="Scripts\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Scripts\jquery.jeditable.js" />
     <Content Include="Scripts\json.js" />
-    <Content Include="Scripts\omnimap-scripts-old.js" />
+    <Content Include="Scripts\omnimap-registration.js" />
     <Content Include="Scripts\omnimap-scripts.js" />
+    <Content Include="Scripts\jquery-utils.js" />
     <Content Include="Views\Friends\Add.aspx" />
     <Content Include="Views\Friends\Delete.aspx" />
     <Content Include="Views\Friends\Index.aspx" />
@@ -132,9 +137,7 @@
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="OmniResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

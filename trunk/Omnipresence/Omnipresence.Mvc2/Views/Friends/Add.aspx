@@ -4,6 +4,9 @@
 	Add Friends
 </asp:Content>
 
+<asp:Content ID="HeadContent" ContentPlaceHolderID="Head" runat="server">
+</asp:Content>
+
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="Header" runat="server">
 </asp:Content>
 

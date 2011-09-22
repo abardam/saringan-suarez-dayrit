@@ -9,50 +9,73 @@ namespace Omnipresence.Processing
 {
     public class AccountServices:IDisposable
     {
-        public void CreateUserAccount(string username, string password, DateTime birthdate, string firstName, string lastName, 
-            bool gender, string emailAddress, Country country, int timezone, UserAccountType userAccountType)
+        public bool AddUser(User user)
         {
-            UserAccount userAccount = new UserAccount();
-            userAccount.Username = username;
-            userAccount.Password = password;
-            userAccount.Birthdate = birthdate;
-            userAccount.FirstName = firstName;
-            userAccount.LastName = lastName;
-            userAccount.Gender = gender;
-            userAccount.EmailAddress = emailAddress;
-            userAccount.Country = country;
-            userAccount.Timezone = timezone;
-            userAccount.UserAccountType = userAccountType;
+            using (OmnipresenceEntities db = new OmnipresenceEntities("metadata=res://*/Core.Core.csdl|res://*/Core.Core.ssdl|res://*/Core.Core.msl;provider=System.Data.SqlClient;provider connection string=\"Data Source=F205-PC;Initial Catalog=Omnipresence;Integrated Security=True;MultipleActiveResultSets=True\""))
+            {
+                db.Users.AddObject(user);
+                db.SaveChanges();
+            }
+
+            return true;
+        }
+
+        public bool CreateUserAccount(string username, string password, string email, string firstName, string lastName, DateTime birthdate)
+        {
+            User user = new User();
+            user.UserName = username;
+            user.Password = password;
+            user.Email = email;
+
+            UserProfile userProfile = new UserProfile();
+            userProfile.FirstName = firstName;
+            userProfile.LastName = lastName;
+            userProfile.Birthdate = birthdate;
+
+            user.UserProfile = userProfile;
 
             using (OmnipresenceEntities db = new OmnipresenceEntities("metadata=res://*/Core.Core.csdl|res://*/Core.Core.ssdl|res://*/Core.Core.msl;provider=System.Data.SqlClient;provider connection string=\"Data Source=F205-PC;Initial Catalog=Omnipresence;Integrated Security=True;MultipleActiveResultSets=True\""))
             {
-                db.UserAccounts.AddObject(userAccount);
+                db.Users.AddObject(user);
                 db.SaveChanges();
             }
+
+            return true;
         }
 
-        public IQueryable<UserAccount> GetUserAccounts()
+        public IQueryable<User> GetUserAccounts()
         {
             using (OmnipresenceEntities db = new OmnipresenceEntities())
             {
-                return db.UserAccounts.AsQueryable();
+                return db.Users.AsQueryable();
             }
         }
 
-        public void DeleteUserAccount(UserAccount userAccount)
+        public bool DeleteUser(User user)
         {
             using (OmnipresenceEntities db = new OmnipresenceEntities())
             {
-                db.UserAccounts.DeleteObject(userAccount);
+                db.Users.DeleteObject(user);
                 db.SaveChanges();
             }
+
+            return true;
         }
 
-        public UserAccount GetUserAccountByEmail(string email)
+        public User GetUserByEmail(string email)
         {
             using (OmnipresenceEntities db = new OmnipresenceEntities())
             {
-                return db.UserAccounts.Where(account => account.EmailAddress == email).FirstOrDefault();
+                return db.Users.Where(account => account.Email == email).FirstOrDefault();
+            }
+        }
+
+        public User GetUserByUserName(string username)
+        {
+            using (OmnipresenceEntities db = new OmnipresenceEntities())
+            {
+                User acc = db.Users.Where(account => account.UserName.ToLower() == username.ToLower()).FirstOrDefault();
+                return acc != null ? acc : null;
             }
         }
 

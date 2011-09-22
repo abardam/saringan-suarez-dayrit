@@ -17,11 +17,11 @@
         Use the form below to create a new account. 
     </p>
     <p>
-        Passwords are required to be a minimum of <%: ViewData["PasswordLength"] %> characters in length.
+        Passwords are required to be a minimum of <%: ViewData["PasswordLength"]%> characters in length.
     </p>
 
-    <form action="/Account/Register" method="post">
-        <%: Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.") %>
+    <% using (Html.BeginForm()) { %>
+        <%: Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")%>
         <div>
             <fieldset>
                 <legend>Account Information</legend>
@@ -32,7 +32,7 @@
                     </label>
                 </div>
                 <div class="editor-field">
-                    <input type="text" id="username" />
+                    <%:Html.TextBoxFor(m => m.UserName)%>
                 </div>
                 <div class="validation-field">
                     <label id="username-validation" />
@@ -44,7 +44,7 @@
                     </label>
                 </div>
                 <div class="editor-field">
-                    <input type="text" id="email" />
+                    <%:Html.TextBoxFor(m => m.Email)%>
                 </div>
                 <div class="validation-field">
                     <label id="email-validation" />
@@ -56,7 +56,7 @@
                     </label>
                 </div>
                 <div class="editor-field">
-                    <input type="password" id="password" />
+                    <%:Html.PasswordFor(m => m.Password)%>
                 </div>
                 <div id="validation-field">
                     <label id="password-validation" />
@@ -68,7 +68,7 @@
                     </label>
                 </div>
                 <div class="editor-field">
-                    <input type="password" id="confirm-password" />                    
+                    <%:Html.PasswordFor(m => m.ConfirmPassword)%>                 
                 </div>
                 <div class="validation-field">
                     <label id="confirm-password-validation" />
@@ -80,7 +80,7 @@
                     </label>
                 </div>
                 <div class="editor-field">
-                    <input type="text" id="first-name" />
+                    <%:Html.TextBoxFor(m => m.FirstName)%>
                 </div>
                 <div class="validation-field">
                     <label id="first-name-validation" />
@@ -92,7 +92,7 @@
                     </label>
                 </div>
                 <div class="editor-field">
-                    <input type="text" id="last-name" />
+                    <%:Html.TextBoxFor(m => m.LastName)%>
                 </div>
                 <div class="validation-field">
                     <label id="last-name-validation" />
@@ -104,7 +104,7 @@
                     </label>
                 </div>
                 <div class="editor-field">
-                    <input type="text" id="birthdate" />
+                    <%:Html.TextBoxFor(m => m.Birthdate)%>
                 </div>
                 <div class="validation-field">
                     <label id="birthdate-validation" />
@@ -115,7 +115,7 @@
                 </p>
             </fieldset>
         </div>
-    </form>
+    <%} %>
 </asp:Content>
 
 <asp:Content ID="FooterContent" ContentPlaceHolderID="Footer" runat="server">

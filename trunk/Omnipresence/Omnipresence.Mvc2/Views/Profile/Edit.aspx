@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
-<asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">
-	EditProfile
+<asp:Content ID="TitleContent" ContentPlaceHolderID="Title" runat="server">
+	Edit Profile
 </asp:Content>
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="Head" runat="server">

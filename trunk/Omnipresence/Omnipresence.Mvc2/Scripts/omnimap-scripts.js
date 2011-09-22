@@ -15,8 +15,6 @@ function eventInfo_error(headline, errormsg, otherinformation) {
 function eventInfo_toggleFunction() {
 }
 
-//Jay New Code
-=======
 ﻿// Leland Code to integrate Sidebar
 function eventInfo_reset() {
 }

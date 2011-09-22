@@ -2,39 +2,16 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="OmnipresenceModelStoreContainer" CdmEntityContainer="OmnipresenceEntities">
     <EntitySetMapping Name="Countries">
-      <EntityTypeMapping TypeName="OmnipresenceModel.Country">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.Country)">
         <MappingFragment StoreEntitySet="Countries">
           <ScalarProperty Name="CountryId" ColumnName="CountryId" />
           <ScalarProperty Name="CountryName" ColumnName="CountryName" />
           <ScalarProperty Name="CountryFlag" ColumnName="CountryFlag" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EventCategories">
-      <EntityTypeMapping TypeName="OmnipresenceModel.EventCategory">
-        <MappingFragment StoreEntitySet="EventCategories">
-          <ScalarProperty Name="EventCategoryId" ColumnName="EventCategoryId" />
-          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-          <ScalarProperty Name="Icon" ColumnName="Icon" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EventComments">
-      <EntityTypeMapping TypeName="OmnipresenceModel.EventComment">
-        <MappingFragment StoreEntitySet="EventComments">
-          <ScalarProperty Name="EventCommentId" ColumnName="EventCommentId" />
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
-          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-          <ScalarProperty Name="EventId" ColumnName="EventId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Events">
-      <EntityTypeMapping TypeName="OmnipresenceModel.Event">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.Event)">
         <MappingFragment StoreEntitySet="Events">
           <ScalarProperty Name="EventId" ColumnName="EventId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -45,15 +22,36 @@
           <ScalarProperty Name="Duration" ColumnName="Duration" />
           <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
           <ScalarProperty Name="DeletionTime" ColumnName="DeletionTime" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
           <ScalarProperty Name="EventCategoryId" ColumnName="EventCategoryId" />
           <ScalarProperty Name="VisibilityTypeId" ColumnName="VisibilityTypeId" />
           <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.EventCategory)">
+        <MappingFragment StoreEntitySet="EventCategories">
+          <ScalarProperty Name="EventCategoryId" ColumnName="EventCategoryId" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventComments">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.EventComment)">
+        <MappingFragment StoreEntitySet="EventComments">
+          <ScalarProperty Name="EventCommentId" ColumnName="EventCommentId" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Locations">
-      <EntityTypeMapping TypeName="OmnipresenceModel.Location">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.Location)">
         <MappingFragment StoreEntitySet="Locations">
           <ScalarProperty Name="LocationId" ColumnName="LocationId" />
           <ScalarProperty Name="Longitude" ColumnName="Longitude" />
@@ -63,7 +61,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="LogEvents">
-      <EntityTypeMapping TypeName="OmnipresenceModel.LogEvent">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.LogEvent)">
         <MappingFragment StoreEntitySet="LogEvents">
           <ScalarProperty Name="LogEventId" ColumnName="LogEventId" />
           <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
@@ -73,16 +71,16 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="LogEventTypes">
-      <EntityTypeMapping TypeName="OmnipresenceModel.LogEventType">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.LogEventType)">
         <MappingFragment StoreEntitySet="LogEventTypes">
           <ScalarProperty Name="LogEventTypeId" ColumnName="LogEventTypeId" />
           <ScalarProperty Name="LogEventTypeText" ColumnName="LogEventTypeText" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
+          <ScalarProperty Name="LogEventDescription" ColumnName="LogEventDescription" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MediaElements">
-      <EntityTypeMapping TypeName="OmnipresenceModel.MediaElement">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.MediaElement)">
         <MappingFragment StoreEntitySet="MediaElements">
           <ScalarProperty Name="MediaElementId" ColumnName="MediaElementId" />
           <ScalarProperty Name="MediaUrl" ColumnName="MediaUrl" />
@@ -90,50 +88,68 @@
           <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="Size" ColumnName="Size" />
           <ScalarProperty Name="EventId" ColumnName="EventId" />
-          <ScalarProperty Name="UserAccountId" ColumnName="UserAccountId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="UserAccounts">
-      <EntityTypeMapping TypeName="OmnipresenceModel.UserAccount">
-        <MappingFragment StoreEntitySet="UserAccounts">
-          <ScalarProperty Name="UserAccountId" ColumnName="UserAccountId" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="LastLoginIp" ColumnName="LastLoginIp" />
+          <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
+          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+          <ScalarProperty Name="LastLockedOutDate" ColumnName="LastLockedOutDate" />
+          <ScalarProperty Name="LastLockedOutReason" ColumnName="LastLockedOutReason" />
+          <ScalarProperty Name="NewPasswordKey" ColumnName="NewPasswordKey" />
+          <ScalarProperty Name="NewPasswordRequested" ColumnName="NewPasswordRequested" />
+          <ScalarProperty Name="NewEmail" ColumnName="NewEmail" />
+          <ScalarProperty Name="NewEmailKey" ColumnName="NewEmailKey" />
+          <ScalarProperty Name="NewEmailRequested" ColumnName="NewEmailRequested" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProfiles">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.UserProfile)">
+        <MappingFragment StoreEntitySet="UserProfiles">
+          <ScalarProperty Name="UserProfileId" ColumnName="UserProfileId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
-          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
           <ScalarProperty Name="AlternateEmailAddress" ColumnName="AlternateEmailAddress" />
           <ScalarProperty Name="Reputation" ColumnName="Reputation" />
           <ScalarProperty Name="AvatarImage" ColumnName="AvatarImage" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="CountryId" ColumnName="CountryId" />
           <ScalarProperty Name="Timezone" ColumnName="Timezone" />
-          <ScalarProperty Name="UserAccountTypeId" ColumnName="UserAccountTypeId" />
-          <ScalarProperty Name="aspnet_UserId" ColumnName="aspnet_UserId" />
           <ScalarProperty Name="Gender" ColumnName="Gender" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="UserAccountTypes">
-      <EntityTypeMapping TypeName="OmnipresenceModel.UserAccountType">
-        <MappingFragment StoreEntitySet="UserAccountTypes">
-          <ScalarProperty Name="UserAccountTypeId" ColumnName="UserAccountTypeId" />
+    <EntitySetMapping Name="UserTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.UserType)">
+        <MappingFragment StoreEntitySet="UserTypes">
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
           <ScalarProperty Name="UserTypeText" ColumnName="UserTypeText" />
           <ScalarProperty Name="UserTypeDescription" ColumnName="UserTypeDescription" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="VisibilityTypes">
-      <EntityTypeMapping TypeName="OmnipresenceModel.VisibilityType">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.VisibilityType)">
         <MappingFragment StoreEntitySet="VisibilityTypes">
           <ScalarProperty Name="VisibilityTypeId" ColumnName="VisibilityTypeId" />
           <ScalarProperty Name="VisibilityText" ColumnName="VisibilityText" />
           <ScalarProperty Name="VisibilityDescription" ColumnName="VisibilityDescription" />
-          <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

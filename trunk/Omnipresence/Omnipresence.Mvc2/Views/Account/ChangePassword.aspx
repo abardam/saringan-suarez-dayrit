@@ -1,10 +1,16 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Omnipresence.Mvc2.Models.ChangePasswordModel>" %>
 
-<asp:Content ID="changePasswordTitle" ContentPlaceHolderID="TitleContent" runat="server">
+<asp:Content ID="TitleContent" ContentPlaceHolderID="Title" runat="server">
     Change Password
 </asp:Content>
 
-<asp:Content ID="changePasswordContent" ContentPlaceHolderID="MiddleCenterContent" runat="server">
+<asp:Content ID="HeadContent" ContentPlaceHolderID="Head" runat="server">
+</asp:Content>
+
+<asp:Content ID="HeaderContent" ContentPlaceHolderID="Header" runat="server">
+</asp:Content>
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
     <h2>Change Password</h2>
     <p>
         Use the form below to change your password. 
@@ -49,4 +55,7 @@
             </fieldset>
         </div>
     <% } %>
+</asp:Content>
+
+<asp:Content ID="FooterContent" ContentPlaceHolderID="Footer" runat="server">
 </asp:Content>

@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
-<asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">
+<asp:Content ID="TitleContent" ContentPlaceHolderID="Title" runat="server">
     <%: ViewData["Name"] %>
 </asp:Content>
 

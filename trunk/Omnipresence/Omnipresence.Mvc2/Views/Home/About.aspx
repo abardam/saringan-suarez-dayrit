@@ -1,7 +1,10 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 
-<asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">
+<asp:Content ID="TitleContent" ContentPlaceHolderID="Title" runat="server">
     About
+</asp:Content>
+
+<asp:Content ID="HeadContent" ContentPlaceHolderID="Head" runat="server">
 </asp:Content>
 
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="Header" runat="server">
