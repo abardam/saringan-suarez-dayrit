@@ -13,11 +13,10 @@ using Omnipresence.DataAccess.Core;
 
 namespace Omnipresence.Mvc2.Controllers
 {
-
     [HandleError]
     public class AccountController : Controller
     {
-
+        private AccountServices accountServices;
         public IFormsAuthenticationService FormsService { get; set; }
         public IMembershipService MembershipService { get; set; }
 
@@ -25,6 +24,7 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
             if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
+            accountServices = new AccountServices();
 
             base.Initialize(requestContext);
         }
@@ -91,16 +91,11 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
+                 //Attempt to register the user
                 MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
                 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    using (AccountServices accountService = new AccountServices())
-                    {
-                        accountService.CreateUserAccount(model.UserName, model.Password, DateTime.Now, model.FirstName, model.LastName, true, model.Email, null, 0, null);   //TODO
-                    }
-
                     FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }

@@ -4,401 +4,397 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OmnipresenceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="OmnipresenceModelStoreContainer">
-          <EntitySet Name="Countries" EntityType="OmnipresenceModel.Store.Countries" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="EventCategories" EntityType="OmnipresenceModel.Store.EventCategories" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="EventComments" EntityType="OmnipresenceModel.Store.EventComments" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Events" EntityType="OmnipresenceModel.Store.Events" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Locations" EntityType="OmnipresenceModel.Store.Locations" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="LogEvents" EntityType="OmnipresenceModel.Store.LogEvents" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="LogEventTypes" EntityType="OmnipresenceModel.Store.LogEventTypes" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="MediaElements" EntityType="OmnipresenceModel.Store.MediaElements" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserAccounts" EntityType="OmnipresenceModel.Store.UserAccounts" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserAccountTypes" EntityType="OmnipresenceModel.Store.UserAccountTypes" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="VisibilityTypes" EntityType="OmnipresenceModel.Store.VisibilityTypes" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_Country_UserAccount" Association="OmnipresenceModel.Store.FK_Country_UserAccount">
-            <End Role="Countries" EntitySet="Countries" />
-            <End Role="UserAccounts" EntitySet="UserAccounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Event_EventComment" Association="OmnipresenceModel.Store.FK_Event_EventComment">
-            <End Role="Events" EntitySet="Events" />
-            <End Role="EventComments" EntitySet="EventComments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Event_Location" Association="OmnipresenceModel.Store.FK_Event_Location">
-            <End Role="Locations" EntitySet="Locations" />
-            <End Role="Events" EntitySet="Events" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Event_MediaElement" Association="OmnipresenceModel.Store.FK_Event_MediaElement">
-            <End Role="Events" EntitySet="Events" />
-            <End Role="MediaElements" EntitySet="MediaElements" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EventCategory_Event" Association="OmnipresenceModel.Store.FK_EventCategory_Event">
-            <End Role="EventCategories" EntitySet="EventCategories" />
-            <End Role="Events" EntitySet="Events" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LogEventType_LogEvent" Association="OmnipresenceModel.Store.FK_LogEventType_LogEvent">
-            <End Role="LogEventTypes" EntitySet="LogEventTypes" />
-            <End Role="LogEvents" EntitySet="LogEvents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAccount_Event" Association="OmnipresenceModel.Store.FK_UserAccount_Event">
-            <End Role="UserAccounts" EntitySet="UserAccounts" />
-            <End Role="Events" EntitySet="Events" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAccount_EventCategory" Association="OmnipresenceModel.Store.FK_UserAccount_EventCategory">
-            <End Role="UserAccounts" EntitySet="UserAccounts" />
-            <End Role="EventCategories" EntitySet="EventCategories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAccount_EventComment" Association="OmnipresenceModel.Store.FK_UserAccount_EventComment">
-            <End Role="UserAccounts" EntitySet="UserAccounts" />
-            <End Role="EventComments" EntitySet="EventComments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAccount_LogEventType" Association="OmnipresenceModel.Store.FK_UserAccount_LogEventType">
-            <End Role="UserAccounts" EntitySet="UserAccounts" />
-            <End Role="LogEventTypes" EntitySet="LogEventTypes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAccountType_UserAccount" Association="OmnipresenceModel.Store.FK_UserAccountType_UserAccount">
-            <End Role="UserAccountTypes" EntitySet="UserAccountTypes" />
-            <End Role="UserAccounts" EntitySet="UserAccounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VisibilityType_Event" Association="OmnipresenceModel.Store.FK_VisibilityType_Event">
-            <End Role="VisibilityTypes" EntitySet="VisibilityTypes" />
-            <End Role="Events" EntitySet="Events" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Countries">
-          <Key>
-            <PropertyRef Name="CountryId" />
-          </Key>
-          <Property Name="CountryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="CountryName" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="CountryFlag" Type="varbinary(max)" />
-          <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="EventCategories">
-          <Key>
-            <PropertyRef Name="EventCategoryId" />
-          </Key>
-          <Property Name="EventCategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryName" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="Icon" Type="varbinary(max)" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="200" />
-          <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="EventComments">
-          <Key>
-            <PropertyRef Name="EventCommentId" />
-          </Key>
-          <Property Name="EventCommentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Comment" Type="varchar(max)" Nullable="false" />
-          <Property Name="Timestamp" Type="binary" Nullable="false" MaxLength="8" />
-          <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
-          <Property Name="EventId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Events">
-          <Key>
-            <PropertyRef Name="EventId" />
-          </Key>
-          <Property Name="EventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="300" />
-          <Property Name="StartTime" Type="datetime" Nullable="false" />
-          <Property Name="EndTime" Type="datetime" Nullable="false" />
-          <Property Name="Reputation" Type="int" Nullable="false" />
-          <Property Name="Duration" Type="int" />
-          <Property Name="CreationTime" Type="datetime" />
-          <Property Name="DeletionTime" Type="datetime" Nullable="false" />
-          <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
-          <Property Name="EventCategoryId" Type="int" />
-          <Property Name="VisibilityTypeId" Type="int" Nullable="false" />
-          <Property Name="LocationId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Locations">
-          <Key>
-            <PropertyRef Name="LocationId" />
-          </Key>
-          <Property Name="LocationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Longitude" Type="float" Nullable="false" />
-          <Property Name="Latitude" Type="float" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="LogEvents">
-          <Key>
-            <PropertyRef Name="LogEventId" />
-          </Key>
-          <Property Name="LogEventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Timestamp" Type="binary" Nullable="false" MaxLength="8" />
-          <Property Name="LogMessage" Type="varchar" Nullable="false" MaxLength="1000" />
-          <Property Name="LogEventTypeId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="LogEventTypes">
-          <Key>
-            <PropertyRef Name="LogEventTypeId" />
-          </Key>
-          <Property Name="LogEventTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="LogEventTypeText" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="CreatedByUserAccountId" Type="int" />
-        </EntityType>
-        <EntityType Name="MediaElements">
-          <Key>
-            <PropertyRef Name="MediaElementId" />
-          </Key>
-          <Property Name="MediaElementId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="MediaUrl" Type="varchar" Nullable="false" MaxLength="200" />
-          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="Type" Type="int" Nullable="false" />
-          <Property Name="Size" Type="float" Nullable="false" />
-          <Property Name="EventId" Type="int" Nullable="false" />
-          <Property Name="UserAccountId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserAccounts">
-          <Key>
-            <PropertyRef Name="UserAccountId" />
-          </Key>
-          <Property Name="UserAccountId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="32" />
-          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="32" />
-          <Property Name="Birthdate" Type="datetime" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="32" />
-          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="32" />
-          <Property Name="GenderId" Type="int" />
-          <Property Name="EmailAddress" Type="varchar" Nullable="false" MaxLength="32" />
-          <Property Name="AlternateEmailAddress" Type="varchar" MaxLength="32" />
-          <Property Name="Reputation" Type="int" Nullable="false" />
-          <Property Name="AvatarImage" Type="varbinary(max)" />
-          <Property Name="Description" Type="varchar" MaxLength="2000" />
-          <Property Name="CountryId" Type="int" />
-          <Property Name="Timezone" Type="int" />
-          <Property Name="UserAccountTypeId" Type="int" Nullable="false" />
-          <Property Name="aspnet_UserId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Gender" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserAccountTypes">
-          <Key>
-            <PropertyRef Name="UserAccountTypeId" />
-          </Key>
-          <Property Name="UserAccountTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="UserTypeText" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="UserTypeDescription" Type="varchar" MaxLength="100" />
-          <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="VisibilityTypes">
-          <Key>
-            <PropertyRef Name="VisibilityTypeId" />
-          </Key>
-          <Property Name="VisibilityTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="VisibilityText" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="VisibilityDescription" Type="varchar" MaxLength="100" />
-          <Property Name="CreatedByUserAccountId" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_Country_UserAccount">
-          <End Role="Countries" Type="OmnipresenceModel.Store.Countries" Multiplicity="0..1" />
-          <End Role="UserAccounts" Type="OmnipresenceModel.Store.UserAccounts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Countries">
-              <PropertyRef Name="CountryId" />
-            </Principal>
-            <Dependent Role="UserAccounts">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Event_EventComment">
-          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="1" />
-          <End Role="EventComments" Type="OmnipresenceModel.Store.EventComments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Events">
-              <PropertyRef Name="EventId" />
-            </Principal>
-            <Dependent Role="EventComments">
-              <PropertyRef Name="EventId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Event_Location">
-          <End Role="Locations" Type="OmnipresenceModel.Store.Locations" Multiplicity="1" />
-          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Locations">
-              <PropertyRef Name="LocationId" />
-            </Principal>
-            <Dependent Role="Events">
-              <PropertyRef Name="LocationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Event_MediaElement">
-          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="1" />
-          <End Role="MediaElements" Type="OmnipresenceModel.Store.MediaElements" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Events">
-              <PropertyRef Name="EventId" />
-            </Principal>
-            <Dependent Role="MediaElements">
-              <PropertyRef Name="EventId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EventCategory_Event">
-          <End Role="EventCategories" Type="OmnipresenceModel.Store.EventCategories" Multiplicity="0..1" />
-          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EventCategories">
-              <PropertyRef Name="EventCategoryId" />
-            </Principal>
-            <Dependent Role="Events">
-              <PropertyRef Name="EventCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LogEventType_LogEvent">
-          <End Role="LogEventTypes" Type="OmnipresenceModel.Store.LogEventTypes" Multiplicity="1" />
-          <End Role="LogEvents" Type="OmnipresenceModel.Store.LogEvents" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LogEventTypes">
-              <PropertyRef Name="LogEventTypeId" />
-            </Principal>
-            <Dependent Role="LogEvents">
-              <PropertyRef Name="LogEventTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserAccount_Event">
-          <End Role="UserAccounts" Type="OmnipresenceModel.Store.UserAccounts" Multiplicity="1" />
-          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserAccounts">
-              <PropertyRef Name="UserAccountId" />
-            </Principal>
-            <Dependent Role="Events">
-              <PropertyRef Name="CreatedByUserAccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserAccount_EventCategory">
-          <End Role="UserAccounts" Type="OmnipresenceModel.Store.UserAccounts" Multiplicity="1" />
-          <End Role="EventCategories" Type="OmnipresenceModel.Store.EventCategories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserAccounts">
-              <PropertyRef Name="UserAccountId" />
-            </Principal>
-            <Dependent Role="EventCategories">
-              <PropertyRef Name="CreatedByUserAccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserAccount_EventComment">
-          <End Role="UserAccounts" Type="OmnipresenceModel.Store.UserAccounts" Multiplicity="1" />
-          <End Role="EventComments" Type="OmnipresenceModel.Store.EventComments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserAccounts">
-              <PropertyRef Name="UserAccountId" />
-            </Principal>
-            <Dependent Role="EventComments">
-              <PropertyRef Name="CreatedByUserAccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserAccount_LogEventType">
-          <End Role="UserAccounts" Type="OmnipresenceModel.Store.UserAccounts" Multiplicity="0..1" />
-          <End Role="LogEventTypes" Type="OmnipresenceModel.Store.LogEventTypes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserAccounts">
-              <PropertyRef Name="UserAccountId" />
-            </Principal>
-            <Dependent Role="LogEventTypes">
-              <PropertyRef Name="CreatedByUserAccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserAccountType_UserAccount">
-          <End Role="UserAccountTypes" Type="OmnipresenceModel.Store.UserAccountTypes" Multiplicity="1" />
-          <End Role="UserAccounts" Type="OmnipresenceModel.Store.UserAccounts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserAccountTypes">
-              <PropertyRef Name="UserAccountTypeId" />
-            </Principal>
-            <Dependent Role="UserAccounts">
-              <PropertyRef Name="UserAccountTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VisibilityType_Event">
-          <End Role="VisibilityTypes" Type="OmnipresenceModel.Store.VisibilityTypes" Multiplicity="1" />
-          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VisibilityTypes">
-              <PropertyRef Name="VisibilityTypeId" />
-            </Principal>
-            <Dependent Role="Events">
-              <PropertyRef Name="VisibilityTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="OmnipresenceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="OmnipresenceModelStoreContainer">
+    <EntitySet Name="Countries" EntityType="OmnipresenceModel.Store.Countries" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Events" EntityType="OmnipresenceModel.Store.Events" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EventCategories" EntityType="OmnipresenceModel.Store.EventCategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EventComments" EntityType="OmnipresenceModel.Store.EventComments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Locations" EntityType="OmnipresenceModel.Store.Locations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LogEvents" EntityType="OmnipresenceModel.Store.LogEvents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LogEventTypes" EntityType="OmnipresenceModel.Store.LogEventTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MediaElements" EntityType="OmnipresenceModel.Store.MediaElements" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="OmnipresenceModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserProfiles" EntityType="OmnipresenceModel.Store.UserProfiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserTypes" EntityType="OmnipresenceModel.Store.UserTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VisibilityTypes" EntityType="OmnipresenceModel.Store.VisibilityTypes" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Country_UserAccount" Association="OmnipresenceModel.Store.FK_Country_UserAccount">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Event_EventComment" Association="OmnipresenceModel.Store.FK_Event_EventComment">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="EventComment" EntitySet="EventComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Event_Location" Association="OmnipresenceModel.Store.FK_Event_Location">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Event_MediaElement" Association="OmnipresenceModel.Store.FK_Event_MediaElement">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="MediaElement" EntitySet="MediaElements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EventCategory_Event" Association="OmnipresenceModel.Store.FK_EventCategory_Event">
+      <End Role="EventCategory" EntitySet="EventCategories" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserEvent" Association="OmnipresenceModel.Store.FK_UserEvent">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VisibilityType_Event" Association="OmnipresenceModel.Store.FK_VisibilityType_Event">
+      <End Role="VisibilityTypes" EntitySet="VisibilityTypes" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EventComment_User" Association="OmnipresenceModel.Store.FK_EventComment_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="EventComment" EntitySet="EventComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LogEventType_LogEvent" Association="OmnipresenceModel.Store.FK_LogEventType_LogEvent">
+      <End Role="LogEventType" EntitySet="LogEventTypes" />
+      <End Role="LogEvent" EntitySet="LogEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAccountTypeUser" Association="OmnipresenceModel.Store.FK_UserAccountTypeUser">
+      <End Role="UserType" EntitySet="UserTypes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserUserProfile" Association="OmnipresenceModel.Store.FK_UserUserProfile">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CountryFlag" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="EventId" />
+    </Key>
+    <Property Name="EventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Description" Type="varchar" Nullable="false" MaxLength="300" />
+    <Property Name="StartTime" Type="datetime" Nullable="false" />
+    <Property Name="EndTime" Type="datetime" Nullable="false" />
+    <Property Name="Reputation" Type="int" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="true" />
+    <Property Name="CreationTime" Type="datetime" Nullable="true" />
+    <Property Name="DeletionTime" Type="datetime" Nullable="false" />
+    <Property Name="EventCategoryId" Type="int" Nullable="true" />
+    <Property Name="VisibilityTypeId" Type="int" Nullable="false" />
+    <Property Name="LocationId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EventCategories">
+    <Key>
+      <PropertyRef Name="EventCategoryId" />
+    </Key>
+    <Property Name="EventCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Icon" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Description" Type="varchar" Nullable="true" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="EventComments">
+    <Key>
+      <PropertyRef Name="EventCommentId" />
+    </Key>
+    <Property Name="EventCommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comment" Type="varchar(max)" Nullable="false" />
+    <Property Name="Timestamp" Type="binary" Nullable="false" MaxLength="8" />
+    <Property Name="EventId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Locations">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="LogEvents">
+    <Key>
+      <PropertyRef Name="LogEventId" />
+    </Key>
+    <Property Name="LogEventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Timestamp" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="LogMessage" Type="varchar" Nullable="false" MaxLength="1000" />
+    <Property Name="LogEventTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LogEventTypes">
+    <Key>
+      <PropertyRef Name="LogEventTypeId" />
+    </Key>
+    <Property Name="LogEventTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LogEventTypeText" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="LogEventDescription" Type="varchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="MediaElements">
+    <Key>
+      <PropertyRef Name="MediaElementId" />
+    </Key>
+    <Property Name="MediaElementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MediaUrl" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Size" Type="float" Nullable="false" />
+    <Property Name="EventId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Comments" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="LastModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLoginIp" Type="datetime" Nullable="true" />
+    <Property Name="IsActivated" Type="bit" Nullable="false" />
+    <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+    <Property Name="LastLockedOutDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLockedOutReason" Type="datetime" Nullable="true" />
+    <Property Name="NewPasswordKey" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="NewPasswordRequested" Type="datetime" Nullable="true" />
+    <Property Name="NewEmail" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="NewEmailKey" Type="nvarchar" Nullable="true" MaxLength="128" />
+    <Property Name="NewEmailRequested" Type="datetime" Nullable="true" />
+    <Property Name="UserTypeId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UserProfiles">
+    <Key>
+      <PropertyRef Name="UserProfileId" />
+    </Key>
+    <Property Name="UserProfileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="32" />
+    <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="32" />
+    <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="32" />
+    <Property Name="Birthdate" Type="datetime" Nullable="false" />
+    <Property Name="AlternateEmailAddress" Type="varchar" Nullable="true" MaxLength="32" />
+    <Property Name="Reputation" Type="int" Nullable="true" />
+    <Property Name="AvatarImage" Type="varbinary(max)" Nullable="true" />
+    <Property Name="Description" Type="varchar" Nullable="true" MaxLength="2000" />
+    <Property Name="CountryId" Type="int" Nullable="true" />
+    <Property Name="Timezone" Type="int" Nullable="true" />
+    <Property Name="Gender" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UserTypes">
+    <Key>
+      <PropertyRef Name="UserTypeId" />
+    </Key>
+    <Property Name="UserTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserTypeText" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="UserTypeDescription" Type="varchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="VisibilityTypes">
+    <Key>
+      <PropertyRef Name="VisibilityTypeId" />
+    </Key>
+    <Property Name="VisibilityTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VisibilityText" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="VisibilityDescription" Type="varchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_Country_UserAccount">
+    <End Role="Country" Type="OmnipresenceModel.Store.Countries" Multiplicity="0..1" />
+    <End Role="UserProfile" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Event_EventComment">
+    <End Role="Event" Type="OmnipresenceModel.Store.Events" Multiplicity="1" />
+    <End Role="EventComment" Type="OmnipresenceModel.Store.EventComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="EventId" />
+      </Principal>
+      <Dependent Role="EventComment">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Event_Location">
+    <End Role="Location" Type="OmnipresenceModel.Store.Locations" Multiplicity="1" />
+    <End Role="Event" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Event_MediaElement">
+    <End Role="Event" Type="OmnipresenceModel.Store.Events" Multiplicity="1" />
+    <End Role="MediaElement" Type="OmnipresenceModel.Store.MediaElements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="EventId" />
+      </Principal>
+      <Dependent Role="MediaElement">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EventCategory_Event">
+    <End Role="EventCategory" Type="OmnipresenceModel.Store.EventCategories" Multiplicity="0..1" />
+    <End Role="Event" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventCategory">
+        <PropertyRef Name="EventCategoryId" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="EventCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserEvent">
+    <End Role="User" Type="OmnipresenceModel.Store.Users" Multiplicity="1" />
+    <End Role="Event" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VisibilityType_Event">
+    <End Role="VisibilityTypes" Type="OmnipresenceModel.Store.VisibilityTypes" Multiplicity="1" />
+    <End Role="Event" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisibilityTypes">
+        <PropertyRef Name="VisibilityTypeId" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="VisibilityTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EventComment_User">
+    <End Role="User" Type="OmnipresenceModel.Store.Users" Multiplicity="1" />
+    <End Role="EventComment" Type="OmnipresenceModel.Store.EventComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="EventComment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LogEventType_LogEvent">
+    <End Role="LogEventType" Type="OmnipresenceModel.Store.LogEventTypes" Multiplicity="1" />
+    <End Role="LogEvent" Type="OmnipresenceModel.Store.LogEvents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LogEventType">
+        <PropertyRef Name="LogEventTypeId" />
+      </Principal>
+      <Dependent Role="LogEvent">
+        <PropertyRef Name="LogEventTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAccountTypeUser">
+    <End Role="UserType" Type="OmnipresenceModel.Store.UserTypes" Multiplicity="0..1" />
+    <End Role="User" Type="OmnipresenceModel.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="UserTypeId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserUserProfile">
+    <End Role="User" Type="OmnipresenceModel.Store.Users" Multiplicity="1" />
+    <End Role="UserProfile" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="UserProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OmnipresenceModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="OmnipresenceEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Countries" EntityType="OmnipresenceModel.Country" />
+          <EntitySet Name="Events" EntityType="OmnipresenceModel.Event" />
           <EntitySet Name="EventCategories" EntityType="OmnipresenceModel.EventCategory" />
           <EntitySet Name="EventComments" EntityType="OmnipresenceModel.EventComment" />
-          <EntitySet Name="Events" EntityType="OmnipresenceModel.Event" />
           <EntitySet Name="Locations" EntityType="OmnipresenceModel.Location" />
           <EntitySet Name="LogEvents" EntityType="OmnipresenceModel.LogEvent" />
           <EntitySet Name="LogEventTypes" EntityType="OmnipresenceModel.LogEventType" />
           <EntitySet Name="MediaElements" EntityType="OmnipresenceModel.MediaElement" />
-          <EntitySet Name="UserAccounts" EntityType="OmnipresenceModel.UserAccount" />
-          <EntitySet Name="UserAccountTypes" EntityType="OmnipresenceModel.UserAccountType" />
+          <EntitySet Name="Users" EntityType="OmnipresenceModel.User" />
+          <EntitySet Name="UserProfiles" EntityType="OmnipresenceModel.UserProfile" />
+          <EntitySet Name="UserTypes" EntityType="OmnipresenceModel.UserType" />
           <EntitySet Name="VisibilityTypes" EntityType="OmnipresenceModel.VisibilityType" />
           <AssociationSet Name="FK_Country_UserAccount" Association="OmnipresenceModel.FK_Country_UserAccount">
-            <End Role="Countries" EntitySet="Countries" />
-            <End Role="UserAccounts" EntitySet="UserAccounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EventCategory_Event" Association="OmnipresenceModel.FK_EventCategory_Event">
-            <End Role="EventCategories" EntitySet="EventCategories" />
-            <End Role="Events" EntitySet="Events" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAccount_EventCategory" Association="OmnipresenceModel.FK_UserAccount_EventCategory">
-            <End Role="UserAccounts" EntitySet="UserAccounts" />
-            <End Role="EventCategories" EntitySet="EventCategories" />
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
           </AssociationSet>
           <AssociationSet Name="FK_Event_EventComment" Association="OmnipresenceModel.FK_Event_EventComment">
-            <End Role="Events" EntitySet="Events" />
-            <End Role="EventComments" EntitySet="EventComments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAccount_EventComment" Association="OmnipresenceModel.FK_UserAccount_EventComment">
-            <End Role="UserAccounts" EntitySet="UserAccounts" />
-            <End Role="EventComments" EntitySet="EventComments" />
+            <End Role="Event" EntitySet="Events" />
+            <End Role="EventComment" EntitySet="EventComments" />
           </AssociationSet>
           <AssociationSet Name="FK_Event_Location" Association="OmnipresenceModel.FK_Event_Location">
-            <End Role="Locations" EntitySet="Locations" />
-            <End Role="Events" EntitySet="Events" />
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Event" EntitySet="Events" />
           </AssociationSet>
           <AssociationSet Name="FK_Event_MediaElement" Association="OmnipresenceModel.FK_Event_MediaElement">
-            <End Role="Events" EntitySet="Events" />
-            <End Role="MediaElements" EntitySet="MediaElements" />
+            <End Role="Event" EntitySet="Events" />
+            <End Role="MediaElement" EntitySet="MediaElements" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserAccount_Event" Association="OmnipresenceModel.FK_UserAccount_Event">
-            <End Role="UserAccounts" EntitySet="UserAccounts" />
-            <End Role="Events" EntitySet="Events" />
+          <AssociationSet Name="FK_EventCategory_Event" Association="OmnipresenceModel.FK_EventCategory_Event">
+            <End Role="EventCategory" EntitySet="EventCategories" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEvent" Association="OmnipresenceModel.FK_UserEvent">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Event" EntitySet="Events" />
           </AssociationSet>
           <AssociationSet Name="FK_VisibilityType_Event" Association="OmnipresenceModel.FK_VisibilityType_Event">
             <End Role="VisibilityTypes" EntitySet="VisibilityTypes" />
-            <End Role="Events" EntitySet="Events" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventComment_User" Association="OmnipresenceModel.FK_EventComment_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="EventComment" EntitySet="EventComments" />
           </AssociationSet>
           <AssociationSet Name="FK_LogEventType_LogEvent" Association="OmnipresenceModel.FK_LogEventType_LogEvent">
-            <End Role="LogEventTypes" EntitySet="LogEventTypes" />
-            <End Role="LogEvents" EntitySet="LogEvents" />
+            <End Role="LogEventType" EntitySet="LogEventTypes" />
+            <End Role="LogEvent" EntitySet="LogEvents" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserAccount_LogEventType" Association="OmnipresenceModel.FK_UserAccount_LogEventType">
-            <End Role="UserAccounts" EntitySet="UserAccounts" />
-            <End Role="LogEventTypes" EntitySet="LogEventTypes" />
+          <AssociationSet Name="FK_UserAccountTypeUser" Association="OmnipresenceModel.FK_UserAccountTypeUser">
+            <End Role="UserType" EntitySet="UserTypes" />
+            <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserAccountType_UserAccount" Association="OmnipresenceModel.FK_UserAccountType_UserAccount">
-            <End Role="UserAccountTypes" EntitySet="UserAccountTypes" />
-            <End Role="UserAccounts" EntitySet="UserAccounts" />
+          <AssociationSet Name="FK_UserUserProfile" Association="OmnipresenceModel.FK_UserUserProfile">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Country">
@@ -408,32 +404,7 @@
           <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CountryName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="CountryFlag" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CreatedByUserAccountId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UserAccounts" Relationship="OmnipresenceModel.FK_Country_UserAccount" FromRole="Countries" ToRole="UserAccounts" />
-        </EntityType>
-        <EntityType Name="EventCategory">
-          <Key>
-            <PropertyRef Name="EventCategoryId" />
-          </Key>
-          <Property Name="EventCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Icon" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="Description" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <Property Name="CreatedByUserAccountId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_EventCategory_Event" FromRole="EventCategories" ToRole="Events" />
-          <NavigationProperty Name="UserAccount" Relationship="OmnipresenceModel.FK_UserAccount_EventCategory" FromRole="EventCategories" ToRole="UserAccounts" />
-        </EntityType>
-        <EntityType Name="EventComment">
-          <Key>
-            <PropertyRef Name="EventCommentId" />
-          </Key>
-          <Property Name="EventCommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="Timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" />
-          <Property Name="CreatedByUserAccountId" Type="Int32" Nullable="false" />
-          <Property Name="EventId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Event" Relationship="OmnipresenceModel.FK_Event_EventComment" FromRole="EventComments" ToRole="Events" />
-          <NavigationProperty Name="UserAccount" Relationship="OmnipresenceModel.FK_UserAccount_EventComment" FromRole="EventComments" ToRole="UserAccounts" />
+          <NavigationProperty Name="UserProfiles" Relationship="OmnipresenceModel.FK_Country_UserAccount" FromRole="Country" ToRole="UserProfile" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -448,16 +419,38 @@
           <Property Name="Duration" Type="Int32" />
           <Property Name="CreationTime" Type="DateTime" />
           <Property Name="DeletionTime" Type="DateTime" Nullable="false" />
-          <Property Name="CreatedByUserAccountId" Type="Int32" Nullable="false" />
           <Property Name="EventCategoryId" Type="Int32" />
           <Property Name="VisibilityTypeId" Type="Int32" Nullable="false" />
           <Property Name="LocationId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="EventCategory" Relationship="OmnipresenceModel.FK_EventCategory_Event" FromRole="Events" ToRole="EventCategories" />
-          <NavigationProperty Name="EventComments" Relationship="OmnipresenceModel.FK_Event_EventComment" FromRole="Events" ToRole="EventComments" />
-          <NavigationProperty Name="Location" Relationship="OmnipresenceModel.FK_Event_Location" FromRole="Events" ToRole="Locations" />
-          <NavigationProperty Name="MediaElements" Relationship="OmnipresenceModel.FK_Event_MediaElement" FromRole="Events" ToRole="MediaElements" />
-          <NavigationProperty Name="UserAccount" Relationship="OmnipresenceModel.FK_UserAccount_Event" FromRole="Events" ToRole="UserAccounts" />
-          <NavigationProperty Name="VisibilityType" Relationship="OmnipresenceModel.FK_VisibilityType_Event" FromRole="Events" ToRole="VisibilityTypes" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EventComments" Relationship="OmnipresenceModel.FK_Event_EventComment" FromRole="Event" ToRole="EventComment" />
+          <NavigationProperty Name="Location" Relationship="OmnipresenceModel.FK_Event_Location" FromRole="Event" ToRole="Location" />
+          <NavigationProperty Name="MediaElements" Relationship="OmnipresenceModel.FK_Event_MediaElement" FromRole="Event" ToRole="MediaElement" />
+          <NavigationProperty Name="EventCategory" Relationship="OmnipresenceModel.FK_EventCategory_Event" FromRole="Event" ToRole="EventCategory" />
+          <NavigationProperty Name="User" Relationship="OmnipresenceModel.FK_UserEvent" FromRole="Event" ToRole="User" />
+          <NavigationProperty Name="VisibilityType" Relationship="OmnipresenceModel.FK_VisibilityType_Event" FromRole="Event" ToRole="VisibilityTypes" />
+        </EntityType>
+        <EntityType Name="EventCategory">
+          <Key>
+            <PropertyRef Name="EventCategoryId" />
+          </Key>
+          <Property Name="EventCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Icon" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_EventCategory_Event" FromRole="EventCategory" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="EventComment">
+          <Key>
+            <PropertyRef Name="EventCommentId" />
+          </Key>
+          <Property Name="EventCommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="OmnipresenceModel.FK_Event_EventComment" FromRole="EventComment" ToRole="Event" />
+          <NavigationProperty Name="User" Relationship="OmnipresenceModel.FK_EventComment_User" FromRole="EventComment" ToRole="User" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -467,17 +460,17 @@
           <Property Name="Longitude" Type="Double" Nullable="false" />
           <Property Name="Latitude" Type="Double" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_Event_Location" FromRole="Locations" ToRole="Events" />
+          <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_Event_Location" FromRole="Location" ToRole="Event" />
         </EntityType>
         <EntityType Name="LogEvent">
           <Key>
             <PropertyRef Name="LogEventId" />
           </Key>
           <Property Name="LogEventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" />
+          <Property Name="Timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="LogMessage" Type="String" Nullable="false" MaxLength="1000" Unicode="false" FixedLength="false" />
           <Property Name="LogEventTypeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="LogEventType" Relationship="OmnipresenceModel.FK_LogEventType_LogEvent" FromRole="LogEvents" ToRole="LogEventTypes" />
+          <NavigationProperty Name="LogEventType" Relationship="OmnipresenceModel.FK_LogEventType_LogEvent" FromRole="LogEvent" ToRole="LogEventType" />
         </EntityType>
         <EntityType Name="LogEventType">
           <Key>
@@ -485,9 +478,8 @@
           </Key>
           <Property Name="LogEventTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LogEventTypeText" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="CreatedByUserAccountId" Type="Int32" />
-          <NavigationProperty Name="LogEvents" Relationship="OmnipresenceModel.FK_LogEventType_LogEvent" FromRole="LogEventTypes" ToRole="LogEvents" />
-          <NavigationProperty Name="UserAccount" Relationship="OmnipresenceModel.FK_UserAccount_LogEventType" FromRole="LogEventTypes" ToRole="UserAccounts" />
+          <Property Name="LogEventDescription" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="LogEvents" Relationship="OmnipresenceModel.FK_LogEventType_LogEvent" FromRole="LogEventType" ToRole="LogEvent" />
         </EntityType>
         <EntityType Name="MediaElement">
           <Key>
@@ -499,46 +491,64 @@
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="Size" Type="Double" Nullable="false" />
           <Property Name="EventId" Type="Int32" Nullable="false" />
-          <Property Name="UserAccountId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Event" Relationship="OmnipresenceModel.FK_Event_MediaElement" FromRole="MediaElements" ToRole="Events" />
+          <NavigationProperty Name="Event" Relationship="OmnipresenceModel.FK_Event_MediaElement" FromRole="MediaElement" ToRole="Event" />
         </EntityType>
-        <EntityType Name="UserAccount">
+        <EntityType Name="User">
           <Key>
-            <PropertyRef Name="UserAccountId" />
+            <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserAccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
-          <Property Name="Birthdate" Type="DateTime" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" />
+          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" />
+          <Property Name="LastLoginIp" Type="DateTime" />
+          <Property Name="IsActivated" Type="Boolean" Nullable="false" />
+          <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
+          <Property Name="LastLockedOutDate" Type="DateTime" Nullable="false" />
+          <Property Name="LastLockedOutReason" Type="DateTime" />
+          <Property Name="NewPasswordKey" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="NewPasswordRequested" Type="DateTime" />
+          <Property Name="NewEmail" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="NewEmailKey" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="NewEmailRequested" Type="DateTime" />
+          <Property Name="UserTypeId" Type="Int32" />
+          <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_UserEvent" FromRole="User" ToRole="Event" />
+          <NavigationProperty Name="EventComments" Relationship="OmnipresenceModel.FK_EventComment_User" FromRole="User" ToRole="EventComment" />
+          <NavigationProperty Name="UserType" Relationship="OmnipresenceModel.FK_UserAccountTypeUser" FromRole="User" ToRole="UserType" />
+          <NavigationProperty Name="UserProfile" Relationship="OmnipresenceModel.FK_UserUserProfile" FromRole="User" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserProfileId" />
+          </Key>
+          <Property Name="UserProfileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
-          <Property Name="GenderId" Type="Int32" />
-          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
+          <Property Name="Birthdate" Type="DateTime" Nullable="false" />
           <Property Name="AlternateEmailAddress" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
-          <Property Name="Reputation" Type="Int32" Nullable="false" />
+          <Property Name="Reputation" Type="Int32" />
           <Property Name="AvatarImage" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="2000" Unicode="false" FixedLength="false" />
           <Property Name="CountryId" Type="Int32" />
           <Property Name="Timezone" Type="Int32" />
-          <Property Name="UserAccountTypeId" Type="Int32" Nullable="false" />
-          <Property Name="aspnet_UserId" Type="Guid" Nullable="false" />
-          <Property Name="Gender" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Country" Relationship="OmnipresenceModel.FK_Country_UserAccount" FromRole="UserAccounts" ToRole="Countries" />
-          <NavigationProperty Name="EventCategories" Relationship="OmnipresenceModel.FK_UserAccount_EventCategory" FromRole="UserAccounts" ToRole="EventCategories" />
-          <NavigationProperty Name="EventComments" Relationship="OmnipresenceModel.FK_UserAccount_EventComment" FromRole="UserAccounts" ToRole="EventComments" />
-          <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_UserAccount_Event" FromRole="UserAccounts" ToRole="Events" />
-          <NavigationProperty Name="LogEventTypes" Relationship="OmnipresenceModel.FK_UserAccount_LogEventType" FromRole="UserAccounts" ToRole="LogEventTypes" />
-          <NavigationProperty Name="UserAccountType" Relationship="OmnipresenceModel.FK_UserAccountType_UserAccount" FromRole="UserAccounts" ToRole="UserAccountTypes" />
+          <Property Name="Gender" Type="Boolean" />
+          <NavigationProperty Name="Country" Relationship="OmnipresenceModel.FK_Country_UserAccount" FromRole="UserProfile" ToRole="Country" />
+          <NavigationProperty Name="User" Relationship="OmnipresenceModel.FK_UserUserProfile" FromRole="UserProfile" ToRole="User" />
         </EntityType>
-        <EntityType Name="UserAccountType">
+        <EntityType Name="UserType">
           <Key>
-            <PropertyRef Name="UserAccountTypeId" />
+            <PropertyRef Name="UserTypeId" />
           </Key>
-          <Property Name="UserAccountTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserTypeText" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="UserTypeDescription" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="CreatedByUserAccountId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UserAccounts" Relationship="OmnipresenceModel.FK_UserAccountType_UserAccount" FromRole="UserAccountTypes" ToRole="UserAccounts" />
+          <NavigationProperty Name="Users" Relationship="OmnipresenceModel.FK_UserAccountTypeUser" FromRole="UserType" ToRole="User" />
         </EntityType>
         <EntityType Name="VisibilityType">
           <Key>
@@ -547,150 +557,137 @@
           <Property Name="VisibilityTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VisibilityText" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="VisibilityDescription" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="CreatedByUserAccountId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_VisibilityType_Event" FromRole="VisibilityTypes" ToRole="Events" />
+          <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_VisibilityType_Event" FromRole="VisibilityTypes" ToRole="Event" />
         </EntityType>
         <Association Name="FK_Country_UserAccount">
-          <End Role="Countries" Type="OmnipresenceModel.Country" Multiplicity="0..1" />
-          <End Role="UserAccounts" Type="OmnipresenceModel.UserAccount" Multiplicity="*" />
+          <End Role="Country" Type="OmnipresenceModel.Country" Multiplicity="0..1" />
+          <End Role="UserProfile" Type="OmnipresenceModel.UserProfile" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Countries">
+            <Principal Role="Country">
               <PropertyRef Name="CountryId" />
             </Principal>
-            <Dependent Role="UserAccounts">
+            <Dependent Role="UserProfile">
               <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EventCategory_Event">
-          <End Role="EventCategories" Type="OmnipresenceModel.EventCategory" Multiplicity="0..1" />
-          <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EventCategories">
-              <PropertyRef Name="EventCategoryId" />
-            </Principal>
-            <Dependent Role="Events">
-              <PropertyRef Name="EventCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserAccount_EventCategory">
-          <End Role="UserAccounts" Type="OmnipresenceModel.UserAccount" Multiplicity="1" />
-          <End Role="EventCategories" Type="OmnipresenceModel.EventCategory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserAccounts">
-              <PropertyRef Name="UserAccountId" />
-            </Principal>
-            <Dependent Role="EventCategories">
-              <PropertyRef Name="CreatedByUserAccountId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Event_EventComment">
-          <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="1" />
-          <End Role="EventComments" Type="OmnipresenceModel.EventComment" Multiplicity="*" />
+          <End Role="Event" Type="OmnipresenceModel.Event" Multiplicity="1" />
+          <End Role="EventComment" Type="OmnipresenceModel.EventComment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Events">
+            <Principal Role="Event">
               <PropertyRef Name="EventId" />
             </Principal>
-            <Dependent Role="EventComments">
+            <Dependent Role="EventComment">
               <PropertyRef Name="EventId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserAccount_EventComment">
-          <End Role="UserAccounts" Type="OmnipresenceModel.UserAccount" Multiplicity="1" />
-          <End Role="EventComments" Type="OmnipresenceModel.EventComment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserAccounts">
-              <PropertyRef Name="UserAccountId" />
-            </Principal>
-            <Dependent Role="EventComments">
-              <PropertyRef Name="CreatedByUserAccountId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Event_Location">
-          <End Role="Locations" Type="OmnipresenceModel.Location" Multiplicity="1" />
-          <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="*" />
+          <End Role="Location" Type="OmnipresenceModel.Location" Multiplicity="1" />
+          <End Role="Event" Type="OmnipresenceModel.Event" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Locations">
+            <Principal Role="Location">
               <PropertyRef Name="LocationId" />
             </Principal>
-            <Dependent Role="Events">
+            <Dependent Role="Event">
               <PropertyRef Name="LocationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Event_MediaElement">
-          <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="1" />
-          <End Role="MediaElements" Type="OmnipresenceModel.MediaElement" Multiplicity="*" />
+          <End Role="Event" Type="OmnipresenceModel.Event" Multiplicity="1" />
+          <End Role="MediaElement" Type="OmnipresenceModel.MediaElement" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Events">
+            <Principal Role="Event">
               <PropertyRef Name="EventId" />
             </Principal>
-            <Dependent Role="MediaElements">
+            <Dependent Role="MediaElement">
               <PropertyRef Name="EventId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserAccount_Event">
-          <End Role="UserAccounts" Type="OmnipresenceModel.UserAccount" Multiplicity="1" />
-          <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="*" />
+        <Association Name="FK_EventCategory_Event">
+          <End Role="EventCategory" Type="OmnipresenceModel.EventCategory" Multiplicity="0..1" />
+          <End Role="Event" Type="OmnipresenceModel.Event" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UserAccounts">
-              <PropertyRef Name="UserAccountId" />
+            <Principal Role="EventCategory">
+              <PropertyRef Name="EventCategoryId" />
             </Principal>
-            <Dependent Role="Events">
-              <PropertyRef Name="CreatedByUserAccountId" />
+            <Dependent Role="Event">
+              <PropertyRef Name="EventCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEvent">
+          <End Role="User" Type="OmnipresenceModel.User" Multiplicity="1" />
+          <End Role="Event" Type="OmnipresenceModel.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VisibilityType_Event">
           <End Role="VisibilityTypes" Type="OmnipresenceModel.VisibilityType" Multiplicity="1" />
-          <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="*" />
+          <End Role="Event" Type="OmnipresenceModel.Event" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="VisibilityTypes">
               <PropertyRef Name="VisibilityTypeId" />
             </Principal>
-            <Dependent Role="Events">
+            <Dependent Role="Event">
               <PropertyRef Name="VisibilityTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EventComment_User">
+          <End Role="User" Type="OmnipresenceModel.User" Multiplicity="1" />
+          <End Role="EventComment" Type="OmnipresenceModel.EventComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EventComment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LogEventType_LogEvent">
-          <End Role="LogEventTypes" Type="OmnipresenceModel.LogEventType" Multiplicity="1" />
-          <End Role="LogEvents" Type="OmnipresenceModel.LogEvent" Multiplicity="*" />
+          <End Role="LogEventType" Type="OmnipresenceModel.LogEventType" Multiplicity="1" />
+          <End Role="LogEvent" Type="OmnipresenceModel.LogEvent" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LogEventTypes">
+            <Principal Role="LogEventType">
               <PropertyRef Name="LogEventTypeId" />
             </Principal>
-            <Dependent Role="LogEvents">
+            <Dependent Role="LogEvent">
               <PropertyRef Name="LogEventTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserAccount_LogEventType">
-          <End Role="UserAccounts" Type="OmnipresenceModel.UserAccount" Multiplicity="0..1" />
-          <End Role="LogEventTypes" Type="OmnipresenceModel.LogEventType" Multiplicity="*" />
+        <Association Name="FK_UserAccountTypeUser">
+          <End Role="UserType" Type="OmnipresenceModel.UserType" Multiplicity="0..1" />
+          <End Role="User" Type="OmnipresenceModel.User" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UserAccounts">
-              <PropertyRef Name="UserAccountId" />
+            <Principal Role="UserType">
+              <PropertyRef Name="UserTypeId" />
             </Principal>
-            <Dependent Role="LogEventTypes">
-              <PropertyRef Name="CreatedByUserAccountId" />
+            <Dependent Role="User">
+              <PropertyRef Name="UserTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserAccountType_UserAccount">
-          <End Role="UserAccountTypes" Type="OmnipresenceModel.UserAccountType" Multiplicity="1" />
-          <End Role="UserAccounts" Type="OmnipresenceModel.UserAccount" Multiplicity="*" />
+        <Association Name="FK_UserUserProfile">
+          <End Role="User" Type="OmnipresenceModel.User" Multiplicity="1" />
+          <End Role="UserProfile" Type="OmnipresenceModel.UserProfile" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="UserAccountTypes">
-              <PropertyRef Name="UserAccountTypeId" />
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
             </Principal>
-            <Dependent Role="UserAccounts">
-              <PropertyRef Name="UserAccountTypeId" />
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="UserProfileId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -698,103 +695,162 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="OmnipresenceModelStoreContainer" CdmEntityContainer="OmnipresenceEntities">
-          <EntitySetMapping Name="Countries"><EntityTypeMapping TypeName="OmnipresenceModel.Country"><MappingFragment StoreEntitySet="Countries">
-            <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-            <ScalarProperty Name="CountryName" ColumnName="CountryName" />
-            <ScalarProperty Name="CountryFlag" ColumnName="CountryFlag" />
-            <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="EventCategories"><EntityTypeMapping TypeName="OmnipresenceModel.EventCategory"><MappingFragment StoreEntitySet="EventCategories">
-            <ScalarProperty Name="EventCategoryId" ColumnName="EventCategoryId" />
-            <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-            <ScalarProperty Name="Icon" ColumnName="Icon" />
-            <ScalarProperty Name="Description" ColumnName="Description" />
-            <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="EventComments"><EntityTypeMapping TypeName="OmnipresenceModel.EventComment"><MappingFragment StoreEntitySet="EventComments">
-            <ScalarProperty Name="EventCommentId" ColumnName="EventCommentId" />
-            <ScalarProperty Name="Comment" ColumnName="Comment" />
-            <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-            <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-            <ScalarProperty Name="EventId" ColumnName="EventId" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Events"><EntityTypeMapping TypeName="OmnipresenceModel.Event"><MappingFragment StoreEntitySet="Events">
-            <ScalarProperty Name="EventId" ColumnName="EventId" />
-            <ScalarProperty Name="Name" ColumnName="Name" />
-            <ScalarProperty Name="Description" ColumnName="Description" />
-            <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-            <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-            <ScalarProperty Name="Reputation" ColumnName="Reputation" />
-            <ScalarProperty Name="Duration" ColumnName="Duration" />
-            <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
-            <ScalarProperty Name="DeletionTime" ColumnName="DeletionTime" />
-            <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-            <ScalarProperty Name="EventCategoryId" ColumnName="EventCategoryId" />
-            <ScalarProperty Name="VisibilityTypeId" ColumnName="VisibilityTypeId" />
-            <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Locations"><EntityTypeMapping TypeName="OmnipresenceModel.Location"><MappingFragment StoreEntitySet="Locations">
-            <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-            <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-            <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-            <ScalarProperty Name="Name" ColumnName="Name" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="LogEvents"><EntityTypeMapping TypeName="OmnipresenceModel.LogEvent"><MappingFragment StoreEntitySet="LogEvents">
-            <ScalarProperty Name="LogEventId" ColumnName="LogEventId" />
-            <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-            <ScalarProperty Name="LogMessage" ColumnName="LogMessage" />
-            <ScalarProperty Name="LogEventTypeId" ColumnName="LogEventTypeId" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="LogEventTypes"><EntityTypeMapping TypeName="OmnipresenceModel.LogEventType"><MappingFragment StoreEntitySet="LogEventTypes">
-            <ScalarProperty Name="LogEventTypeId" ColumnName="LogEventTypeId" />
-            <ScalarProperty Name="LogEventTypeText" ColumnName="LogEventTypeText" />
-            <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="MediaElements"><EntityTypeMapping TypeName="OmnipresenceModel.MediaElement"><MappingFragment StoreEntitySet="MediaElements">
-            <ScalarProperty Name="MediaElementId" ColumnName="MediaElementId" />
-            <ScalarProperty Name="MediaUrl" ColumnName="MediaUrl" />
-            <ScalarProperty Name="Title" ColumnName="Title" />
-            <ScalarProperty Name="Type" ColumnName="Type" />
-            <ScalarProperty Name="Size" ColumnName="Size" />
-            <ScalarProperty Name="EventId" ColumnName="EventId" />
-            <ScalarProperty Name="UserAccountId" ColumnName="UserAccountId" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="UserAccounts"><EntityTypeMapping TypeName="OmnipresenceModel.UserAccount"><MappingFragment StoreEntitySet="UserAccounts">
-            <ScalarProperty Name="UserAccountId" ColumnName="UserAccountId" />
-            <ScalarProperty Name="Username" ColumnName="Username" />
-            <ScalarProperty Name="Password" ColumnName="Password" />
-            <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
-            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-            <ScalarProperty Name="LastName" ColumnName="LastName" />
-            <ScalarProperty Name="GenderId" ColumnName="GenderId" />
-            <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-            <ScalarProperty Name="AlternateEmailAddress" ColumnName="AlternateEmailAddress" />
-            <ScalarProperty Name="Reputation" ColumnName="Reputation" />
-            <ScalarProperty Name="AvatarImage" ColumnName="AvatarImage" />
-            <ScalarProperty Name="Description" ColumnName="Description" />
-            <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-            <ScalarProperty Name="Timezone" ColumnName="Timezone" />
-            <ScalarProperty Name="UserAccountTypeId" ColumnName="UserAccountTypeId" />
-            <ScalarProperty Name="aspnet_UserId" ColumnName="aspnet_UserId" />
-            <ScalarProperty Name="Gender" ColumnName="Gender" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="UserAccountTypes"><EntityTypeMapping TypeName="OmnipresenceModel.UserAccountType"><MappingFragment StoreEntitySet="UserAccountTypes">
-            <ScalarProperty Name="UserAccountTypeId" ColumnName="UserAccountTypeId" />
-            <ScalarProperty Name="UserTypeText" ColumnName="UserTypeText" />
-            <ScalarProperty Name="UserTypeDescription" ColumnName="UserTypeDescription" />
-            <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="VisibilityTypes"><EntityTypeMapping TypeName="OmnipresenceModel.VisibilityType"><MappingFragment StoreEntitySet="VisibilityTypes">
-            <ScalarProperty Name="VisibilityTypeId" ColumnName="VisibilityTypeId" />
-            <ScalarProperty Name="VisibilityText" ColumnName="VisibilityText" />
-            <ScalarProperty Name="VisibilityDescription" ColumnName="VisibilityDescription" />
-            <ScalarProperty Name="CreatedByUserAccountId" ColumnName="CreatedByUserAccountId" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OmnipresenceModelStoreContainer" CdmEntityContainer="OmnipresenceEntities">
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.Country)">
+        <MappingFragment StoreEntitySet="Countries">
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="CountryFlag" ColumnName="CountryFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.Event)">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Reputation" ColumnName="Reputation" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+          <ScalarProperty Name="DeletionTime" ColumnName="DeletionTime" />
+          <ScalarProperty Name="EventCategoryId" ColumnName="EventCategoryId" />
+          <ScalarProperty Name="VisibilityTypeId" ColumnName="VisibilityTypeId" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.EventCategory)">
+        <MappingFragment StoreEntitySet="EventCategories">
+          <ScalarProperty Name="EventCategoryId" ColumnName="EventCategoryId" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventComments">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.EventComment)">
+        <MappingFragment StoreEntitySet="EventComments">
+          <ScalarProperty Name="EventCommentId" ColumnName="EventCommentId" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.Location)">
+        <MappingFragment StoreEntitySet="Locations">
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogEvents">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.LogEvent)">
+        <MappingFragment StoreEntitySet="LogEvents">
+          <ScalarProperty Name="LogEventId" ColumnName="LogEventId" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="LogMessage" ColumnName="LogMessage" />
+          <ScalarProperty Name="LogEventTypeId" ColumnName="LogEventTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogEventTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.LogEventType)">
+        <MappingFragment StoreEntitySet="LogEventTypes">
+          <ScalarProperty Name="LogEventTypeId" ColumnName="LogEventTypeId" />
+          <ScalarProperty Name="LogEventTypeText" ColumnName="LogEventTypeText" />
+          <ScalarProperty Name="LogEventDescription" ColumnName="LogEventDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MediaElements">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.MediaElement)">
+        <MappingFragment StoreEntitySet="MediaElements">
+          <ScalarProperty Name="MediaElementId" ColumnName="MediaElementId" />
+          <ScalarProperty Name="MediaUrl" ColumnName="MediaUrl" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="LastLoginIp" ColumnName="LastLoginIp" />
+          <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
+          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+          <ScalarProperty Name="LastLockedOutDate" ColumnName="LastLockedOutDate" />
+          <ScalarProperty Name="LastLockedOutReason" ColumnName="LastLockedOutReason" />
+          <ScalarProperty Name="NewPasswordKey" ColumnName="NewPasswordKey" />
+          <ScalarProperty Name="NewPasswordRequested" ColumnName="NewPasswordRequested" />
+          <ScalarProperty Name="NewEmail" ColumnName="NewEmail" />
+          <ScalarProperty Name="NewEmailKey" ColumnName="NewEmailKey" />
+          <ScalarProperty Name="NewEmailRequested" ColumnName="NewEmailRequested" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProfiles">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.UserProfile)">
+        <MappingFragment StoreEntitySet="UserProfiles">
+          <ScalarProperty Name="UserProfileId" ColumnName="UserProfileId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+          <ScalarProperty Name="AlternateEmailAddress" ColumnName="AlternateEmailAddress" />
+          <ScalarProperty Name="Reputation" ColumnName="Reputation" />
+          <ScalarProperty Name="AvatarImage" ColumnName="AvatarImage" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="Timezone" ColumnName="Timezone" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.UserType)">
+        <MappingFragment StoreEntitySet="UserTypes">
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="UserTypeText" ColumnName="UserTypeText" />
+          <ScalarProperty Name="UserTypeDescription" ColumnName="UserTypeDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VisibilityTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.VisibilityType)">
+        <MappingFragment StoreEntitySet="VisibilityTypes">
+          <ScalarProperty Name="VisibilityTypeId" ColumnName="VisibilityTypeId" />
+          <ScalarProperty Name="VisibilityText" ColumnName="VisibilityText" />
+          <ScalarProperty Name="VisibilityDescription" ColumnName="VisibilityDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
@@ -813,87 +869,89 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Core">
-        <EntityTypeShape EntityType="OmnipresenceModel.Country" Width="1.5" PointX="0.75" PointY="5.125" Height="1.9802864583333335" IsExpanded="true" />
-        <EntityTypeShape EntityType="OmnipresenceModel.EventCategory" Width="1.5" PointX="5.25" PointY="3.5" Height="2.3648893229166656" IsExpanded="true" />
-        <EntityTypeShape EntityType="OmnipresenceModel.EventComment" Width="1.5" PointX="9.75" PointY="1.625" Height="2.3648893229166656" IsExpanded="true" />
-        <EntityTypeShape EntityType="OmnipresenceModel.Event" Width="1.5" PointX="7.5" PointY="0.75" Height="4.6725065104166656" IsExpanded="true" />
-        <EntityTypeShape EntityType="OmnipresenceModel.Location" Width="1.5" PointX="5.25" PointY="9.875" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="OmnipresenceModel.LogEvent" Width="1.5" PointX="7.5" PointY="6.625" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="OmnipresenceModel.LogEventType" Width="1.5" PointX="5.25" PointY="6.625" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="OmnipresenceModel.MediaElement" Width="1.5" PointX="9.75" PointY="4.875" Height="2.5571907552083317" IsExpanded="true" />
-        <EntityTypeShape EntityType="OmnipresenceModel.UserAccount" Width="1.5" PointX="3" PointY="3.375" Height="5.4417122395833353" IsExpanded="true" />
-        <EntityTypeShape EntityType="OmnipresenceModel.UserAccountType" Width="1.5" PointX="0.75" PointY="2.125" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="OmnipresenceModel.VisibilityType" Width="1.5" PointX="5.25" PointY="12.5" Height="1.9802864583333353" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.Country" Width="1.5" PointX="6" PointY="1.5" Height="1.7879850260416672" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.Event" Width="1.5" PointX="5.25" PointY="4" Height="4.6725065104166665" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.EventCategory" Width="1.5" PointX="3" PointY="0.75" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.EventComment" Width="1.5" PointX="10.5" PointY="5.25" Height="2.3648893229166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.Location" Width="1.5" PointX="3" PointY="10.5" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.LogEvent" Width="1.5" PointX="11" PointY="1" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.LogEventType" Width="1.5" PointX="8.75" PointY="1.125" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.MediaElement" Width="1.5" PointX="7.5" PointY="9.25" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.User" Width="1.5" PointX="3" PointY="3.5" Height="5.6340136718750031" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.UserProfile" Width="1.5" PointX="8.25" PointY="4.5" Height="3.7109993489583353" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.UserType" Width="1.5" PointX="0.75" PointY="5.5" Height="1.787985026041671" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.VisibilityType" Width="1.5" PointX="3" PointY="13.25" Height="1.7879850260416745" IsExpanded="true" />
         <AssociationConnector Association="OmnipresenceModel.FK_Country_UserAccount" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="6.1151432291666667" />
-          <ConnectorPoint PointX="3" PointY="6.1151432291666667" />
-        </AssociationConnector>
-        <AssociationConnector Association="OmnipresenceModel.FK_EventCategory_Event" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="4.4612532552083328" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="4.4612532552083319" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="4.4612532552083328" />
-          <ConnectorPoint PointX="7.229166666666667" PointY="4.4612532552083319" />
-          <ConnectorPoint PointX="7.395833333333333" PointY="4.4612532552083328" />
-          <ConnectorPoint PointX="7.5" PointY="4.4612532552083328" />
-        </AssociationConnector>
-        <AssociationConnector Association="OmnipresenceModel.FK_UserAccount_EventCategory" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="4.6824446614583328" />
-          <ConnectorPoint PointX="5.25" PointY="4.6824446614583328" />
+          <ConnectorPoint PointX="7.5" PointY="3.1317350260416674" />
+          <ConnectorPoint PointX="8.46875" PointY="3.1317350260416674" />
+          <ConnectorPoint PointX="8.46875" PointY="4.5" />
         </AssociationConnector>
         <AssociationConnector Association="OmnipresenceModel.FK_Event_EventComment" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="2.8074446614583328" />
-          <ConnectorPoint PointX="9.2916666666666661" PointY="2.8074446614583324" />
-          <ConnectorPoint PointX="9.4583333333333339" PointY="2.8074446614583328" />
-          <ConnectorPoint PointX="9.75" PointY="2.8074446614583328" />
-        </AssociationConnector>
-        <AssociationConnector Association="OmnipresenceModel.FK_UserAccount_EventComment" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.75" PointY="3.375" />
-          <ConnectorPoint PointX="3.75" PointY="0.5" />
-          <ConnectorPoint PointX="9.375" PointY="0.5" />
-          <ConnectorPoint PointX="9.375" PointY="3.4299189921875" />
-          <ConnectorPoint PointX="9.75" PointY="3.4299189921875" />
+          <ConnectorPoint PointX="6.75" PointY="8.4730029296875014" />
+          <ConnectorPoint PointX="7.760416666666667" PointY="8.4730029296875014" />
+          <ConnectorPoint PointX="7.927083333333333" PointY="8.4730029296875014" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="8.4730029296875014" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="8.4730029296875014" />
+          <ConnectorPoint PointX="10.760414166666665" PointY="8.4730029296875014" />
+          <ConnectorPoint PointX="10.927080833333333" PointY="8.4730029296875014" />
+          <ConnectorPoint PointX="11.25" PointY="8.4730029296875014" />
+          <ConnectorPoint PointX="11.25" PointY="7.6148893229166656" />
         </AssociationConnector>
         <AssociationConnector Association="OmnipresenceModel.FK_Event_Location" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="9.8761528461538468" />
-          <ConnectorPoint PointX="7.125" PointY="9.5011528461538468" />
-          <ConnectorPoint PointX="7.125" PointY="2.5743746276041657" />
-          <ConnectorPoint PointX="7.229166666666667" PointY="2.5743746276041652" />
-          <ConnectorPoint PointX="7.395833333333333" PointY="2.5743746276041657" />
-          <ConnectorPoint PointX="7.5" PointY="2.5743746276041657" />
+          <ConnectorPoint PointX="4.5" PointY="11.490143229166666" />
+          <ConnectorPoint PointX="5.5104141666666671" PointY="11.490143229166666" />
+          <ConnectorPoint PointX="5.6770808333333331" PointY="11.490143229166666" />
+          <ConnectorPoint PointX="6" PointY="11.490143229166666" />
+          <ConnectorPoint PointX="6" PointY="8.6725065104166674" />
         </AssociationConnector>
         <AssociationConnector Association="OmnipresenceModel.FK_Event_MediaElement" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="5.1487532552083328" />
-          <ConnectorPoint PointX="9.75" PointY="5.1487532552083328" />
+          <ConnectorPoint PointX="6.75" PointY="4.21875" />
+          <ConnectorPoint PointX="7.84375" PointY="4.21875" />
+          <ConnectorPoint PointX="7.84375" PointY="9.25" />
         </AssociationConnector>
-        <AssociationConnector Association="OmnipresenceModel.FK_UserAccount_Event" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="3.40625" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="3.4062499999999996" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="3.40625" />
-          <ConnectorPoint PointX="7.229166666666667" PointY="3.4062499999999996" />
-          <ConnectorPoint PointX="7.395833333333333" PointY="3.40625" />
-          <ConnectorPoint PointX="7.5" PointY="3.40625" />
+        <AssociationConnector Association="OmnipresenceModel.FK_EventCategory_Event" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="1.09375" />
+          <ConnectorPoint PointX="5.59375" PointY="1.09375" />
+          <ConnectorPoint PointX="5.59375" PointY="4" />
+        </AssociationConnector>
+        <AssociationConnector Association="OmnipresenceModel.FK_UserEvent" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="6.3362532552083337" />
+          <ConnectorPoint PointX="5.25" PointY="6.3362532552083337" />
         </AssociationConnector>
         <AssociationConnector Association="OmnipresenceModel.FK_VisibilityType_Event" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="12.563460538461539" />
-          <ConnectorPoint PointX="7.3125" PointY="12.000960538461541" />
-          <ConnectorPoint PointX="7.3125" PointY="1.6309353138020821" />
-          <ConnectorPoint PointX="7.5" PointY="1.6309353138020821" />
+          <ConnectorPoint PointX="4.5" PointY="14.143992513020837" />
+          <ConnectorPoint PointX="5.5937475" PointY="14.143992513020837" />
+          <ConnectorPoint PointX="5.5937475" PointY="8.6725065104166674" />
+        </AssociationConnector>
+        <AssociationConnector Association="OmnipresenceModel.FK_EventComment_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="8.9345100911458353" />
+          <ConnectorPoint PointX="5.5104141666666671" PointY="8.9345100911458353" />
+          <ConnectorPoint PointX="5.6770808333333331" PointY="8.9345100911458353" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="8.9345100911458353" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="8.9345100911458353" />
+          <ConnectorPoint PointX="7.760416666666667" PointY="8.9345100911458353" />
+          <ConnectorPoint PointX="7.927083333333333" PointY="8.9345100911458353" />
+          <ConnectorPoint PointX="10.8437475" PointY="8.9345100911458353" />
+          <ConnectorPoint PointX="10.8437475" PointY="7.6148893229166656" />
         </AssociationConnector>
         <AssociationConnector Association="OmnipresenceModel.FK_LogEventType_LogEvent" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="7.6151432291666659" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="7.615143229166665" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="7.6151432291666659" />
-          <ConnectorPoint PointX="7.229166666666667" PointY="7.615143229166665" />
-          <ConnectorPoint PointX="7.395833333333333" PointY="7.6151432291666659" />
-          <ConnectorPoint PointX="7.5" PointY="7.6151432291666659" />
+          <ConnectorPoint PointX="10.25" PointY="2.0189925130208337" />
+          <ConnectorPoint PointX="11" PointY="2.0189925130208337" />
         </AssociationConnector>
-        <AssociationConnector Association="OmnipresenceModel.FK_UserAccount_LogEventType" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="7.6151432291666659" />
-          <ConnectorPoint PointX="5.25" PointY="7.6151432291666659" />
+        <AssociationConnector Association="OmnipresenceModel.FK_UserAccountTypeUser" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="6.3939925130208355" />
+          <ConnectorPoint PointX="3" PointY="6.3939925130208355" />
         </AssociationConnector>
-        <AssociationConnector Association="OmnipresenceModel.FK_UserAccountType_UserAccount" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="3.7401432291666659" />
-          <ConnectorPoint PointX="3" PointY="3.7401432291666659" />
+        <AssociationConnector Association="OmnipresenceModel.FK_UserUserProfile" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="8.8035058007812577" />
+          <ConnectorPoint PointX="5.5104141666666671" PointY="8.8035058007812577" />
+          <ConnectorPoint PointX="5.6770808333333331" PointY="8.8035058007812577" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="8.8035058007812577" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="8.8035058007812577" />
+          <ConnectorPoint PointX="7.760416666666667" PointY="8.8035058007812577" />
+          <ConnectorPoint PointX="7.927083333333333" PointY="8.8035058007812577" />
+          <ConnectorPoint PointX="9" PointY="8.8035058007812577" />
+          <ConnectorPoint PointX="9" PointY="8.2109993489583353" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

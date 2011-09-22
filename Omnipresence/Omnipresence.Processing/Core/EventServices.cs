@@ -10,7 +10,7 @@ namespace Omnipresence.Processing
     public class EventServices : IDisposable
     {
         public void CreateEvent(string name, string desc, DateTime start, DateTime end, Int32 reputation, Int32 duration, 
-                                EventCategory category, VisibilityType visibility, UserAccount creator)
+                                EventCategory category, VisibilityType visibility, User creator)
         {
             Event newEvent = new Event();
             newEvent.Name = name;
@@ -21,7 +21,7 @@ namespace Omnipresence.Processing
             newEvent.Duration = duration;
             newEvent.EventCategory = category;
             newEvent.VisibilityType = visibility;
-            newEvent.UserAccount = creator;
+            //newEvent. = creator;
             newEvent.CreationTime = System.DateTime.Now;
 
             using (OmnipresenceEntities db = new OmnipresenceEntities())
