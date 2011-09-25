@@ -16,13 +16,17 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
 <div id="map_container">
     <div id="event_info" class="">
+    </div>
+    <div id="map_canvas">
+    </div>
+</div>
+</asp:Content>
+
+<asp:Content ID="FooterContent" ContentPlaceHolderID="Footer" runat="server">
+</asp:Content>
+
     <div id="error">
     <span class="header">An error has occured.</span>
-    <span class="header-2">Click anywhere to continue.</span>
-    <span class="text">I am filler text.</span>
-    </div>
-    <div id="default">
-    <span class="header">This is the map.</span>
     <span class="header-2">Click anywhere to continue.</span>
     <span class="text">I am filler text.</span>
     </div>
@@ -66,11 +70,3 @@
         <input value ="Comment!" type="button" onclick="addComment(' + markerNum + ', this.form)"/>
         </form></div>
     </div>
-    </div>
-    <div id="map_canvas">
-    </div>
-</div>
-</asp:Content>
-
-<asp:Content ID="FooterContent" ContentPlaceHolderID="Footer" runat="server">
-</asp:Content>
