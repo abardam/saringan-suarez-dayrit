@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Omnipresence.DataAccess.Core;
 
 namespace Omnipresence.Processing
 {
     public class EventQueryModel
     {
-        public string Type { get; set; }
-        public IEnumerable<string> Tags { get; set; }
-        public string SearchString { get; set; }
-        public string City { get; set; }
-        public int User { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public VisibilityType VisibilityType { get; set; }
+        public Location Location { get; set; }
     }
 }

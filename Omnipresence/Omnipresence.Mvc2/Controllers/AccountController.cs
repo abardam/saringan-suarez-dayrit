@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Security.Principal;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
@@ -18,20 +13,16 @@ namespace Omnipresence.Mvc2.Controllers
     {
         private AccountServices accountServices;
         public IFormsAuthenticationService FormsService { get; set; }
-        public IMembershipService MembershipService { get; set; }
+        //public IMembershipService MembershipService { get; set; }
 
         protected override void Initialize(RequestContext requestContext)
         {
             if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
-            if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
+            //if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
             accountServices = new AccountServices();
 
             base.Initialize(requestContext);
         }
-
-        // **************************************
-        // URL: /Account/LogOn
-        // **************************************
 
         public ActionResult LogOn()
         {
@@ -43,9 +34,10 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (MembershipService.ValidateUser(model.UserName, model.Password))
+                if (accountServices.ValidateUser(model.UserName, model.Password))
                 {
                     FormsService.SignIn(model.UserName, model.RememberMe);
+
                     if (!String.IsNullOrEmpty(returnUrl))
                     {
                         return Redirect(returnUrl);
@@ -61,13 +53,8 @@ namespace Omnipresence.Mvc2.Controllers
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-        // **************************************
-        // URL: /Account/LogOff
-        // **************************************
 
         public ActionResult LogOff()
         {
@@ -76,13 +63,9 @@ namespace Omnipresence.Mvc2.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // **************************************
-        // URL: /Account/Register
-        // **************************************
-
         public ActionResult Register()
         {
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+            ViewData["PasswordLength"] = 6;
             return View();
         }
 
@@ -91,33 +74,28 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (ModelState.IsValid)
             {
-                 //Attempt to register the user
-                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
-                
-                if (createStatus == MembershipCreateStatus.Success)
+                User user = accountServices.CreateUser(model.UserName.Trim(), model.Password.Trim(), model.Email.Trim(), model.FirstName.Trim(), model.LastName.Trim(), model.Birthdate);
+
+                if (user != null)
                 {
-                    FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
+                    accountServices.AddUser(user);
+                    FormsService.SignIn(user.Username, false);
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
+                    ModelState.AddModelError("", AccountValidation.ErrorCodeToString(MembershipCreateStatus.UserRejected));
                 }
             }
 
-            // If we got this far, something failed, redisplay form
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+            ViewData["PasswordLength"] = 6;
             return View(model);
         }
-
-        // **************************************
-        // URL: /Account/ChangePassword
-        // **************************************
 
         [Authorize]
         public ActionResult ChangePassword()
         {
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+            ViewData["PasswordLength"] = 6;
             return View();
         }
 
@@ -127,7 +105,7 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (MembershipService.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword))
+                if (accountServices.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword))
                 {
                     return RedirectToAction("ChangePasswordSuccess");
                 }
@@ -137,14 +115,9 @@ namespace Omnipresence.Mvc2.Controllers
                 }
             }
 
-            // If we got this far, something failed, redisplay form
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+            ViewData["PasswordLength"] = 6;
             return View(model);
         }
-
-        // **************************************
-        // URL: /Account/ChangePasswordSuccess
-        // **************************************
 
         public ActionResult ChangePasswordSuccess()
         {
