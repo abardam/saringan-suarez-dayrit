@@ -82,10 +82,9 @@
       <DependentUpon>OmniResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\Account\AccountViewModels.cs" />
-    <Compile Include="ViewModels\Account\NewAccountViewModel.cs" />
-    <Compile Include="ViewModels\Event\NewEventViewModels.cs" />
-    <Compile Include="ViewModels\Page\IndexViewModel.cs" />
+    <Compile Include="Models\Account\AccountModels.cs" />
+    <Compile Include="Models\Event\NewEventModel.cs" />
+    <Compile Include="Models\Page\IndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Content\Images\disaster.png" />
