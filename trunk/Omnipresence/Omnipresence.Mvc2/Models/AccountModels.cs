@@ -82,85 +82,86 @@ namespace Omnipresence.Mvc2.Models
     }
     #endregion
 
-    #region Services
+    //#region Services
     //// The FormsAuthentication type is sealed and contains static members, so it is difficult to
     //// unit test code that calls its members. The interface and helper class below demonstrate
     //// how to create an abstract wrapper around such a type in order to make the AccountController
     //// code unit testable.
 
-    public interface IMembershipService
-    {
-        int MinPasswordLength { get; }
+    //public interface IMembershipService
+    //{
+    //    int MinPasswordLength { get; }
 
-        bool ValidateUser(string userName, string password);
-        MembershipCreateStatus CreateUser(string userName, string password, string email);
-        bool ChangePassword(string userName, string oldPassword, string newPassword);
-    }
+    //    bool ValidateUser(string userName, string password);
+    //    MembershipCreateStatus CreateUser(string userName, string password, string email);
+    //    bool ChangePassword(string userName, string oldPassword, string newPassword);
+    //}
 
-    public class AccountMembershipService : IMembershipService
-    {
-        private readonly OmniMembershipProvider _provider;
+    //public class AccountMembershipService : IMembershipService
+    //{
+    //    private readonly OmniMembershipProvider _provider;
 
-        public AccountMembershipService()
-            : this(null)
-        {
-        }
+    //    public AccountMembershipService()
+    //        : this(null)
+    //    {
+    //    }
 
-        public AccountMembershipService(OmniMembershipProvider provider)
-        {
-            _provider = provider ?? new OmniMembershipProvider();
-        }
+    //    public AccountMembershipService(OmniMembershipProvider provider)
+    //    {
+    //        _provider = provider ?? new OmniMembershipProvider();
+    //    }
 
-        public int MinPasswordLength
-        {
-            get
-            {
-                return _provider.MinRequiredPasswordLength;
-            }
-        }
+    //    public int MinPasswordLength
+    //    {
+    //        get
+    //        {
+    //            return _provider.MinRequiredPasswordLength;
+    //        }
+    //    }
 
-        public bool ValidateUser(string userName, string password)
-        {
-            if (String.IsNullOrEmpty(userName)) throw new ArgumentException("Value cannot be null or empty.", "userName");
-            if (String.IsNullOrEmpty(password)) throw new ArgumentException("Value cannot be null or empty.", "password");
+    //    public bool ValidateUser(string userName, string password)
+    //    {
+    //        if (String.IsNullOrEmpty(userName)) throw new ArgumentException("Value cannot be null or empty.", "userName");
+    //        if (String.IsNullOrEmpty(password)) throw new ArgumentException("Value cannot be null or empty.", "password");
 
-            return _provider.ValidateUser(userName, password);
-        }
+    //        return _provider.ValidateUser(userName, password);
+    //    }
 
-        public MembershipCreateStatus CreateUser(string userName, string password, string email)
-        {
-            if (String.IsNullOrEmpty(userName)) throw new ArgumentException("Value cannot be null or empty.", "userName");
-            if (String.IsNullOrEmpty(password)) throw new ArgumentException("Value cannot be null or empty.", "password");
-            if (String.IsNullOrEmpty(email)) throw new ArgumentException("Value cannot be null or empty.", "email");
+    //    public MembershipCreateStatus CreateUser(string userName, string password, string email)
+    //    {
+    //        if (String.IsNullOrEmpty(userName)) throw new ArgumentException("Value cannot be null or empty.", "userName");
+    //        if (String.IsNullOrEmpty(password)) throw new ArgumentException("Value cannot be null or empty.", "password");
+    //        if (String.IsNullOrEmpty(email)) throw new ArgumentException("Value cannot be null or empty.", "email");
 
-            MembershipCreateStatus status;
-            _provider.CreateUser(userName, password, email, null, null, true, null, out status);
-            return status;
-        }
+    //        MembershipCreateStatus status;
+    //        _provider.CreateUser(userName, password, email, null, null, true, null, out status);
+    //        return status;
+    //    }
 
-        public bool ChangePassword(string userName, string oldPassword, string newPassword)
-        {
-            if (String.IsNullOrEmpty(userName)) throw new ArgumentException("Value cannot be null or empty.", "userName");
-            if (String.IsNullOrEmpty(oldPassword)) throw new ArgumentException("Value cannot be null or empty.", "oldPassword");
-            if (String.IsNullOrEmpty(newPassword)) throw new ArgumentException("Value cannot be null or empty.", "newPassword");
+    //    public bool ChangePassword(string userName, string oldPassword, string newPassword)
+    //    {
+    //        if (String.IsNullOrEmpty(userName)) throw new ArgumentException("Value cannot be null or empty.", "userName");
+    //        if (String.IsNullOrEmpty(oldPassword)) throw new ArgumentException("Value cannot be null or empty.", "oldPassword");
+    //        if (String.IsNullOrEmpty(newPassword)) throw new ArgumentException("Value cannot be null or empty.", "newPassword");
 
-            // The underlying ChangePassword() will throw an exception rather
-            // than return false in certain failure scenarios.
-            try
-            {
-                MembershipUser currentUser = _provider.GetUser(userName, true /* userIsOnline */);
-                return currentUser.ChangePassword(oldPassword, newPassword);
-            }
-            catch (ArgumentException)
-            {
-                return false;
-            }
-            catch (MembershipPasswordException)
-            {
-                return false;
-            }
-        }
-    }
+    //        // The underlying ChangePassword() will throw an exception rather
+    //        // than return false in certain failure scenarios.
+    //        try
+    //        {
+    //            MembershipUser currentUser = _provider.GetUser(userName, true);
+    //            return currentUser.ChangePassword(oldPassword, newPassword);
+    //        }
+    //        catch (ArgumentException)
+    //        {
+    //            return false;
+    //        }
+    //        catch (MembershipPasswordException)
+    //        {
+    //            return false;
+    //        }
+    //    }
+    //}
+    //#endregion
 
     public interface IFormsAuthenticationService
     {
@@ -182,7 +183,6 @@ namespace Omnipresence.Mvc2.Models
             FormsAuthentication.SignOut();
         }
     }
-    #endregion
 
     //#region Validation
 
@@ -190,8 +190,6 @@ namespace Omnipresence.Mvc2.Models
     {
         public static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
-            // See http://go.microsoft.com/fwlink/?LinkID=177550 for
-            // a full list of status codes.
             switch (createStatus)
             {
                 case MembershipCreateStatus.DuplicateUserName:
@@ -226,69 +224,4 @@ namespace Omnipresence.Mvc2.Models
             }
         }
     }
-
-    //[AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
-    //public sealed class PropertiesMustMatchAttribute : ValidationAttribute
-    //{
-    //    private const string _defaultErrorMessage = "'{0}' and '{1}' do not match.";
-    //    private readonly object _typeId = new object();
-
-    //    public PropertiesMustMatchAttribute(string originalProperty, string confirmProperty)
-    //        : base(_defaultErrorMessage)
-    //    {
-    //        OriginalProperty = originalProperty;
-    //        ConfirmProperty = confirmProperty;
-    //    }
-
-    //    public string ConfirmProperty { get; private set; }
-    //    public string OriginalProperty { get; private set; }
-
-    //    public override object TypeId
-    //    {
-    //        get
-    //        {
-    //            return _typeId;
-    //        }
-    //    }
-
-    //    public override string FormatErrorMessage(string name)
-    //    {
-    //        return String.Format(CultureInfo.CurrentUICulture, ErrorMessageString,
-    //            OriginalProperty, ConfirmProperty);
-    //    }
-
-    //    public override bool IsValid(object value)
-    //    {
-    //        PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(value);
-    //        object originalValue = properties.Find(OriginalProperty, true /* ignoreCase */).GetValue(value);
-    //        object confirmValue = properties.Find(ConfirmProperty, true /* ignoreCase */).GetValue(value);
-    //        return Object.Equals(originalValue, confirmValue);
-    //    }
-    //}
-
-    //[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    //public sealed class ValidatePasswordLengthAttribute : ValidationAttribute
-    //{
-    //    private const string _defaultErrorMessage = "'{0}' must be at least {1} characters long.";
-    //    private readonly int _minCharacters = Membership.Provider.MinRequiredPasswordLength;
-
-    //    public ValidatePasswordLengthAttribute()
-    //        : base(_defaultErrorMessage)
-    //    {
-    //    }
-
-    //    public override string FormatErrorMessage(string name)
-    //    {
-    //        return String.Format(CultureInfo.CurrentUICulture, ErrorMessageString,
-    //            name, _minCharacters);
-    //    }
-
-    //    public override bool IsValid(object value)
-    //    {
-    //        string valueAsString = value as string;
-    //        return (valueAsString != null && valueAsString.Length >= _minCharacters);
-    //    }
-    //}
-    //#endregion
-
 }
