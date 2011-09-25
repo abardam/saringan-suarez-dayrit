@@ -1,0 +1,589 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OmnipresenceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="OmnipresenceModelStoreContainer">
+          <EntitySet Name="Categories" EntityType="OmnipresenceModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Countries" EntityType="OmnipresenceModel.Store.Countries" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Events" EntityType="OmnipresenceModel.Store.Events" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Genders" EntityType="OmnipresenceModel.Store.Genders" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Locations" EntityType="OmnipresenceModel.Store.Locations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfiles" EntityType="OmnipresenceModel.Store.UserProfiles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="OmnipresenceModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VisibilityTypes" EntityType="OmnipresenceModel.Store.VisibilityTypes" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Event_Category" Association="OmnipresenceModel.Store.FK_Event_Category">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Location" Association="OmnipresenceModel.Store.FK_Event_Location">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_VisibilityType" Association="OmnipresenceModel.Store.FK_Event_VisibilityType">
+            <End Role="VisibilityTypes" EntitySet="VisibilityTypes" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_Country" Association="OmnipresenceModel.Store.FK_Location_Country">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Locations" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_User" Association="OmnipresenceModel.Store.FK_UserProfile_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfiles_Gender" Association="OmnipresenceModel.Store.FK_UserProfiles_Gender">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="Description" Type="nvarchar" MaxLength="128" />
+          <Property Name="Icon" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="Flag" Type="varbinary(max)" />
+          <Property Name="Description" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="LastModified" Type="datetime" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="VisibilityTypeId" Type="int" />
+          <Property Name="LocationId" Type="int" />
+          <Property Name="CategoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="Genders">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GenderText" Type="nvarchar" MaxLength="16" />
+          <Property Name="Description" Type="nvarchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" />
+          <Property Name="CountryId" Type="int" />
+        </EntityType>
+        <EntityType Name="UserProfiles">
+          <Key>
+            <PropertyRef Name="UserProfileId" />
+          </Key>
+          <Property Name="UserProfileId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Birthdate" Type="datetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Avatar" Type="varbinary(max)" />
+          <Property Name="Reputation" Type="int" />
+          <Property Name="Timezone" Type="int" />
+          <Property Name="GenderId" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="nvarchar" MaxLength="32" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="AlternateEmail" Type="nvarchar" MaxLength="128" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="256" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginIp" Type="nvarchar" MaxLength="64" />
+          <Property Name="IsActivated" Type="bit" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+          <Property Name="LastLockedOutDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLockedOutReason" Type="nvarchar" MaxLength="256" />
+          <Property Name="NewPasswordKey" Type="nvarchar" MaxLength="128" />
+          <Property Name="NewPasswordRequested" Type="datetime" />
+          <Property Name="NewEmail" Type="nvarchar" MaxLength="128" />
+          <Property Name="NewEmailKey" Type="nvarchar" MaxLength="128" />
+          <Property Name="NewEmailRequested" Type="datetime" />
+          <Property Name="SecurityQuestion" Type="nvarchar" MaxLength="256" />
+          <Property Name="SecurityAnswer" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="VisibilityTypes">
+          <Key>
+            <PropertyRef Name="VisibilityTypeId" />
+          </Key>
+          <Property Name="VisibilityTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="nvarchar" MaxLength="32" />
+          <Property Name="Description" Type="nvarchar" MaxLength="128" />
+          <Property Name="Icon" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Event_Category">
+          <End Role="Categories" Type="OmnipresenceModel.Store.Categories" Multiplicity="0..1" />
+          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Location">
+          <End Role="Locations" Type="OmnipresenceModel.Store.Locations" Multiplicity="0..1" />
+          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_VisibilityType">
+          <End Role="VisibilityTypes" Type="OmnipresenceModel.Store.VisibilityTypes" Multiplicity="0..1" />
+          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisibilityTypes">
+              <PropertyRef Name="VisibilityTypeId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="VisibilityTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_Country">
+          <End Role="Countries" Type="OmnipresenceModel.Store.Countries" Multiplicity="0..1" />
+          <End Role="Locations" Type="OmnipresenceModel.Store.Locations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Locations">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_User">
+          <End Role="Users" Type="OmnipresenceModel.Store.Users" Multiplicity="1" />
+          <End Role="UserProfiles" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserProfiles">
+              <PropertyRef Name="UserProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfiles_Gender">
+          <End Role="Genders" Type="OmnipresenceModel.Store.Genders" Multiplicity="0..1" />
+          <End Role="UserProfiles" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="UserProfiles">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OmnipresenceModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="OmnipresenceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="OmnipresenceModel.Category" />
+          <EntitySet Name="Countries" EntityType="OmnipresenceModel.Country" />
+          <EntitySet Name="Events" EntityType="OmnipresenceModel.Event" />
+          <EntitySet Name="Genders" EntityType="OmnipresenceModel.Gender" />
+          <EntitySet Name="Locations" EntityType="OmnipresenceModel.Location" />
+          <EntitySet Name="UserProfiles" EntityType="OmnipresenceModel.UserProfile" />
+          <EntitySet Name="Users" EntityType="OmnipresenceModel.User" />
+          <EntitySet Name="VisibilityTypes" EntityType="OmnipresenceModel.VisibilityType" />
+          <AssociationSet Name="FK_Event_Category" Association="OmnipresenceModel.FK_Event_Category">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_Country" Association="OmnipresenceModel.FK_Location_Country">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Locations" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Location" Association="OmnipresenceModel.FK_Event_Location">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_VisibilityType" Association="OmnipresenceModel.FK_Event_VisibilityType">
+            <End Role="VisibilityTypes" EntitySet="VisibilityTypes" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfiles_Gender" Association="OmnipresenceModel.FK_UserProfiles_Gender">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_User" Association="OmnipresenceModel.FK_UserProfile_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Icon" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_Event_Category" FromRole="Categories" ToRole="Events" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="Flag" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Locations" Relationship="OmnipresenceModel.FK_Location_Country" FromRole="Countries" ToRole="Locations" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="Created" Type="DateTime" />
+          <Property Name="LastModified" Type="DateTime" />
+          <Property Name="StartTime" Type="DateTime" />
+          <Property Name="EndTime" Type="DateTime" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="VisibilityTypeId" Type="Int32" />
+          <Property Name="LocationId" Type="Int32" />
+          <Property Name="CategoryId" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="OmnipresenceModel.FK_Event_Category" FromRole="Events" ToRole="Categories" />
+          <NavigationProperty Name="Location" Relationship="OmnipresenceModel.FK_Event_Location" FromRole="Events" ToRole="Locations" />
+          <NavigationProperty Name="VisibilityType" Relationship="OmnipresenceModel.FK_Event_VisibilityType" FromRole="Events" ToRole="VisibilityTypes" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenderText" Type="String" MaxLength="16" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="UserProfiles" Relationship="OmnipresenceModel.FK_UserProfiles_Gender" FromRole="Genders" ToRole="UserProfiles" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="CountryId" Type="Int32" />
+          <NavigationProperty Name="Country" Relationship="OmnipresenceModel.FK_Location_Country" FromRole="Locations" ToRole="Countries" />
+          <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_Event_Location" FromRole="Locations" ToRole="Events" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserProfileId" />
+          </Key>
+          <Property Name="UserProfileId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Birthdate" Type="DateTime" />
+          <Property Name="Description" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="Avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Reputation" Type="Int32" />
+          <Property Name="Timezone" Type="Int32" />
+          <Property Name="GenderId" Type="Int32" />
+          <NavigationProperty Name="Gender" Relationship="OmnipresenceModel.FK_UserProfiles_Gender" FromRole="UserProfiles" ToRole="Genders" />
+          <NavigationProperty Name="User" Relationship="OmnipresenceModel.FK_UserProfile_User" FromRole="UserProfiles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="AlternateEmail" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" />
+          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" />
+          <Property Name="LastLoginIp" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="IsActivated" Type="Boolean" Nullable="false" />
+          <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
+          <Property Name="LastLockedOutDate" Type="DateTime" Nullable="false" />
+          <Property Name="LastLockedOutReason" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="NewPasswordKey" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="NewPasswordRequested" Type="DateTime" />
+          <Property Name="NewEmail" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="NewEmailKey" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="NewEmailRequested" Type="DateTime" />
+          <Property Name="SecurityQuestion" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="SecurityAnswer" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="UserProfile" Relationship="OmnipresenceModel.FK_UserProfile_User" FromRole="Users" ToRole="UserProfiles" />
+        </EntityType>
+        <EntityType Name="VisibilityType">
+          <Key>
+            <PropertyRef Name="VisibilityTypeId" />
+          </Key>
+          <Property Name="VisibilityTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Icon" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Events" Relationship="OmnipresenceModel.FK_Event_VisibilityType" FromRole="VisibilityTypes" ToRole="Events" />
+        </EntityType>
+        <Association Name="FK_Event_Category">
+          <End Role="Categories" Type="OmnipresenceModel.Category" Multiplicity="0..1" />
+          <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_Country">
+          <End Role="Countries" Type="OmnipresenceModel.Country" Multiplicity="0..1" />
+          <End Role="Locations" Type="OmnipresenceModel.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Locations">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Location">
+          <End Role="Locations" Type="OmnipresenceModel.Location" Multiplicity="0..1" />
+          <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_VisibilityType">
+          <End Role="VisibilityTypes" Type="OmnipresenceModel.VisibilityType" Multiplicity="0..1" />
+          <End Role="Events" Type="OmnipresenceModel.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisibilityTypes">
+              <PropertyRef Name="VisibilityTypeId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="VisibilityTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfiles_Gender">
+          <End Role="Genders" Type="OmnipresenceModel.Gender" Multiplicity="0..1" />
+          <End Role="UserProfiles" Type="OmnipresenceModel.UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="UserProfiles">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_User">
+          <End Role="Users" Type="OmnipresenceModel.User" Multiplicity="1" />
+          <End Role="UserProfiles" Type="OmnipresenceModel.UserProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserProfiles">
+              <PropertyRef Name="UserProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OmnipresenceModelStoreContainer" CdmEntityContainer="OmnipresenceEntities">
+          <EntitySetMapping Name="Categories"><EntityTypeMapping TypeName="OmnipresenceModel.Category"><MappingFragment StoreEntitySet="Categories">
+            <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="Icon" ColumnName="Icon" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Countries"><EntityTypeMapping TypeName="OmnipresenceModel.Country"><MappingFragment StoreEntitySet="Countries">
+            <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Flag" ColumnName="Flag" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Events"><EntityTypeMapping TypeName="OmnipresenceModel.Event"><MappingFragment StoreEntitySet="Events">
+            <ScalarProperty Name="EventId" ColumnName="EventId" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="Rating" ColumnName="Rating" />
+            <ScalarProperty Name="Created" ColumnName="Created" />
+            <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+            <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+            <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+            <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+            <ScalarProperty Name="VisibilityTypeId" ColumnName="VisibilityTypeId" />
+            <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+            <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Genders"><EntityTypeMapping TypeName="OmnipresenceModel.Gender"><MappingFragment StoreEntitySet="Genders">
+            <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+            <ScalarProperty Name="GenderText" ColumnName="GenderText" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Locations"><EntityTypeMapping TypeName="OmnipresenceModel.Location"><MappingFragment StoreEntitySet="Locations">
+            <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+            <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+            <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles"><EntityTypeMapping TypeName="OmnipresenceModel.UserProfile"><MappingFragment StoreEntitySet="UserProfiles">
+            <ScalarProperty Name="UserProfileId" ColumnName="UserProfileId" />
+            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="LastName" />
+            <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+            <ScalarProperty Name="Reputation" ColumnName="Reputation" />
+            <ScalarProperty Name="Timezone" ColumnName="Timezone" />
+            <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="OmnipresenceModel.User"><MappingFragment StoreEntitySet="Users">
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="Username" ColumnName="Username" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+            <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="AlternateEmail" ColumnName="AlternateEmail" />
+            <ScalarProperty Name="Comments" ColumnName="Comments" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+            <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+            <ScalarProperty Name="LastLoginIp" ColumnName="LastLoginIp" />
+            <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
+            <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+            <ScalarProperty Name="LastLockedOutDate" ColumnName="LastLockedOutDate" />
+            <ScalarProperty Name="LastLockedOutReason" ColumnName="LastLockedOutReason" />
+            <ScalarProperty Name="NewPasswordKey" ColumnName="NewPasswordKey" />
+            <ScalarProperty Name="NewPasswordRequested" ColumnName="NewPasswordRequested" />
+            <ScalarProperty Name="NewEmail" ColumnName="NewEmail" />
+            <ScalarProperty Name="NewEmailKey" ColumnName="NewEmailKey" />
+            <ScalarProperty Name="NewEmailRequested" ColumnName="NewEmailRequested" />
+            <ScalarProperty Name="SecurityQuestion" ColumnName="SecurityQuestion" />
+            <ScalarProperty Name="SecurityAnswer" ColumnName="SecurityAnswer" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="VisibilityTypes"><EntityTypeMapping TypeName="OmnipresenceModel.VisibilityType"><MappingFragment StoreEntitySet="VisibilityTypes">
+            <ScalarProperty Name="VisibilityTypeId" ColumnName="VisibilityTypeId" />
+            <ScalarProperty Name="Type" ColumnName="Type" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="Icon" ColumnName="Icon" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Core">
+        <EntityTypeShape EntityType="OmnipresenceModel.Category" Width="1.5" PointX="3" PointY="5.75" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.Country" Width="1.5" PointX="0.75" PointY="2" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.Event" Width="1.5" PointX="5.25" PointY="1" Height="3.9033007812499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.Gender" Width="1.5" PointX="5.75" PointY="6.625" Height="1.7879850260416657" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.Location" Width="1.5" PointX="3" PointY="1.75" Height="2.3648893229166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.UserProfile" Width="1.5" PointX="8" PointY="6" Height="3.1340950520833335" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.User" Width="1.5" PointX="5.75" PointY="9.875" Height="5.4417122395833317" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.VisibilityType" Width="1.5" PointX="3" PointY="8.375" Height="1.9802864583333317" IsExpanded="true" />
+        <AssociationConnector Association="OmnipresenceModel.FK_Event_Category" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="6.15625" />
+          <ConnectorPoint PointX="5.2447891666666671" PointY="6.1562499999999991" />
+          <ConnectorPoint PointX="5.4114558333333331" PointY="6.15625" />
+          <ConnectorPoint PointX="5.46875" PointY="6.15625" />
+          <ConnectorPoint PointX="5.46875" PointY="4.90330078125" />
+        </AssociationConnector>
+        <AssociationConnector Association="OmnipresenceModel.FK_Location_Country" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.9901432291666667" />
+          <ConnectorPoint PointX="3" PointY="2.9901432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="OmnipresenceModel.FK_Event_Location" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="2.9324446614583328" />
+          <ConnectorPoint PointX="5.25" PointY="2.9324446614583328" />
+        </AssociationConnector>
+        <AssociationConnector Association="OmnipresenceModel.FK_Event_VisibilityType" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="9.1439925130208337" />
+          <ConnectorPoint PointX="5.3281225" PointY="9.1439925130208337" />
+          <ConnectorPoint PointX="5.3281225" PointY="4.90330078125" />
+        </AssociationConnector>
+        <AssociationConnector Association="OmnipresenceModel.FK_UserProfiles_Gender" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.25" PointY="7.5189925130208328" />
+          <ConnectorPoint PointX="8" PointY="7.5189925130208328" />
+        </AssociationConnector>
+        <AssociationConnector Association="OmnipresenceModel.FK_UserProfile_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.25" PointY="12.595856119791666" />
+          <ConnectorPoint PointX="8.75" PointY="12.595856119791666" />
+          <ConnectorPoint PointX="8.75" PointY="9.1340950520833335" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
