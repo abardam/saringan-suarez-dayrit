@@ -85,6 +85,7 @@
     <Compile Include="ViewModels\Account\AccountViewModels.cs" />
     <Compile Include="ViewModels\Account\NewAccountViewModel.cs" />
     <Compile Include="ViewModels\Event\NewEventViewModels.cs" />
+    <Compile Include="ViewModels\Page\IndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Content\Images\disaster.png" />
@@ -107,6 +108,7 @@
     <Content Include="Views\Map\Index.aspx" />
     <Content Include="Views\Profile\Edit.aspx" />
     <Content Include="Views\Profile\Index.aspx" />
+    <Content Include="Views\Sidebar\IndexUserControl.ascx" />
     <Content Include="Views\Sidebar\LoginUserControl.ascx" />
     <Content Include="Views\Sidebar\ProfileUserControl.ascx" />
     <Content Include="Views\Sidebar\RegisterUserControl.ascx" />
