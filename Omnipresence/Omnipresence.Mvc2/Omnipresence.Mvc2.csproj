@@ -107,10 +107,10 @@
     <Content Include="Views\Map\Index.aspx" />
     <Content Include="Views\Profile\Edit.aspx" />
     <Content Include="Views\Profile\Index.aspx" />
-    <Content Include="Views\Sidebar\IndexUserControl.ascx" />
-    <Content Include="Views\Sidebar\LoginUserControl.ascx" />
-    <Content Include="Views\Sidebar\ProfileUserControl.ascx" />
-    <Content Include="Views\Sidebar\RegisterUserControl.ascx" />
+    <Content Include="Views\Home\IndexUserControl.ascx" />
+    <Content Include="Views\Home\LoginUserControl.ascx" />
+    <Content Include="Views\Home\ProfileUserControl.ascx" />
+    <Content Include="Views\Home\RegisterUserControl.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

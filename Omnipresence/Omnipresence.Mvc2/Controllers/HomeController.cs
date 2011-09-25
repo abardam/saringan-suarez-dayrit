@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Omnipresence.Processing;
+using Omnipresence.Mvc2.Models;
 
 namespace Omnipresence.Mvc2.Controllers
 {
@@ -26,6 +27,13 @@ namespace Omnipresence.Mvc2.Controllers
         public ActionResult About(string comm, int markerNum)
         {
             return null;
+        }
+
+        public ActionResult Default()
+        {
+            // TODO: When indexviewmodel has content, do this.
+            IndexViewModel vm = new IndexViewModel();
+            return PartialView("IndexUserControl",vm);
         }
 
         //[HttpPost]
