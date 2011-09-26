@@ -707,7 +707,7 @@ namespace Omnipresence.DataAccess.Core
                 OnRatingChanged();
             }
         }
-        private Nullable<global::System.Int32> _Rating;
+        private Nullable<global::System.Int32> _Rating = 0;
         partial void OnRatingChanging(Nullable<global::System.Int32> value);
         partial void OnRatingChanged();
     

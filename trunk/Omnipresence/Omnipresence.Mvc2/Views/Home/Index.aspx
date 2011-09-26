@@ -21,11 +21,12 @@
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
     <div id="map_container">
+        <div id="sidebar-big">
         <a class="sidebar-link" href="<%= Url.Action("Index","Sidebar",new{id = 1}) %>" onclick="">Home</a>
         <a class="sidebar-link" href="<%= Url.Action("Profile","Sidebar",new{id = 1}) %>" onclick="">Profile</a>
         <a class="sidebar-link" href="<%= Url.Action("Login","Sidebar",new{id=1}) %>" onclick="">Login</a>
         <a class="sidebar-link" href="<%= Url.Action("Register","Sidebar",new{id=1}) %>" onclick="">Register</a>
-        <div id="sidebar-big">
+        <br />
             <a class="sidebar-link" href="<%= Url.Action("NewEvent","Sidebar") %>" onclick=""><img class="button" src="../../Content/Images/newevent.png" /></a>
             <a class="sidebar-link" href="<%= Url.Action("NewEvent","Sidebar") %>" onclick=""><img class="button" src="../../Content/Images/findevent.png" /></a>
             <a class="sidebar-link" href="<%= Url.Action("Profile","Sidebar",new{id = 1}) %>" onclick=""><img class="button" src="../../Content/Images/viewprofile.png" /></a>

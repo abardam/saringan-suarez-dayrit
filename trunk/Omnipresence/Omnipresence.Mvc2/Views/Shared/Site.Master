@@ -27,7 +27,6 @@
             </div>
             -->
             <asp:ContentPlaceHolder ID="Header" runat="server"/>
-            <% Html.RenderPartial("TabItemsUserControl"); %>
         </div>
 
         <div id="middle">

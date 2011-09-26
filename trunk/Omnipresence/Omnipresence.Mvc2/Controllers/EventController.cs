@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Omnipresence.Mvc2.Models;
+using Omnipresence.Processing;
 
 namespace Omnipresence.Mvc2.Controllers
 {

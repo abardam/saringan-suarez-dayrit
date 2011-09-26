@@ -25,6 +25,7 @@ namespace Omnipresence.Processing
             return true;
         }
 
+        // TODO: Delete this duplicate method
         public Event CreateEvent(string title, string description, DateTime startTime, DateTime endTime, int rating, string categoryString, string visibilityTypeString, double latitude, double longitude, string locationName)
         {
             Category category = GetCategory(categoryString);
@@ -35,6 +36,16 @@ namespace Omnipresence.Processing
             return CreateEvent(title, description, startTime, endTime, rating, category, visibilityType, location);
         }
 
+        public Event CreateEvent(NewEventModel temp)
+        {
+            Category category = GetCategory(temp.CategoryString);
+            VisibilityType visibilityType = GetVisibilityType(temp.VisibilityTypeString);
+
+            Location location = CreateLocation(temp.Latitude, temp.Longitude, temp.LocationName, "");
+
+            return CreateEvent(temp.Title, temp.Description, temp.StartTime, temp.EndTime, 0, category, visibilityType, location);
+        }
+        // TODO: MODIFY TO USE ANOTHER MODEL INSTEAD OF MANY PARAMETERS
         private Event CreateEvent(string title, string description, DateTime startTime, DateTime endTime, int rating, Category category, VisibilityType visibilityType, Location location)
         {
             Event newEvent = new Event();
