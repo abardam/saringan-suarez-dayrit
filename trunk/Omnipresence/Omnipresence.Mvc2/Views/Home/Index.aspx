@@ -8,10 +8,21 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <script type="text/javascript" src="../../Scripts/omnimap-scripts.js"></script>
     <script type="text/javascript">
-        function sideShow(d) { $("#sidebar").fadeOut(200, function () { $('#sidebar').html(d); $('#sidebar').fadeIn(200); }); }
+
         
-        $('.sidebar-button').live('click', function(event) {
+        function sideShowNew(d, func) { $("#sidebar").fadeOut(200, function () { $('#sidebar').html(d); $('#sidebar').fadeIn(200, func); }); }
+        function sideShow(d) { sideShowNew(d, null) }
+
+        $('.sidebar-button').live('click', function (event) {
             event.preventDefault();
+
+            $('img.selected').css('display', 'none');
+            $('img.unselected').css('display', 'inline');
+
+            jQuery('img.unselected', this).css('display', 'none');
+            jQuery('img.selected', this).css('display', 'inline');
+
+            $('.helper').css('display', 'none');
         });
         
         $('.sidebar-link').live("click", function (event) {
@@ -24,7 +35,11 @@
 
         function showNewEvent() {
             $.get('<%= Url.Action("NewEvent","Sidebar") %>', function (d) {
-                sideShow(d);
+                sideShowNew(d, function () {
+                    $('#Latitude').attr("disabled", "disabled");
+                    $('#Longitude').attr("disabled", "disabled");
+                });
+
             });
         }
     </script>
@@ -39,9 +54,9 @@
         <a class="sidebar-link sidebar-button" href="<%= Url.Action("Login","Sidebar",new{id=1}) %>" onclick="">Login</a>
         <a class="sidebar-link sidebar-button" href="<%= Url.Action("Register","Sidebar",new{id=1}) %>" onclick="">Register</a>
         <br />
-            <a class="sidebar-button" href="" onclick="setNodeMode(true)"><img class="button" src="../../Content/Images/newevent.png" /></a>
-            <a class="sidebar-link sidebar-button" href="<%= Url.Action("NewEvent","Sidebar") %>" onclick=""><img class="button" src="../../Content/Images/findevent.png" /></a>
-            <a class="sidebar-link sidebar-button" href="<%= Url.Action("Profile","Sidebar",new{id = 1}) %>" onclick=""><img class="button" src="../../Content/Images/viewprofile.png" /></a>
+            <a class="sidebar-button" href="" onclick="setNodeMode(true)"><img class="button unselected" src="../../Content/Images/newevent.png" /><img class="button selected" src="../../Content/Images/newevent-selected.png" /></a><span class="helper">(post event)<br /></span>
+            <a class="sidebar-link sidebar-button" href="<%= Url.Action("NewEvent","Sidebar") %>" onclick=""><img class="button unselected" src="../../Content/Images/findevent.png" /><img class="button selected" src="../../Content/Images/findevent-selected.png" /></a><span class="helper">(find event)<br /></span>
+            <a class="sidebar-link sidebar-button" href="<%= Url.Action("Profile","Sidebar",new{id = 1}) %>" onclick=""><img class="button unselected" src="../../Content/Images/viewprofile.png" /><img class="button selected" src="../../Content/Images/viewprofile-selected.png" /></a><span class="helper">(view profile)<br /></span>
             <div id="sidebar" class="">
             </div>
         </div>
