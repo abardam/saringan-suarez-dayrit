@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Omnipresence.Mvc2.Models;
 
 namespace Omnipresence.Mvc2.Controllers
 {
@@ -16,9 +17,12 @@ namespace Omnipresence.Mvc2.Controllers
             return View();
         }
 
-        //public PartialViewResult NewEvent()
-        //{
-        //    return PartialView("/Sidebar/NewEventUserControl");
-        //}
+        [HttpPost]
+        public bool NewEvent(NewEventModel model)
+        {
+            // TODO: insert to database
+            return false;
+        }
     }
+    
 }
