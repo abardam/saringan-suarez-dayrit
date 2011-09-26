@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Omnipresence.Mvc2.Models;
+// TODO: MODIFY THIS WHEN PROCESSING ALREADY IMPLEMENTS USERACCOUNTMODEL
+using Omnipresence.Processing;
+using Omnipresence.DataAccess.Core;
 
 namespace Omnipresence.Mvc2.Controllers
 {
@@ -46,6 +49,24 @@ namespace Omnipresence.Mvc2.Controllers
         {
             // TODO: insert logic
             return PartialView("EditEvent", model);
+        }
+        public ActionResult Login()
+        {
+            return PartialView("LoginUserControl");
+        }
+        [HttpPost]
+        public ActionResult Login(LogOnModel model)
+        {
+            return RedirectToAction("LogOn", "Account", model);
+        }
+        public ActionResult Register()
+        {
+            return PartialView("RegisterUserControl");
+        }
+        [HttpPost]
+        public ActionResult Register(RegisterModel model)
+        {
+            return RedirectToAction("Register", "Account", model);
         }
     }
 }
