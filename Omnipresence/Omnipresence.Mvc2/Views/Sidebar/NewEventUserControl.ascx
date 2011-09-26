@@ -1,48 +1,84 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
-<div class="control-container">
-    <div id="error">
-    <span class="header">An error has occured.</span>
-    <span class="header-2">Click anywhere to continue.</span>
-    <span class="text">I am filler text.</span>
-    </div>
-    <div id="new_event">
-        <span class="header edit" id="event_name" >Edit title. TO DO: SAVE TO SERVER</span>
-        <div id="event_votes">
-            <button id="upVote" name="upvoteButton" type="button">++</button>
-            <button name="downvoteButton" type="button">--</button>
-        </div>
-    
-        <span class="header-2">Location:</span><span class="content" id="event_location">coordinates</span>
-    
-        <div id="type_selector">
-        <span class="header-2">Type:</span>
-        <form>
-            <select id="sel_type" name="sel_type">
-            <!-- moved to omnimap-scripts.js; nasa initializer ni jay -->
-            </select>
-        </form>
-        </div>
-    
-        <div id="description">
-        <span class="header-2">Description: </span>
-        <span class="content edit" id="event_description">Lorem ipsum dolor sit amet </span>
-        </div>
-        <!--
-        <div id="editDescription">
-        <form name="edit' + markerNum + '" action="" >
-        <textarea id="editDescriptionTextArea">Enter new description</textarea><br />
-        <input value ="Edit!" type="button" onclick="editDescription(' + markerNum + ', this.form)"/>
-        </form>
-        </div>
-        -->
-        <div id="comment-box"><span class="header-2">Comments</span>
-        <div id="comments">
-        I am a comment</div>
-        </div>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Omnipresence.Mvc2.Models.NewEventModel>" %>
 
-        <div id="add-comment-box"><form name="comment" action="">
-        <textarea id="commentTextArea">Add new comment</textarea><br />
-        <input value ="Comment!" type="button" onclick="addComment(' + markerNum + ', this.form)"/>
-        </form></div>
+    <% using (Html.BeginForm()) {%>
+        <%: Html.ValidationSummary(true) %>
+
+        <fieldset>
+            <legend>Fields</legend>
+            
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.CreatedBy) %>
+            </div>
+            <div class="editor-field">
+                <%: Html.TextBoxFor(model => model.CreatedBy) %>
+                <%: Html.ValidationMessageFor(model => model.CreatedBy) %>
+            </div>
+            
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.Name) %>
+            </div>
+            <div class="editor-field">
+                <%: Html.TextBoxFor(model => model.Name) %>
+                <%: Html.ValidationMessageFor(model => model.Name) %>
+            </div>
+            
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.Description) %>
+            </div>
+            <div class="editor-field">
+                <%: Html.TextBoxFor(model => model.Description) %>
+                <%: Html.ValidationMessageFor(model => model.Description) %>
+            </div>
+            
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.StartTime) %>
+            </div>
+            <div class="editor-field">
+                <%: Html.TextBoxFor(model => model.StartTime) %>
+                <%: Html.ValidationMessageFor(model => model.StartTime) %>
+            </div>
+            
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.EndTime) %>
+            </div>
+            <div class="editor-field">
+                <%: Html.TextBoxFor(model => model.EndTime) %>
+                <%: Html.ValidationMessageFor(model => model.EndTime) %>
+            </div>
+            
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.Duration) %>
+            </div>
+            <div class="editor-field">
+                <%: Html.TextBoxFor(model => model.Duration) %>
+                <%: Html.ValidationMessageFor(model => model.Duration) %>
+            </div>
+            
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.CreateTime) %>
+            </div>
+            <div class="editor-field">
+                <%: Html.TextBoxFor(model => model.CreateTime) %>
+                <%: Html.ValidationMessageFor(model => model.CreateTime) %>
+            </div>
+            
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.DeleteTime) %>
+            </div>
+            <div class="editor-field">
+                <%: Html.TextBoxFor(model => model.DeleteTime) %>
+                <%: Html.ValidationMessageFor(model => model.DeleteTime) %>
+            </div>
+            
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+
+    <% } %>
+
+    <div>
+        <%: Html.ActionLink("Back to List", "Index") %>
     </div>
-</div>
+
+
