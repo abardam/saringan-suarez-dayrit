@@ -25,5 +25,15 @@ namespace Omnipresence.Mvc2.Controllers
             }
             return PartialView("ProfileUserControl", model);
         }
+        public ActionResult NewEvent()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult NewEvent(NewEventModel model)
+        {
+            // TODO: insert latlng logic
+            return PartialView("NewEvent",model);
+        }
     }
 }

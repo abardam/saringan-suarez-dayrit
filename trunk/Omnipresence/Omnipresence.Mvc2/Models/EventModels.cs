@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Omnipresence.Mvc2.Models
 {
-    public class NewEventViewModel
+    public class NewEventModel
     {
         // TODO: Update this using actual new event content (NewEventViewModel)
         public int CreatedBy { get; set; }
