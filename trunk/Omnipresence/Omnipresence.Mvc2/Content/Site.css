@@ -399,23 +399,9 @@ div#banner
     width: 6em;
 }
 
-/*
-Added by Jay
-*/
-#map_canvas
-{
-    height: 100%;
-	width: 70%;
-	min-width:350px;
-}
-
 #map_container
 {
     position: absolute;
-    top:0;
-    bottom:0;
-    right:0;
-    left:0;
     
 }
 
@@ -453,4 +439,21 @@ Added by Jay
     font-size: 12px;
     padding-left: 4px;
     padding-right: 4px;
+}
+
+.controlLogo
+{
+    background-color: none;
+    padding: 10px;
+}
+
+img.button
+{
+    padding: 5px
+}
+
+a.sidebar-link
+{
+    display: table-cell;
+    text-align: center;
 }

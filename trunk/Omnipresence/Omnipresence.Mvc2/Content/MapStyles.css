@@ -9,21 +9,30 @@
     display:block;
     clear:both;
     height:100%;
-    min-width:510px;
+    min-width:468px;
     width:100%;
 }
 #map_canvas 
 {
-    float:left;
+    width:70%;
+    height:100%;
 }
-#sidebar 
+#sidebar-big
 {
-    float:right;
+    
     width:30%;
-	min-width:150px;
     height:100%;
     background-color: White;
     font-family: Segoe UI , Calibri, Sans-Serif;
+    position: absolute;
+    top:0;
+    right:0;
+}
+
+#sidebar
+{
+    font-family: Segoe UI , Calibri, Sans-Serif;
+    width:100%;
 }
 
 span.header 
