@@ -95,6 +95,8 @@
     <Resource Include="Content\Images\talk.png" />
     <Resource Include="Content\Images\traffic.png" />
     <Resource Include="Content\Images\none.png" />
+    <Content Include="Content\Images\bg_button_a.gif" />
+    <Content Include="Content\Images\bg_button_span.gif" />
     <Content Include="Content\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\MapStyles.css" />
     <Content Include="Global.asax" />
@@ -105,9 +107,13 @@
     <Content Include="Scripts\omnimap-registration.js" />
     <Content Include="Scripts\omnimap-scripts.js" />
     <Content Include="Scripts\jquery-utils.js" />
+    <Content Include="Scripts\omnimap-sidebar-scripts.js" />
     <Content Include="Views\Friends\Add.aspx" />
     <Content Include="Views\Friends\Delete.aspx" />
     <Content Include="Views\Friends\Index.aspx" />
+    <Content Include="Views\Home\Default.ascx" />
+    <Content Include="Views\Home\Error.ascx" />
+    <Content Include="Views\Home\NewEvent.ascx" />
     <Content Include="Views\Map\Index.aspx" />
     <Content Include="Views\Profile\Edit.aspx" />
     <Content Include="Views\Profile\Index.aspx" />

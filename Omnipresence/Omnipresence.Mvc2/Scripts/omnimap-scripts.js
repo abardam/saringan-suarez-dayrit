@@ -85,8 +85,49 @@ $(document).ready(
         }
         ).change();
 
+
+        //resize
+
+        //alert('alert');
+        var    dheight = $('html').height(),
+            cbody = $('#contentbody').height(),
+            wheight = $(window).height(),
+            cheight = wheight - dheight + cbody;
+            
+        if (wheight > dheight){
+            $('#contentbody').height(cheight);
+        }
+        
+        $(window).resize(function(){
+            wheight = $(window).height();
+            noscroll();
+            changepush();
+        });
+
+        function noscroll(){
+           if (wheight > dheight) {
+                $('html').addClass('noscroll');
+           }
+
+            else if (wheight <= dheight) {
+                $('html').removeClass('noscroll');
+            }
+            
+            else {}
+
+        }
+
+        function changepush(){
+           if (wheight > dheight) {
+                   $('#contentbody').height(wheight-dheight+cbody);
+           }
+            
+        }
+
     }
 );
+
+
 
 function textAreaFocusIn(textArea) {
     textArea.text('');
@@ -442,14 +483,21 @@ function formatButton(controlUI, innerHtml, title) {
     controlUI.className = "controlButton";
     controlUI.title = title;
     // Set CSS for the control interior
-    var controlText = document.createElement('DIV');
+    //var controlText = document.createElement('DIV');
     //    controlText.style.fontFamily = 'Arial,sans-serif';
     //    controlText.style.fontSize = '12px';
     //    controlText.style.paddingLeft = '4px';
     //    controlText.style.paddingRight = '4px';
-    controlText.className = "controlText";
-    controlText.innerHTML = innerHtml;
-    controlUI.appendChild(controlText);
+    //controlText.className = "controlText";
+    //controlText.innerHTML = innerHtml;
+    //controlUI.appendChild(controlText);
+    var controlButton = document.createElement('A');
+    controlButton.className="button";
+    
+    var controlSpan = document.createElement('SPAN');
+    controlSpan.innerHTML = innerHtml;
+    controlButton.appendChild(controlSpan);
+    controlUI.appendChild(controlButton);
 }
 
 //call this function on windows para uniform yung style
