@@ -88,7 +88,6 @@
       <DependentUpon>OmniResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\EventModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Content\Images\disaster.png" />

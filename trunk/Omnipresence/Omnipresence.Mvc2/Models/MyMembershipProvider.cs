@@ -5,6 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-public class MyMembershipProvider : MembershipProvider
+public class MyMembershipProvider //: MembershipProvider
 {
 }
