@@ -31,7 +31,7 @@ namespace Omnipresence.Mvc2.Controllers
         // TODO: CHANGE EVENT OBJECT TYPE IN EVENTSERVICES
         public ActionResult NewEvent()
         {
-            return PartialView();
+            return PartialView("NewEventUserControl");
         }
         [HttpPost]
         public ActionResult NewEvent(NewEventModel model)
@@ -62,12 +62,17 @@ namespace Omnipresence.Mvc2.Controllers
         }
         public ActionResult Register()
         {
+            ViewData["PasswordLength"] = 6;
             return PartialView("RegisterUserControl");
         }
         [HttpPost]
         public ActionResult Register(RegisterModel model)
         {
-            return RedirectToAction("Register", "Account", model);
+            AccountController x = new AccountController();
+            if (x.AddUser(model)) return RedirectToAction("Index", "Home");
+
+            ViewData["PasswordLength"] = 6;
+            return PartialView("RegisterUserControl", model);
         }
     }
 }
