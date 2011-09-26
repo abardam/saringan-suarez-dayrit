@@ -117,6 +117,7 @@
     <Content Include="Views\Map\Index.aspx" />
     <Content Include="Views\Profile\Edit.aspx" />
     <Content Include="Views\Profile\Index.aspx" />
+    <Content Include="Views\Sidebar\EditEventUserControl.ascx" />
     <Content Include="Views\Sidebar\IndexUserControl.ascx" />
     <Content Include="Views\Sidebar\LoginUserControl.ascx" />
     <Content Include="Views\Sidebar\NewEvent.ascx" />

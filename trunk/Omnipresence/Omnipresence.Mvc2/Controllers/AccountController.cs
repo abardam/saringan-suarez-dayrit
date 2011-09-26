@@ -24,6 +24,8 @@ namespace Omnipresence.Mvc2.Controllers
             base.Initialize(requestContext);
         }
 
+        //TODO: LOGON FEATURE FOR SIDEBAR HAS SEPARATE CODE
+
         public ActionResult LogOn()
         {
             return View();

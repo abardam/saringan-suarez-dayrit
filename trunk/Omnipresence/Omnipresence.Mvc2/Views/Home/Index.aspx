@@ -21,8 +21,10 @@
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
     <div id="map_container">
-        <a class="sidebar-link" href="<%= Url.Action("Profile","Sidebar",new{id = 1}) %>" onclick="">Hello</a>
-        <a class="sidebar-link" href="<%= Url.Action("EditEvent","Sidebar",new{id=1}) %>" onclick="">Hello</a>
+        <a class="sidebar-link" href="<%= Url.Action("Index","Sidebar",new{id = 1}) %>" onclick="">Home</a>
+        <a class="sidebar-link" href="<%= Url.Action("Profile","Sidebar",new{id = 1}) %>" onclick="">Profile</a>
+        <a class="sidebar-link" href="<%= Url.Action("Login","Sidebar",new{id=1}) %>" onclick="">Login</a>
+        <a class="sidebar-link" href="<%= Url.Action("Register","Sidebar",new{id=1}) %>" onclick="">Register</a>
         <div id="sidebar" class="">
         </div>
         <div id="map_canvas">
