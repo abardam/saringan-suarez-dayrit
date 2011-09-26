@@ -4,6 +4,7 @@ using System.Data.Objects;
 using System.Linq;
 using System.Text;
 using Omnipresence.DataAccess.Core;
+// TODO: CHANGE ALL RETURN VALUES TO OBJECT TYPES RELEVANT ONLY TO THIS PROJECT, PROCESSING
 
 namespace Omnipresence.Processing
 {

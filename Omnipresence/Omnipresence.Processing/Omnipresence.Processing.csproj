@@ -44,6 +44,7 @@
     <Compile Include="Core\AccountServices.cs" />
     <Compile Include="Core\EventServices.cs" />
     <Compile Include="Logging\LoggingServices.cs" />
+    <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\EventQueryModel.cs" />
     <Compile Include="Models\EventViewModelMicro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
