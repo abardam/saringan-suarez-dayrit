@@ -7,14 +7,14 @@ namespace Omnipresence.Processing
 {
     public class NewEventModel
     {
-        public string      Title;
-        public string      Description;
-        public DateTime    StartTime;
-        public DateTime    EndTime;
-        public string      CategoryString;
-        public string      VisibilityTypeString;
-        public double      Latitude;
-        public double      Longitude;
-        public string      LocationName;
+        public string Title{get;set;}
+        public string Description{get;set;}
+        public DateTime StartTime{get;set;}
+        public DateTime EndTime{get;set;}
+        public string CategoryString{get;set;}
+        public string VisibilityTypeString{get;set;}
+        public double Latitude{get;set;}
+        public double Longitude{get;set;}
+        public string LocationName{get;set;}
     }
 }
