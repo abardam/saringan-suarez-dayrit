@@ -73,6 +73,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\SidebarController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -110,13 +111,11 @@
     <Content Include="Views\Map\Index.aspx" />
     <Content Include="Views\Profile\Edit.aspx" />
     <Content Include="Views\Profile\Index.aspx" />
-
     <Content Include="Views\Sidebar\IndexUserControl.ascx" />
     <Content Include="Views\Sidebar\LoginUserControl.ascx" />
     <Content Include="Views\Sidebar\NewEventUserControl.ascx" />
     <Content Include="Views\Sidebar\ProfileUserControl.ascx" />
     <Content Include="Views\Sidebar\RegisterUserControl.ascx" />
-
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

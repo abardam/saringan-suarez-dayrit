@@ -8,9 +8,13 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <script type="text/javascript" src="../../Scripts/omnimap-scripts.js"></script>
     <script type="text/javascript">
-        $('.toDefault').live('click', function () { $.get('<%= Url.Action("Default","Home") %>', function (d) { sideShow(d); }); });
-        $('.toNewEvent').live('click', function () { $.get('<%= Url.Action("Default","Home") %>', function (d) { sideShow(d); }); });
-        function sideShow(d) {$("#event_info").fadeOut(200, function () { $('#event_info').html(d); $('#event_info').fadeIn(200); }); }
+        function sideShow(d) { $("#event_info").fadeOut(200, function () { $('#event_info').html(d); $('#event_info').fadeIn(200); }); }
+        $('.sidebar-link').live("click", function (event) {
+            event.preventDefault();
+            $.get(event.target, function (d) {
+                sideShow(d);
+            });
+        });
     </script>
 </asp:Content>
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="Header" runat="server">
@@ -19,7 +23,8 @@
     <div id="map_container">
         <div id="event_info" class="">
         </div>
-        <a class="toDefault" href="#">Hello</a>
+        <a class="sidebar-link" href="<%= Url.Action("Profile","Sidebar",new{id = 1}) %>" onclick="">Hello</a>
+        <a class="sidebar-link" href="<%= Url.Action("Index","Sidebar") %>" onclick="">Hello</a>
         <div id="map_canvas">
         </div>
     </div>
