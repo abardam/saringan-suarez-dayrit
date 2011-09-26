@@ -11,7 +11,7 @@
         function sideShow(d) { $("#sidebar").fadeOut(200, function () { $('#sidebar').html(d); $('#sidebar').fadeIn(200); }); }
         $('.sidebar-link').live("click", function (event) {
             event.preventDefault();
-            $.get(event.target, function (d) {
+            $.get(event.currentTarget, function (d) {
                 sideShow(d);
             });
         });
@@ -25,7 +25,12 @@
         <a class="sidebar-link" href="<%= Url.Action("Profile","Sidebar",new{id = 1}) %>" onclick="">Profile</a>
         <a class="sidebar-link" href="<%= Url.Action("Login","Sidebar",new{id=1}) %>" onclick="">Login</a>
         <a class="sidebar-link" href="<%= Url.Action("Register","Sidebar",new{id=1}) %>" onclick="">Register</a>
-        <div id="sidebar" class="">
+        <div id="sidebar-big">
+            <a class="sidebar-link" href="<%= Url.Action("NewEvent","Sidebar") %>" onclick=""><img class="button" src="../../Content/Images/newevent.png" /></a>
+            <a class="sidebar-link" href="<%= Url.Action("NewEvent","Sidebar") %>" onclick=""><img class="button" src="../../Content/Images/findevent.png" /></a>
+            <a class="sidebar-link" href="<%= Url.Action("Profile","Sidebar",new{id = 1}) %>" onclick=""><img class="button" src="../../Content/Images/viewprofile.png" /></a>
+            <div id="sidebar" class="">
+            </div>
         </div>
         <div id="map_canvas">
         </div>

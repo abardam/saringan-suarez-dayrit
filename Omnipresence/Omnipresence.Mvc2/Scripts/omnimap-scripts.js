@@ -219,11 +219,17 @@ function initialize() {
 
     // Create the DIV to hold the control and call the HomeControl() constructor
     // passing in this DIV.
-    var homeControlDiv = document.createElement('DIV');
-    var homeControl = new HomeControl(homeControlDiv, map);
+    //COMMENTED OUT: nasa right sidebar na dapat
+    //var homeControlDiv = document.createElement('DIV');
+    //var homeControl = new HomeControl(homeControlDiv, map);
 
-    homeControlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(homeControlDiv);
+    //homeControlDiv.index = 1;
+    //map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(homeControlDiv);
+
+    var logoDiv = document.createElement('DIV');
+    formatLogo(logoDiv,'<img src="../../Content/Images/omnilogo.png" />');
+    logoDiv.index=1;
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(logoDiv);
 
     //formatting the window divs
 
@@ -517,6 +523,14 @@ function formatWindow(controlUI, innerHtml) {
     //    controlText.style.fontSize = '12px';
     //    controlText.style.paddingLeft = '4px';
     //    controlText.style.paddingRight = '4px';
+    controlText.className = "controlText";
+    controlText.innerHTML = innerHtml;
+    controlUI.appendChild(controlText);
+}
+
+function formatLogo(controlUI, innerHtml) {
+    controlUI.className = "controlLogo";
+    var controlText = document.createElement('DIV');
     controlText.className = "controlText";
     controlText.innerHTML = innerHtml;
     controlUI.appendChild(controlText);
