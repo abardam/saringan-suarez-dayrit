@@ -186,6 +186,10 @@ function Comment(username) {
 
 }
 
+function setNodeMode(n){
+    nodeMode = n;
+}
+
 function commentToHTML(comment) {
     return "<p> <strong>" + comment.username + ": </strong>" + comment.content + "</p>";
 }
@@ -280,11 +284,13 @@ function addRandomMarker(latlng) {
             //closeBoxes();
             //displayInfoWindow(marker.number);
             currentMarker = marker.number;
-            updateRightPanel(markerArray[marker.number]);
+            //updateRightPanel(markerArray[marker.number]);
+            //showNewEvent();
 
         });
         numMarkers++;
         nodeMode = false;
+        showNewEvent();
     }
 }
 

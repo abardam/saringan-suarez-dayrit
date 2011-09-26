@@ -451,9 +451,3 @@ img.button
 {
     padding: 5px
 }
-
-a.sidebar-link
-{
-    display: table-cell;
-    text-align: center;
-}
