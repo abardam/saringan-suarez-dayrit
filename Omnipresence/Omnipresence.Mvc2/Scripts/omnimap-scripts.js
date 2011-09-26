@@ -220,11 +220,11 @@ function initialize() {
     // Create the DIV to hold the control and call the HomeControl() constructor
     // passing in this DIV.
     //COMMENTED OUT: nasa right sidebar na dapat
-    //var homeControlDiv = document.createElement('DIV');
-    //var homeControl = new HomeControl(homeControlDiv, map);
+    var homeControlDiv = document.createElement('DIV');
+    var homeControl = new HomeControl(homeControlDiv, map);
 
-    //homeControlDiv.index = 1;
-    //map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(homeControlDiv);
+    homeControlDiv.index = 1;
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(homeControlDiv);
 
     var logoDiv = document.createElement('DIV');
     formatLogo(logoDiv,'<img src="../../Content/Images/omnilogo.png" />');

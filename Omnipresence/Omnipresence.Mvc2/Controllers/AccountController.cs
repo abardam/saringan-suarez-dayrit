@@ -74,6 +74,14 @@ namespace Omnipresence.Mvc2.Controllers
         [HttpPost]
         public ActionResult Register(RegisterModel model)
         {
+            if (AddUser(model)) return RedirectToAction("Index", "Home");
+
+            ViewData["PasswordLength"] = 6;
+            return View(model);
+        }
+        //TODO: Transfer this to services
+        public bool AddUser(RegisterModel model)
+        {
             if (ModelState.IsValid)
             {
                 User user = accountServices.CreateUser(model.UserName.Trim(), model.Password.Trim(), model.Email.Trim(), model.FirstName.Trim(), model.LastName.Trim(), model.Birthdate);
@@ -82,16 +90,14 @@ namespace Omnipresence.Mvc2.Controllers
                 {
                     accountServices.AddUser(user);
                     FormsService.SignIn(user.Username, false);
-                    return RedirectToAction("Index", "Home");
+                    return true;
                 }
                 else
                 {
                     ModelState.AddModelError("", AccountValidation.ErrorCodeToString(MembershipCreateStatus.UserRejected));
                 }
             }
-
-            ViewData["PasswordLength"] = 6;
-            return View(model);
+            return false;
         }
 
         [Authorize]
