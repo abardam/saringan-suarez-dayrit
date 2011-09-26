@@ -35,5 +35,17 @@ namespace Omnipresence.Mvc2.Controllers
             // TODO: insert latlng logic
             return PartialView("NewEvent",model);
         }
+        public ActionResult EditEvent(int id)
+        {
+            // TODO: insert logic
+            EditEventModel model = new EditEventModel{ CreatedBy = 1, CreateTime = DateTime.Now, DeleteTime = DateTime.Now, Description = "Description", Duration = 10, EndTime = DateTime.Now, Name= "Name", StartTime = DateTime.Now};
+            return PartialView("EditEvent", model);
+        }
+        [HttpPost]
+        public ActionResult EditEvent(EditEventModel model)
+        {
+            // TODO: insert logic
+            return PartialView("EditEvent", model);
+        }
     }
 }

@@ -8,7 +8,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <script type="text/javascript" src="../../Scripts/omnimap-scripts.js"></script>
     <script type="text/javascript">
-        function sideShow(d) { $("#event_info").fadeOut(200, function () { $('#event_info').html(d); $('#event_info').fadeIn(200); }); }
+        function sideShow(d) { $("#sidebar").fadeOut(200, function () { $('#sidebar').html(d); $('#sidebar').fadeIn(200); }); }
         $('.sidebar-link').live("click", function (event) {
             event.preventDefault();
             $.get(event.target, function (d) {
@@ -21,10 +21,10 @@
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
     <div id="map_container">
-        <div id="event_info" class="">
-        </div>
         <a class="sidebar-link" href="<%= Url.Action("Profile","Sidebar",new{id = 1}) %>" onclick="">Hello</a>
-        <a class="sidebar-link" href="<%= Url.Action("Index","Sidebar") %>" onclick="">Hello</a>
+        <a class="sidebar-link" href="<%= Url.Action("EditEvent","Sidebar",new{id=1}) %>" onclick="">Hello</a>
+        <div id="sidebar" class="">
+        </div>
         <div id="map_canvas">
         </div>
     </div>
