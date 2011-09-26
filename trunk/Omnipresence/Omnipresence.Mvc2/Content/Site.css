@@ -3,9 +3,31 @@ The base color for this template is #5c87b2. If you'd like
 to use a different color start by replacing all instances of
 #5c87b2 with your new color.
 ----------------------------------------------------------*/
+
+/* Palette color codes */
+
+/* Feel free to copy&paste color codes to your application */
+
+
+
+.primary-1 { background-color: #FBAD6C }
+
+.primary-2 { background-color: #D19B6E }
+
+.primary-3 { background-color: #C07537 }
+
+.primary-4 { background-color: #FECA9E }
+
+.primary-5 { background-color: #FEDFC6 }
+
+
+
+/* end */
+
+
 body
 {
-    background-color: #5c87b2;
+    background-color: #FEDFC6;
     font-size: .75em;
     font-family: Verdana, Helvetica, Sans-Serif;
     margin: 0;
@@ -36,6 +58,43 @@ p, ul
 {
     margin-bottom: 20px;
     line-height: 1.6em;
+}
+
+/* stretchy buttons */
+
+.clear { /* generic container (i.e. div) for floating buttons */
+    overflow: hidden;
+    width: 100%;
+}
+
+a.button {
+    background: transparent url('/Content/Images/bg_button_a.gif') no-repeat scroll top right;
+    color: #444;
+    display: block;
+    float: left;
+    font: normal 12px arial, sans-serif;
+    height: 24px;
+    margin-right: 6px;
+    padding-right: 18px; /* sliding doors padding */
+    text-decoration: none;
+}
+
+a.button span {
+    background: transparent url('/Content/Images/bg_button_span.gif') no-repeat;
+    display: block;
+    line-height: 14px;
+    padding: 5px 0 5px 18px;
+}
+
+a.button:active {
+    background-position: bottom right;
+    color: #000;
+    outline: none; /* hide dotted outline in Firefox */
+}
+
+a.button:active span {
+    background-position: bottom left;
+    padding: 6px 0 4px 18px; /* push text down 1px */
 }
 
 /* HEADINGS   
@@ -84,7 +143,8 @@ first child of the left and right table columns */
 page width. Or, you can specify an exact pixel width. */
 .page
 {
-    width: 95%;
+    width: 100%;
+    height: 100%
     margin-left: auto;
     margin-right: auto;
 }
@@ -348,10 +408,15 @@ Added by Jay
 	min-width:350px;
 }
 
+#map_container
+{
+    width: 100%;
+}
+
 .controlButton
 {
-    background-color: white;
-    border-style: solid;
+    background-color: transparent;
+    border-style: none;
     border-width: 2px;
     cursor: pointer;
     text-align: center;
