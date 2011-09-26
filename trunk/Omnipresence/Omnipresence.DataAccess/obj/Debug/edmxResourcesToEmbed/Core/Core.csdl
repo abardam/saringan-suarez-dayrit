@@ -61,7 +61,7 @@
     <Property Name="EventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Title" Type="String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
     <Property Name="Description" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
-    <Property Name="Rating" Type="Int32" />
+    <Property Name="Rating" Type="Int32" DefaultValue="0" />
     <Property Name="Created" Type="DateTime" />
     <Property Name="LastModified" Type="DateTime" />
     <Property Name="StartTime" Type="DateTime" />

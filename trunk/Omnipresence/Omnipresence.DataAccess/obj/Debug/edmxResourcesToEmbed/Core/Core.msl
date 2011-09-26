@@ -2,7 +2,7 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="OmnipresenceModelStoreContainer" CdmEntityContainer="OmnipresenceEntities">
     <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="OmnipresenceModel.Category">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.Category)">
         <MappingFragment StoreEntitySet="Categories">
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -12,7 +12,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Countries">
-      <EntityTypeMapping TypeName="OmnipresenceModel.Country">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.Country)">
         <MappingFragment StoreEntitySet="Countries">
           <ScalarProperty Name="CountryId" ColumnName="CountryId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -22,7 +22,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Events">
-      <EntityTypeMapping TypeName="OmnipresenceModel.Event">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.Event)">
         <MappingFragment StoreEntitySet="Events">
           <ScalarProperty Name="EventId" ColumnName="EventId" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -40,7 +40,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Genders">
-      <EntityTypeMapping TypeName="OmnipresenceModel.Gender">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.Gender)">
         <MappingFragment StoreEntitySet="Genders">
           <ScalarProperty Name="GenderId" ColumnName="GenderId" />
           <ScalarProperty Name="GenderText" ColumnName="GenderText" />
@@ -49,7 +49,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Locations">
-      <EntityTypeMapping TypeName="OmnipresenceModel.Location">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.Location)">
         <MappingFragment StoreEntitySet="Locations">
           <ScalarProperty Name="LocationId" ColumnName="LocationId" />
           <ScalarProperty Name="Latitude" ColumnName="Latitude" />
@@ -60,7 +60,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UserProfiles">
-      <EntityTypeMapping TypeName="OmnipresenceModel.UserProfile">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.UserProfile)">
         <MappingFragment StoreEntitySet="UserProfiles">
           <ScalarProperty Name="UserProfileId" ColumnName="UserProfileId" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -75,7 +75,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="OmnipresenceModel.User">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.User)">
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Username" ColumnName="Username" />
@@ -103,7 +103,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="VisibilityTypes">
-      <EntityTypeMapping TypeName="OmnipresenceModel.VisibilityType">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.VisibilityType)">
         <MappingFragment StoreEntitySet="VisibilityTypes">
           <ScalarProperty Name="VisibilityTypeId" ColumnName="VisibilityTypeId" />
           <ScalarProperty Name="Type" ColumnName="Type" />
