@@ -28,6 +28,7 @@ namespace Omnipresence.Mvc2.Controllers
             }
             return PartialView("ProfileUserControl", model);
         }
+        // TODO: CHANGE EVENT OBJECT TYPE IN EVENTSERVICES
         public ActionResult NewEvent()
         {
             return PartialView();
@@ -36,7 +37,7 @@ namespace Omnipresence.Mvc2.Controllers
         public ActionResult NewEvent(NewEventModel model)
         {
             // TODO: insert latlng logic
-            return PartialView("NewEvent",model);
+            return PartialView("NewEventUserControl",model);
         }
         public ActionResult EditEvent(int id)
         {

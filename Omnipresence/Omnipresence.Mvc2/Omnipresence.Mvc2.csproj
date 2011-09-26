@@ -130,7 +130,6 @@
     <Content Include="Views\Sidebar\EditEventUserControl.ascx" />
     <Content Include="Views\Sidebar\IndexUserControl.ascx" />
     <Content Include="Views\Sidebar\LoginUserControl.ascx" />
-    <Content Include="Views\Sidebar\NewEvent.ascx" />
     <Content Include="Views\Sidebar\NewEventUserControl.ascx" />
     <Content Include="Views\Sidebar\ProfileUserControl.ascx" />
     <Content Include="Views\Sidebar\RegisterUserControl.ascx" />
