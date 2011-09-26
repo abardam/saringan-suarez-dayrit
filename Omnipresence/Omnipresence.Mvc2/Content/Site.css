@@ -27,6 +27,7 @@ to use a different color start by replacing all instances of
 
 body
 {
+    height: 100%;
     background-color: #FEDFC6;
     font-size: .75em;
     font-family: Verdana, Helvetica, Sans-Serif;
@@ -403,14 +404,24 @@ Added by Jay
 */
 #map_canvas
 {
-	height: 500px;
+    height: 100%;
 	width: 70%;
 	min-width:350px;
 }
 
 #map_container
 {
-    width: 100%;
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    
+}
+
+#middle
+{
+    height: 100%;
 }
 
 .controlButton
