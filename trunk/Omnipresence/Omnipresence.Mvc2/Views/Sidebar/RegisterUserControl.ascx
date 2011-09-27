@@ -1,4 +1,7 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Omnipresence.Mvc2.Models.RegisterModel>" %>
+<div class="control-container">
+<% if (!Request.IsAuthenticated)
+   { %>
 <script type="text/javascript" src="../../Scripts/omnimap-registration.js"></script>
 <span class="header-2">
     Create a New Account</span>
@@ -99,3 +102,10 @@
     </fieldset>
 </div>
 <%} %>
+<%}
+   else
+   { %>
+<span class="header">Login</span>
+<span class="header-2">You are already logged in as <%=Page.User.Identity.Name %>.</span>
+<%} %>
+</div>

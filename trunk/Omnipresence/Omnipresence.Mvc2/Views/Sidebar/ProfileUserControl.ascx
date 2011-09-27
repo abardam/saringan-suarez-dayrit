@@ -2,7 +2,11 @@
 
 <% //TODO: Write actual PROFILE content (ProfileUserControl) %>
 <div class="control-container">
+    <div style="float:left; padding-right:15px;">
+    <img src="<%= Model.AvatarUrl %>" alt="<%=Model.FirstName %>"/>
+    </div>
+    <div style="float:left;">
     <span class="header"><%= Model.FirstName %> <%= Model.LastName %></span>
-    <span class="header-2">Click anywhere to continue.</span>
-    <span class="text">I am filler text.</span>
+    <span class="header-2"><%=Model.Description %></span>
+    </div>
 </div>

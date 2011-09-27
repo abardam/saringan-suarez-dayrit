@@ -77,7 +77,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AccountModels.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\EventModels.cs" />
     <Compile Include="Models\FriendModels.cs" />
     <Compile Include="Models\HomeModels.cs" />
@@ -101,6 +103,7 @@
     <Content Include="Content\Images\blockuser.png" />
     <Content Include="Content\Images\cancel.png" />
     <Content Include="Content\Images\findevent.png" />
+    <Content Include="Content\Images\loading-gif.gif" />
     <Content Include="Content\Images\message.png" />
     <Content Include="Content\Images\newevent.png" />
     <Content Include="Content\Images\ok.png" />
@@ -133,6 +136,7 @@
     <Content Include="Views\Sidebar\NewEventUserControl.ascx" />
     <Content Include="Views\Sidebar\ProfileUserControl.ascx" />
     <Content Include="Views\Sidebar\RegisterUserControl.ascx" />
+    <Content Include="Views\Sidebar\SearchUserControl.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

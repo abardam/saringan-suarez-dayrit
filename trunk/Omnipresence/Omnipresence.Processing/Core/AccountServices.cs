@@ -152,5 +152,10 @@ namespace Omnipresence.Processing
         {
             db.Connection.Close();
         }
+
+        public UserProfile GetProfile(User user)
+        {
+            return db.UserProfiles.Where(x => x.User == user).First();
+        }
     }
 }

@@ -19,40 +19,114 @@
 }
 #sidebar-big
 {
-    
     width:30%;
     height:100%;
     background-color: White;
     font-family: Segoe UI , Calibri, Sans-Serif;
-    position: absolute;
+    position:absolute;
     top:0;
     right:0;
 }
 
 #sidebar
 {
-    font-family: Segoe UI , Calibri, Sans-Serif;
-    width:100%;
+    font-family: Segoe UI, Calibri, Sans-Serif !important;
+    width:100% !important;
 }
 
-span.header 
+span.header, legend
 {
-    font-size:1.6em;
+    font-family: Segoe UI Light, Calibri, Sans-Serif !important;
+    text-transform: lowercase !important;
+    padding-bottom: .2em !important;
+    font-size:3em !important;
     display:block;
 }
 
-span.header-2 
+span.header-2
 {
-    font-size:1.4em;
-    display:block;
+    font-size:1.4em !important;
+    display:block !important;
+    padding:0em 0em .2em 0em;
 }
 
-span.content 
+span.content, .control-container > p
 {
-    display:block;
+    display:block !important;
+    padding-bottom:.2em;
 }
 
 #map_container textarea
 {
-    font-family: Calibri, Sans-Serif;
+    font-family: Calibri, Sans-Serif !important;
+}
+
+.helper 
+{
+    display:none;
+}
+
+#sidebar-nav 
+{
+    text-align: center;
+    margin-top:50px;
+    /*margin:25px;*/
+}
+
+.control-container 
+{
+    margin: 25px;
+    margin-top: 50px;
+}
+
+#sidebar-big 
+{
+    overflow-y:scroll;
+    overflow-x:hidden;
+}
+
+fieldset 
+{
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-button img
+{
+    opacity:0.4;
+    filter:alpha(opacity=40);
+}
+
+.sidebar-button:hover img, .sidebar-button img.selected
+{
+    opacity:1.0;
+    filter:alpha(opacity=100);
+}
+
+#login-widget 
+{
+    position:fixed;
+    top:0px;
+    right:50px;
+}
+
+.small-text 
+{
+    font-size:0.8em;
+    font-family:Segoe UI, Calibri, Sans-Serif;
+}
+
+.small-text a
+{
+    color: Black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.control-container a,.control-container a:link
+{
+    color: Black;
+    text-decoration: none;
+    font-weight: bold;
 }

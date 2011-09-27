@@ -7,6 +7,6 @@ namespace Omnipresence.Mvc2.Models
 {
     public class IndexViewModel
     {
-        //TODO: Update this :S
+        public string DisplayName { get; set; }
     }
 }

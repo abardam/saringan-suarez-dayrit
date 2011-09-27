@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Omnipresence.Processing.NewEventModel>" %>
-
+<div class="control-container">
     <% using (Html.BeginForm()) {%>
         <%: Html.ValidationSummary(true) %>
 
@@ -90,3 +90,4 @@
     </div>
 
 
+</div>
