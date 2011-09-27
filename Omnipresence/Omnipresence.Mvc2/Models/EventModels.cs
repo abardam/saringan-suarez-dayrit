@@ -18,4 +18,7 @@ namespace Omnipresence.Mvc2.Models
         public DateTime CreateTime { get; set; }
         public DateTime DeleteTime { get; set; }
     }
+    public class SearchEventModel
+    {
+    }
 }

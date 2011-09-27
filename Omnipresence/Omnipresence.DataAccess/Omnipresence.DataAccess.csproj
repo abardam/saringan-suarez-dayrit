@@ -55,7 +55,9 @@
     <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="Core\Core.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Core.Designer.cs</LastGenOutput>

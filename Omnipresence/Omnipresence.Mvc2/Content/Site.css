@@ -443,22 +443,11 @@ div#banner
 
 .controlLogo
 {
-    background-color: none;
+    background-color: transparent;
     padding: 10px;
 }
 
 img.button
 {
     padding: 5px
-}
-
-img.selected
-{
-    display: none;
-    vertical-align: middle;
-}
-
-img.unselected
-{
-    vertical-align: middle;
 }
