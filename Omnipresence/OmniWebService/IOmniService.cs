@@ -28,6 +28,6 @@ namespace OmniWebService
             string visibilityTypeString);
 
         [OperationContract]
-        IQueryable<Event> GetEvents();
+        bool AddUser(string username, string password, string email, string firstName, string lastName, DateTime birthdate);
     }
 }
