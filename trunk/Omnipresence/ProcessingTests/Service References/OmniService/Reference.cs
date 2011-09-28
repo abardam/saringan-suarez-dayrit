@@ -18,8 +18,8 @@ namespace ProcessingTests.OmniService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOmniService/AddEvent", ReplyAction="http://tempuri.org/IOmniService/AddEventResponse")]
         bool AddEvent(string title, string description, string categoryString, System.DateTime created, System.DateTime lastModified, System.DateTime startTime, System.DateTime endTime, string locationName, double latitude, double longitude, int rating, string visibilityTypeString);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOmniService/GetEvents", ReplyAction="http://tempuri.org/IOmniService/GetEventsResponse")]
-        object GetEvents();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOmniService/AddUser", ReplyAction="http://tempuri.org/IOmniService/AddUserResponse")]
+        bool AddUser(string username, string password, string email, string firstName, string lastName, System.DateTime birthdate);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -53,8 +53,8 @@ namespace ProcessingTests.OmniService {
             return base.Channel.AddEvent(title, description, categoryString, created, lastModified, startTime, endTime, locationName, latitude, longitude, rating, visibilityTypeString);
         }
         
-        public object GetEvents() {
-            return base.Channel.GetEvents();
+        public bool AddUser(string username, string password, string email, string firstName, string lastName, System.DateTime birthdate) {
+            return base.Channel.AddUser(username, password, email, firstName, lastName, birthdate);
         }
     }
 }
