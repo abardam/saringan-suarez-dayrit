@@ -12,20 +12,20 @@
   <wsdl:message name="IOmniService_AddEvent_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddEventResponse" />
   </wsdl:message>
-  <wsdl:message name="IOmniService_GetEvents_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetEvents" />
+  <wsdl:message name="IOmniService_AddUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUser" />
   </wsdl:message>
-  <wsdl:message name="IOmniService_GetEvents_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetEventsResponse" />
+  <wsdl:message name="IOmniService_AddUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserResponse" />
   </wsdl:message>
   <wsdl:portType name="IOmniService">
     <wsdl:operation name="AddEvent">
       <wsdl:input wsaw:Action="http://tempuri.org/IOmniService/AddEvent" message="tns:IOmniService_AddEvent_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOmniService/AddEventResponse" message="tns:IOmniService_AddEvent_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetEvents">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOmniService/GetEvents" message="tns:IOmniService_GetEvents_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOmniService/GetEventsResponse" message="tns:IOmniService_GetEvents_OutputMessage" />
+    <wsdl:operation name="AddUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOmniService/AddUser" message="tns:IOmniService_AddUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOmniService/AddUserResponse" message="tns:IOmniService_AddUser_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IOmniService" type="tns:IOmniService">
@@ -39,8 +39,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetEvents">
-      <soap:operation soapAction="http://tempuri.org/IOmniService/GetEvents" style="document" />
+    <wsdl:operation name="AddUser">
+      <soap:operation soapAction="http://tempuri.org/IOmniService/AddUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

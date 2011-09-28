@@ -31,6 +31,7 @@ namespace ProcessingTests
         public void Begin()
         {
             AddEventTest();
+            AddUserTest();
         }
 
         private bool AddEventTest()
@@ -54,9 +55,16 @@ namespace ProcessingTests
             return service.AddEvent(title, description, categoryString, created, lastModified, startTime, endTime, locationName, latitude, longitude,rating, visibilityTypeString);
         }
 
-        private IQueryable<Event> GetEventsTest()
+        private bool AddUserTest()
         {
-            return (IQueryable<Event>)service.GetEvents();
+            string username = "emanuel12345";
+            string password = "password";
+            string email = "saringan.emanuel@live.com";
+            string firstName = "Jay";
+            string lastName = "Saringan";
+            DateTime birthdate = DateTime.Now;
+
+            return service.AddUser(username, password, email, firstName, lastName, birthdate);
         }
     }
 }
