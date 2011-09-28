@@ -37,13 +37,16 @@ namespace OmniWebService
         {
             Event e = eventServices.CreateEvent(title, description, startTime, endTime, rating, categoryString, visibilityTypeString, latitude, longitude, locationName);
             eventServices.AddEvent(e);
-
+            
             return true;
         }
 
-        public IQueryable<Event> GetEvents()
+        public bool AddUser(string username, string password, string email, string firstName, string lastName, DateTime birthdate)
         {
-            return eventServices.GetEvents();
+            User user = accountServices.CreateUser(username, password, email, firstName, lastName, birthdate);
+            accountServices.AddUser(user);
+
+            return true;
         }
     }
 }
