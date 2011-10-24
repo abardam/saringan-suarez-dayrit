@@ -85,10 +85,12 @@ namespace Omnipresence.Processing
 
         public IQueryable<Event> GetEvents()
         {
-            using (OmnipresenceEntities db = new OmnipresenceEntities())
-            {
-                return db.Events.AsQueryable();
-            }
+            return db.Events.AsQueryable();
+        }
+
+        public Event GetEventById(int id)
+        {
+            return db.Events.Where(x => x.EventId == id).SingleOrDefault();
         }
 
         public void DeleteEvent(Event e)
@@ -193,6 +195,26 @@ namespace Omnipresence.Processing
         {
             Country country = db.Countries.Where(x => x.Name.Equals(countryString, StringComparison.CurrentCultureIgnoreCase)).SingleOrDefault();
             return country;
+        }
+
+        public bool AddComment(int eventId, string commentString)
+        {
+            Event e = GetEventById(eventId);
+            Comment comment = new Comment();
+            comment.Timestamp = DateTime.Now;
+            comment.CommentText = commentString;
+
+            return AddComment(e, comment);
+        }
+
+        private bool AddComment(Event e, Comment comment)
+        {
+            e.Comments.Add(comment);
+            db.AddToComments(comment);
+
+            db.SaveChanges();
+
+            return true;
         }
 
         public void Dispose()
