@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AccountServices.cs" />
-    <Compile Include="Core\EventModels.cs" />
+    <Compile Include="Models\EventModels.cs" />
     <Compile Include="Core\EventServices.cs" />
     <Compile Include="Logging\LoggingServices.cs" />
     <Compile Include="Models\AccountModels.cs" />
