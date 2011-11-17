@@ -24,6 +24,23 @@ namespace Omnipresence.Processing
             db.SaveChanges();
         }
 
+        public bool SaveUserProfile(UserProfile userProfile)
+        {
+            UserProfile up = GetUserByUserName(userProfile.User.Username).UserProfile;
+
+            if (up != null)
+            {
+                up = userProfile;
+                db.SaveChanges();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public User CreateUser(string username, string password, string email, string firstName, string lastName, DateTime birthdate)
         {
             User user = GetUserByUserName(username);
@@ -70,6 +87,18 @@ namespace Omnipresence.Processing
             return userProfile;
         }
 
+        public bool MakeFriends(UserProfile requester, UserProfile accepter)
+        {
+            Friendship friendship = new Friendship();
+            friendship.AddingParty = requester;
+            friendship.AddedParty = accepter;
+
+            requester.RequestedFriendships.Add(friendship);
+            accepter.AcceptedFriendships.Add(friendship);
+
+            return true;
+        }
+
         public IQueryable<User> GetUserAccounts()
         {
             using (OmnipresenceEntities db = new OmnipresenceEntities())
@@ -86,6 +115,12 @@ namespace Omnipresence.Processing
             return true;
         }
 
+        public User GetUserById(int id)
+        {
+            User user = db.Users.Where(account => account.UserId == id).FirstOrDefault();
+            return user;
+        }
+
         public User GetUserByEmail(string email)
         {
             User user = db.Users.Where(account => account.Email == email).FirstOrDefault();
@@ -96,6 +131,11 @@ namespace Omnipresence.Processing
         {
             User user = db.Users.Where(account => account.Username.ToLower() == username.ToLower()).FirstOrDefault();
             return user != null ? user : null;
+        }
+
+        public UserProfile GetProfile(User user)
+        {
+            return db.UserProfiles.Where(x => x.User == user).First();
         }
 
         public bool ChangePassword(string username, string oldPassword, string newPassword)
@@ -151,11 +191,6 @@ namespace Omnipresence.Processing
         public void Dispose()
         {
             db.Connection.Close();
-        }
-
-        public UserProfile GetProfile(User user)
-        {
-            return db.UserProfiles.Where(x => x.User == user).First();
         }
     }
 }
