@@ -35,6 +35,20 @@ namespace Omnipresence.Processing
         public string LocationName { get; set; }
     }
 
+    public class UpdateEventModel
+    {
+        public int EventId { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public Category Category { get; set; }
+        public VisibilityType VisibilityType { get; set; }
+        public Location Location { get; set; }
+        public bool IsActive { get; set; }
+        public int Rating { get; set; }
+    }
+
     public class DeleteEventModel
     {
         public int EventId { get; set; }

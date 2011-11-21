@@ -24,44 +24,71 @@ namespace Omnipresence.Processing
 
         #region [CRUD]
 
-        public EventModel CreateEvent(CreateEventModel createEventModel)
-        {
-            EventModel eventModel = new EventModel();
-            eventModel.Title = createEventModel.Title;
-            eventModel.Description = createEventModel.Description;
-            eventModel.StartTime = createEventModel.StartTime;
-            eventModel.EndTime = createEventModel.EndTime;
-            eventModel.Category = GetCategory(createEventModel.CategoryString);
-            eventModel.VisibilityType = GetVisibilityType(createEventModel.VisibilityTypeString);
-            eventModel.Location = CreateLocation(createEventModel.Latitude, createEventModel.Longitude, createEventModel.LocationName);
+        //public bool AddEvent(EventModel eventModel)
+        //{
+        //    Event newEvent = new Event();
+        //    newEvent.Title = eventModel.Title;
+        //    newEvent.Description = eventModel.Description;
+        //    newEvent.StartTime = eventModel.StartTime;
+        //    newEvent.EndTime = eventModel.EndTime;
+        //    newEvent.Category = eventModel.Category;
+        //    newEvent.VisibilityType = eventModel.VisibilityType;
+        //    newEvent.Location = eventModel.Location;
+        //    newEvent.IsActive = eventModel.IsActive;
+        //    newEvent.LastModified = eventModel.LastModified;
+        //    newEvent.Created = eventModel.Created;
+        //    newEvent.Rating = eventModel.Rating;
 
-            eventModel.IsActive = true;
-            eventModel.LastModified = DateTime.Now;
-            eventModel.Created = System.DateTime.Now;
-            eventModel.Rating = 0;
+        //    db.AddToEvents(newEvent);
+        //    db.SaveChanges();
 
-            return eventModel;
-        }
+        //    return true;
+        //}
 
-        public bool AddEvent(EventModel eventModel)
+        public bool CreateEvent(CreateEventModel createEventModel)
         {
             Event newEvent = new Event();
-            newEvent.Title = eventModel.Title;
-            newEvent.Description = eventModel.Description;
-            newEvent.StartTime = eventModel.StartTime;
-            newEvent.EndTime = eventModel.EndTime;
-            newEvent.Category = eventModel.Category;
-            newEvent.VisibilityType = eventModel.VisibilityType;
-            newEvent.Location = eventModel.Location;
-            newEvent.IsActive = eventModel.IsActive;
-            newEvent.LastModified = eventModel.LastModified;
-            newEvent.Created = eventModel.Created;
-            newEvent.Rating = eventModel.Rating;
+            newEvent.Title = createEventModel.Title;
+            newEvent.Description = createEventModel.Description;
+            newEvent.StartTime = createEventModel.StartTime;
+            newEvent.EndTime = createEventModel.EndTime;
+            newEvent.Category = GetCategory(createEventModel.CategoryString);
+            newEvent.VisibilityType = GetVisibilityType(createEventModel.VisibilityTypeString);
+            newEvent.Location = CreateLocation(createEventModel.Latitude, createEventModel.Longitude, createEventModel.LocationName);
+
+            newEvent.IsActive = true;
+            newEvent.LastModified = DateTime.Now;
+            newEvent.Created = System.DateTime.Now;
+            newEvent.Rating = 0;
 
             db.AddToEvents(newEvent);
             db.SaveChanges();
 
             return true;
+        }
+
+        public bool UpdateEvent(UpdateEventModel uem)
+        {
+            Event evt = db.Events.Where(e => e.EventId == uem.EventId).FirstOrDefault();
+
+            if (evt != null)
+            {
+                evt.Title = uem.Title;
+                evt.Description = uem.Description;
+                evt.StartTime = uem.StartTime;
+                evt.Category = uem.Category;
+                evt.VisibilityType = uem.VisibilityType;
+                evt.Location = uem.Location;
+                evt.IsActive = uem.IsActive;
+                evt.Rating = uem.Rating;
+                db.SaveChanges();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool DeleteEvent(DeleteEventModel deleteEventModel)
@@ -114,6 +141,7 @@ namespace Omnipresence.Processing
                     curEvent.Rating++;
                 }
 
+                db.SaveChanges();
                 return true;
             }
             else
