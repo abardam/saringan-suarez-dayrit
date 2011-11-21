@@ -102,7 +102,7 @@
     <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="128" />
     <Property Name="Birthdate" Type="datetime" Nullable="false" />
     <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="1024" />
-    <Property Name="Avatar" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Avatar" Type="varbinary(max)" Nullable="true" />
     <Property Name="Reputation" Type="int" Nullable="false" />
     <Property Name="Timezone" Type="int" Nullable="false" />
     <Property Name="IsFemale" Type="bit" Nullable="false" />
@@ -112,25 +112,18 @@
       <PropertyRef Name="UserId" />
     </Key>
     <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Username" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="32" />
     <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
     <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
     <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="AlternateEmail" Type="nvarchar" Nullable="true" MaxLength="128" />
+    <Property Name="AlternateEmail" Type="nvarchar" Nullable="false" MaxLength="128" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-    <Property Name="LastModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
     <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
-    <Property Name="LastLoginIp" Type="nvarchar" Nullable="true" MaxLength="64" />
     <Property Name="IsActivated" Type="bit" Nullable="false" />
     <Property Name="IsLockedOut" Type="bit" Nullable="false" />
     <Property Name="LastLockedOutDate" Type="datetime" Nullable="false" />
-    <Property Name="LastLockedOutReason" Type="nvarchar" Nullable="true" MaxLength="256" />
-    <Property Name="NewPasswordKey" Type="nvarchar" Nullable="true" MaxLength="128" />
-    <Property Name="NewPasswordRequested" Type="datetime" Nullable="true" />
-    <Property Name="NewEmail" Type="nvarchar" Nullable="true" MaxLength="128" />
-    <Property Name="NewEmailKey" Type="nvarchar" Nullable="true" MaxLength="128" />
-    <Property Name="NewEmailRequested" Type="datetime" Nullable="true" />
-    <Property Name="SecurityQuestion" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="SecurityQuestion" Type="nvarchar" Nullable="false" MaxLength="256" />
     <Property Name="SecurityAnswer" Type="nvarchar" Nullable="true" MaxLength="256" />
   </EntityType>
   <EntityType Name="VisibilityTypes">
@@ -355,7 +348,7 @@
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
           <Property Name="Birthdate" Type="DateTime" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" Nullable="false" />
-          <Property Name="Avatar" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Reputation" Type="Int32" Nullable="false" />
           <Property Name="Timezone" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="OmnipresenceModel.FK_UserProfile_User" FromRole="UserProfiles" ToRole="Users" />
@@ -369,25 +362,18 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Username" Type="String" MaxLength="32" Unicode="true" FixedLength="false" Nullable="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
           <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="AlternateEmail" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="AlternateEmail" Type="String" MaxLength="128" Unicode="true" FixedLength="false" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" />
           <Property Name="LastLoginDate" Type="DateTime" Nullable="false" />
-          <Property Name="LastLoginIp" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
           <Property Name="IsActivated" Type="Boolean" Nullable="false" />
           <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
           <Property Name="LastLockedOutDate" Type="DateTime" Nullable="false" />
-          <Property Name="LastLockedOutReason" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
-          <Property Name="NewPasswordKey" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="NewPasswordRequested" Type="DateTime" />
-          <Property Name="NewEmail" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="NewEmailKey" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="NewEmailRequested" Type="DateTime" />
-          <Property Name="SecurityQuestion" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="SecurityQuestion" Type="String" MaxLength="256" Unicode="true" FixedLength="false" Nullable="false" />
           <Property Name="SecurityAnswer" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="UserProfile" Relationship="OmnipresenceModel.FK_UserProfile_User" FromRole="Users" ToRole="UserProfiles" />
         </EntityType>
@@ -590,16 +576,9 @@
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
           <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
-          <ScalarProperty Name="LastLoginIp" ColumnName="LastLoginIp" />
           <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
           <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
           <ScalarProperty Name="LastLockedOutDate" ColumnName="LastLockedOutDate" />
-          <ScalarProperty Name="LastLockedOutReason" ColumnName="LastLockedOutReason" />
-          <ScalarProperty Name="NewPasswordKey" ColumnName="NewPasswordKey" />
-          <ScalarProperty Name="NewPasswordRequested" ColumnName="NewPasswordRequested" />
-          <ScalarProperty Name="NewEmail" ColumnName="NewEmail" />
-          <ScalarProperty Name="NewEmailKey" ColumnName="NewEmailKey" />
-          <ScalarProperty Name="NewEmailRequested" ColumnName="NewEmailRequested" />
           <ScalarProperty Name="SecurityQuestion" ColumnName="SecurityQuestion" />
           <ScalarProperty Name="SecurityAnswer" ColumnName="SecurityAnswer" />
         </MappingFragment>
@@ -642,13 +621,13 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Core">
+      <Diagram Name="Core" ZoomLevel="92">
         <EntityTypeShape EntityType="OmnipresenceModel.Category" Width="1.5" PointX="3" PointY="5.75" Height="1.9802864583333335" IsExpanded="true" />
         <EntityTypeShape EntityType="OmnipresenceModel.Comment" Width="1.5" PointX="7.5" PointY="1.875" Height="2.3648893229166656" IsExpanded="true" />
         <EntityTypeShape EntityType="OmnipresenceModel.Event" Width="1.5" PointX="5.25" PointY="1" Height="4.0956022135416656" IsExpanded="true" />
         <EntityTypeShape EntityType="OmnipresenceModel.Location" Width="1.5" PointX="3" PointY="1.875" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="OmnipresenceModel.UserProfile" Width="1.5" PointX="7.5" PointY="10.75" Height="3.5186979166666656" IsExpanded="true" />
-        <EntityTypeShape EntityType="OmnipresenceModel.User" Width="1.5" PointX="5.25" PointY="9.5" Height="5.4417122395833335" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.User" Width="1.5" PointX="5.25" PointY="9.5" Height="3.9033007812500014" IsExpanded="true" />
         <EntityTypeShape EntityType="OmnipresenceModel.VisibilityType" Width="1.5" PointX="3" PointY="8.5" Height="1.9802864583333317" IsExpanded="true" />
         <AssociationConnector Association="OmnipresenceModel.FK_Event_Category" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="5.75" />
@@ -675,8 +654,8 @@
           <ConnectorPoint PointX="5.25" PointY="4.059700079427083" />
         </AssociationConnector>
         <AssociationConnector Association="OmnipresenceModel.FK_UserProfile_User" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="12.509348958333334" />
-          <ConnectorPoint PointX="7.5" PointY="12.509348958333334" />
+          <ConnectorPoint PointX="6.75" PointY="12.076650390625002" />
+          <ConnectorPoint PointX="7.5" PointY="12.076650390625002" />
         </AssociationConnector>
         <EntityTypeShape EntityType="OmnipresenceModel.Friendship" Width="1.5" PointX="11.25" PointY="11.875" Height="1.7879850260416674" />
         <AssociationConnector Association="OmnipresenceModel.UserProfileFriendship">

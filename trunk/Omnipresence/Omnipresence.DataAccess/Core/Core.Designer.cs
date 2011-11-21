@@ -1503,26 +1503,34 @@ namespace Omnipresence.DataAccess.Core
         /// Create a new User object.
         /// </summary>
         /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="username">Initial value of the Username property.</param>
         /// <param name="password">Initial value of the Password property.</param>
         /// <param name="passwordSalt">Initial value of the PasswordSalt property.</param>
         /// <param name="email">Initial value of the Email property.</param>
+        /// <param name="alternateEmail">Initial value of the AlternateEmail property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        /// <param name="lastModifiedDate">Initial value of the LastModifiedDate property.</param>
         /// <param name="lastLoginDate">Initial value of the LastLoginDate property.</param>
         /// <param name="isActivated">Initial value of the IsActivated property.</param>
         /// <param name="isLockedOut">Initial value of the IsLockedOut property.</param>
         /// <param name="lastLockedOutDate">Initial value of the LastLockedOutDate property.</param>
-        public static User CreateUser(global::System.Int32 userId, global::System.String password, global::System.String passwordSalt, global::System.String email, global::System.DateTime createdDate, global::System.DateTime lastLoginDate, global::System.Boolean isActivated, global::System.Boolean isLockedOut, global::System.DateTime lastLockedOutDate)
+        /// <param name="securityQuestion">Initial value of the SecurityQuestion property.</param>
+        public static User CreateUser(global::System.Int32 userId, global::System.String username, global::System.String password, global::System.String passwordSalt, global::System.String email, global::System.String alternateEmail, global::System.DateTime createdDate, global::System.DateTime lastModifiedDate, global::System.DateTime lastLoginDate, global::System.Boolean isActivated, global::System.Boolean isLockedOut, global::System.DateTime lastLockedOutDate, global::System.String securityQuestion)
         {
             User user = new User();
             user.UserId = userId;
+            user.Username = username;
             user.Password = password;
             user.PasswordSalt = passwordSalt;
             user.Email = email;
+            user.AlternateEmail = alternateEmail;
             user.CreatedDate = createdDate;
+            user.LastModifiedDate = lastModifiedDate;
             user.LastLoginDate = lastLoginDate;
             user.IsActivated = isActivated;
             user.IsLockedOut = isLockedOut;
             user.LastLockedOutDate = lastLockedOutDate;
+            user.SecurityQuestion = securityQuestion;
             return user;
         }
 
@@ -1559,7 +1567,7 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Username
         {
@@ -1571,7 +1579,7 @@ namespace Omnipresence.DataAccess.Core
             {
                 OnUsernameChanging(value);
                 ReportPropertyChanging("Username");
-                _Username = StructuralObject.SetValidValue(value, true);
+                _Username = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Username");
                 OnUsernameChanged();
             }
@@ -1655,7 +1663,7 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String AlternateEmail
         {
@@ -1667,7 +1675,7 @@ namespace Omnipresence.DataAccess.Core
             {
                 OnAlternateEmailChanging(value);
                 ReportPropertyChanging("AlternateEmail");
-                _AlternateEmail = StructuralObject.SetValidValue(value, true);
+                _AlternateEmail = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("AlternateEmail");
                 OnAlternateEmailChanged();
             }
@@ -1703,9 +1711,9 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> LastModifiedDate
+        public global::System.DateTime LastModifiedDate
         {
             get
             {
@@ -1720,8 +1728,8 @@ namespace Omnipresence.DataAccess.Core
                 OnLastModifiedDateChanged();
             }
         }
-        private Nullable<global::System.DateTime> _LastModifiedDate;
-        partial void OnLastModifiedDateChanging(Nullable<global::System.DateTime> value);
+        private global::System.DateTime _LastModifiedDate;
+        partial void OnLastModifiedDateChanging(global::System.DateTime value);
         partial void OnLastModifiedDateChanged();
     
         /// <summary>
@@ -1747,30 +1755,6 @@ namespace Omnipresence.DataAccess.Core
         private global::System.DateTime _LastLoginDate;
         partial void OnLastLoginDateChanging(global::System.DateTime value);
         partial void OnLastLoginDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String LastLoginIp
-        {
-            get
-            {
-                return _LastLoginIp;
-            }
-            set
-            {
-                OnLastLoginIpChanging(value);
-                ReportPropertyChanging("LastLoginIp");
-                _LastLoginIp = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("LastLoginIp");
-                OnLastLoginIpChanged();
-            }
-        }
-        private global::System.String _LastLoginIp;
-        partial void OnLastLoginIpChanging(global::System.String value);
-        partial void OnLastLoginIpChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1847,151 +1831,7 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String LastLockedOutReason
-        {
-            get
-            {
-                return _LastLockedOutReason;
-            }
-            set
-            {
-                OnLastLockedOutReasonChanging(value);
-                ReportPropertyChanging("LastLockedOutReason");
-                _LastLockedOutReason = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("LastLockedOutReason");
-                OnLastLockedOutReasonChanged();
-            }
-        }
-        private global::System.String _LastLockedOutReason;
-        partial void OnLastLockedOutReasonChanging(global::System.String value);
-        partial void OnLastLockedOutReasonChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String NewPasswordKey
-        {
-            get
-            {
-                return _NewPasswordKey;
-            }
-            set
-            {
-                OnNewPasswordKeyChanging(value);
-                ReportPropertyChanging("NewPasswordKey");
-                _NewPasswordKey = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("NewPasswordKey");
-                OnNewPasswordKeyChanged();
-            }
-        }
-        private global::System.String _NewPasswordKey;
-        partial void OnNewPasswordKeyChanging(global::System.String value);
-        partial void OnNewPasswordKeyChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> NewPasswordRequested
-        {
-            get
-            {
-                return _NewPasswordRequested;
-            }
-            set
-            {
-                OnNewPasswordRequestedChanging(value);
-                ReportPropertyChanging("NewPasswordRequested");
-                _NewPasswordRequested = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("NewPasswordRequested");
-                OnNewPasswordRequestedChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _NewPasswordRequested;
-        partial void OnNewPasswordRequestedChanging(Nullable<global::System.DateTime> value);
-        partial void OnNewPasswordRequestedChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String NewEmail
-        {
-            get
-            {
-                return _NewEmail;
-            }
-            set
-            {
-                OnNewEmailChanging(value);
-                ReportPropertyChanging("NewEmail");
-                _NewEmail = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("NewEmail");
-                OnNewEmailChanged();
-            }
-        }
-        private global::System.String _NewEmail;
-        partial void OnNewEmailChanging(global::System.String value);
-        partial void OnNewEmailChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String NewEmailKey
-        {
-            get
-            {
-                return _NewEmailKey;
-            }
-            set
-            {
-                OnNewEmailKeyChanging(value);
-                ReportPropertyChanging("NewEmailKey");
-                _NewEmailKey = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("NewEmailKey");
-                OnNewEmailKeyChanged();
-            }
-        }
-        private global::System.String _NewEmailKey;
-        partial void OnNewEmailKeyChanging(global::System.String value);
-        partial void OnNewEmailKeyChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> NewEmailRequested
-        {
-            get
-            {
-                return _NewEmailRequested;
-            }
-            set
-            {
-                OnNewEmailRequestedChanging(value);
-                ReportPropertyChanging("NewEmailRequested");
-                _NewEmailRequested = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("NewEmailRequested");
-                OnNewEmailRequestedChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _NewEmailRequested;
-        partial void OnNewEmailRequestedChanging(Nullable<global::System.DateTime> value);
-        partial void OnNewEmailRequestedChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String SecurityQuestion
         {
@@ -2003,7 +1843,7 @@ namespace Omnipresence.DataAccess.Core
             {
                 OnSecurityQuestionChanging(value);
                 ReportPropertyChanging("SecurityQuestion");
-                _SecurityQuestion = StructuralObject.SetValidValue(value, true);
+                _SecurityQuestion = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("SecurityQuestion");
                 OnSecurityQuestionChanged();
             }
@@ -2099,11 +1939,10 @@ namespace Omnipresence.DataAccess.Core
         /// <param name="lastName">Initial value of the LastName property.</param>
         /// <param name="birthdate">Initial value of the Birthdate property.</param>
         /// <param name="description">Initial value of the Description property.</param>
-        /// <param name="avatar">Initial value of the Avatar property.</param>
         /// <param name="reputation">Initial value of the Reputation property.</param>
         /// <param name="timezone">Initial value of the Timezone property.</param>
         /// <param name="isFemale">Initial value of the IsFemale property.</param>
-        public static UserProfile CreateUserProfile(global::System.Int32 userProfileId, global::System.String firstName, global::System.String lastName, global::System.DateTime birthdate, global::System.String description, global::System.Byte[] avatar, global::System.Int32 reputation, global::System.Int32 timezone, global::System.Boolean isFemale)
+        public static UserProfile CreateUserProfile(global::System.Int32 userProfileId, global::System.String firstName, global::System.String lastName, global::System.DateTime birthdate, global::System.String description, global::System.Int32 reputation, global::System.Int32 timezone, global::System.Boolean isFemale)
         {
             UserProfile userProfile = new UserProfile();
             userProfile.UserProfileId = userProfileId;
@@ -2111,7 +1950,6 @@ namespace Omnipresence.DataAccess.Core
             userProfile.LastName = lastName;
             userProfile.Birthdate = birthdate;
             userProfile.Description = description;
-            userProfile.Avatar = avatar;
             userProfile.Reputation = reputation;
             userProfile.Timezone = timezone;
             userProfile.IsFemale = isFemale;
@@ -2247,7 +2085,7 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.Byte[] Avatar
         {
@@ -2259,7 +2097,7 @@ namespace Omnipresence.DataAccess.Core
             {
                 OnAvatarChanging(value);
                 ReportPropertyChanging("Avatar");
-                _Avatar = StructuralObject.SetValidValue(value, false);
+                _Avatar = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Avatar");
                 OnAvatarChanged();
             }

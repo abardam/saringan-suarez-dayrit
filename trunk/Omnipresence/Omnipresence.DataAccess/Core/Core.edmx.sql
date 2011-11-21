@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/22/2011 07:09:51
+-- Date Created: 11/22/2011 07:22:06
 -- Generated from EDMX file: C:\Users\emanuel\Desktop\omni\saringan-suarez-dayrit\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
@@ -128,7 +128,7 @@ CREATE TABLE [dbo].[UserProfiles] (
     [LastName] nvarchar(128)  NOT NULL,
     [Birthdate] datetime  NOT NULL,
     [Description] nvarchar(1024)  NOT NULL,
-    [Avatar] varbinary(max)  NOT NULL,
+    [Avatar] varbinary(max)  NULL,
     [Reputation] int  NOT NULL,
     [Timezone] int  NOT NULL,
     [IsFemale] bit  NOT NULL
@@ -138,25 +138,18 @@ GO
 -- Creating table 'Users'
 CREATE TABLE [dbo].[Users] (
     [UserId] int IDENTITY(1,1) NOT NULL,
-    [Username] nvarchar(32)  NULL,
+    [Username] nvarchar(32)  NOT NULL,
     [Password] nvarchar(128)  NOT NULL,
     [PasswordSalt] nvarchar(128)  NOT NULL,
     [Email] nvarchar(128)  NOT NULL,
-    [AlternateEmail] nvarchar(128)  NULL,
+    [AlternateEmail] nvarchar(128)  NOT NULL,
     [CreatedDate] datetime  NOT NULL,
-    [LastModifiedDate] datetime  NULL,
+    [LastModifiedDate] datetime  NOT NULL,
     [LastLoginDate] datetime  NOT NULL,
-    [LastLoginIp] nvarchar(64)  NULL,
     [IsActivated] bit  NOT NULL,
     [IsLockedOut] bit  NOT NULL,
     [LastLockedOutDate] datetime  NOT NULL,
-    [LastLockedOutReason] nvarchar(256)  NULL,
-    [NewPasswordKey] nvarchar(128)  NULL,
-    [NewPasswordRequested] datetime  NULL,
-    [NewEmail] nvarchar(128)  NULL,
-    [NewEmailKey] nvarchar(128)  NULL,
-    [NewEmailRequested] datetime  NULL,
-    [SecurityQuestion] nvarchar(256)  NULL,
+    [SecurityQuestion] nvarchar(256)  NOT NULL,
     [SecurityAnswer] nvarchar(256)  NULL
 );
 GO
