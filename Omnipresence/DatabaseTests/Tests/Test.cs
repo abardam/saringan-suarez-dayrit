@@ -5,8 +5,10 @@ using System.Text;
 
 namespace DatabaseTests
 {
-    public abstract class TestSuite
+    public abstract class Test
     {
-        public abstract void BeginTests();
+        public string Name { get; set; }
+
+        public abstract bool Execute();
     }
 }
