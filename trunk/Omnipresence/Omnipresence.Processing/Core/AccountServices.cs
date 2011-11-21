@@ -4,29 +4,116 @@ using System.Data.Objects;
 using System.Linq;
 using System.Text;
 using Omnipresence.DataAccess.Core;
-// TODO: CHANGE ALL RETURN VALUES TO OBJECT TYPES RELEVANT ONLY TO THIS PROJECT, PROCESSING
 
 namespace Omnipresence.Processing
 {
     public class AccountServices:IDisposable
     {
+        #region [FIELDS]
         private OmnipresenceEntities db;
+        #endregion
 
+        #region [CONSTRUCTOR]
         public AccountServices()
         {
             db = new OmnipresenceEntities();
             db.Connection.Open();
         }
+        #endregion
 
-        public void AddUser(User user)
+        #region [CRUD]
+        public bool AddUser(UserModel userModel)
         {
+            User user = new User();
+            user.Username = userModel.Username;
+            user.Password = userModel.Password;
+            user.PasswordSalt = userModel.PasswordSalt;
+            user.Email = userModel.Email;
+            user.AlternateEmail = userModel.AlternateEmail;
+            user.SecurityQuestion = userModel.SecurityQuestion;
+            user.SecurityAnswer = userModel.SecurityAnswer;
+            user.CreatedDate = userModel.CreatedDate;
+            user.IsActivated = userModel.IsActivated;
+            user.IsLockedOut = userModel.IsLockedOut;
+            user.LastLoginDate = user.LastLoginDate;
+            user.UserProfile = userModel.UserProfile;
+
             db.AddToUsers(user);
             db.SaveChanges();
+
+            return true;
         }
 
-        public bool SaveUserProfile(UserProfile userProfile)
+        public UserModel CreateUser(CreateUserModel userModel, CreateUserProfileModel userProfileModel)
         {
-            UserProfile up = GetUserByUserName(userProfile.User.Username).UserProfile;
+            UserModel user = new UserModel();
+            user.Username = userModel.Username;
+            user.Password = userModel.Password;
+            user.Email = userModel.Email;
+
+            user.LastLoginDate = DateTime.Now;
+            user.CreatedDate = DateTime.Now;
+            user.IsActivated = true;
+            user.IsLockedOut = false;
+            user.LastLockedOutDate = DateTime.Now;
+
+            UserProfile userProfile = CreateUserProfile(userProfileModel);
+            user.UserProfile = userProfile;
+
+            return user;
+        }
+
+        public bool MakeFriends(UserProfile requester, UserProfile accepter)
+        {
+            Friendship friendship = new Friendship();
+            friendship.AddingParty = requester;
+            friendship.AddedParty = accepter;
+
+            db.AddToFriendships(friendship);
+            db.SaveChanges();
+
+            return true;
+        }
+
+        public bool UpdateUser(UserModel userModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteUser(DeleteUserModel deleteUserModel)
+        {
+            User user = db.Users.Where(u => u.UserId == deleteUserModel.UserId).FirstOrDefault();
+
+            if (user != null)
+            {
+                db.Users.DeleteObject(user);
+                db.SaveChanges();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public UserProfile CreateUserProfile(CreateUserProfileModel userProfileModel)
+        {
+            UserProfile userProfile = new UserProfile();
+            userProfile.FirstName = userProfileModel.FirstName;
+            userProfile.LastName = userProfileModel.LastName;
+            userProfile.Birthdate = userProfileModel.Birthdate;
+            userProfile.Gender = userProfileModel.Gender;
+            userProfile.Description = userProfileModel.Description;
+
+            userProfile.Reputation = 0;
+
+            return userProfile;
+        }
+
+        public bool UpdateUserProfile(UserProfile userProfile)
+        {
+            UserProfile up = GetUserByUsername(userProfile.User.Username).UserProfile;
 
             if (up != null)
             {
@@ -41,113 +128,110 @@ namespace Omnipresence.Processing
             }
         }
 
-        public User CreateUser(string username, string password, string email, string firstName, string lastName, DateTime birthdate)
+        public bool DeleteUser(DeleteUserModel deleteUserModel)
         {
-            User user = GetUserByUserName(username);
+            User user = db.Users.Where(u => u.UserId == deleteUserModel.UserId).FirstOrDefault();
 
             if (user != null)
             {
-                return null;
+                db.Users.DeleteObject(user);
+                db.SaveChanges();
+
+                return true;
             }
-
-            user = new User();
-            user.Username = username;
-            user.Password = password;
-            user.Email = email;
-            user.PasswordSalt = "1234";
-            user.LastLoginDate = DateTime.Now;
-            user.CreatedDate = DateTime.Now;
-            user.IsActivated = true;
-            user.IsLockedOut = false;
-            user.LastLockedOutDate = DateTime.Now;
-
-            UserProfile userProfile = CreateUserProfile(firstName, lastName, birthdate, "male", 0, "", 0);
-            user.UserProfile = userProfile;
-
-            return user;
-        }
-
-        public UserProfile CreateUserProfile(string firstName, string lastName, DateTime birthdate, string genderString, int reputation, string description, int timezone)
-        {
-            Gender gender = GetGender(genderString);
-            return CreateUserProfile(firstName, lastName, birthdate, gender, reputation, description, timezone);
-        }
-
-        private UserProfile CreateUserProfile(string firstName, string lastName, DateTime birthdate, Gender gender, int reputation, string description, int timezone)
-        {
-            UserProfile userProfile = new UserProfile();
-            userProfile.FirstName = firstName;
-            userProfile.LastName = lastName;
-            userProfile.Birthdate = birthdate;
-            userProfile.Gender = gender;
-            userProfile.Reputation = reputation;
-            userProfile.Timezone = timezone;
-            userProfile.Description = description;
-
-            return userProfile;
-        }
-
-        public bool MakeFriends(UserProfile requester, UserProfile accepter)
-        {
-            Friendship friendship = new Friendship();
-            friendship.AddingParty = requester;
-            friendship.AddedParty = accepter;
-
-            requester.RequestedFriendships.Add(friendship);
-            accepter.AcceptedFriendships.Add(friendship);
-
-            return true;
-        }
-
-        public IQueryable<User> GetUserAccounts()
-        {
-            using (OmnipresenceEntities db = new OmnipresenceEntities())
+            else
             {
-                return db.Users.AsQueryable();
+                return false;
             }
         }
 
-        public bool DeleteUser(User user)
-        {
-            db.Users.DeleteObject(user);
-            db.SaveChanges();
+        #endregion
 
-            return true;
-        }
-
-        public User GetUserById(int id)
+        #region [SEARCH]
+        public UserModel GetUserById(int id)
         {
             User user = db.Users.Where(account => account.UserId == id).FirstOrDefault();
-            return user;
+            UserModel userModel = Utilities.UserToUserModel(user);
+
+            return userModel;
         }
 
-        public User GetUserByEmail(string email)
+        public UserModel GetUserByEmail(string email)
         {
             User user = db.Users.Where(account => account.Email == email).FirstOrDefault();
-            return user != null ? user : null;
+            UserModel userModel = Utilities.UserToUserModel(user);
+
+            return userModel;
         }
 
-        public User GetUserByUserName(string username)
+        public UserModel GetUserByUsername(string username)
         {
             User user = db.Users.Where(account => account.Username.ToLower() == username.ToLower()).FirstOrDefault();
-            return user != null ? user : null;
+            UserModel userModel = Utilities.UserToUserModel(user);
+
+            return userModel;
         }
 
-        public UserProfile GetProfile(User user)
+        public IQueryable<UserModel> GetAllUsers()
         {
-            return db.UserProfiles.Where(x => x.User == user).First();
+            ObjectSet<User> users = db.Users;
+            List<UserModel> userModels = new List<UserModel>();
+
+            foreach (User user in users)
+            {
+                userModels.Add(Utilities.UserToUserModel(user));
+            }
+
+            return userModels.AsQueryable();
         }
 
-        public bool ChangePassword(string username, string oldPassword, string newPassword)
+        public UserProfileModel GetUserProfileById(int id)
         {
-            User user = db.Users.Where(x => x.Username == username).FirstOrDefault();
+            UserModel userModel = GetUserById(id);
+
+            return Utilities.UserProfileToUserProfileModel(userModel.UserProfile);
+        }
+
+        public UserProfileModel GetUserProfileByEmail(string email)
+        {
+            UserModel userModel = GetUserByEmail(email);
+
+            return Utilities.UserProfileToUserProfileModel(userModel.UserProfile);
+        }
+
+        public UserProfileModel GetUserProfileByUsername(string username)
+        {
+            UserModel userModel = GetUserByUsername(username);
+
+            return Utilities.UserProfileToUserProfileModel(userModel.UserProfile);
+        }
+
+        public IQueryable<UserProfileModel> GetAllUserProfiles()
+        {
+            ObjectSet<UserProfile> userProfiles = db.UserProfiles;
+            List<UserProfileModel> userProfileModels = new List<UserProfileModel>();
+
+            foreach (UserProfile up in userProfiles)
+            {
+                userProfileModels.Add(Utilities.UserProfileToUserProfileModel(up));
+            }
+
+            return userProfileModels.AsQueryable();
+        }
+
+        #endregion
+
+        public bool UpdatePassword(UpdatePasswordModel changePasswordModel)
+        {
+            User user = db.Users.Where(x => x.Username == changePasswordModel.Username).FirstOrDefault();
 
             if (user != null)
             {
-                if (user.Password == oldPassword)
+                if (user.Password == changePasswordModel.OldPassword)
                 {
-                    user.Password = newPassword;
+                    user.Password = changePasswordModel.NewPassword;
                     db.SaveChanges();
+
                     return true;
                 }
                 else
@@ -163,11 +247,11 @@ namespace Omnipresence.Processing
 
         public bool ValidateUser(string username, string password)
         {
-            User user = GetUserByUserName(username);
+            UserModel userModel = GetUserByUsername(username);
 
-            if (user != null)
+            if (userModel != null)
             {
-                return user.Password == password;
+                return userModel.Password == password;
             }
             else
             {
@@ -175,18 +259,18 @@ namespace Omnipresence.Processing
             }
         }
 
-        private Gender GetGender(string genderString)
-        {
-            if (genderString.Equals("male", StringComparison.CurrentCultureIgnoreCase) || genderString.Equals("female", StringComparison.CurrentCultureIgnoreCase))
-            {
-                Gender gender = db.Genders.Where(x => x.GenderText.Equals(genderString, StringComparison.CurrentCultureIgnoreCase)).SingleOrDefault();
-                return gender;
-            }
-            else
-            {
-                return null;
-            }
-        }
+        //private Gender GetGender(string genderString)
+        //{
+        //    if (genderString.Equals("male", StringComparison.CurrentCultureIgnoreCase) || genderString.Equals("female", StringComparison.CurrentCultureIgnoreCase))
+        //    {
+        //        Gender gender = db.Genders.Where(x => x.GenderText.Equals(genderString, StringComparison.CurrentCultureIgnoreCase)).SingleOrDefault();
+        //        return gender;
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
 
         public void Dispose()
         {
