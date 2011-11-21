@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/20/2011 00:12:14
+-- Date Created: 11/22/2011 07:09:51
 -- Generated from EDMX file: C:\Users\emanuel\Desktop\omni\saringan-suarez-dayrit\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
@@ -23,20 +23,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_Comment_Events]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_Comment_Events];
 GO
-IF OBJECT_ID(N'[dbo].[FK_Comment_Users]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_Comment_Users];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Location_Country]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Locations] DROP CONSTRAINT [FK_Location_Country];
-GO
 IF OBJECT_ID(N'[dbo].[FK_Event_Location]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_Event_Location];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Event_VisibilityType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_Event_VisibilityType];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UserProfiles_Gender]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UserProfiles] DROP CONSTRAINT [FK_UserProfiles_Gender];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserProfile_User]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[UserProfiles] DROP CONSTRAINT [FK_UserProfile_User];
@@ -46,6 +37,9 @@ IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendship]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendship1]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Friendships] DROP CONSTRAINT [FK_UserProfileFriendship1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserProfileComment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_UserProfileComment];
 GO
 
 -- --------------------------------------------------
@@ -58,14 +52,8 @@ GO
 IF OBJECT_ID(N'[dbo].[Comments]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Comments];
 GO
-IF OBJECT_ID(N'[dbo].[Countries]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Countries];
-GO
 IF OBJECT_ID(N'[dbo].[Events]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Events];
-GO
-IF OBJECT_ID(N'[dbo].[Genders]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Genders];
 GO
 IF OBJECT_ID(N'[dbo].[Locations]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Locations];
@@ -106,37 +94,20 @@ CREATE TABLE [dbo].[Comments] (
 );
 GO
 
--- Creating table 'Countries'
-CREATE TABLE [dbo].[Countries] (
-    [CountryId] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(64)  NOT NULL,
-    [Flag] varbinary(max)  NULL,
-    [Description] nvarchar(128)  NULL
-);
-GO
-
 -- Creating table 'Events'
 CREATE TABLE [dbo].[Events] (
     [EventId] int IDENTITY(1,1) NOT NULL,
     [Title] nvarchar(64)  NOT NULL,
-    [Description] nvarchar(1024)  NULL,
-    [Rating] int  NULL,
-    [Created] datetime  NULL,
-    [LastModified] datetime  NULL,
-    [StartTime] datetime  NULL,
-    [EndTime] datetime  NULL,
-    [IsActive] bit  NULL,
+    [Description] nvarchar(1024)  NOT NULL,
+    [Rating] int  NOT NULL,
+    [Created] datetime  NOT NULL,
+    [LastModified] datetime  NOT NULL,
+    [StartTime] datetime  NOT NULL,
+    [EndTime] datetime  NOT NULL,
+    [IsActive] bit  NOT NULL,
     [VisibilityTypeId] int  NULL,
     [LocationId] int  NULL,
     [CategoryId] int  NULL
-);
-GO
-
--- Creating table 'Genders'
-CREATE TABLE [dbo].[Genders] (
-    [GenderId] int IDENTITY(1,1) NOT NULL,
-    [GenderText] nvarchar(16)  NULL,
-    [Description] nvarchar(32)  NULL
 );
 GO
 
@@ -155,12 +126,12 @@ CREATE TABLE [dbo].[UserProfiles] (
     [UserProfileId] int  NOT NULL,
     [FirstName] nvarchar(128)  NOT NULL,
     [LastName] nvarchar(128)  NOT NULL,
-    [Birthdate] datetime  NULL,
-    [Description] nvarchar(1024)  NULL,
-    [Avatar] varbinary(max)  NULL,
-    [Reputation] int  NULL,
-    [Timezone] int  NULL,
-    [GenderId] int  NULL
+    [Birthdate] datetime  NOT NULL,
+    [Description] nvarchar(1024)  NOT NULL,
+    [Avatar] varbinary(max)  NOT NULL,
+    [Reputation] int  NOT NULL,
+    [Timezone] int  NOT NULL,
+    [IsFemale] bit  NOT NULL
 );
 GO
 
@@ -222,22 +193,10 @@ ADD CONSTRAINT [PK_Comments]
     PRIMARY KEY CLUSTERED ([CommentId] ASC);
 GO
 
--- Creating primary key on [CountryId] in table 'Countries'
-ALTER TABLE [dbo].[Countries]
-ADD CONSTRAINT [PK_Countries]
-    PRIMARY KEY CLUSTERED ([CountryId] ASC);
-GO
-
 -- Creating primary key on [EventId] in table 'Events'
 ALTER TABLE [dbo].[Events]
 ADD CONSTRAINT [PK_Events]
     PRIMARY KEY CLUSTERED ([EventId] ASC);
-GO
-
--- Creating primary key on [GenderId] in table 'Genders'
-ALTER TABLE [dbo].[Genders]
-ADD CONSTRAINT [PK_Genders]
-    PRIMARY KEY CLUSTERED ([GenderId] ASC);
 GO
 
 -- Creating primary key on [LocationId] in table 'Locations'
@@ -302,20 +261,6 @@ ON [dbo].[Comments]
     ([EventId]);
 GO
 
--- Creating foreign key on [CountryId] in table 'Locations'
-ALTER TABLE [dbo].[Locations]
-ADD CONSTRAINT [FK_Location_Country]
-    FOREIGN KEY ([CountryId])
-    REFERENCES [dbo].[Countries]
-        ([CountryId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_Location_Country'
-CREATE INDEX [IX_FK_Location_Country]
-ON [dbo].[Locations]
-    ([CountryId]);
-GO
-
 -- Creating foreign key on [LocationId] in table 'Events'
 ALTER TABLE [dbo].[Events]
 ADD CONSTRAINT [FK_Event_Location]
@@ -342,20 +287,6 @@ ADD CONSTRAINT [FK_Event_VisibilityType]
 CREATE INDEX [IX_FK_Event_VisibilityType]
 ON [dbo].[Events]
     ([VisibilityTypeId]);
-GO
-
--- Creating foreign key on [GenderId] in table 'UserProfiles'
-ALTER TABLE [dbo].[UserProfiles]
-ADD CONSTRAINT [FK_UserProfiles_Gender]
-    FOREIGN KEY ([GenderId])
-    REFERENCES [dbo].[Genders]
-        ([GenderId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_UserProfiles_Gender'
-CREATE INDEX [IX_FK_UserProfiles_Gender]
-ON [dbo].[UserProfiles]
-    ([GenderId]);
 GO
 
 -- Creating foreign key on [UserProfileId] in table 'UserProfiles'

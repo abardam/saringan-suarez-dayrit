@@ -22,7 +22,6 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Comment_Events", "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event), "Comments", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Comment), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Event_Location", "Locations", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.Location), "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Event_VisibilityType", "VisibilityTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.VisibilityType), "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
-[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_UserProfiles_Gender", "Genders", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.Gender), "UserProfiles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.UserProfile), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_UserProfile_User", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.User), "UserProfiles", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.UserProfile), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileFriendship", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Friendship", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Friendship), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileFriendship1", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Friendship", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Friendship), true)]
@@ -129,22 +128,6 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Gender> Genders
-        {
-            get
-            {
-                if ((_Genders == null))
-                {
-                    _Genders = base.CreateObjectSet<Gender>("Genders");
-                }
-                return _Genders;
-            }
-        }
-        private ObjectSet<Gender> _Genders;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Location> Locations
         {
             get
@@ -247,14 +230,6 @@ namespace Omnipresence.DataAccess.Core
         public void AddToEvents(Event @event)
         {
             base.AddObject("Events", @event);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Genders EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToGenders(Gender gender)
-        {
-            base.AddObject("Genders", gender);
         }
     
         /// <summary>
@@ -1337,134 +1312,6 @@ namespace Omnipresence.DataAccess.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="Gender")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Gender : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Gender object.
-        /// </summary>
-        /// <param name="genderId">Initial value of the GenderId property.</param>
-        public static Gender CreateGender(global::System.Int32 genderId)
-        {
-            Gender gender = new Gender();
-            gender.GenderId = genderId;
-            return gender;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 GenderId
-        {
-            get
-            {
-                return _GenderId;
-            }
-            set
-            {
-                if (_GenderId != value)
-                {
-                    OnGenderIdChanging(value);
-                    ReportPropertyChanging("GenderId");
-                    _GenderId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("GenderId");
-                    OnGenderIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _GenderId;
-        partial void OnGenderIdChanging(global::System.Int32 value);
-        partial void OnGenderIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String GenderText
-        {
-            get
-            {
-                return _GenderText;
-            }
-            set
-            {
-                OnGenderTextChanging(value);
-                ReportPropertyChanging("GenderText");
-                _GenderText = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("GenderText");
-                OnGenderTextChanged();
-            }
-        }
-        private global::System.String _GenderText;
-        partial void OnGenderTextChanging(global::System.String value);
-        partial void OnGenderTextChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                OnDescriptionChanging(value);
-                ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Description");
-                OnDescriptionChanged();
-            }
-        }
-        private global::System.String _Description;
-        partial void OnDescriptionChanging(global::System.String value);
-        partial void OnDescriptionChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_UserProfiles_Gender", "UserProfiles")]
-        public EntityCollection<UserProfile> UserProfiles
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserProfile>("OmnipresenceModel.FK_UserProfiles_Gender", "UserProfiles");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserProfile>("OmnipresenceModel.FK_UserProfiles_Gender", "UserProfiles", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="Location")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -2255,7 +2102,8 @@ namespace Omnipresence.DataAccess.Core
         /// <param name="avatar">Initial value of the Avatar property.</param>
         /// <param name="reputation">Initial value of the Reputation property.</param>
         /// <param name="timezone">Initial value of the Timezone property.</param>
-        public static UserProfile CreateUserProfile(global::System.Int32 userProfileId, global::System.String firstName, global::System.String lastName, global::System.DateTime birthdate, global::System.String description, global::System.Byte[] avatar, global::System.Int32 reputation, global::System.Int32 timezone)
+        /// <param name="isFemale">Initial value of the IsFemale property.</param>
+        public static UserProfile CreateUserProfile(global::System.Int32 userProfileId, global::System.String firstName, global::System.String lastName, global::System.DateTime birthdate, global::System.String description, global::System.Byte[] avatar, global::System.Int32 reputation, global::System.Int32 timezone, global::System.Boolean isFemale)
         {
             UserProfile userProfile = new UserProfile();
             userProfile.UserProfileId = userProfileId;
@@ -2266,6 +2114,7 @@ namespace Omnipresence.DataAccess.Core
             userProfile.Avatar = avatar;
             userProfile.Reputation = reputation;
             userProfile.Timezone = timezone;
+            userProfile.IsFemale = isFemale;
             return userProfile;
         }
 
@@ -2470,68 +2319,30 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> GenderId
+        public global::System.Boolean IsFemale
         {
             get
             {
-                return _GenderId;
+                return _IsFemale;
             }
             set
             {
-                OnGenderIdChanging(value);
-                ReportPropertyChanging("GenderId");
-                _GenderId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("GenderId");
-                OnGenderIdChanged();
+                OnIsFemaleChanging(value);
+                ReportPropertyChanging("IsFemale");
+                _IsFemale = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsFemale");
+                OnIsFemaleChanged();
             }
         }
-        private Nullable<global::System.Int32> _GenderId;
-        partial void OnGenderIdChanging(Nullable<global::System.Int32> value);
-        partial void OnGenderIdChanged();
+        private global::System.Boolean _IsFemale;
+        partial void OnIsFemaleChanging(global::System.Boolean value);
+        partial void OnIsFemaleChanged();
 
         #endregion
     
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_UserProfiles_Gender", "Genders")]
-        public Gender Gender
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Gender>("OmnipresenceModel.FK_UserProfiles_Gender", "Genders").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Gender>("OmnipresenceModel.FK_UserProfiles_Gender", "Genders").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Gender> GenderReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Gender>("OmnipresenceModel.FK_UserProfiles_Gender", "Genders");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Gender>("OmnipresenceModel.FK_UserProfiles_Gender", "Genders", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
