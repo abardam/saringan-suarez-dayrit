@@ -47,7 +47,7 @@
     <Compile Include="Core\EventServices.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\Utilities.cs" />
+    <Compile Include="Library\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Omnipresence.DataAccess\Omnipresence.DataAccess.csproj">

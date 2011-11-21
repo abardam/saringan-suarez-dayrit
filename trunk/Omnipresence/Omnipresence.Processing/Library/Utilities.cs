@@ -67,6 +67,7 @@ namespace Omnipresence.Processing
             if (evt != null)
             {
                 EventModel evtModel = new EventModel();
+                evtModel.EventId = evt.EventId;
                 evtModel.Title = evt.Title;
                 evtModel.Description = evt.Description;
                 evtModel.StartTime = evt.StartTime;
@@ -118,11 +119,10 @@ namespace Omnipresence.Processing
             userProfileModel.UserProfileId = userProfile.UserProfileId;
             userProfileModel.FirstName = userProfile.FirstName;
             userProfileModel.LastName = userProfile.LastName;
-            userProfileModel.Gender = userProfile.Gender;
+            userProfileModel.IsFemale = userProfile.IsFemale;
             userProfileModel.Description = userProfile.Description;
             userProfileModel.AcceptedFriendships = userProfile.AcceptedFriendships;
             userProfileModel.RequestedFriendships = userProfile.RequestedFriendships;
-            userProfileModel.Timezone = userProfile.Timezone;
             userProfileModel.Birthdate = userProfile.Birthdate;
             userProfileModel.Comments = userProfile.Comments;
             userProfileModel.Reputation = userProfile.Reputation;
