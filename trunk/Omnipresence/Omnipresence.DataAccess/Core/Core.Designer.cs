@@ -19,13 +19,14 @@ using System.Runtime.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Event_Category", "Categories", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.Category), "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
-[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Comment_Events", "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.Event), "Comments", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Comment), true)]
-[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Comment_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.User), "Comments", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Comment), true)]
-[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Location_Country", "Countries", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.Country), "Locations", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Location), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Comment_Events", "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event), "Comments", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Comment), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Event_Location", "Locations", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.Location), "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Event_VisibilityType", "VisibilityTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.VisibilityType), "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_UserProfiles_Gender", "Genders", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.Gender), "UserProfiles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.UserProfile), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_UserProfile_User", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.User), "UserProfiles", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.UserProfile), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileFriendship", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Friendship", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Friendship), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileFriendship1", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Friendship", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Friendship), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileComment", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Comment), true)]
 
 #endregion
 
@@ -108,22 +109,6 @@ namespace Omnipresence.DataAccess.Core
             }
         }
         private ObjectSet<Comment> _Comments;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Country> Countries
-        {
-            get
-            {
-                if ((_Countries == null))
-                {
-                    _Countries = base.CreateObjectSet<Country>("Countries");
-                }
-                return _Countries;
-            }
-        }
-        private ObjectSet<Country> _Countries;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -220,6 +205,22 @@ namespace Omnipresence.DataAccess.Core
             }
         }
         private ObjectSet<VisibilityType> _VisibilityTypes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Friendship> Friendships
+        {
+            get
+            {
+                if ((_Friendships == null))
+                {
+                    _Friendships = base.CreateObjectSet<Friendship>("Friendships");
+                }
+                return _Friendships;
+            }
+        }
+        private ObjectSet<Friendship> _Friendships;
 
         #endregion
         #region AddTo Methods
@@ -238,14 +239,6 @@ namespace Omnipresence.DataAccess.Core
         public void AddToComments(Comment comment)
         {
             base.AddObject("Comments", comment);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Countries EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToCountries(Country country)
-        {
-            base.AddObject("Countries", country);
         }
     
         /// <summary>
@@ -294,6 +287,14 @@ namespace Omnipresence.DataAccess.Core
         public void AddToVisibilityTypes(VisibilityType visibilityType)
         {
             base.AddObject("VisibilityTypes", visibilityType);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Friendships EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToFriendships(Friendship friendship)
+        {
+            base.AddObject("Friendships", friendship);
         }
 
         #endregion
@@ -472,10 +473,18 @@ namespace Omnipresence.DataAccess.Core
         /// Create a new Comment object.
         /// </summary>
         /// <param name="commentId">Initial value of the CommentId property.</param>
-        public static Comment CreateComment(global::System.Int32 commentId)
+        /// <param name="commentText">Initial value of the CommentText property.</param>
+        /// <param name="timestamp">Initial value of the Timestamp property.</param>
+        /// <param name="userProfileId">Initial value of the UserProfileId property.</param>
+        /// <param name="eventId">Initial value of the EventId property.</param>
+        public static Comment CreateComment(global::System.Int32 commentId, global::System.String commentText, global::System.DateTime timestamp, global::System.Int32 userProfileId, global::System.Int32 eventId)
         {
             Comment comment = new Comment();
             comment.CommentId = commentId;
+            comment.CommentText = commentText;
+            comment.Timestamp = timestamp;
+            comment.UserProfileId = userProfileId;
+            comment.EventId = eventId;
             return comment;
         }
 
@@ -512,7 +521,7 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String CommentText
         {
@@ -524,7 +533,7 @@ namespace Omnipresence.DataAccess.Core
             {
                 OnCommentTextChanging(value);
                 ReportPropertyChanging("CommentText");
-                _CommentText = StructuralObject.SetValidValue(value, true);
+                _CommentText = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("CommentText");
                 OnCommentTextChanged();
             }
@@ -536,9 +545,9 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> Timestamp
+        public global::System.DateTime Timestamp
         {
             get
             {
@@ -553,40 +562,40 @@ namespace Omnipresence.DataAccess.Core
                 OnTimestampChanged();
             }
         }
-        private Nullable<global::System.DateTime> _Timestamp;
-        partial void OnTimestampChanging(Nullable<global::System.DateTime> value);
+        private global::System.DateTime _Timestamp;
+        partial void OnTimestampChanging(global::System.DateTime value);
         partial void OnTimestampChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> UserId
+        public global::System.Int32 UserProfileId
         {
             get
             {
-                return _UserId;
+                return _UserProfileId;
             }
             set
             {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
+                OnUserProfileIdChanging(value);
+                ReportPropertyChanging("UserProfileId");
+                _UserProfileId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserProfileId");
+                OnUserProfileIdChanged();
             }
         }
-        private Nullable<global::System.Int32> _UserId;
-        partial void OnUserIdChanging(Nullable<global::System.Int32> value);
-        partial void OnUserIdChanged();
+        private global::System.Int32 _UserProfileId;
+        partial void OnUserProfileIdChanging(global::System.Int32 value);
+        partial void OnUserProfileIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> EventId
+        public global::System.Int32 EventId
         {
             get
             {
@@ -601,8 +610,8 @@ namespace Omnipresence.DataAccess.Core
                 OnEventIdChanged();
             }
         }
-        private Nullable<global::System.Int32> _EventId;
-        partial void OnEventIdChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _EventId;
+        partial void OnEventIdChanging(global::System.Int32 value);
         partial void OnEventIdChanged();
 
         #endregion
@@ -653,16 +662,16 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Comment_Users", "Users")]
-        public User User
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileComment", "UserProfile")]
+        public UserProfile UserProfile
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("OmnipresenceModel.FK_Comment_Users", "Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileComment", "UserProfile").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("OmnipresenceModel.FK_Comment_Users", "Users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileComment", "UserProfile").Value = value;
             }
         }
         /// <summary>
@@ -670,171 +679,17 @@ namespace Omnipresence.DataAccess.Core
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<UserProfile> UserProfileReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("OmnipresenceModel.FK_Comment_Users", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileComment", "UserProfile");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("OmnipresenceModel.FK_Comment_Users", "Users", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="Country")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Country : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Country object.
-        /// </summary>
-        /// <param name="countryId">Initial value of the CountryId property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
-        public static Country CreateCountry(global::System.Int32 countryId, global::System.String name)
-        {
-            Country country = new Country();
-            country.CountryId = countryId;
-            country.Name = name;
-            return country;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CountryId
-        {
-            get
-            {
-                return _CountryId;
-            }
-            set
-            {
-                if (_CountryId != value)
-                {
-                    OnCountryIdChanging(value);
-                    ReportPropertyChanging("CountryId");
-                    _CountryId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("CountryId");
-                    OnCountryIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _CountryId;
-        partial void OnCountryIdChanging(global::System.Int32 value);
-        partial void OnCountryIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
-            }
-        }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] Flag
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_Flag);
-            }
-            set
-            {
-                OnFlagChanging(value);
-                ReportPropertyChanging("Flag");
-                _Flag = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Flag");
-                OnFlagChanged();
-            }
-        }
-        private global::System.Byte[] _Flag;
-        partial void OnFlagChanging(global::System.Byte[] value);
-        partial void OnFlagChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                OnDescriptionChanging(value);
-                ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Description");
-                OnDescriptionChanged();
-            }
-        }
-        private global::System.String _Description;
-        partial void OnDescriptionChanging(global::System.String value);
-        partial void OnDescriptionChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Location_Country", "Locations")]
-        public EntityCollection<Location> Locations
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Location>("OmnipresenceModel.FK_Location_Country", "Locations");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Location>("OmnipresenceModel.FK_Location_Country", "Locations", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserProfile>("OmnipresenceModel.UserProfileComment", "UserProfile", value);
                 }
             }
         }
@@ -857,11 +712,25 @@ namespace Omnipresence.DataAccess.Core
         /// </summary>
         /// <param name="eventId">Initial value of the EventId property.</param>
         /// <param name="title">Initial value of the Title property.</param>
-        public static Event CreateEvent(global::System.Int32 eventId, global::System.String title)
+        /// <param name="description">Initial value of the Description property.</param>
+        /// <param name="rating">Initial value of the Rating property.</param>
+        /// <param name="created">Initial value of the Created property.</param>
+        /// <param name="lastModified">Initial value of the LastModified property.</param>
+        /// <param name="startTime">Initial value of the StartTime property.</param>
+        /// <param name="endTime">Initial value of the EndTime property.</param>
+        /// <param name="isActive">Initial value of the IsActive property.</param>
+        public static Event CreateEvent(global::System.Int32 eventId, global::System.String title, global::System.String description, global::System.Int32 rating, global::System.DateTime created, global::System.DateTime lastModified, global::System.DateTime startTime, global::System.DateTime endTime, global::System.Boolean isActive)
         {
             Event @event = new Event();
             @event.EventId = eventId;
             @event.Title = title;
+            @event.Description = description;
+            @event.Rating = rating;
+            @event.Created = created;
+            @event.LastModified = lastModified;
+            @event.StartTime = startTime;
+            @event.EndTime = endTime;
+            @event.IsActive = isActive;
             return @event;
         }
 
@@ -922,7 +791,7 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Description
         {
@@ -934,7 +803,7 @@ namespace Omnipresence.DataAccess.Core
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
+                _Description = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
@@ -946,9 +815,9 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Rating
+        public global::System.Int32 Rating
         {
             get
             {
@@ -963,16 +832,16 @@ namespace Omnipresence.DataAccess.Core
                 OnRatingChanged();
             }
         }
-        private Nullable<global::System.Int32> _Rating;
-        partial void OnRatingChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _Rating;
+        partial void OnRatingChanging(global::System.Int32 value);
         partial void OnRatingChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> Created
+        public global::System.DateTime Created
         {
             get
             {
@@ -987,16 +856,16 @@ namespace Omnipresence.DataAccess.Core
                 OnCreatedChanged();
             }
         }
-        private Nullable<global::System.DateTime> _Created;
-        partial void OnCreatedChanging(Nullable<global::System.DateTime> value);
+        private global::System.DateTime _Created;
+        partial void OnCreatedChanging(global::System.DateTime value);
         partial void OnCreatedChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> LastModified
+        public global::System.DateTime LastModified
         {
             get
             {
@@ -1011,16 +880,16 @@ namespace Omnipresence.DataAccess.Core
                 OnLastModifiedChanged();
             }
         }
-        private Nullable<global::System.DateTime> _LastModified;
-        partial void OnLastModifiedChanging(Nullable<global::System.DateTime> value);
+        private global::System.DateTime _LastModified;
+        partial void OnLastModifiedChanging(global::System.DateTime value);
         partial void OnLastModifiedChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> StartTime
+        public global::System.DateTime StartTime
         {
             get
             {
@@ -1035,16 +904,16 @@ namespace Omnipresence.DataAccess.Core
                 OnStartTimeChanged();
             }
         }
-        private Nullable<global::System.DateTime> _StartTime;
-        partial void OnStartTimeChanging(Nullable<global::System.DateTime> value);
+        private global::System.DateTime _StartTime;
+        partial void OnStartTimeChanging(global::System.DateTime value);
         partial void OnStartTimeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> EndTime
+        public global::System.DateTime EndTime
         {
             get
             {
@@ -1059,16 +928,16 @@ namespace Omnipresence.DataAccess.Core
                 OnEndTimeChanged();
             }
         }
-        private Nullable<global::System.DateTime> _EndTime;
-        partial void OnEndTimeChanging(Nullable<global::System.DateTime> value);
+        private global::System.DateTime _EndTime;
+        partial void OnEndTimeChanging(global::System.DateTime value);
         partial void OnEndTimeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> IsActive
+        public global::System.Boolean IsActive
         {
             get
             {
@@ -1083,8 +952,8 @@ namespace Omnipresence.DataAccess.Core
                 OnIsActiveChanged();
             }
         }
-        private Nullable<global::System.Boolean> _IsActive;
-        partial void OnIsActiveChanging(Nullable<global::System.Boolean> value);
+        private global::System.Boolean _IsActive;
+        partial void OnIsActiveChanging(global::System.Boolean value);
         partial void OnIsActiveChanged();
     
         /// <summary>
@@ -1295,6 +1164,169 @@ namespace Omnipresence.DataAccess.Core
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<VisibilityType>("OmnipresenceModel.FK_Event_VisibilityType", "VisibilityTypes", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="Friendship")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Friendship : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Friendship object.
+        /// </summary>
+        /// <param name="adderId">Initial value of the AdderId property.</param>
+        /// <param name="addedId">Initial value of the AddedId property.</param>
+        public static Friendship CreateFriendship(global::System.Int32 adderId, global::System.Int32 addedId)
+        {
+            Friendship friendship = new Friendship();
+            friendship.AdderId = adderId;
+            friendship.AddedId = addedId;
+            return friendship;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AdderId
+        {
+            get
+            {
+                return _AdderId;
+            }
+            set
+            {
+                if (_AdderId != value)
+                {
+                    OnAdderIdChanging(value);
+                    ReportPropertyChanging("AdderId");
+                    _AdderId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AdderId");
+                    OnAdderIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AdderId;
+        partial void OnAdderIdChanging(global::System.Int32 value);
+        partial void OnAdderIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AddedId
+        {
+            get
+            {
+                return _AddedId;
+            }
+            set
+            {
+                if (_AddedId != value)
+                {
+                    OnAddedIdChanging(value);
+                    ReportPropertyChanging("AddedId");
+                    _AddedId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AddedId");
+                    OnAddedIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AddedId;
+        partial void OnAddedIdChanging(global::System.Int32 value);
+        partial void OnAddedIdChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileFriendship", "UserProfile")]
+        public UserProfile AddingParty
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendship", "UserProfile").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendship", "UserProfile").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<UserProfile> AddingPartyReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendship", "UserProfile");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendship", "UserProfile", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileFriendship1", "UserProfile")]
+        public UserProfile AddedParty
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendship1", "UserProfile").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendship1", "UserProfile").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<UserProfile> AddedPartyReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendship1", "UserProfile");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendship1", "UserProfile", value);
                 }
             }
         }
@@ -1591,44 +1623,6 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Location_Country", "Countries")]
-        public Country Country
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Country>("OmnipresenceModel.FK_Location_Country", "Countries").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Country>("OmnipresenceModel.FK_Location_Country", "Countries").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Country> CountryReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Country>("OmnipresenceModel.FK_Location_Country", "Countries");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Country>("OmnipresenceModel.FK_Location_Country", "Countries", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Event_Location", "Events")]
         public EntityCollection<Event> Events
         {
@@ -1834,30 +1828,6 @@ namespace Omnipresence.DataAccess.Core
         private global::System.String _AlternateEmail;
         partial void OnAlternateEmailChanging(global::System.String value);
         partial void OnAlternateEmailChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Comments
-        {
-            get
-            {
-                return _Comments;
-            }
-            set
-            {
-                OnCommentsChanging(value);
-                ReportPropertyChanging("Comments");
-                _Comments = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Comments");
-                OnCommentsChanged();
-            }
-        }
-        private global::System.String _Comments;
-        partial void OnCommentsChanging(global::System.String value);
-        partial void OnCommentsChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2229,28 +2199,6 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Comment_Users", "Comments")]
-        public EntityCollection<Comment> Comments1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Comment>("OmnipresenceModel.FK_Comment_Users", "Comments");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Comment>("OmnipresenceModel.FK_Comment_Users", "Comments", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_UserProfile_User", "UserProfiles")]
         public UserProfile UserProfile
         {
@@ -2302,12 +2250,22 @@ namespace Omnipresence.DataAccess.Core
         /// <param name="userProfileId">Initial value of the UserProfileId property.</param>
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="lastName">Initial value of the LastName property.</param>
-        public static UserProfile CreateUserProfile(global::System.Int32 userProfileId, global::System.String firstName, global::System.String lastName)
+        /// <param name="birthdate">Initial value of the Birthdate property.</param>
+        /// <param name="description">Initial value of the Description property.</param>
+        /// <param name="avatar">Initial value of the Avatar property.</param>
+        /// <param name="reputation">Initial value of the Reputation property.</param>
+        /// <param name="timezone">Initial value of the Timezone property.</param>
+        public static UserProfile CreateUserProfile(global::System.Int32 userProfileId, global::System.String firstName, global::System.String lastName, global::System.DateTime birthdate, global::System.String description, global::System.Byte[] avatar, global::System.Int32 reputation, global::System.Int32 timezone)
         {
             UserProfile userProfile = new UserProfile();
             userProfile.UserProfileId = userProfileId;
             userProfile.FirstName = firstName;
             userProfile.LastName = lastName;
+            userProfile.Birthdate = birthdate;
+            userProfile.Description = description;
+            userProfile.Avatar = avatar;
+            userProfile.Reputation = reputation;
+            userProfile.Timezone = timezone;
             return userProfile;
         }
 
@@ -2392,9 +2350,9 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> Birthdate
+        public global::System.DateTime Birthdate
         {
             get
             {
@@ -2409,14 +2367,14 @@ namespace Omnipresence.DataAccess.Core
                 OnBirthdateChanged();
             }
         }
-        private Nullable<global::System.DateTime> _Birthdate;
-        partial void OnBirthdateChanging(Nullable<global::System.DateTime> value);
+        private global::System.DateTime _Birthdate;
+        partial void OnBirthdateChanging(global::System.DateTime value);
         partial void OnBirthdateChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Description
         {
@@ -2428,7 +2386,7 @@ namespace Omnipresence.DataAccess.Core
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
+                _Description = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
@@ -2440,7 +2398,7 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Byte[] Avatar
         {
@@ -2452,7 +2410,7 @@ namespace Omnipresence.DataAccess.Core
             {
                 OnAvatarChanging(value);
                 ReportPropertyChanging("Avatar");
-                _Avatar = StructuralObject.SetValidValue(value, true);
+                _Avatar = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Avatar");
                 OnAvatarChanged();
             }
@@ -2464,9 +2422,9 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Reputation
+        public global::System.Int32 Reputation
         {
             get
             {
@@ -2481,16 +2439,16 @@ namespace Omnipresence.DataAccess.Core
                 OnReputationChanged();
             }
         }
-        private Nullable<global::System.Int32> _Reputation;
-        partial void OnReputationChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _Reputation;
+        partial void OnReputationChanging(global::System.Int32 value);
         partial void OnReputationChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Timezone
+        public global::System.Int32 Timezone
         {
             get
             {
@@ -2505,8 +2463,8 @@ namespace Omnipresence.DataAccess.Core
                 OnTimezoneChanged();
             }
         }
-        private Nullable<global::System.Int32> _Timezone;
-        partial void OnTimezoneChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _Timezone;
+        partial void OnTimezoneChanging(global::System.Int32 value);
         partial void OnTimezoneChanged();
     
         /// <summary>
@@ -2609,6 +2567,72 @@ namespace Omnipresence.DataAccess.Core
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("OmnipresenceModel.FK_UserProfile_User", "Users", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileFriendship", "Friendship")]
+        public EntityCollection<Friendship> RequestedFriendships
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Friendship>("OmnipresenceModel.UserProfileFriendship", "Friendship");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Friendship>("OmnipresenceModel.UserProfileFriendship", "Friendship", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileFriendship1", "Friendship")]
+        public EntityCollection<Friendship> AcceptedFriendships
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Friendship>("OmnipresenceModel.UserProfileFriendship1", "Friendship");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Friendship>("OmnipresenceModel.UserProfileFriendship1", "Friendship", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileComment", "Comment")]
+        public EntityCollection<Comment> Comments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Comment>("OmnipresenceModel.UserProfileComment", "Comment");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Comment>("OmnipresenceModel.UserProfileComment", "Comment", value);
                 }
             }
         }
