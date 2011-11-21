@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 09/26/2011 18:32:07
--- Generated from EDMX file: C:\Users\emanuel\Desktop\Acads\Computer Science\SVN Repository\saringan-suarez-dayrit\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
+-- Date Created: 11/20/2011 00:12:14
+-- Generated from EDMX file: C:\Users\emanuel\Desktop\omni\saringan-suarez-dayrit\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,14 +17,17 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_Event_Category]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_Event_Category];
+GO
 IF OBJECT_ID(N'[dbo].[FK_Comment_Events]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_Comment_Events];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Comment_Users]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_Comment_Users];
 GO
-IF OBJECT_ID(N'[dbo].[FK_Event_Category]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_Event_Category];
+IF OBJECT_ID(N'[dbo].[FK_Location_Country]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Locations] DROP CONSTRAINT [FK_Location_Country];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Event_Location]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_Event_Location];
@@ -32,14 +35,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_Event_VisibilityType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_Event_VisibilityType];
 GO
-IF OBJECT_ID(N'[dbo].[FK_Location_Country]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Locations] DROP CONSTRAINT [FK_Location_Country];
+IF OBJECT_ID(N'[dbo].[FK_UserProfiles_Gender]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UserProfiles] DROP CONSTRAINT [FK_UserProfiles_Gender];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserProfile_User]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[UserProfiles] DROP CONSTRAINT [FK_UserProfile_User];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UserProfiles_Gender]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UserProfiles] DROP CONSTRAINT [FK_UserProfiles_Gender];
+IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendship]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Friendships] DROP CONSTRAINT [FK_UserProfileFriendship];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendship1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Friendships] DROP CONSTRAINT [FK_UserProfileFriendship1];
 GO
 
 -- --------------------------------------------------
@@ -73,6 +79,9 @@ GO
 IF OBJECT_ID(N'[dbo].[VisibilityTypes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[VisibilityTypes];
 GO
+IF OBJECT_ID(N'[dbo].[Friendships]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Friendships];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -90,10 +99,10 @@ GO
 -- Creating table 'Comments'
 CREATE TABLE [dbo].[Comments] (
     [CommentId] int  NOT NULL,
-    [CommentText] nvarchar(1024)  NULL,
-    [Timestamp] datetime  NULL,
-    [UserId] int  NULL,
-    [EventId] int  NULL
+    [CommentText] nvarchar(1024)  NOT NULL,
+    [Timestamp] datetime  NOT NULL,
+    [UserProfileId] int  NOT NULL,
+    [EventId] int  NOT NULL
 );
 GO
 
@@ -163,7 +172,6 @@ CREATE TABLE [dbo].[Users] (
     [PasswordSalt] nvarchar(128)  NOT NULL,
     [Email] nvarchar(128)  NOT NULL,
     [AlternateEmail] nvarchar(128)  NULL,
-    [Comments] nvarchar(256)  NULL,
     [CreatedDate] datetime  NOT NULL,
     [LastModifiedDate] datetime  NULL,
     [LastLoginDate] datetime  NOT NULL,
@@ -188,6 +196,13 @@ CREATE TABLE [dbo].[VisibilityTypes] (
     [Type] nvarchar(32)  NULL,
     [Description] nvarchar(128)  NULL,
     [Icon] varbinary(max)  NULL
+);
+GO
+
+-- Creating table 'Friendships'
+CREATE TABLE [dbo].[Friendships] (
+    [AdderId] int IDENTITY(1,1) NOT NULL,
+    [AddedId] int  NOT NULL
 );
 GO
 
@@ -249,6 +264,12 @@ ADD CONSTRAINT [PK_VisibilityTypes]
     PRIMARY KEY CLUSTERED ([VisibilityTypeId] ASC);
 GO
 
+-- Creating primary key on [AdderId], [AddedId] in table 'Friendships'
+ALTER TABLE [dbo].[Friendships]
+ADD CONSTRAINT [PK_Friendships]
+    PRIMARY KEY NONCLUSTERED ([AdderId], [AddedId] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -279,20 +300,6 @@ ADD CONSTRAINT [FK_Comment_Events]
 CREATE INDEX [IX_FK_Comment_Events]
 ON [dbo].[Comments]
     ([EventId]);
-GO
-
--- Creating foreign key on [UserId] in table 'Comments'
-ALTER TABLE [dbo].[Comments]
-ADD CONSTRAINT [FK_Comment_Users]
-    FOREIGN KEY ([UserId])
-    REFERENCES [dbo].[Users]
-        ([UserId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_Comment_Users'
-CREATE INDEX [IX_FK_Comment_Users]
-ON [dbo].[Comments]
-    ([UserId]);
 GO
 
 -- Creating foreign key on [CountryId] in table 'Locations'
@@ -358,6 +365,43 @@ ADD CONSTRAINT [FK_UserProfile_User]
     REFERENCES [dbo].[Users]
         ([UserId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [AdderId] in table 'Friendships'
+ALTER TABLE [dbo].[Friendships]
+ADD CONSTRAINT [FK_UserProfileFriendship]
+    FOREIGN KEY ([AdderId])
+    REFERENCES [dbo].[UserProfiles]
+        ([UserProfileId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [AddedId] in table 'Friendships'
+ALTER TABLE [dbo].[Friendships]
+ADD CONSTRAINT [FK_UserProfileFriendship1]
+    FOREIGN KEY ([AddedId])
+    REFERENCES [dbo].[UserProfiles]
+        ([UserProfileId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserProfileFriendship1'
+CREATE INDEX [IX_FK_UserProfileFriendship1]
+ON [dbo].[Friendships]
+    ([AddedId]);
+GO
+
+-- Creating foreign key on [UserProfileId] in table 'Comments'
+ALTER TABLE [dbo].[Comments]
+ADD CONSTRAINT [FK_UserProfileComment]
+    FOREIGN KEY ([UserProfileId])
+    REFERENCES [dbo].[UserProfiles]
+        ([UserProfileId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserProfileComment'
+CREATE INDEX [IX_FK_UserProfileComment]
+ON [dbo].[Comments]
+    ([UserProfileId]);
 GO
 
 -- --------------------------------------------------
