@@ -9,141 +9,161 @@ namespace Omnipresence.Processing
 {
     public class EventServices : IDisposable
     {
+        #region [FIELDS]
         private OmnipresenceEntities db;
+        #endregion
 
+        #region [CONSTRUCTOR]
         public EventServices()
         {
             db = new OmnipresenceEntities();
             db.Connection.Open();
         }
 
-        public bool AddEvent(Event e)
+        #endregion
+
+        #region [CRUD]
+
+        public EventModel CreateEvent(CreateEventModel createEventModel)
         {
-            db.AddToEvents(e);
+            EventModel eventModel = new EventModel();
+            eventModel.Title = createEventModel.Title;
+            eventModel.Description = createEventModel.Description;
+            eventModel.StartTime = createEventModel.StartTime;
+            eventModel.EndTime = createEventModel.EndTime;
+            eventModel.Category = GetCategory(createEventModel.CategoryString);
+            eventModel.VisibilityType = GetVisibilityType(createEventModel.VisibilityTypeString);
+            eventModel.Location = CreateLocation(createEventModel.Latitude, createEventModel.Longitude, createEventModel.LocationName);
+
+            eventModel.IsActive = true;
+            eventModel.LastModified = DateTime.Now;
+            eventModel.Created = System.DateTime.Now;
+            eventModel.Rating = 0;
+
+            return eventModel;
+        }
+
+        public bool AddEvent(EventModel eventModel)
+        {
+            Event newEvent = new Event();
+            newEvent.Title = eventModel.Title;
+            newEvent.Description = eventModel.Description;
+            newEvent.StartTime = eventModel.StartTime;
+            newEvent.EndTime = eventModel.EndTime;
+            newEvent.Category = eventModel.Category;
+            newEvent.VisibilityType = eventModel.VisibilityType;
+            newEvent.Location = eventModel.Location;
+            newEvent.IsActive = eventModel.IsActive;
+            newEvent.LastModified = eventModel.LastModified;
+            newEvent.Created = eventModel.Created;
+            newEvent.Rating = eventModel.Rating;
+
+            db.AddToEvents(newEvent);
             db.SaveChanges();
 
             return true;
         }
 
-        // TODO: Delete this duplicate method
-        public Event CreateEvent(string title, string description, DateTime startTime, DateTime endTime, int rating, string categoryString, string visibilityTypeString, double latitude, double longitude, string locationName)
+        public bool DeleteEvent(DeleteEventModel deleteEventModel)
         {
-            Category category = GetCategory(categoryString);
-            VisibilityType visibilityType = GetVisibilityType(visibilityTypeString);
+            Event evt = db.Events.Where(ev => ev.EventId == deleteEventModel.EventId).FirstOrDefault();
 
-            Location location = CreateLocation(latitude, longitude, locationName, "");
+            if (evt != null)
+            {
+                db.Events.DeleteObject(evt);
+                db.SaveChanges();
 
-            return CreateEvent(title, description, startTime, endTime, rating, category, visibilityType, location);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public Event CreateEvent(NewEventModel temp)
+        public bool AddComment(AddCommentModel addCommentModel)
         {
-            Category category = GetCategory(temp.CategoryString);
-            VisibilityType visibilityType = GetVisibilityType(temp.VisibilityTypeString);
+            Comment comment = new Comment();
+            comment.CommentText = addCommentModel.Comment;
+            comment.Timestamp = DateTime.Now;
 
-            Location location = CreateLocation(temp.Latitude, temp.Longitude, temp.LocationName, "");
+            Event evt = db.Events.Where(ev => ev.EventId == addCommentModel.EventId).SingleOrDefault();
+            UserProfile userProfile = db.UserProfiles.Where(up => up.UserProfileId == addCommentModel.UserProfileId).FirstOrDefault();
 
-            return CreateEvent(temp.Title, temp.Description, temp.StartTime, temp.EndTime, 0, category, visibilityType, location);
-        }
-        // TODO: MODIFY TO USE ANOTHER MODEL INSTEAD OF MANY PARAMETERS
-        private Event CreateEvent(string title, string description, DateTime startTime, DateTime endTime, int rating, Category category, VisibilityType visibilityType, Location location)
-        {
-            Event newEvent = new Event();
-            newEvent.Title = title;
-            newEvent.Description = description;
-            newEvent.StartTime = startTime;
-            newEvent.EndTime = endTime;
-            newEvent.Rating = rating;
+            comment.Event = evt;
+            comment.UserProfile = userProfile;
 
-            newEvent.Category = category;
-            newEvent.VisibilityType = visibilityType;
-            newEvent.IsActive = true;
-            newEvent.Location = location;
+            db.AddToComments(comment);
+            db.SaveChanges();
 
-            newEvent.LastModified = DateTime.Now;
-            newEvent.Created = System.DateTime.Now;
-
-            return newEvent;
+            return true;
         }
 
-        private Location CreateLocation(double latitude, double longitude, string name, string countryString)
+        public bool Vote(VoteEventModel voteEventModel)
         {
-            Country country = GetCountry(countryString);
-            return CreateLocation(latitude, longitude, name, country);
+            Event curEvent = db.Events.Where(ev => (ev.EventId == voteEventModel.EventId)).FirstOrDefault();
+
+            if (curEvent != null)
+            {
+                if (voteEventModel.IsDownvote)
+                {
+                    curEvent.Rating--;
+                }
+                else
+                {
+                    curEvent.Rating++;
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        
-        private Location CreateLocation(double latitude, double longitude, string name, Country country)
+
+        #endregion
+
+        #region [UTILITY METHODS]
+        private Location CreateLocation(double latitude, double longitude, string name)
         {
             Location location = new Location();
             location.Latitude = latitude;
             location.Longitude = longitude;
             location.Name = name;
-            location.Country = country;
 
             return location;
         }
 
-        public IQueryable<Event> GetEvents()
+        private VisibilityType GetVisibilityType(string visibilityTypeString)
         {
-            return db.Events.AsQueryable();
+            VisibilityType visibilityType = db.VisibilityTypes.Where(x => x.Type.Equals(visibilityTypeString, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            return visibilityType;
         }
 
-        public Event GetEventById(int id)
+        private Category GetCategory(string categoryString)
         {
-            return db.Events.Where(x => x.EventId == id).SingleOrDefault();
+            Category category = db.Categories.Where(x => x.Name.Equals(categoryString, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            return category;
         }
 
-        public void DeleteEvent(Event e)
+        #endregion
+
+        #region [SEARCH]
+        public IQueryable<EventModel> GetAllEvents()
         {
-            using (OmnipresenceEntities db = new OmnipresenceEntities())
+            List<EventModel> eventModels = new List<EventModel>();
+            ObjectSet<Event> events = db.Events;
+
+            foreach (Event evt in events)
             {
-                db.Events.DeleteObject(e);
-                db.SaveChanges();
+                eventModels.Add(Utilities.EventToEventModel(evt));
             }
+
+            return eventModels.AsQueryable();
         }
 
-        public IEnumerable<Event> QueryEvents(string title, string description, DateTime startTime, DateTime endTime, string visibilityTypeString, string locationName, double? latitude, double? longitude)
-        {
-            #region OLD QUERY CODE
-            //IEnumerable<EventViewModelMicro> r;
-            //    r = from p in db.Events
-            //        select new EventViewModelMicro()
-            //        {
-            //            EventId = p.EventId,
-            //            Name = p.Title,
-            //            End = p.EndTime.Value,
-            //            Start = p.StartTime.Value,
-            //            Latitude = p.Location.Latitude,
-            //            Longitude = p.Location.Longitude,
-            //            Type = p.Category.Name
-            //        };
-            //    if (model.Type != "")
-            //    {
-            //        r = r.Where(x => x.Type == model.Type);
-            //    }
-            //    if (model.Tags.Count() > 0)
-            //    {
-            //        // TODO: Actual string search schtuff
-            //    }
-            //    if (model.SearchString != "")
-            //    {
-            //        // TODO: Actual string search schtuff
-            //    }// TODO: CITY USER FRIENDS SUBSCRIPTIONS ETC WALA NAHHHHFUFHBUIRGUORGVIO
-            //return r;
-            #endregion
-
-            EventQueryModel queryModel = new EventQueryModel();
-            queryModel.Title = title;
-            queryModel.Description = description;
-            queryModel.StartTime = startTime;
-            queryModel.EndTime = endTime;
-            queryModel.Location = CreateLocation(latitude.Value, longitude.Value, locationName, "");
-            queryModel.VisibilityType = GetVisibilityType(visibilityTypeString);
-
-            return QueryEvents(queryModel);
-        }
-
-        public IEnumerable<Event> QueryEvents(EventQueryModel queryModel)
+        public IEnumerable<EventModel> QueryEvents(QueryEventModel queryModel)
         {
             IEnumerable<Event> titleMatches;
             titleMatches = db.Events.Where(x => queryModel.Title != null ? x.Title.Equals(queryModel.Title, StringComparison.CurrentCultureIgnoreCase) : true);
@@ -160,12 +180,18 @@ namespace Omnipresence.Processing
             IEnumerable<Event> locationMatches;
             locationMatches = db.Events.Where(x => x.Location != null ? AreWithinRadius(x.Location, queryModel.Location, 0.1) : true);
 
-            IEnumerable<Event> visibilityTypeMatches;
-            visibilityTypeMatches = db.Events.Where(x => queryModel.VisibilityType == x.VisibilityType);
+            IEnumerable<Event> result = titleMatches.Intersect(descriptionMatches.Intersect(startTimeMatches.Intersect(endTimeMatches)).Intersect(locationMatches));
 
-            IEnumerable<Event> result = titleMatches.Intersect(descriptionMatches.Intersect(startTimeMatches.Intersect(endTimeMatches)).Intersect(locationMatches.Intersect(visibilityTypeMatches)));
+            List<EventModel> eventModels = new List<EventModel>();
+            EventModel evtModel = null;
 
-            return result;
+            foreach (Event evt in result)
+            {
+                evtModel = Utilities.EventToEventModel(evt);
+                eventModels.Add(evtModel);
+            }
+
+            return eventModels.AsQueryable();
         }
 
         private bool AreWithinRadius(Location a, Location b, double radius)
@@ -179,43 +205,7 @@ namespace Omnipresence.Processing
             return Math.Sqrt((y1 - x1) * (y1 - x1) + (y2 - x2) * (y2 - x2)) <= radius;
         }
 
-        private VisibilityType GetVisibilityType(string visibilityTypeString)
-        {
-            VisibilityType visibilityType = db.VisibilityTypes.Where(x => x.Type.Equals(visibilityTypeString, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-            return visibilityType;
-        }
-
-        private Category GetCategory(string categoryString)
-        {
-            Category category = db.Categories.Where(x => x.Name.Equals(categoryString, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-            return category;
-        }
-
-        private Country GetCountry(string countryString)
-        {
-            Country country = db.Countries.Where(x => x.Name.Equals(countryString, StringComparison.CurrentCultureIgnoreCase)).SingleOrDefault();
-            return country;
-        }
-
-        public bool AddComment(int eventId, string commentString)
-        {
-            Event e = GetEventById(eventId);
-            Comment comment = new Comment();
-            comment.Timestamp = DateTime.Now;
-            comment.CommentText = commentString;
-
-            return AddComment(e, comment);
-        }
-
-        private bool AddComment(Event e, Comment comment)
-        {
-            e.Comments.Add(comment);
-            db.AddToComments(comment);
-
-            db.SaveChanges();
-
-            return true;
-        }
+        #endregion
 
         public void Dispose()
         {
