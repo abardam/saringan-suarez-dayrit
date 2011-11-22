@@ -8,5 +8,6 @@
     <div style="float:left;">
     <span class="header"><%= Model.FirstName %> <%= Model.LastName %></span>
     <span class="header-2"><%=Model.Description %></span>
+    <a href="<%= Url.Action("EditProfile", "Sidebar") %>">Edit</a>
     </div>
 </div>
