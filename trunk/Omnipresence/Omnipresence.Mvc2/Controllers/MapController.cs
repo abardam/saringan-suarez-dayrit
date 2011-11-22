@@ -27,7 +27,13 @@ namespace Omnipresence.Mvc2.Controllers
 
         public JsonResult GetEvents(string title, string description, DateTime startTime, DateTime endTime, string visibilityTypeString, string locationName, double latitude, double longitude)
         {
-            return Json(eventServices.QueryEvents(title, description, startTime, endTime, visibilityTypeString, locationName, latitude, longitude));
+            QueryEventModel qem = new QueryEventModel();
+            qem.Description = description;
+            qem.EndTime = endTime;
+            qem.StartTime = startTime;
+            qem.Title = title;
+            return Json(eventServices.QueryEvents(qem));
+            
         }
     }
 }

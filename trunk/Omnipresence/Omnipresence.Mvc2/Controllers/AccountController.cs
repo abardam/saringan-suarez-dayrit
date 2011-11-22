@@ -36,7 +36,10 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (accountServices.ValidateUser(model.UserName, model.Password))
+                ValidateUserModel vum = new ValidateUserModel();
+                vum.Password = model.Password;
+                vum.Username = model.UserName;
+                if (accountServices.ValidateUser(vum))
                 {
                     FormsService.SignIn(model.UserName, model.RememberMe);
 
@@ -84,13 +87,21 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = accountServices.CreateUser(model.UserName.Trim(), model.Password.Trim(), model.Email.Trim(), model.FirstName.Trim(), model.LastName.Trim(), model.Birthdate);
+                CreateUserModel cum = new CreateUserModel();
+                cum.Username = model.UserName.Trim();
+                cum.Password = model.Password.Trim();
+                cum.Email = model.Email.Trim();
+                CreateUserProfileModel cupm = new CreateUserProfileModel();
+                cupm.FirstName = model.FirstName.Trim();
+                cupm.LastName = model.FirstName.Trim();
+                cupm.Birthdate = model.Birthdate;
+                cupm.Description = "";
+                cupm.IsFemale = false;
 
-                if (user != null)
+                
+
+                if (accountServices.CreateUser(cum, cupm))
                 {
-                    accountServices.AddUser(user);
-                    FormsService.SignIn(user.Username, false);
-                    return true;
                 }
                 else
                 {
@@ -113,7 +124,11 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (accountServices.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword))
+                UpdatePasswordModel upm = new UpdatePasswordModel();
+                upm.NewPassword = model.NewPassword;
+                upm.OldPassword = model.OldPassword;
+                upm.Username = User.Identity.Name;
+                if (accountServices.UpdatePassword(upm))
                 {
                     return RedirectToAction("ChangePasswordSuccess");
                 }

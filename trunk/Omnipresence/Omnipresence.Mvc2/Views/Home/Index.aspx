@@ -53,7 +53,7 @@
         <div id="sidebar-nav">
             <a class="sidebar-button" href="" onclick=""><img class="button unselected" src="../../Content/Images/newevent.png" alt="New Event"/></a><span class="helper">(post event)<br /></span>
             <a class="sidebar-link sidebar-button" href="<%= Url.Action("Search","Sidebar") %>" onclick=""><img class="button unselected" src="../../Content/Images/findevent.png" alt="Search"/></a><span class="helper">(find event)<br /></span>
-            <a class="sidebar-link sidebar-button" href="<%= Url.Action("Profile","Sidebar",new{id = 1}) %>" onclick=""><img class="button unselected" src="../../Content/Images/viewprofile.png" alt="My Profile"/></a><span class="helper">(view profile)<br /></span>
+            <a class="sidebar-link sidebar-button" href="<%= Url.Action("Profile","Sidebar",new{username = Page.User.Identity.Name }) %>" onclick=""><img class="button unselected" src="../../Content/Images/viewprofile.png" alt="My Profile"/></a><span class="helper">(view profile)<br /></span>
         </div>
         <% } %>
             <div id="sidebar" class="">

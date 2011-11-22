@@ -18,12 +18,6 @@ namespace Omnipresence.Mvc2.Controllers
             return View();
         }
 
-        [HttpPost]
-        public bool NewEvent(NewEventModel model)
-        {
-            // TODO: insert to database
-            return false;
-        }
     }
     
 }

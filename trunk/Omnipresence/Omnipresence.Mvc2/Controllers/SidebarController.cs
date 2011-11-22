@@ -32,22 +32,68 @@ namespace Omnipresence.Mvc2.Controllers
             IndexViewModel vm = new IndexViewModel();
             return PartialView("IndexUserControl",vm);
         }
-        public ActionResult Profile(int id)
+        public ActionResult Profile(String username)
         {
-            //TODO: Actual model
-            ProfileModel model = new ProfileModel { AvatarUrl = "/Content/Images/viewprofile.png", Birthdate = DateTime.Now, Description = "Super bad-ass", FirstName = "Adrian", GenderText = "Male", LastName = "Fazinsky", Reputation = 10, Timezone = 0 };
+            UserProfileModel p = accountServices.GetUserProfileByUsername(username);
+            
+            DateTime Birthdate;
+            if (p.Birthdate != null)
+            {
+                Birthdate = (DateTime)p.Birthdate;
+            }
+            else
+            {
+                Birthdate = DateTime.Now;
+            }
+
+            int Reputation;
+            if (p.Reputation != null)
+            {
+                Reputation = (int)p.Reputation;
+            }
+            else
+            {
+                Reputation = 0;
+            }
+
+
+
+            ProfileModel model = new ProfileModel { AvatarUrl = "/Content/Images/viewprofile.png", 
+                Birthdate = Birthdate, 
+                Description = p.Description, 
+                FirstName = p.FirstName, 
+                GenderText = p.IsFemale?"Female":"Male", 
+                LastName = p.LastName, 
+                Reputation = Reputation, 
+                 };
             return PartialView("ProfileUserControl", model);
         }
+
+        public ActionResult EditProfile()
+        {
+            string username = User.Identity.Name;
+            UserProfileModel u = accountServices.GetUserProfileByUsername(username);
+            return PartialView("EditProfile", u);
+        }
+
+        [HttpPost]
+        public ActionResult EditProfile(ProfileModel model)
+        {
+            String username = User.Identity.Name;
+            UserProfileModel p = accountServices.GetUserProfileByUsername(username);
+            p.Birthdate = model.Birthdate;
+            p.Description = model.Description;
+            p.LastName = model.LastName;
+            p.FirstName = model.FirstName;
+
+            accountServices.UpdateUserProfile(p);
+            return PartialView("ProfileUserControl", model);
+        }
+
         // TODO: CHANGE EVENT OBJECT TYPE IN EVENTSERVICES
         public ActionResult NewEvent()
         {
             return PartialView("NewEventUserControl");
-        }
-        [HttpPost]
-        public ActionResult NewEvent(NewEventModel model)
-        {
-            // TODO: insert latlng logic
-            return PartialView("NewEventUserControl",model);
         }
         public ActionResult EditEvent(int id)
         {
@@ -70,7 +116,11 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (accountServices.ValidateUser(model.UserName, model.Password))
+                ValidateUserModel vum = new ValidateUserModel();
+                vum.Username = model.UserName;
+                vum.Password = model.Password;
+
+                if (accountServices.ValidateUser(vum))
                 {
                     FormsService.SignIn(model.UserName, model.RememberMe);
 
@@ -102,13 +152,19 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = accountServices.CreateUser(model.UserName.Trim(), model.Password.Trim(), model.Email.Trim(), model.FirstName.Trim(), model.LastName.Trim(), model.Birthdate);
+                CreateUserModel cum = new CreateUserModel();
+                cum.Username = model.UserName.Trim();
+                cum.Password = model.Password.Trim();
+                cum.Email = model.Email.Trim();
+                CreateUserProfileModel cupm = new CreateUserProfileModel();
+                cupm.FirstName = model.FirstName.Trim();
+                cupm.LastName = model.FirstName.Trim();
+                cupm.Birthdate = model.Birthdate;
+                cupm.Description = "";
+                cupm.IsFemale = false;
 
-                if (user != null)
-                {
-                    accountServices.AddUser(user);
-                    FormsService.SignIn(user.Username, false);
-                    return true;
+                if (accountServices.CreateUser(cum, cupm)) {
+                    
                 }
                 else
                 {
