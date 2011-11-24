@@ -32,6 +32,7 @@ namespace Omnipresence.Mvc2.Controllers
             IndexViewModel vm = new IndexViewModel();
             return PartialView("IndexUserControl",vm);
         }
+
         public ActionResult Profile(String username)
         {
             UserProfileModel p = accountServices.GetUserProfileByUsername(username);
@@ -46,26 +47,15 @@ namespace Omnipresence.Mvc2.Controllers
                 Birthdate = DateTime.Now;
             }
 
-            int Reputation;
-            if (p.Reputation != null)
-            {
-                Reputation = (int)p.Reputation;
-            }
-            else
-            {
-                Reputation = 0;
-            }
-
-
-
             ProfileModel model = new ProfileModel { AvatarUrl = "/Content/Images/viewprofile.png", 
                 Birthdate = Birthdate, 
                 Description = p.Description, 
                 FirstName = p.FirstName, 
                 GenderText = p.IsFemale?"Female":"Male", 
                 LastName = p.LastName, 
-                Reputation = Reputation, 
+                Reputation = p.Reputation, 
                  };
+
             return PartialView("ProfileUserControl", model);
         }
 
@@ -73,7 +63,7 @@ namespace Omnipresence.Mvc2.Controllers
         {
             string username = User.Identity.Name;
             UserProfileModel u = accountServices.GetUserProfileByUsername(username);
-            return PartialView("EditProfile", u);
+            return PartialView("EditProfileUserControl", u);
         }
 
         [HttpPost]
