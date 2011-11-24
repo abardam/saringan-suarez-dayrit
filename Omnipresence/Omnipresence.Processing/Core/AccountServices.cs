@@ -278,16 +278,26 @@ namespace Omnipresence.Processing
             }
         }
 
-        public bool MakeFriends(UserProfile requester, UserProfile accepter)
+        public bool MakeFriends(MakeFriendsModel makeFriendsModel)
         {
-            Friendship friendship = new Friendship();
-            friendship.AddingParty = requester;
-            friendship.AddedParty = accepter;
+            UserProfile requester = db.UserProfiles.Where(up => up.UserProfileId == makeFriendsModel.AdderUserProfileId).FirstOrDefault();
+            UserProfile accepter = db.UserProfiles.Where(up => up.UserProfileId == makeFriendsModel.AddedUserProfileId).FirstOrDefault();
+            
+            if (requester != null && accepter != null)
+            {
+                Friendship friendship = new Friendship();
+                friendship.AddingParty = requester;
+                friendship.AddedParty = accepter;
 
-            db.AddToFriendships(friendship);
-            db.SaveChanges();
+                db.AddToFriendships(friendship);
+                db.SaveChanges();
 
-            return true;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         //private Gender GetGender(string genderString)
