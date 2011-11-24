@@ -60,7 +60,7 @@
     <Key>
       <PropertyRef Name="CommentId" />
     </Key>
-    <Property Name="CommentId" Type="int" Nullable="false" />
+    <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CommentText" Type="nvarchar" Nullable="false" MaxLength="1024" />
     <Property Name="Timestamp" Type="datetime" Nullable="false" />
     <Property Name="UserProfileId" Type="int" Nullable="false" />
@@ -140,7 +140,7 @@
       <PropertyRef Name="AdderId" />
       <PropertyRef Name="AddedId" />
     </Key>
-    <Property Name="AdderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdderId" Type="int" Nullable="false" />
     <Property Name="AddedId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_Event_Category">
@@ -299,7 +299,7 @@
           <Key>
             <PropertyRef Name="CommentId" />
           </Key>
-          <Property Name="CommentId" Type="Int32" Nullable="false" />
+          <Property Name="CommentId" Nullable="false" Type="Int32" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CommentText" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" Nullable="false" />
           <Property Name="Timestamp" Type="DateTime" Nullable="false" />
           <Property Name="UserProfileId" Type="Int32" Nullable="false" />
@@ -452,7 +452,7 @@
             <PropertyRef Name="AdderId" />
             <PropertyRef Name="AddedId" />
           </Key>
-          <Property Type="Int32" Name="AdderId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="AdderId" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <NavigationProperty Name="AddingParty" Relationship="OmnipresenceModel.UserProfileFriendship" FromRole="Friendship" ToRole="UserProfile" />
           <NavigationProperty Name="AddedParty" Relationship="OmnipresenceModel.UserProfileFriendship1" FromRole="Friendship" ToRole="UserProfile" />
           <Property Type="Int32" Name="AddedId" Nullable="false" />
