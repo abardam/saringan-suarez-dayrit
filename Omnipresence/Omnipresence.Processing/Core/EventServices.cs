@@ -53,7 +53,7 @@ namespace Omnipresence.Processing
             newEvent.StartTime = createEventModel.StartTime;
             newEvent.EndTime = createEventModel.EndTime;
             newEvent.Category = GetCategory(createEventModel.CategoryString);
-            newEvent.VisibilityType = GetVisibilityType(createEventModel.VisibilityTypeString);
+            newEvent.IsPrivate = createEventModel.IsPrivate;
             newEvent.Location = CreateLocation(createEventModel.Latitude, createEventModel.Longitude, createEventModel.LocationName);
 
             newEvent.IsActive = true;
@@ -77,7 +77,7 @@ namespace Omnipresence.Processing
                 evt.Description = uem.Description;
                 evt.StartTime = uem.StartTime;
                 evt.Category = uem.Category;
-                evt.VisibilityType = uem.VisibilityType;
+                evt.IsPrivate = uem.IsPrivate;
                 evt.Location = uem.Location;
                 evt.IsActive = uem.IsActive;
                 evt.Rating = uem.Rating;
@@ -161,12 +161,6 @@ namespace Omnipresence.Processing
             location.Name = name;
 
             return location;
-        }
-
-        private VisibilityType GetVisibilityType(string visibilityTypeString)
-        {
-            VisibilityType visibilityType = db.VisibilityTypes.Where(x => x.Type.Equals(visibilityTypeString, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-            return visibilityType;
         }
 
         private Category GetCategory(string categoryString)
