@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Omnipresence.Processing;
 
-namespace DatabaseTests.Tests
+namespace DatabaseTests
 {
     public class AddFriendTest : Test
     {
@@ -18,7 +18,15 @@ namespace DatabaseTests.Tests
 
         public override bool Execute()
         {
-            throw new NotImplementedException();
+            int totalUsers = accountServices.GetAllUserProfiles().Count();
+            MakeFriendsModel m = new MakeFriendsModel();
+            m.AddedUserProfileId = random_gen.Next(1,totalUsers);
+            m.AdderUserProfileId = random_gen.Next(1, totalUsers);
+            Console.WriteLine("Making users " + m.AdderUserProfileId + " and " + m.AddedUserProfileId + " friends.");
+            
+            return accountServices.MakeFriends(m);
         }
+
+        public static Random random_gen = new Random();
     }
 }

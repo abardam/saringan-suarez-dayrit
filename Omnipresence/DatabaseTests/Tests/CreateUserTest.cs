@@ -19,7 +19,7 @@ namespace DatabaseTests
         public override bool Execute()
         {
             CreateUserModel cum = new CreateUserModel();
-            cum.Username = "iikwalsemsiskweyrd";
+            cum.Username = ""+DateTime.Now.ToString();
             cum.Password = "password";
             cum.Email = "saringan.emanuel@gmail.com";
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Omnipresence.Processing;
 
-namespace DatabaseTests.Tests
+namespace DatabaseTests
 {
     public class AddCommentTest : Test
     {
@@ -18,7 +18,7 @@ namespace DatabaseTests.Tests
 
         public override bool Execute()
         {
-            throw new NotImplementedException();
+            return eventServices.AddComment(new AddCommentModel { Comment = "OHOHOHOHOHO " + Name + " " + DateTime.Now.ToString(), EventId = 1, UserProfileId = 1 });
         }
     }
 }
