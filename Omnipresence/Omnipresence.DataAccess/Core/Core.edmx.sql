@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/22/2011 07:22:06
+-- Date Created: 11/22/2011 17:59:04
 -- Generated from EDMX file: C:\Users\emanuel\Desktop\omni\saringan-suarez-dayrit\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
@@ -86,7 +86,7 @@ GO
 
 -- Creating table 'Comments'
 CREATE TABLE [dbo].[Comments] (
-    [CommentId] int  NOT NULL,
+    [CommentId] int IDENTITY(1,1) NOT NULL,
     [CommentText] nvarchar(1024)  NOT NULL,
     [Timestamp] datetime  NOT NULL,
     [UserProfileId] int  NOT NULL,
@@ -165,7 +165,7 @@ GO
 
 -- Creating table 'Friendships'
 CREATE TABLE [dbo].[Friendships] (
-    [AdderId] int IDENTITY(1,1) NOT NULL,
+    [AdderId] int  NOT NULL,
     [AddedId] int  NOT NULL
 );
 GO
