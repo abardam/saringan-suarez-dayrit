@@ -24,7 +24,7 @@ namespace DatabaseTests
             c.StartTime = DateTime.Now;
             c.EndTime = DateTime.Now;
             c.CategoryString = "Party";
-            c.VisibilityTypeString = "public";
+            c.IsPrivate = false;
             c.Latitude = 10.0;
             c.Longitude = 120.0;
             c.LocationName = "Ateneo";
