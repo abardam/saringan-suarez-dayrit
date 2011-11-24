@@ -21,11 +21,11 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Event_Category", "Categories", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.Category), "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Comment_Events", "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event), "Comments", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Comment), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Event_Location", "Locations", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.Location), "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
-[assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_Event_VisibilityType", "VisibilityTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.VisibilityType), "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "FK_UserProfile_User", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.User), "UserProfiles", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.UserProfile), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileFriendship", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Friendship", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Friendship), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileFriendship1", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Friendship", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Friendship), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileComment", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Comment), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileEvent", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
 
 #endregion
 
@@ -176,22 +176,6 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<VisibilityType> VisibilityTypes
-        {
-            get
-            {
-                if ((_VisibilityTypes == null))
-                {
-                    _VisibilityTypes = base.CreateObjectSet<VisibilityType>("VisibilityTypes");
-                }
-                return _VisibilityTypes;
-            }
-        }
-        private ObjectSet<VisibilityType> _VisibilityTypes;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Friendship> Friendships
         {
             get
@@ -254,14 +238,6 @@ namespace Omnipresence.DataAccess.Core
         public void AddToUsers(User user)
         {
             base.AddObject("Users", user);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the VisibilityTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToVisibilityTypes(VisibilityType visibilityType)
-        {
-            base.AddObject("VisibilityTypes", visibilityType);
         }
     
         /// <summary>
@@ -694,7 +670,9 @@ namespace Omnipresence.DataAccess.Core
         /// <param name="startTime">Initial value of the StartTime property.</param>
         /// <param name="endTime">Initial value of the EndTime property.</param>
         /// <param name="isActive">Initial value of the IsActive property.</param>
-        public static Event CreateEvent(global::System.Int32 eventId, global::System.String title, global::System.String description, global::System.Int32 rating, global::System.DateTime created, global::System.DateTime lastModified, global::System.DateTime startTime, global::System.DateTime endTime, global::System.Boolean isActive)
+        /// <param name="isPrivate">Initial value of the IsPrivate property.</param>
+        /// <param name="createdById">Initial value of the CreatedById property.</param>
+        public static Event CreateEvent(global::System.Int32 eventId, global::System.String title, global::System.String description, global::System.Int32 rating, global::System.DateTime created, global::System.DateTime lastModified, global::System.DateTime startTime, global::System.DateTime endTime, global::System.Boolean isActive, global::System.Boolean isPrivate, global::System.Int32 createdById)
         {
             Event @event = new Event();
             @event.EventId = eventId;
@@ -706,6 +684,8 @@ namespace Omnipresence.DataAccess.Core
             @event.StartTime = startTime;
             @event.EndTime = endTime;
             @event.IsActive = isActive;
+            @event.IsPrivate = isPrivate;
+            @event.CreatedById = createdById;
             return @event;
         }
 
@@ -1002,6 +982,54 @@ namespace Omnipresence.DataAccess.Core
         private Nullable<global::System.Int32> _CategoryId;
         partial void OnCategoryIdChanging(Nullable<global::System.Int32> value);
         partial void OnCategoryIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsPrivate
+        {
+            get
+            {
+                return _IsPrivate;
+            }
+            set
+            {
+                OnIsPrivateChanging(value);
+                ReportPropertyChanging("IsPrivate");
+                _IsPrivate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsPrivate");
+                OnIsPrivateChanged();
+            }
+        }
+        private global::System.Boolean _IsPrivate;
+        partial void OnIsPrivateChanging(global::System.Boolean value);
+        partial void OnIsPrivateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CreatedById
+        {
+            get
+            {
+                return _CreatedById;
+            }
+            set
+            {
+                OnCreatedByIdChanging(value);
+                ReportPropertyChanging("CreatedById");
+                _CreatedById = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedById");
+                OnCreatedByIdChanged();
+            }
+        }
+        private global::System.Int32 _CreatedById;
+        partial void OnCreatedByIdChanging(global::System.Int32 value);
+        partial void OnCreatedByIdChanged();
 
         #endregion
     
@@ -1111,16 +1139,16 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Event_VisibilityType", "VisibilityTypes")]
-        public VisibilityType VisibilityType
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileEvent", "UserProfile")]
+        public UserProfile CreatedBy
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VisibilityType>("OmnipresenceModel.FK_Event_VisibilityType", "VisibilityTypes").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileEvent", "UserProfile").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VisibilityType>("OmnipresenceModel.FK_Event_VisibilityType", "VisibilityTypes").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileEvent", "UserProfile").Value = value;
             }
         }
         /// <summary>
@@ -1128,17 +1156,17 @@ namespace Omnipresence.DataAccess.Core
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<VisibilityType> VisibilityTypeReference
+        public EntityReference<UserProfile> CreatedByReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<VisibilityType>("OmnipresenceModel.FK_Event_VisibilityType", "VisibilityTypes");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileEvent", "UserProfile");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<VisibilityType>("OmnipresenceModel.FK_Event_VisibilityType", "VisibilityTypes", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserProfile>("OmnipresenceModel.UserProfileEvent", "UserProfile", value);
                 }
             }
         }
@@ -1325,12 +1353,14 @@ namespace Omnipresence.DataAccess.Core
         /// <param name="locationId">Initial value of the LocationId property.</param>
         /// <param name="latitude">Initial value of the Latitude property.</param>
         /// <param name="longitude">Initial value of the Longitude property.</param>
-        public static Location CreateLocation(global::System.Int32 locationId, global::System.Double latitude, global::System.Double longitude)
+        /// <param name="address">Initial value of the Address property.</param>
+        public static Location CreateLocation(global::System.Int32 locationId, global::System.Double latitude, global::System.Double longitude, global::System.String address)
         {
             Location location = new Location();
             location.LocationId = locationId;
             location.Latitude = latitude;
             location.Longitude = longitude;
+            location.Address = address;
             return location;
         }
 
@@ -1459,6 +1489,30 @@ namespace Omnipresence.DataAccess.Core
         private Nullable<global::System.Int32> _CountryId;
         partial void OnCountryIdChanging(Nullable<global::System.Int32> value);
         partial void OnCountryIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Address
+        {
+            get
+            {
+                return _Address;
+            }
+            set
+            {
+                OnAddressChanging(value);
+                ReportPropertyChanging("Address");
+                _Address = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Address");
+                OnAddressChanged();
+            }
+        }
+        private global::System.String _Address;
+        partial void OnAddressChanging(global::System.String value);
+        partial void OnAddressChanged();
 
         #endregion
     
@@ -2285,136 +2339,6 @@ namespace Omnipresence.DataAccess.Core
                 }
             }
         }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="VisibilityType")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class VisibilityType : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new VisibilityType object.
-        /// </summary>
-        /// <param name="visibilityTypeId">Initial value of the VisibilityTypeId property.</param>
-        public static VisibilityType CreateVisibilityType(global::System.Int32 visibilityTypeId)
-        {
-            VisibilityType visibilityType = new VisibilityType();
-            visibilityType.VisibilityTypeId = visibilityTypeId;
-            return visibilityType;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 VisibilityTypeId
-        {
-            get
-            {
-                return _VisibilityTypeId;
-            }
-            set
-            {
-                if (_VisibilityTypeId != value)
-                {
-                    OnVisibilityTypeIdChanging(value);
-                    ReportPropertyChanging("VisibilityTypeId");
-                    _VisibilityTypeId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("VisibilityTypeId");
-                    OnVisibilityTypeIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _VisibilityTypeId;
-        partial void OnVisibilityTypeIdChanging(global::System.Int32 value);
-        partial void OnVisibilityTypeIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Type
-        {
-            get
-            {
-                return _Type;
-            }
-            set
-            {
-                OnTypeChanging(value);
-                ReportPropertyChanging("Type");
-                _Type = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Type");
-                OnTypeChanged();
-            }
-        }
-        private global::System.String _Type;
-        partial void OnTypeChanging(global::System.String value);
-        partial void OnTypeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                OnDescriptionChanging(value);
-                ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Description");
-                OnDescriptionChanged();
-            }
-        }
-        private global::System.String _Description;
-        partial void OnDescriptionChanging(global::System.String value);
-        partial void OnDescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] Icon
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_Icon);
-            }
-            set
-            {
-                OnIconChanging(value);
-                ReportPropertyChanging("Icon");
-                _Icon = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Icon");
-                OnIconChanged();
-            }
-        }
-        private global::System.Byte[] _Icon;
-        partial void OnIconChanging(global::System.Byte[] value);
-        partial void OnIconChanged();
-
-        #endregion
-    
-        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2422,18 +2346,18 @@ namespace Omnipresence.DataAccess.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "FK_Event_VisibilityType", "Events")]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileEvent", "Event")]
         public EntityCollection<Event> Events
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event>("OmnipresenceModel.FK_Event_VisibilityType", "Events");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event>("OmnipresenceModel.UserProfileEvent", "Event");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("OmnipresenceModel.FK_Event_VisibilityType", "Events", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("OmnipresenceModel.UserProfileEvent", "Event", value);
                 }
             }
         }
