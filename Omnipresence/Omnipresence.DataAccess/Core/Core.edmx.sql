@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/22/2011 17:59:04
+-- Date Created: 11/24/2011 14:13:35
 -- Generated from EDMX file: C:\Users\emanuel\Desktop\omni\saringan-suarez-dayrit\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
@@ -25,9 +25,6 @@ IF OBJECT_ID(N'[dbo].[FK_Comment_Events]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_Event_Location]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_Event_Location];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Event_VisibilityType]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_Event_VisibilityType];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserProfile_User]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[UserProfiles] DROP CONSTRAINT [FK_UserProfile_User];
@@ -63,9 +60,6 @@ IF OBJECT_ID(N'[dbo].[UserProfiles]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Users];
-GO
-IF OBJECT_ID(N'[dbo].[VisibilityTypes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[VisibilityTypes];
 GO
 IF OBJECT_ID(N'[dbo].[Friendships]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Friendships];
@@ -107,7 +101,9 @@ CREATE TABLE [dbo].[Events] (
     [IsActive] bit  NOT NULL,
     [VisibilityTypeId] int  NULL,
     [LocationId] int  NULL,
-    [CategoryId] int  NULL
+    [CategoryId] int  NULL,
+    [IsPrivate] bit  NOT NULL,
+    [CreatedById] int  NOT NULL
 );
 GO
 
@@ -116,8 +112,9 @@ CREATE TABLE [dbo].[Locations] (
     [LocationId] int IDENTITY(1,1) NOT NULL,
     [Latitude] float  NOT NULL,
     [Longitude] float  NOT NULL,
-    [Name] nvarchar(128)  NULL,
-    [CountryId] int  NULL
+    [Name] nvarchar(64)  NULL,
+    [CountryId] int  NULL,
+    [Address] nvarchar(64)  NOT NULL
 );
 GO
 
@@ -151,15 +148,6 @@ CREATE TABLE [dbo].[Users] (
     [LastLockedOutDate] datetime  NOT NULL,
     [SecurityQuestion] nvarchar(256)  NOT NULL,
     [SecurityAnswer] nvarchar(256)  NULL
-);
-GO
-
--- Creating table 'VisibilityTypes'
-CREATE TABLE [dbo].[VisibilityTypes] (
-    [VisibilityTypeId] int IDENTITY(1,1) NOT NULL,
-    [Type] nvarchar(32)  NULL,
-    [Description] nvarchar(128)  NULL,
-    [Icon] varbinary(max)  NULL
 );
 GO
 
@@ -208,12 +196,6 @@ GO
 ALTER TABLE [dbo].[Users]
 ADD CONSTRAINT [PK_Users]
     PRIMARY KEY CLUSTERED ([UserId] ASC);
-GO
-
--- Creating primary key on [VisibilityTypeId] in table 'VisibilityTypes'
-ALTER TABLE [dbo].[VisibilityTypes]
-ADD CONSTRAINT [PK_VisibilityTypes]
-    PRIMARY KEY CLUSTERED ([VisibilityTypeId] ASC);
 GO
 
 -- Creating primary key on [AdderId], [AddedId] in table 'Friendships'
@@ -268,20 +250,6 @@ ON [dbo].[Events]
     ([LocationId]);
 GO
 
--- Creating foreign key on [VisibilityTypeId] in table 'Events'
-ALTER TABLE [dbo].[Events]
-ADD CONSTRAINT [FK_Event_VisibilityType]
-    FOREIGN KEY ([VisibilityTypeId])
-    REFERENCES [dbo].[VisibilityTypes]
-        ([VisibilityTypeId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_Event_VisibilityType'
-CREATE INDEX [IX_FK_Event_VisibilityType]
-ON [dbo].[Events]
-    ([VisibilityTypeId]);
-GO
-
 -- Creating foreign key on [UserProfileId] in table 'UserProfiles'
 ALTER TABLE [dbo].[UserProfiles]
 ADD CONSTRAINT [FK_UserProfile_User]
@@ -326,6 +294,20 @@ ADD CONSTRAINT [FK_UserProfileComment]
 CREATE INDEX [IX_FK_UserProfileComment]
 ON [dbo].[Comments]
     ([UserProfileId]);
+GO
+
+-- Creating foreign key on [CreatedById] in table 'Events'
+ALTER TABLE [dbo].[Events]
+ADD CONSTRAINT [FK_UserProfileEvent]
+    FOREIGN KEY ([CreatedById])
+    REFERENCES [dbo].[UserProfiles]
+        ([UserProfileId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserProfileEvent'
+CREATE INDEX [IX_FK_UserProfileEvent]
+ON [dbo].[Events]
+    ([CreatedById]);
 GO
 
 -- --------------------------------------------------
