@@ -285,14 +285,21 @@ namespace Omnipresence.Processing
             
             if (requester != null && accepter != null)
             {
-                Friendship friendship = new Friendship();
-                friendship.AddingParty = requester;
-                friendship.AddedParty = accepter;
+                if (!Utilities.AreFriends(requester, accepter))
+                {
+                    Friendship friendship = new Friendship();
+                    friendship.AddingParty = requester;
+                    friendship.AddedParty = accepter;
 
-                db.AddToFriendships(friendship);
-                db.SaveChanges();
+                    db.AddToFriendships(friendship);
+                    db.SaveChanges();
 
-                return true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {

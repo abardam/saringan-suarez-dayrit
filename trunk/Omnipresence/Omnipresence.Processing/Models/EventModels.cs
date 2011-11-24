@@ -14,7 +14,7 @@ namespace Omnipresence.Processing
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public Category Category { get; set; }
-        public VisibilityType VisibilityType { get; set; }
+        public bool IsPrivate { get; set; }
         public Location Location { get; set; }
         public bool IsActive { get; set; }
         public DateTime LastModified { get; set; }
@@ -29,7 +29,7 @@ namespace Omnipresence.Processing
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string CategoryString { get; set; }
-        public string VisibilityTypeString { get; set; }
+        public bool IsPrivate { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string LocationName { get; set; }
@@ -43,7 +43,7 @@ namespace Omnipresence.Processing
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public Category Category { get; set; }
-        public VisibilityType VisibilityType { get; set; }
+        public bool IsPrivate { get; set; }
         public Location Location { get; set; }
         public bool IsActive { get; set; }
         public int Rating { get; set; }

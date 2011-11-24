@@ -73,7 +73,7 @@ namespace Omnipresence.Processing
                 evtModel.StartTime = evt.StartTime;
                 evtModel.EndTime = evt.EndTime;
                 evtModel.Category = evt.Category;
-                evtModel.VisibilityType = evt.VisibilityType;
+                evtModel.IsPrivate = evt.IsPrivate;
                 evtModel.Location = evt.Location;
                 evtModel.IsActive = evt.IsActive;
                 evtModel.LastModified = evt.LastModified;
@@ -131,11 +131,11 @@ namespace Omnipresence.Processing
             return userProfileModel;
         }
 
-        public bool AreFriends(UserProfile a, UserProfile b)
+        public static bool AreFriends(UserProfile a, UserProfile b)
         {
             IEnumerable<Friendship> test = a.RequestedFriendships.Where(x => x.AddedId == b.UserProfileId).Union(b.RequestedFriendships.Where(y => y.AddedId == a.UserProfileId));
 
-            return test.Count() == 0;
+            return test.Count() != 0;
         }
     }
 }
