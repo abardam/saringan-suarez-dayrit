@@ -77,4 +77,10 @@ namespace Omnipresence.Processing
         public string Username { get; set; }
         public string Password { get; set; }
     }
+
+    public class MakeFriendsModel
+    {
+        public int AdderUserProfileId { get; set; }
+        public int AddedUserProfileId { get; set; }
+    }
 }

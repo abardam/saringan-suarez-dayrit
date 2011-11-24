@@ -130,5 +130,12 @@ namespace Omnipresence.Processing
             
             return userProfileModel;
         }
+
+        public bool AreFriends(UserProfile a, UserProfile b)
+        {
+            IEnumerable<Friendship> test = a.RequestedFriendships.Where(x => x.AddedId == b.UserProfileId).Union(b.RequestedFriendships.Where(y => y.AddedId == a.UserProfileId));
+
+            return test.Count() == 0;
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace Omnipresence.Processing
         public DateTime Created { get; set; }
         public int Rating { get; set; }
     }
-
+    // TODO: Add validator
     public class CreateEventModel
     {
         public string Title { get; set; }
@@ -34,7 +34,7 @@ namespace Omnipresence.Processing
         public double Longitude { get; set; }
         public string LocationName { get; set; }
     }
-
+    // TODO: Add validator
     public class UpdateEventModel
     {
         public int EventId { get; set; }
@@ -48,25 +48,25 @@ namespace Omnipresence.Processing
         public bool IsActive { get; set; }
         public int Rating { get; set; }
     }
-
+    // TODO: Add validator
     public class DeleteEventModel
     {
         public int EventId { get; set; }
     }
-
+    // TODO: Add validator
     public class AddCommentModel
     {
         public int UserProfileId { get; set; }
         public int EventId { get; set; }
         public string Comment { get; set; }
     }
-
+    // TODO: Add validator
     public class VoteEventModel
     {
         public int EventId { get; set; }
         public bool IsDownvote { get; set; }
     }
-
+    // TODO: Add validator
     public class QueryEventModel
     {
         public string Title { get; set; }
