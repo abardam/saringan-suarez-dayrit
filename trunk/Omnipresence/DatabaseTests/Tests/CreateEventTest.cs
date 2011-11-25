@@ -28,6 +28,7 @@ namespace DatabaseTests
             c.Latitude = 10.0;
             c.Longitude = 120.0;
             c.LocationName = "Ateneo";
+            c.Address = "Katipunan Avenue";
 
             return eventServices.CreateEvent(c);
         }
