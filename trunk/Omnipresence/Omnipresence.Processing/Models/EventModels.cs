@@ -33,6 +33,7 @@ namespace Omnipresence.Processing
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string LocationName { get; set; }
+        public string Address { get; set; }
     }
     // TODO: Add validator
     public class UpdateEventModel
