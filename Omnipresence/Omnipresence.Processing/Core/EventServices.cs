@@ -52,9 +52,10 @@ namespace Omnipresence.Processing
             newEvent.Description = createEventModel.Description;
             newEvent.StartTime = createEventModel.StartTime;
             newEvent.EndTime = createEventModel.EndTime;
-            newEvent.Category = GetCategory(createEventModel.CategoryString);
             newEvent.IsPrivate = createEventModel.IsPrivate;
-            newEvent.Location = CreateLocation(createEventModel.Latitude, createEventModel.Longitude, createEventModel.LocationName);
+
+            newEvent.Category = GetCategory(createEventModel.CategoryString);
+            newEvent.Location = CreateLocation(createEventModel.Latitude, createEventModel.Longitude, createEventModel.LocationName, createEventModel.Address);
 
             newEvent.IsActive = true;
             newEvent.LastModified = DateTime.Now;
@@ -126,6 +127,12 @@ namespace Omnipresence.Processing
             return true;
         }
 
+        //TODO
+        //public bool UpdateComment(UpdateCommentModel updateCommentModel)
+        //{
+        //    return true;
+        //}
+
         public bool Vote(VoteEventModel voteEventModel)
         {
             Event curEvent = db.Events.Where(ev => (ev.EventId == voteEventModel.EventId)).FirstOrDefault();
@@ -153,12 +160,13 @@ namespace Omnipresence.Processing
         #endregion
 
         #region [UTILITY METHODS]
-        private Location CreateLocation(double latitude, double longitude, string name)
+        private Location CreateLocation(double latitude, double longitude, string name, string address)
         {
             Location location = new Location();
             location.Latitude = latitude;
             location.Longitude = longitude;
             location.Name = name;
+            location.Address = address;
 
             return location;
         }
