@@ -61,11 +61,19 @@ namespace Omnipresence.Processing
             newEvent.LastModified = DateTime.Now;
             newEvent.Created = System.DateTime.Now;
             newEvent.Rating = 0;
+            newEvent.CreatedBy = db.UserProfiles.Where(up => up.UserProfileId == createEventModel.UserProfileId).FirstOrDefault();
 
-            db.AddToEvents(newEvent);
-            db.SaveChanges();
+            if (newEvent.CreatedBy != null)
+            {
+                db.AddToEvents(newEvent);
+                db.SaveChanges();
 
-            return true;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool UpdateEvent(UpdateEventModel uem)
@@ -121,10 +129,17 @@ namespace Omnipresence.Processing
             comment.Event = evt;
             comment.UserProfile = userProfile;
 
-            db.AddToComments(comment);
-            db.SaveChanges();
+            if (comment.Event != null && comment.UserProfile != null)
+            {
+                db.AddToComments(comment);
+                db.SaveChanges();
 
-            return true;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         //TODO
