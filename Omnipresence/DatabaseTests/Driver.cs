@@ -11,43 +11,17 @@ namespace DatabaseTests
         static void Main(string[] args)
         {
             List<Test> testSuite = new List<Test>();
-            testSuite.Add(new CreateUserTest("Account Creation Test"));
-            testSuite.Add(new CreateUserTest("Account Creation Test"));
-            testSuite.Add(new CreateUserTest("Account Creation Test"));
-            testSuite.Add(new CreateUserTest("Account Creation Test"));
-            testSuite.Add(new CreateUserTest("Account Creation Test"));
+
             testSuite.Add(new CreateUserTest("Account Creation Test"));
             testSuite.Add(new CreateEventTest("Event Creation Test"));
             testSuite.Add(new VoteEventTest("Event Voting Test"));
             testSuite.Add(new AddCommentTest("Comment Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
-            testSuite.Add(new AddFriendTest("Add Friend Test"));
 
+            for (int i = 0; i < 6; i++)
+            {
+                testSuite.Add(new AddFriendTest("Add Friend Test"));
+            }
+            
             int numSuccess = 0;
             Stopwatch stopwatch;
 
