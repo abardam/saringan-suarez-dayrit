@@ -10,39 +10,33 @@ namespace Omnipresence.Processing
     public class AccountServices:IDisposable
     {
         #region [FIELDS]
+
         private OmnipresenceEntities db;
+        private static AccountServices instance;
+
         #endregion
 
         #region [CONSTRUCTOR]
-        public AccountServices()
+
+        private AccountServices()
         {
             db = new OmnipresenceEntities();
             db.Connection.Open();
         }
+
+        public static AccountServices GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new AccountServices();
+            }
+
+            return instance;
+        }
+
         #endregion
 
         #region [CRUD]
-        //public bool AddUser(UserModel userModel)
-        //{
-        //    User user = new User();
-        //    user.Username = userModel.Username;
-        //    user.Password = userModel.Password;
-        //    user.PasswordSalt = userModel.PasswordSalt;
-        //    user.Email = userModel.Email;
-        //    user.AlternateEmail = userModel.AlternateEmail;
-        //    user.SecurityQuestion = userModel.SecurityQuestion;
-        //    user.SecurityAnswer = userModel.SecurityAnswer;
-        //    user.CreatedDate = userModel.CreatedDate;
-        //    user.IsActivated = userModel.IsActivated;
-        //    user.IsLockedOut = userModel.IsLockedOut;
-        //    user.LastLoginDate = user.LastLoginDate;
-        //    user.UserProfile = userModel.UserProfile;
-
-        //    db.AddToUsers(user);
-        //    db.SaveChanges();
-
-        //    return true;
-        //}
 
         public bool CreateUser(CreateUserModel userModel, CreateUserProfileModel userProfileModel)
         {
@@ -167,6 +161,7 @@ namespace Omnipresence.Processing
         #endregion
 
         #region [SEARCH]
+
         public UserModel GetUserById(int id)
         {
             User user = db.Users.Where(account => account.UserId == id).FirstOrDefault();
@@ -193,8 +188,8 @@ namespace Omnipresence.Processing
 
         public IQueryable<UserModel> GetAllUsers()
         {
-            ObjectSet<User> users = db.Users;
             List<UserModel> userModels = new List<UserModel>();
+            IQueryable<User> users = db.Users;
 
             foreach (User user in users)
             {
@@ -227,7 +222,7 @@ namespace Omnipresence.Processing
 
         public IQueryable<UserProfileModel> GetAllUserProfiles()
         {
-            ObjectSet<UserProfile> userProfiles = db.UserProfiles;
+            IQueryable<UserProfile> userProfiles = db.UserProfiles;
             List<UserProfileModel> userProfileModels = new List<UserProfileModel>();
 
             foreach (UserProfile up in userProfiles)
@@ -334,19 +329,6 @@ namespace Omnipresence.Processing
                 return false;
             }
         }
-
-        //private Gender GetGender(string genderString)
-        //{
-        //    if (genderString.Equals("male", StringComparison.CurrentCultureIgnoreCase) || genderString.Equals("female", StringComparison.CurrentCultureIgnoreCase))
-        //    {
-        //        Gender gender = db.Genders.Where(x => x.GenderText.Equals(genderString, StringComparison.CurrentCultureIgnoreCase)).SingleOrDefault();
-        //        return gender;
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-        //}
 
         public void Dispose()
         {
