@@ -23,7 +23,5 @@ namespace DatabaseTests
             
             return accountServices.MakeFriends(m);
         }
-
-        public static Random random = new Random();
     }
 }
