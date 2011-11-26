@@ -12,7 +12,11 @@ namespace DatabaseTests
         {
             List<Test> testSuite = new List<Test>();
 
-            testSuite.Add(new CreateUserTest("Account Creation Test"));
+            for (int i = 0; i < 20; i++)
+            {
+                testSuite.Add(new CreateUserTest("Account Creation Test"));
+            }
+
             testSuite.Add(new CreateEventTest("Event Creation Test"));
             testSuite.Add(new VoteEventTest("Event Voting Test"));
             testSuite.Add(new AddCommentTest("Comment Test"));
@@ -21,7 +25,9 @@ namespace DatabaseTests
             {
                 testSuite.Add(new AddFriendTest("Add Friend Test"));
             }
-            
+
+            testSuite.Add(new GetAllFriendsTest("Get All Friends Test"));
+
             int numSuccess = 0;
             Stopwatch stopwatch;
 
