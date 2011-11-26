@@ -238,6 +238,34 @@ namespace Omnipresence.Processing
             return userProfileModels.AsQueryable();
         }
 
+        public IQueryable<UserProfileModel> GetAllFriends(GetAllFriendsModel gafm)
+        {
+            UserProfile userProfile = db.UserProfiles.Where(u => u.UserProfileId == gafm.UserProfileId).FirstOrDefault();
+            var acceptedFriends = userProfile.AcceptedFriendships;
+            var requestedFriends = userProfile.RequestedFriendships;
+
+            List<UserProfile> friends = new List<UserProfile>();
+
+            foreach (Friendship item in acceptedFriends)
+            {
+                friends.Add(item.AddingParty);
+            }
+
+            foreach (Friendship item in requestedFriends)
+            {
+                friends.Add(item.AddedParty);
+            }
+
+            List<UserProfileModel> userProfileModels = new List<UserProfileModel>();
+
+            foreach (UserProfile up in friends)
+            {
+                userProfileModels.Add(Utilities.UserProfileToUserProfileModel(up));
+            }
+
+            return userProfileModels.AsQueryable();
+        }
+
         #endregion
 
         public bool UpdatePassword(UpdatePasswordModel changePasswordModel)
@@ -283,7 +311,7 @@ namespace Omnipresence.Processing
             UserProfile requester = db.UserProfiles.Where(up => up.UserProfileId == makeFriendsModel.AdderUserProfileId).FirstOrDefault();
             UserProfile accepter = db.UserProfiles.Where(up => up.UserProfileId == makeFriendsModel.AddedUserProfileId).FirstOrDefault();
             
-            if (requester != null && accepter != null)
+            if ((requester != null && accepter != null) && (requester != accepter))
             {
                 if (!Utilities.AreFriends(requester, accepter))
                 {

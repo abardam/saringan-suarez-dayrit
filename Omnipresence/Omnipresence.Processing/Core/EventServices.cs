@@ -123,7 +123,7 @@ namespace Omnipresence.Processing
             comment.CommentText = addCommentModel.Comment;
             comment.Timestamp = DateTime.Now;
 
-            Event evt = db.Events.Where(ev => ev.EventId == addCommentModel.EventId).SingleOrDefault();
+            Event evt = db.Events.Where(ev => ev.EventId == addCommentModel.EventId).FirstOrDefault();
             UserProfile userProfile = db.UserProfiles.Where(up => up.UserProfileId == addCommentModel.UserProfileId).FirstOrDefault();
 
             comment.Event = evt;
