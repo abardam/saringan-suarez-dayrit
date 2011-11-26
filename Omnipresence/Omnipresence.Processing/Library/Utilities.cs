@@ -36,32 +36,6 @@ namespace Omnipresence.Processing
             }
         }
 
-        //public static User UserModelToUser(UserModel userModel)
-        //{
-        //    if (userModel != null)
-        //    {
-        //        User user = new User();
-        //        user.Username = userModel.Username;
-        //        user.Password = userModel.Password;
-        //        user.PasswordSalt = userModel.PasswordSalt;
-        //        user.Email = userModel.Email;
-        //        user.AlternateEmail = userModel.AlternateEmail;
-        //        user.SecurityQuestion = userModel.SecurityQuestion;
-        //        user.SecurityAnswer = userModel.SecurityAnswer;
-        //        user.CreatedDate = userModel.CreatedDate;
-        //        user.IsActivated = userModel.IsActivated;
-        //        user.IsLockedOut = userModel.IsLockedOut;
-        //        user.LastLoginDate = user.LastLoginDate;
-        //        user.UserProfile = userModel.UserProfile;
-
-        //        return user;
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-        //}
-
         public static EventModel EventToEventModel(Event evt)
         {
             if (evt != null)
@@ -88,47 +62,29 @@ namespace Omnipresence.Processing
             }
         }
 
-        //public static Event EventModelToEvent(EventModel eventModel)
-        //{
-        //    if (eventModel != null)
-        //    {
-        //        Event newEvent = new Event();
-        //        newEvent.Title = eventModel.Title;
-        //        newEvent.Description = eventModel.Description;
-        //        newEvent.StartTime = eventModel.StartTime;
-        //        newEvent.EndTime = eventModel.EndTime;
-        //        newEvent.Category = eventModel.Category;
-        //        newEvent.VisibilityType = eventModel.VisibilityType;
-        //        newEvent.Location = eventModel.Location;
-        //        newEvent.IsActive = eventModel.IsActive;
-        //        newEvent.LastModified = eventModel.LastModified;
-        //        newEvent.Created = eventModel.Created;
-        //        newEvent.Rating = eventModel.Rating;
-
-        //        return newEvent;
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-        //}
-
         public static UserProfileModel UserProfileToUserProfileModel(UserProfile userProfile)
         {
-            UserProfileModel userProfileModel = new UserProfileModel();
-            userProfileModel.UserProfileId = userProfile.UserProfileId;
-            userProfileModel.FirstName = userProfile.FirstName;
-            userProfileModel.LastName = userProfile.LastName;
-            userProfileModel.IsFemale = userProfile.IsFemale;
-            userProfileModel.Description = userProfile.Description;
-            userProfileModel.AcceptedFriendships = userProfile.AcceptedFriendships;
-            userProfileModel.RequestedFriendships = userProfile.RequestedFriendships;
-            userProfileModel.Birthdate = userProfile.Birthdate;
-            userProfileModel.Comments = userProfile.Comments;
-            userProfileModel.Reputation = userProfile.Reputation;
-            userProfileModel.Avatar = userProfile.Avatar;
-            
-            return userProfileModel;
+            if (userProfile != null)
+            {
+                UserProfileModel userProfileModel = new UserProfileModel();
+                userProfileModel.UserProfileId = userProfile.UserProfileId;
+                userProfileModel.FirstName = userProfile.FirstName;
+                userProfileModel.LastName = userProfile.LastName;
+                userProfileModel.IsFemale = userProfile.IsFemale;
+                userProfileModel.Description = userProfile.Description;
+                userProfileModel.AcceptedFriendships = userProfile.AcceptedFriendships;
+                userProfileModel.RequestedFriendships = userProfile.RequestedFriendships;
+                userProfileModel.Birthdate = userProfile.Birthdate;
+                userProfileModel.Comments = userProfile.Comments;
+                userProfileModel.Reputation = userProfile.Reputation;
+                userProfileModel.Avatar = userProfile.Avatar;
+
+                return userProfileModel;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public static bool AreFriends(UserProfile a, UserProfile b)
@@ -136,6 +92,37 @@ namespace Omnipresence.Processing
             IEnumerable<Friendship> test = a.RequestedFriendships.Where(x => x.AddedId == b.UserProfileId).Union(b.RequestedFriendships.Where(y => y.AddedId == a.UserProfileId));
 
             return test.Count() != 0;
+        }
+
+        public static bool AreWithinRadius(Location a, Location b, double radius)
+        {
+            double x1 = a.Latitude;
+            double y1 = a.Longitude;
+
+            double x2 = b.Latitude;
+            double y2 = b.Longitude;
+
+            return Math.Sqrt((y1 - x1) * (y1 - x1) + (y2 - x2) * (y2 - x2)) <= radius;
+        }
+
+        public static CommentModel CommentToCommentModel(Comment comment)
+        {
+            if (comment != null)
+            {
+                CommentModel commentModel = new CommentModel();
+
+                commentModel.CommentId = comment.CommentId;
+                commentModel.UserProfileModel = comment.UserProfileId;
+                commentModel.EventId = comment.EventId;
+                commentModel.CommentText = comment.CommentText;
+                commentModel.Timestamp = comment.Timestamp;
+
+                return commentModel;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

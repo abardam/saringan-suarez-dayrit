@@ -10,40 +10,33 @@ namespace Omnipresence.Processing
     public class EventServices : IDisposable
     {
         #region [FIELDS]
+
         private OmnipresenceEntities db;
+        private static EventServices instance;
+
         #endregion
 
         #region [CONSTRUCTOR]
-        public EventServices()
+
+        private EventServices()
         {
             db = new OmnipresenceEntities();
             db.Connection.Open();
         }
 
+        public static EventServices GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new EventServices();
+            }
+
+            return instance;
+        }
+
         #endregion
 
         #region [CRUD]
-
-        //public bool AddEvent(EventModel eventModel)
-        //{
-        //    Event newEvent = new Event();
-        //    newEvent.Title = eventModel.Title;
-        //    newEvent.Description = eventModel.Description;
-        //    newEvent.StartTime = eventModel.StartTime;
-        //    newEvent.EndTime = eventModel.EndTime;
-        //    newEvent.Category = eventModel.Category;
-        //    newEvent.VisibilityType = eventModel.VisibilityType;
-        //    newEvent.Location = eventModel.Location;
-        //    newEvent.IsActive = eventModel.IsActive;
-        //    newEvent.LastModified = eventModel.LastModified;
-        //    newEvent.Created = eventModel.Created;
-        //    newEvent.Rating = eventModel.Rating;
-
-        //    db.AddToEvents(newEvent);
-        //    db.SaveChanges();
-
-        //    return true;
-        //}
 
         public bool CreateEvent(CreateEventModel createEventModel)
         {
@@ -117,14 +110,14 @@ namespace Omnipresence.Processing
             }
         }
 
-        public bool AddComment(AddCommentModel addCommentModel)
+        public bool CreateComment(CreateCommentModel createCommentModel)
         {
             Comment comment = new Comment();
-            comment.CommentText = addCommentModel.Comment;
+            comment.CommentText = createCommentModel.Comment;
             comment.Timestamp = DateTime.Now;
-
-            Event evt = db.Events.Where(ev => ev.EventId == addCommentModel.EventId).FirstOrDefault();
-            UserProfile userProfile = db.UserProfiles.Where(up => up.UserProfileId == addCommentModel.UserProfileId).FirstOrDefault();
+            
+            Event evt = db.Events.Where(ev => ev.EventId == createCommentModel.EventId).FirstOrDefault();
+            UserProfile userProfile = db.UserProfiles.Where(up => up.UserProfileId == createCommentModel.UserProfileId).FirstOrDefault();
 
             comment.Event = evt;
             comment.UserProfile = userProfile;
@@ -142,11 +135,40 @@ namespace Omnipresence.Processing
             }
         }
 
-        //TODO
-        //public bool UpdateComment(UpdateCommentModel updateCommentModel)
-        //{
-        //    return true;
-        //}
+        public bool UpdateComment(CommentModel updateCommentModel)
+        {
+            Comment comment = db.Comments.Where(c => c.CommentId == updateCommentModel.CommentId).FirstOrDefault();
+
+            if (comment != null)
+            {
+                comment.CommentText = updateCommentModel.CommentText;
+                comment.Timestamp = DateTime.Now;
+                db.SaveChanges();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteComment(DeleteCommentModel dcm)
+        {
+            Comment comment = db.Comments.Where(c => c.CommentId == dcm.CommentId).FirstOrDefault();
+
+            if (comment != null)
+            {
+                db.DeleteObject(comment);
+                db.SaveChanges();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public bool Vote(VoteEventModel voteEventModel)
         {
@@ -175,6 +197,7 @@ namespace Omnipresence.Processing
         #endregion
 
         #region [UTILITY METHODS]
+
         private Location CreateLocation(double latitude, double longitude, string name, string address)
         {
             Location location = new Location();
@@ -195,10 +218,17 @@ namespace Omnipresence.Processing
         #endregion
 
         #region [SEARCH]
-        public IQueryable<EventModel> GetAllEvents()
+
+        public EventModel GetEventById(int id)
+        {
+            Event evt = db.Events.Where(e => e.EventId == id).FirstOrDefault();
+            return Utilities.EventToEventModel(evt);
+        }
+
+        public IQueryable<EventModel> GetAllEventsByUserProfileId(int id)
         {
             List<EventModel> eventModels = new List<EventModel>();
-            ObjectSet<Event> events = db.Events;
+            IQueryable<Event> events = db.Events.Where(e => e.CreatedById == id);
 
             foreach (Event evt in events)
             {
@@ -206,6 +236,64 @@ namespace Omnipresence.Processing
             }
 
             return eventModels.AsQueryable();
+        }
+
+        public IQueryable<EventModel> GetAllEvents()
+        {
+            List<EventModel> eventModels = new List<EventModel>();
+            IQueryable<Event> events = db.Events;
+
+            foreach (Event evt in events)
+            {
+                eventModels.Add(Utilities.EventToEventModel(evt));
+            }
+
+            return eventModels.AsQueryable();
+        }
+
+        public CommentModel GetCommentById(int id)
+        {
+            Comment comment = db.Comments.Where(c => c.CommentId == id).FirstOrDefault();
+            return Utilities.CommentToCommentModel(comment);
+        }
+
+        public IQueryable<CommentModel> GetAllCommentsByUserProfileId(int id)
+        {
+            List<CommentModel> commentModels = new List<CommentModel>();
+            IQueryable<Comment> comments = db.Comments.Where(c => c.UserProfileId == id);
+
+            foreach (Comment comment in comments)
+            {
+                commentModels.Add(Utilities.CommentToCommentModel(comment));
+            }
+
+            return commentModels.AsQueryable();
+        }
+
+        public IQueryable<CommentModel> GetAllCommentsByEventId(int id)
+        {
+            List<CommentModel> commentModels = new List<CommentModel>();
+            IQueryable<Comment> comments = db.Comments.Where(c => c.EventId == id);
+
+            foreach (Comment comment in comments)
+            {
+                commentModels.Add(Utilities.CommentToCommentModel(comment));
+            }
+
+            return commentModels.AsQueryable();
+        }
+
+        public IQueryable<CommentModel> GetAllComments()
+        {
+            List<CommentModel> commentModels = new List<CommentModel>();
+            IQueryable<Comment> comments = db.Comments;
+
+            foreach (Comment comment in comments)
+            {
+                commentModels.Add(Utilities.CommentToCommentModel(comment));
+            }
+
+            return commentModels.AsQueryable();
         }
 
         public IEnumerable<EventModel> QueryEvents(QueryEventModel queryModel)
@@ -223,7 +311,7 @@ namespace Omnipresence.Processing
             endTimeMatches = db.Events.Where(x => queryModel.EndTime != null ? x.EndTime <= queryModel.EndTime : true);
 
             IEnumerable<Event> locationMatches;
-            locationMatches = db.Events.Where(x => x.Location != null ? AreWithinRadius(x.Location, queryModel.Location, 0.1) : true);
+            locationMatches = db.Events.Where(x => x.Location != null ? Utilities.AreWithinRadius(x.Location, queryModel.Location, 0.1) : true);
 
             IEnumerable<Event> result = titleMatches.Intersect(descriptionMatches.Intersect(startTimeMatches.Intersect(endTimeMatches)).Intersect(locationMatches));
 
@@ -237,17 +325,6 @@ namespace Omnipresence.Processing
             }
 
             return eventModels.AsQueryable();
-        }
-
-        private bool AreWithinRadius(Location a, Location b, double radius)
-        {
-            double x1 = a.Latitude;
-            double y1 = a.Longitude;
-
-            double x2 = b.Latitude;
-            double y2 = b.Longitude;
-
-            return Math.Sqrt((y1 - x1) * (y1 - x1) + (y2 - x2) * (y2 - x2)) <= radius;
         }
 
         #endregion
