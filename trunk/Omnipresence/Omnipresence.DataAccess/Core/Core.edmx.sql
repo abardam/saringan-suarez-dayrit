@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/26/2011 13:18:02
+-- Date Created: 11/27/2011 00:55:25
 -- Generated from EDMX file: C:\Users\emanuel\Desktop\omni\saringan-suarez-dayrit\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
@@ -66,6 +66,9 @@ IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Friendships]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Friendships];
+GO
+IF OBJECT_ID(N'[dbo].[WebServiceUsers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[WebServiceUsers];
 GO
 
 -- --------------------------------------------------
@@ -161,6 +164,16 @@ CREATE TABLE [dbo].[Friendships] (
 );
 GO
 
+-- Creating table 'WebServiceUsers'
+CREATE TABLE [dbo].[WebServiceUsers] (
+    [WebServiceUserId] int IDENTITY(1,1) NOT NULL,
+    [ApiKey] nchar(32)  NOT NULL,
+    [LastCallDate] datetime  NOT NULL,
+    [ApiCallCount] int  NOT NULL,
+    [AppName] nvarchar(max)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -205,6 +218,12 @@ GO
 ALTER TABLE [dbo].[Friendships]
 ADD CONSTRAINT [PK_Friendships]
     PRIMARY KEY NONCLUSTERED ([AdderId], [AddedId] ASC);
+GO
+
+-- Creating primary key on [WebServiceUserId] in table 'WebServiceUsers'
+ALTER TABLE [dbo].[WebServiceUsers]
+ADD CONSTRAINT [PK_WebServiceUsers]
+    PRIMARY KEY CLUSTERED ([WebServiceUserId] ASC);
 GO
 
 -- --------------------------------------------------
