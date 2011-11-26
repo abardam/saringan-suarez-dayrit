@@ -12,27 +12,27 @@ namespace DatabaseTests
         {
             List<Test> testSuite = new List<Test>();
 
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 100; i++)
             {
                 testSuite.Add(new CreateUserTest("Account Creation Test"));
             }
 
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 100; i++)
             {
                 testSuite.Add(new CreateEventTest("Event Creation Test"));
             }
 
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 100; i++)
             {
                 testSuite.Add(new VoteEventTest("Event Voting Test"));
             }
 
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 100; i++)
             {
-                testSuite.Add(new AddCommentTest("Comment Test"));
+                testSuite.Add(new CreateCommentTest("Comment Test"));
             }
 
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 100; i++)
             {
                 testSuite.Add(new AddFriendTest("Add Friend Test"));
             }
@@ -40,6 +40,26 @@ namespace DatabaseTests
             for (int i = 0; i < 20; i++)
             {
                 testSuite.Add(new GetAllFriendsTest("Get All Friends Test"));
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                testSuite.Add(new AddFriendTest("Add Friend Test"));
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                testSuite.Add(new GetAllCommentsByEventId("Get Comments By Event Test"));
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                testSuite.Add(new GetAllCommentsByUserProfileIdTest("Get Comments By User Profile Test"));
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                testSuite.Add(new GetAllEventsByUserProfileIdTest("Get Events By User Profile Test"));
             }
 
             int numSuccess = 0;
@@ -69,6 +89,7 @@ namespace DatabaseTests
             Console.WriteLine("Total Tests: " + testSuite.Count);
             Console.WriteLine("Total Passed: " + numSuccess);
             Console.WriteLine("Total Failed: " + (testSuite.Count - numSuccess));
+            Console.WriteLine("Total Runtime: " + totalRuntime);
 
             Console.ReadKey();
         }
