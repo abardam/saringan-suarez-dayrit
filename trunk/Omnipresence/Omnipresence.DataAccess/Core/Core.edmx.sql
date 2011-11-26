@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/24/2011 14:13:35
+-- Date Created: 11/26/2011 13:18:02
 -- Generated from EDMX file: C:\Users\emanuel\Desktop\omni\saringan-suarez-dayrit\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
@@ -37,6 +37,9 @@ IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendship1]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserProfileComment]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_UserProfileComment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserProfileEvent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_UserProfileEvent];
 GO
 
 -- --------------------------------------------------
