@@ -10,5 +10,7 @@ namespace DatabaseTests
         public string Name { get; set; }
 
         public abstract bool Execute();
+
+        public static Random random = new Random();
     }
 }
