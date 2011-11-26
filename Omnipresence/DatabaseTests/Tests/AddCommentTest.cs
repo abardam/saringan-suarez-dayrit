@@ -8,14 +8,9 @@ namespace DatabaseTests
 {
     public class AddCommentTest : Test
     {
-        private EventServices eventServices;
-        private AccountServices accountServices;
-
         public AddCommentTest(string name)
         {
             Name = name;
-            eventServices = new EventServices();
-            accountServices = new AccountServices();
         }
 
         public override bool Execute()

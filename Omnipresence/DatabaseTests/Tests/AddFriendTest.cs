@@ -8,12 +8,9 @@ namespace DatabaseTests
 {
     public class AddFriendTest : Test
     {
-        private AccountServices accountServices;
-
         public AddFriendTest(string name)
         {
             Name = name;
-            accountServices = new AccountServices();
         }
 
         public override bool Execute()

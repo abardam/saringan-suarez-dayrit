@@ -12,35 +12,52 @@ namespace DatabaseTests
         {
             List<Test> testSuite = new List<Test>();
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 200; i++)
             {
                 testSuite.Add(new CreateUserTest("Account Creation Test"));
             }
 
-            testSuite.Add(new CreateEventTest("Event Creation Test"));
-            testSuite.Add(new VoteEventTest("Event Voting Test"));
-            testSuite.Add(new AddCommentTest("Comment Test"));
+            for (int i = 0; i < 200; i++)
+            {
+                testSuite.Add(new CreateEventTest("Event Creation Test"));
+            }
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 200; i++)
+            {
+                testSuite.Add(new VoteEventTest("Event Voting Test"));
+            }
+
+            for (int i = 0; i < 200; i++)
+            {
+                testSuite.Add(new AddCommentTest("Comment Test"));
+            }
+
+            for (int i = 0; i < 200; i++)
             {
                 testSuite.Add(new AddFriendTest("Add Friend Test"));
             }
 
-            testSuite.Add(new GetAllFriendsTest("Get All Friends Test"));
+            for (int i = 0; i < 20; i++)
+            {
+                testSuite.Add(new GetAllFriendsTest("Get All Friends Test"));
+            }
 
             int numSuccess = 0;
-            Stopwatch stopwatch;
+            long totalRuntime = 0;
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             foreach (Test test in testSuite)
             {
                 Console.WriteLine(test.Name + " started");
-                stopwatch = new Stopwatch();
-                stopwatch.Start();
+
+                stopwatch.Restart();
                 bool success = test.Execute();
                 stopwatch.Stop();
 
                 Console.WriteLine("{0} {1} in {2} ms", test.Name, success ? "succeeded" : "failed", stopwatch.ElapsedMilliseconds);
                 Console.WriteLine("++++++++++++++++++++++++");
+
+                totalRuntime += stopwatch.ElapsedMilliseconds;
 
                 if (success)
                 {

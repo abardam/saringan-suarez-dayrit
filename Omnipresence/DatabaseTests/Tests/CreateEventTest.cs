@@ -8,12 +8,9 @@ namespace DatabaseTests
 {
     public class CreateEventTest : Test
     {
-        private EventServices eventServices;
-
         public CreateEventTest(string name)
         {
             Name = name;
-            eventServices = new EventServices();
         }
 
         public override bool Execute()

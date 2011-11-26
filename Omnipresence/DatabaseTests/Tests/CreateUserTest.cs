@@ -8,29 +8,26 @@ namespace DatabaseTests
 {
     public class CreateUserTest : Test
     {
-        private AccountServices accountServices;
-        
         public CreateUserTest(string name)
         {
             Name = name;
-            accountServices = new AccountServices();
         }
 
         public override bool Execute()
         {
-            CreateUserModel cum = new CreateUserModel();
-            cum.Username = ""+DateTime.Now.ToString();
-            cum.Password = "password";
-            cum.Email = "saringan.emanuel@gmail.com";
+            CreateUserModel createUserModel = new CreateUserModel();
+            createUserModel.Username = ""+DateTime.Now.ToString();
+            createUserModel.Password = "password";
+            createUserModel.Email = "saringan.emanuel@gmail.com";
 
-            CreateUserProfileModel cupm = new CreateUserProfileModel();
-            cupm.FirstName = "Emanuel";
-            cupm.LastName = "Saringan";
-            cupm.Description = "A handsome man";
-            cupm.Birthdate = DateTime.Now;
-            cupm.IsFemale = false;
+            CreateUserProfileModel createUserProfileModel = new CreateUserProfileModel();
+            createUserProfileModel.FirstName = "FName-" + DateTime.Now.ToString();
+            createUserProfileModel.LastName = "LName-" + DateTime.Now.ToString();
+            createUserProfileModel.Description = "Desc-" + DateTime.Now.ToString();
+            createUserProfileModel.Birthdate = DateTime.Now;
+            createUserProfileModel.IsFemale = false;
 
-            return accountServices.CreateUser(cum, cupm);
+            return accountServices.CreateUser(createUserModel, createUserProfileModel);
         }
     }
 }
