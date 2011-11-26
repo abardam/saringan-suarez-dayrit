@@ -12,8 +12,8 @@ namespace DatabaseTests
 
         public abstract bool Execute();
 
-        public static Random random = new Random();
-        protected static AccountServices accountServices = new AccountServices();
-        protected static EventServices eventServices = new EventServices();
+        protected static Random random = new Random();
+        protected AccountServices accountServices = AccountServices.GetInstance();
+        protected EventServices eventServices = EventServices.GetInstance();
     }
 }
