@@ -20,6 +20,7 @@ namespace Omnipresence.Processing
         public DateTime LastModified { get; set; }
         public DateTime Created { get; set; }
         public int Rating { get; set; }
+        public int CreatedById { get; set; }
     }
     
     public class CreateEventModel
@@ -59,7 +60,7 @@ namespace Omnipresence.Processing
     public class CommentModel
     {
         public int CommentId { get; set; }
-        public int UserProfileModel { get; set; }
+        public int UserProfileId { get; set; }
         public int EventId { get; set; }
         public string CommentText { get; set; }
         public DateTime Timestamp { get; set; }

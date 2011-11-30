@@ -53,6 +53,7 @@ namespace Omnipresence.Processing
                 evtModel.LastModified = evt.LastModified;
                 evtModel.Created = evt.Created;
                 evtModel.Rating = evt.Rating;
+                evtModel.CreatedById = evt.CreatedById;
 
                 return evtModel;
             }
@@ -112,7 +113,7 @@ namespace Omnipresence.Processing
                 CommentModel commentModel = new CommentModel();
 
                 commentModel.CommentId = comment.CommentId;
-                commentModel.UserProfileModel = comment.UserProfileId;
+                commentModel.UserProfileId = comment.UserProfileId;
                 commentModel.EventId = comment.EventId;
                 commentModel.CommentText = comment.CommentText;
                 commentModel.Timestamp = comment.Timestamp;
