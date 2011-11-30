@@ -139,9 +139,9 @@
   </EntityType>
   <EntityType Name="ApiUsers">
     <Key>
-      <PropertyRef Name="WebServiceUserId" />
+      <PropertyRef Name="ApiUserId" />
     </Key>
-    <Property Name="WebServiceUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApiUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ApiKey" Type="nchar" Nullable="false" MaxLength="32" />
     <Property Name="LastCallDate" Type="datetime" Nullable="false" />
     <Property Name="ApiCallCount" Type="int" Nullable="false" />
@@ -494,9 +494,9 @@
         </Association>
         <EntityType Name="ApiUser">
           <Key>
-            <PropertyRef Name="WebServiceUserId" />
+            <PropertyRef Name="ApiUserId" />
           </Key>
-          <Property Type="Int32" Name="WebServiceUserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ApiUserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="ApiKey" Nullable="false" MaxLength="32" FixedLength="true" />
           <Property Type="DateTime" Name="LastCallDate" Nullable="false" />
           <Property Type="Int32" Name="ApiCallCount" Nullable="false" />
@@ -608,7 +608,7 @@
     <EntitySetMapping Name="ApiUsers">
       <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.ApiUser)">
         <MappingFragment StoreEntitySet="ApiUsers">
-          <ScalarProperty Name="WebServiceUserId" ColumnName="WebServiceUserId" />
+          <ScalarProperty Name="ApiUserId" ColumnName="ApiUserId" />
           <ScalarProperty Name="ApiKey" ColumnName="ApiKey" />
           <ScalarProperty Name="LastCallDate" ColumnName="LastCallDate" />
           <ScalarProperty Name="ApiCallCount" ColumnName="ApiCallCount" />
