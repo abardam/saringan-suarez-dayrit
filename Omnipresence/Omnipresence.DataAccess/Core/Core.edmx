@@ -13,7 +13,7 @@
     <EntitySet Name="UserProfiles" EntityType="OmnipresenceModel.Store.UserProfiles" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Users" EntityType="OmnipresenceModel.Store.Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Friendships" EntityType="OmnipresenceModel.Store.Friendships" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="WebServiceUsers" EntityType="OmnipresenceModel.Store.WebServiceUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ApiUsers" EntityType="OmnipresenceModel.Store.ApiUsers" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_Event_Category" Association="OmnipresenceModel.Store.FK_Event_Category">
       <End Role="Categories" EntitySet="Categories" />
       <End Role="Events" EntitySet="Events" />
@@ -137,7 +137,7 @@
     <Property Name="AdderId" Type="int" Nullable="false" />
     <Property Name="AddedId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="WebServiceUsers">
+  <EntityType Name="ApiUsers">
     <Key>
       <PropertyRef Name="WebServiceUserId" />
     </Key>
@@ -146,6 +146,7 @@
     <Property Name="LastCallDate" Type="datetime" Nullable="false" />
     <Property Name="ApiCallCount" Type="int" Nullable="false" />
     <Property Name="AppName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="FK_Event_Category">
     <End Role="Categories" Type="OmnipresenceModel.Store.Categories" Multiplicity="0..1" />
@@ -287,7 +288,7 @@
             <End Role="UserProfile" EntitySet="UserProfiles" />
             <End Role="Event" EntitySet="Events" />
           </AssociationSet>
-          <EntitySet Name="WebServiceUsers" EntityType="OmnipresenceModel.WebServiceUser" />
+          <EntitySet Name="ApiUsers" EntityType="OmnipresenceModel.ApiUser" />
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -491,7 +492,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="WebServiceUser">
+        <EntityType Name="ApiUser">
           <Key>
             <PropertyRef Name="WebServiceUserId" />
           </Key>
@@ -500,6 +501,7 @@
           <Property Type="DateTime" Name="LastCallDate" Nullable="false" />
           <Property Type="Int32" Name="ApiCallCount" Nullable="false" />
           <Property Type="String" Name="AppName" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -603,14 +605,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="WebServiceUsers">
-      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.WebServiceUser)">
-        <MappingFragment StoreEntitySet="WebServiceUsers">
+    <EntitySetMapping Name="ApiUsers">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.ApiUser)">
+        <MappingFragment StoreEntitySet="ApiUsers">
           <ScalarProperty Name="WebServiceUserId" ColumnName="WebServiceUserId" />
           <ScalarProperty Name="ApiKey" ColumnName="ApiKey" />
           <ScalarProperty Name="LastCallDate" ColumnName="LastCallDate" />
           <ScalarProperty Name="ApiCallCount" ColumnName="ApiCallCount" />
           <ScalarProperty Name="AppName" ColumnName="AppName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -675,7 +678,7 @@
           <ConnectorPoint PointX="7.125" PointY="4.3774113481445314" />
           <ConnectorPoint PointX="6.75" PointY="4.3774113481445314" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="OmnipresenceModel.WebServiceUser" Width="1.5" PointX="0.875" PointY="7.625" Height="1.9802864583333335" />
+        <EntityTypeShape EntityType="OmnipresenceModel.ApiUser" Width="1.5" PointX="0.875" PointY="7.625" Height="2.1725878906249996" />
       </Diagram>
     </Diagrams>
   </Designer>
