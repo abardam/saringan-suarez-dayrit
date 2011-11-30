@@ -42,7 +42,108 @@ namespace Omnipresence.Mvc2.Controllers
             }
             else
             {
-                return Json(null);
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetEventsByUser(string key, string username)
+        {
+            if (apiServices.IsValidKey(key))
+            {
+                UserProfileModel userProfileModel = accountServices.GetUserProfileByUsername(username);
+                List<EventModel> events = eventServices.GetAllEventsByUserProfileId(userProfileModel.UserProfileId).ToList();
+
+                EventViewModel[] result = new EventViewModel[events.Count()];
+                EventViewModel evm;
+
+                for (int i = 0; i < events.Count; i++)
+                {
+                    evm = new EventViewModel();
+                    evm.EventId = events[i].EventId;
+                    evm.Title = events[i].Title;
+                    evm.Description = events[i].Description;
+                    evm.StartTime = events[i].StartTime;
+                    evm.EndTime = events[i].EndTime;
+                    evm.IsActive = events[i].IsActive;
+                    evm.IsPrivate = events[i].IsPrivate;
+                    evm.Rating = events[i].Rating;
+                    evm.CreatedById = events[i].CreatedById;
+                    //evm.Address = events[i].Address;
+                    //evm.Latitude = events[i].Latitude;
+                    //evm.Longitude = events[i].Longitude;
+
+                    result[i] = evm;
+                }
+
+                apiServices.IncrementKeyUsage(key);
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetCommentsByUser(string key, string username)
+        {
+            if (apiServices.IsValidKey(key))
+            {
+                UserProfileModel userProfileModel = accountServices.GetUserProfileByUsername(username);
+                List<CommentModel> comments = eventServices.GetAllCommentsByUserProfileId(userProfileModel.UserProfileId).ToList();
+
+                CommentViewModel[] result = new CommentViewModel[comments.Count()];
+                CommentViewModel cvm;
+
+                for (int i = 0; i < comments.Count; i++)
+                {
+                    cvm = new CommentViewModel();
+                    cvm.CommentId = comments[i].CommentId;
+                    cvm.EventId = comments[i].EventId;
+                    cvm.UserProfileId = comments[i].UserProfileId;
+                    cvm.CommentText = comments[i].CommentText;
+                    cvm.Timestamp = comments[i].Timestamp;
+                    result[i] = cvm;
+                }
+
+                apiServices.IncrementKeyUsage(key);
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetCommentsByEvent(string key, int id)
+        {
+            if (apiServices.IsValidKey(key))
+            {
+                EventModel ev = eventServices.GetEventById(id);
+                List<CommentModel> comments = eventServices.GetAllCommentsByEventId(ev.EventId).ToList();
+
+                CommentViewModel[] result = new CommentViewModel[comments.Count()];
+                CommentViewModel cvm;
+
+                for (int i = 0; i < comments.Count; i++)
+                {
+                    cvm = new CommentViewModel();
+                    cvm.CommentId = comments[i].CommentId;
+                    cvm.EventId = comments[i].EventId;
+                    cvm.UserProfileId = comments[i].UserProfileId;
+                    cvm.CommentText = comments[i].CommentText;
+                    cvm.Timestamp = comments[i].Timestamp;
+                    result[i] = cvm;
+                }
+
+                apiServices.IncrementKeyUsage(key);
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
             }
         }
     }
