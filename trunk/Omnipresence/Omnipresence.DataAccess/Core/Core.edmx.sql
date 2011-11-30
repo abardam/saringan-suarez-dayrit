@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/30/2011 19:57:57
+-- Date Created: 11/30/2011 22:01:56
 -- Generated from EDMX file: C:\Users\emanuel\Desktop\omni\saringan-suarez-dayrit\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
@@ -175,6 +175,15 @@ CREATE TABLE [dbo].[ApiUsers] (
 );
 GO
 
+-- Creating table 'MediaItems'
+CREATE TABLE [dbo].[MediaItems] (
+    [MediaItemId] int IDENTITY(1,1) NOT NULL,
+    [FileName] nvarchar(max)  NOT NULL,
+    [FilePath] nvarchar(max)  NOT NULL,
+    [EventId] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -225,6 +234,12 @@ GO
 ALTER TABLE [dbo].[ApiUsers]
 ADD CONSTRAINT [PK_ApiUsers]
     PRIMARY KEY CLUSTERED ([ApiUserId] ASC);
+GO
+
+-- Creating primary key on [MediaItemId] in table 'MediaItems'
+ALTER TABLE [dbo].[MediaItems]
+ADD CONSTRAINT [PK_MediaItems]
+    PRIMARY KEY CLUSTERED ([MediaItemId] ASC);
 GO
 
 -- --------------------------------------------------
@@ -331,6 +346,20 @@ ADD CONSTRAINT [FK_UserProfileEvent]
 CREATE INDEX [IX_FK_UserProfileEvent]
 ON [dbo].[Events]
     ([CreatedById]);
+GO
+
+-- Creating foreign key on [EventId] in table 'MediaItems'
+ALTER TABLE [dbo].[MediaItems]
+ADD CONSTRAINT [FK_EventMediaItem]
+    FOREIGN KEY ([EventId])
+    REFERENCES [dbo].[Events]
+        ([EventId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EventMediaItem'
+CREATE INDEX [IX_FK_EventMediaItem]
+ON [dbo].[MediaItems]
+    ([EventId]);
 GO
 
 -- --------------------------------------------------

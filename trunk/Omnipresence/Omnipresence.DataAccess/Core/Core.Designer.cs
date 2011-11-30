@@ -26,6 +26,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileFriendship1", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Friendship", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Friendship), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileComment", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Comment), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileEvent", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "EventMediaItem", "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event), "MediaItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.MediaItem), true)]
 
 #endregion
 
@@ -204,6 +205,22 @@ namespace Omnipresence.DataAccess.Core
             }
         }
         private ObjectSet<ApiUser> _ApiUsers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<MediaItem> MediaItems
+        {
+            get
+            {
+                if ((_MediaItems == null))
+                {
+                    _MediaItems = base.CreateObjectSet<MediaItem>("MediaItems");
+                }
+                return _MediaItems;
+            }
+        }
+        private ObjectSet<MediaItem> _MediaItems;
 
         #endregion
         #region AddTo Methods
@@ -270,6 +287,14 @@ namespace Omnipresence.DataAccess.Core
         public void AddToApiUsers(ApiUser apiUser)
         {
             base.AddObject("ApiUsers", apiUser);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the MediaItems EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToMediaItems(MediaItem mediaItem)
+        {
+            base.AddObject("MediaItems", mediaItem);
         }
 
         #endregion
@@ -1379,6 +1404,28 @@ namespace Omnipresence.DataAccess.Core
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "EventMediaItem", "MediaItem")]
+        public EntityCollection<MediaItem> MediaItems
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MediaItem>("OmnipresenceModel.EventMediaItem", "MediaItem");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MediaItem>("OmnipresenceModel.EventMediaItem", "MediaItem", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -1745,6 +1792,180 @@ namespace Omnipresence.DataAccess.Core
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("OmnipresenceModel.FK_Event_Location", "Events", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="MediaItem")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class MediaItem : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new MediaItem object.
+        /// </summary>
+        /// <param name="mediaItemId">Initial value of the MediaItemId property.</param>
+        /// <param name="fileName">Initial value of the FileName property.</param>
+        /// <param name="filePath">Initial value of the FilePath property.</param>
+        /// <param name="eventId">Initial value of the EventId property.</param>
+        public static MediaItem CreateMediaItem(global::System.Int32 mediaItemId, global::System.String fileName, global::System.String filePath, global::System.Int32 eventId)
+        {
+            MediaItem mediaItem = new MediaItem();
+            mediaItem.MediaItemId = mediaItemId;
+            mediaItem.FileName = fileName;
+            mediaItem.FilePath = filePath;
+            mediaItem.EventId = eventId;
+            return mediaItem;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 MediaItemId
+        {
+            get
+            {
+                return _MediaItemId;
+            }
+            set
+            {
+                if (_MediaItemId != value)
+                {
+                    OnMediaItemIdChanging(value);
+                    ReportPropertyChanging("MediaItemId");
+                    _MediaItemId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("MediaItemId");
+                    OnMediaItemIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _MediaItemId;
+        partial void OnMediaItemIdChanging(global::System.Int32 value);
+        partial void OnMediaItemIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String FileName
+        {
+            get
+            {
+                return _FileName;
+            }
+            set
+            {
+                OnFileNameChanging(value);
+                ReportPropertyChanging("FileName");
+                _FileName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("FileName");
+                OnFileNameChanged();
+            }
+        }
+        private global::System.String _FileName;
+        partial void OnFileNameChanging(global::System.String value);
+        partial void OnFileNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String FilePath
+        {
+            get
+            {
+                return _FilePath;
+            }
+            set
+            {
+                OnFilePathChanging(value);
+                ReportPropertyChanging("FilePath");
+                _FilePath = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("FilePath");
+                OnFilePathChanged();
+            }
+        }
+        private global::System.String _FilePath;
+        partial void OnFilePathChanging(global::System.String value);
+        partial void OnFilePathChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EventId
+        {
+            get
+            {
+                return _EventId;
+            }
+            set
+            {
+                OnEventIdChanging(value);
+                ReportPropertyChanging("EventId");
+                _EventId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EventId");
+                OnEventIdChanged();
+            }
+        }
+        private global::System.Int32 _EventId;
+        partial void OnEventIdChanging(global::System.Int32 value);
+        partial void OnEventIdChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "EventMediaItem", "Event")]
+        public Event Event
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.EventMediaItem", "Event").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.EventMediaItem", "Event").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Event> EventReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.EventMediaItem", "Event");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Event>("OmnipresenceModel.EventMediaItem", "Event", value);
                 }
             }
         }

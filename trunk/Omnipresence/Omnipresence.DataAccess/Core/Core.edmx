@@ -14,6 +14,7 @@
     <EntitySet Name="Users" EntityType="OmnipresenceModel.Store.Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Friendships" EntityType="OmnipresenceModel.Store.Friendships" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ApiUsers" EntityType="OmnipresenceModel.Store.ApiUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MediaItems" EntityType="OmnipresenceModel.Store.MediaItems" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_Event_Category" Association="OmnipresenceModel.Store.FK_Event_Category">
       <End Role="Categories" EntitySet="Categories" />
       <End Role="Events" EntitySet="Events" />
@@ -45,6 +46,10 @@
     <AssociationSet Name="UserProfileEvent" Association="OmnipresenceModel.Store.UserProfileEvent">
       <End Role="UserProfile" EntitySet="UserProfiles" />
       <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="EventMediaItem" Association="OmnipresenceModel.Store.EventMediaItem">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="MediaItem" EntitySet="MediaItems" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Categories">
@@ -148,6 +153,15 @@
     <Property Name="AppName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="MediaItems">
+    <Key>
+      <PropertyRef Name="MediaItemId" />
+    </Key>
+    <Property Name="MediaItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EventId" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="FK_Event_Category">
     <End Role="Categories" Type="OmnipresenceModel.Store.Categories" Multiplicity="0..1" />
     <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
@@ -244,6 +258,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="EventMediaItem">
+    <End Role="Event" Type="OmnipresenceModel.Store.Events" Multiplicity="1" />
+    <End Role="MediaItem" Type="OmnipresenceModel.Store.MediaItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="EventId" />
+      </Principal>
+      <Dependent Role="MediaItem">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -289,6 +315,11 @@
             <End Role="Event" EntitySet="Events" />
           </AssociationSet>
           <EntitySet Name="ApiUsers" EntityType="OmnipresenceModel.ApiUser" />
+          <EntitySet Name="MediaItems" EntityType="OmnipresenceModel.MediaItem" />
+          <AssociationSet Name="EventMediaItem" Association="OmnipresenceModel.EventMediaItem">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="MediaItem" EntitySet="MediaItems" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -334,6 +365,7 @@
           <Property Type="Boolean" Name="IsPrivate" Nullable="false" a:SetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
           <NavigationProperty Name="CreatedBy" Relationship="OmnipresenceModel.UserProfileEvent" FromRole="Event" ToRole="UserProfile" />
           <Property Type="Int32" Name="CreatedById" Nullable="false" />
+          <NavigationProperty Name="MediaItems" Relationship="OmnipresenceModel.EventMediaItem" FromRole="Event" ToRole="MediaItem" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -503,6 +535,28 @@
           <Property Type="String" Name="AppName" Nullable="false" />
           <Property Type="String" Name="Email" Nullable="false" />
         </EntityType>
+        <EntityType Name="MediaItem">
+          <Key>
+            <PropertyRef Name="MediaItemId" />
+          </Key>
+          <Property Type="Int32" Name="MediaItemId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FileName" Nullable="false" />
+          <Property Type="String" Name="FilePath" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="OmnipresenceModel.EventMediaItem" FromRole="MediaItem" ToRole="Event" />
+          <Property Type="Int32" Name="EventId" Nullable="false" />
+        </EntityType>
+        <Association Name="EventMediaItem">
+          <End Type="OmnipresenceModel.Event" Role="Event" Multiplicity="1" />
+          <End Type="OmnipresenceModel.MediaItem" Role="MediaItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="MediaItem">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -617,6 +671,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MediaItems">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.MediaItem)">
+        <MappingFragment StoreEntitySet="MediaItems">
+          <ScalarProperty Name="MediaItemId" ColumnName="MediaItemId" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -679,6 +743,11 @@
           <ConnectorPoint PointX="6.75" PointY="4.3774113481445314" />
         </AssociationConnector>
         <EntityTypeShape EntityType="OmnipresenceModel.ApiUser" Width="1.5" PointX="0.875" PointY="7.625" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="OmnipresenceModel.MediaItem" Width="1.5" PointX="9.75" PointY="1" Height="1.9802864583333339" />
+        <AssociationConnector Association="OmnipresenceModel.EventMediaItem">
+          <ConnectorPoint PointX="6.75" PointY="1.40625" />
+          <ConnectorPoint PointX="9.75" PointY="1.40625" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>
