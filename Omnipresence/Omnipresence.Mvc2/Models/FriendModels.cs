@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Omnipresence.Mvc2.Models
 {
-    public class FriendModels
+    public class FriendsViewModel
     {
     }
 }

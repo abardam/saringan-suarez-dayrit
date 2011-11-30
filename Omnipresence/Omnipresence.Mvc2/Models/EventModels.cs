@@ -6,7 +6,24 @@ using System.Web.Mvc;
 
 namespace Omnipresence.Mvc2.Models
 {
-    public class EditEventModel
+    public class EventViewModel
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public string CategoryString { get; set; }
+        public bool IsPrivate { get; set; }
+        public string Address { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime LastModified { get; set; }
+        public DateTime Created { get; set; }
+        public int Rating { get; set; }
+    }
+
+    public class EditEventViewModel
     {
         // TODO: Update this using actual new event content (NewEventViewModel)
         public string Title { get; set; }
@@ -20,7 +37,8 @@ namespace Omnipresence.Mvc2.Models
         public DateTime CreateTime { get; set; }
         public DateTime DeleteTime { get; set; }
     }
-    public class NewEventModel
+
+    public class CreateEventViewModel
     {
         // TODO: Update this using actual new event content (NewEventViewModel)
         public string Title { get; set; }
@@ -36,9 +54,15 @@ namespace Omnipresence.Mvc2.Models
         public string Address { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-
     }
-    public class SearchEventModel
+
+    public class CommentViewModel
+    {
+        public string CommentText { get; set; }
+        public DateTime Timestamp { get; set; }
+    }
+
+    public class SearchEventViewModel
     {
     }
 }
