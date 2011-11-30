@@ -65,7 +65,7 @@ namespace Omnipresence.Processing
         public int UserProfileId { get; set; }
     }
 
-    public class GetAllFriendsModel
+    public class GetFriendsModel
     {
         public int UserProfileId { get; set; }
     }
