@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Omnipresence.DataAccess.Core;
 using System.Web.Mvc;
 using System.Globalization;
 
 namespace Omnipresence.Mvc2.Models
 {
-    public class ProfileModel
+    public class ProfileViewModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -19,7 +18,7 @@ namespace Omnipresence.Mvc2.Models
         public string GenderText { get; set; }
     }
 
-    public class EditProfileModel
+    public class EditProfileViewModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
