@@ -125,7 +125,7 @@ namespace Omnipresence.Processing
             }
         }
 
-        public static ApiUserModel UserToUserModel(ApiUser apiUser)
+        public static ApiUserModel ApiUserToApiUserModel(ApiUser apiUser)
         {
             ApiUserModel apiUserModel = new ApiUserModel();
             apiUserModel.ApiUserId = apiUser.ApiUserId;

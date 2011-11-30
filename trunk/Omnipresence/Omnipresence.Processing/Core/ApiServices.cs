@@ -99,7 +99,7 @@ namespace Omnipresence.Processing
         public ApiUserModel GetApiUserById(int id)
         {
             ApiUser apiUser = db.ApiUsers.Where(account => account.ApiUserId == id).FirstOrDefault();
-            ApiUserModel apiUserModel = Utilities.UserToUserModel(apiUser);
+            ApiUserModel apiUserModel = Utilities.ApiUserToApiUserModel(apiUser);
 
             return apiUserModel;
         }
@@ -107,7 +107,7 @@ namespace Omnipresence.Processing
         public ApiUserModel GetApiUserByEmail(string email)
         {
             ApiUser apiUser = db.ApiUsers.Where(account => account.Email == email).FirstOrDefault();
-            ApiUserModel apiUserModel = Utilities.UserToUserModel(apiUser);
+            ApiUserModel apiUserModel = Utilities.ApiUserToApiUserModel(apiUser);
 
             return apiUserModel;
         }
@@ -115,7 +115,7 @@ namespace Omnipresence.Processing
         public ApiUserModel GetApiUserByApiKey(string apiKey)
         {
             ApiUser apiUser = db.ApiUsers.Where(account => account.ApiKey == apiKey).FirstOrDefault();
-            ApiUserModel apiUserModel = Utilities.UserToUserModel(apiUser);
+            ApiUserModel apiUserModel = Utilities.ApiUserToApiUserModel(apiUser);
 
             return apiUserModel;
         }
