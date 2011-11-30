@@ -203,21 +203,42 @@ namespace Omnipresence.Processing
         {
             UserModel userModel = GetUserById(id);
 
-            return Utilities.UserProfileToUserProfileModel(userModel.UserProfile);
+            if (userModel != null)
+            {
+                return Utilities.UserProfileToUserProfileModel(userModel.UserProfile);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public UserProfileModel GetUserProfileByEmail(string email)
         {
             UserModel userModel = GetUserByEmail(email);
 
-            return Utilities.UserProfileToUserProfileModel(userModel.UserProfile);
+            if (userModel != null)
+            {
+                return Utilities.UserProfileToUserProfileModel(userModel.UserProfile);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public UserProfileModel GetUserProfileByUsername(string username)
         {
             UserModel userModel = GetUserByUsername(username);
 
-            return Utilities.UserProfileToUserProfileModel(userModel.UserProfile);
+            if (userModel != null)
+            {
+                return Utilities.UserProfileToUserProfileModel(userModel.UserProfile);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public IQueryable<UserProfileModel> GetAllUserProfiles()
