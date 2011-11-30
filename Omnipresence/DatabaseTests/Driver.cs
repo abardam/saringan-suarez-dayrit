@@ -62,6 +62,11 @@ namespace DatabaseTests
                 testSuite.Add(new GetAllEventsByUserProfileIdTest("Get Events By User Profile Test"));
             }
 
+            for (int i = 0; i < 100; i++)
+            {
+                testSuite.Add(new CreateApiUserTest("Create API User Test"));
+            }
+
             int numSuccess = 0;
             long totalRuntime = 0;
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -91,7 +96,7 @@ namespace DatabaseTests
             Console.WriteLine("Total Failed: " + (testSuite.Count - numSuccess));
             Console.WriteLine("Total Runtime: " + totalRuntime);
 
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }

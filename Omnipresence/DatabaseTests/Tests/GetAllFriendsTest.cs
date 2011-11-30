@@ -15,7 +15,7 @@ namespace DatabaseTests
 
         public override bool Execute()
         {
-            GetAllFriendsModel getAllFriendsModel = new GetAllFriendsModel();
+            GetFriendsModel getAllFriendsModel = new GetFriendsModel();
             int randomId = random.Next(1, accountServices.GetAllUserProfiles().Count());
             UserProfileModel userProfileModel = accountServices.GetUserProfileById(randomId);
 
