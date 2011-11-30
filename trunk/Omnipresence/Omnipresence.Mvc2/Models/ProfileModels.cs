@@ -9,6 +9,7 @@ namespace Omnipresence.Mvc2.Models
 {
     public class ProfileViewModel
     {
+        public int UserProfileId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime Birthdate { get; set; }
