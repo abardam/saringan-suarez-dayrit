@@ -124,5 +124,18 @@ namespace Omnipresence.Processing
                 return null;
             }
         }
+
+        public static ApiUserModel UserToUserModel(ApiUser apiUser)
+        {
+            ApiUserModel apiUserModel = new ApiUserModel();
+            apiUserModel.ApiUserId = apiUser.ApiUserId;
+            apiUserModel.ApiKey = apiUser.ApiKey;
+            apiUserModel.ApiCallCount = apiUser.ApiCallCount;
+            apiUserModel.LastCallDate = apiUser.LastCallDate;
+            apiUserModel.Email = apiUser.Email;
+            apiUserModel.AppName = apiUser.AppName;
+
+            return apiUserModel;
+        }
     }
 }
