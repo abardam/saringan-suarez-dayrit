@@ -8,6 +8,9 @@
     <div style="float:left;">
     <span class="header"><%= Model.FirstName %> <%= Model.LastName %></span>
     <span class="header-2"><%=Model.Description %></span>
+    <span>Born <%= Model.Birthdate.ToString("dddd, dd MMMM yyyy") %>. </span>
+    <span><%= Model.GenderText %>. </span>
+    <span><%= Model.Reputation %> reputation. </span>
     <a href="<%= Url.Action("EditProfile", "Sidebar") %>">Edit</a>
     </div>
 </div>

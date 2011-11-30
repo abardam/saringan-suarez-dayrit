@@ -14,6 +14,7 @@ namespace Omnipresence.Mvc2.Controllers
     public class SidebarController : Controller
     {
         private AccountServices accountServices;
+        private EventServices eventServices;
         public IFormsAuthenticationService FormsService { get; set; }
         //public IMembershipService MembershipService { get; set; }
 
@@ -21,7 +22,8 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
             //if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
-            accountServices = new AccountServices();
+            accountServices = AccountServices.GetInstance();
+            eventServices = EventServices.GetInstance();
 
             base.Initialize(requestContext);
         }
@@ -47,7 +49,7 @@ namespace Omnipresence.Mvc2.Controllers
                 Birthdate = DateTime.Now;
             }
 
-            ProfileModel model = new ProfileModel { AvatarUrl = "/Content/Images/viewprofile.png", 
+            ProfileModel model = new ProfileModel {  
                 Birthdate = Birthdate, 
                 Description = p.Description, 
                 FirstName = p.FirstName, 
@@ -61,13 +63,39 @@ namespace Omnipresence.Mvc2.Controllers
 
         public ActionResult EditProfile()
         {
+            List<string> genderList = new List<string>();
+            genderList.Add("Male");
+            genderList.Add("Female");
+            SelectList list = new SelectList(genderList);
+            ViewData["gender"] = list;
+
             string username = User.Identity.Name;
-            UserProfileModel u = accountServices.GetUserProfileByUsername(username);
+            UserProfileModel up = accountServices.GetUserProfileByUsername(username);
+            EditProfileModel u = new EditProfileModel();
+            u.Description = up.Description;
+            u.FirstName = up.FirstName;
+            u.LastName = up.LastName;
+            u.GenderText = up.IsFemale ? "Female" : "Male";
+            u.Reputation = up.Reputation;
+            u.BirthdateDay = up.Birthdate.Day;
+            u.BirthdateMonth = up.Birthdate.ToString("MMMM");
+            u.BirthdateYear = up.Birthdate.Year;
+
+            int[] dayA = new int[31];
+
+            for (int i = 0; i < 31; i++)
+            {
+                dayA[i] = i + 1;
+            }
+
+            SelectList daySL = new SelectList(dayA);
+
+
             return PartialView("EditProfileUserControl", u);
         }
 
         [HttpPost]
-        public ActionResult EditProfile(ProfileModel model)
+        public ActionResult EditProfile(EditProfileModel model)
         {
             String username = User.Identity.Name;
             UserProfileModel p = accountServices.GetUserProfileByUsername(username);
@@ -75,15 +103,37 @@ namespace Omnipresence.Mvc2.Controllers
             p.Description = model.Description;
             p.LastName = model.LastName;
             p.FirstName = model.FirstName;
+            p.IsFemale = model.GenderText.Equals("Female");
 
+            DateTime newDT = DateTime.Parse(model.BirthdateMonth + "/" + model.BirthdateDay + "/" + model.BirthdateYear);
+
+            p.Birthdate = newDT;
             accountServices.UpdateUserProfile(p);
-            return PartialView("ProfileUserControl", model);
+            //return PartialView("ProfileUserControl", model);
+            return Profile(username);
         }
 
         // TODO: CHANGE EVENT OBJECT TYPE IN EVENTSERVICES
         public ActionResult NewEvent()
         {
             return PartialView("NewEventUserControl");
+        }
+        [HttpPost]
+        public ActionResult NewEvent(NewEventModel model)
+        {
+            CreateEventModel cem = new CreateEventModel();
+            cem.Address = model.Address;
+            cem.CategoryString = model.CategoryString;
+            cem.Description = model.Description;
+            cem.EndTime = model.EndTime;
+            cem.Latitude = model.Latitude;
+            cem.Longitude = model.Longitude;
+            cem.StartTime = model.StartTime;
+            cem.Title = model.Title;
+            string username = User.Identity.Name;
+            cem.UserProfileId=accountServices.GetUserProfileByUsername(username).UserProfileId;
+            eventServices.CreateEvent(cem);
+            return Index();
         }
         public ActionResult EditEvent(int id)
         {
@@ -148,7 +198,7 @@ namespace Omnipresence.Mvc2.Controllers
                 cum.Email = model.Email.Trim();
                 CreateUserProfileModel cupm = new CreateUserProfileModel();
                 cupm.FirstName = model.FirstName.Trim();
-                cupm.LastName = model.FirstName.Trim();
+                cupm.LastName = model.LastName.Trim();
                 cupm.Birthdate = model.Birthdate;
                 cupm.Description = "";
                 cupm.IsFemale = false;

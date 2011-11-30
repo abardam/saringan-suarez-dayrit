@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Omnipresence.Processing.NewEventModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Omnipresence.Mvc2.Models.NewEventModel>" %>
 <div class="control-container">
     <% using (Html.BeginForm()) {%>
         <%: Html.ValidationSummary(true) %>
@@ -47,14 +47,6 @@
             </div>
             
             <div class="editor-label">
-                <%: Html.LabelFor(model => model.VisibilityTypeString) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.VisibilityTypeString) %>
-                <%: Html.ValidationMessageFor(model => model.VisibilityTypeString) %>
-            </div>
-            
-            <div class="editor-label">
                 <%: Html.LabelFor(model => model.Latitude) %>
             </div>
             <div class="editor-field">
@@ -69,13 +61,13 @@
                 <%: Html.TextBoxFor(model => model.Longitude) %>
                 <%: Html.ValidationMessageFor(model => model.Longitude) %>
             </div>
-            
+
             <div class="editor-label">
-                <%: Html.LabelFor(model => model.LocationName) %>
+                <%: Html.LabelFor(model => model.Address) %>
             </div>
             <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.LocationName) %>
-                <%: Html.ValidationMessageFor(model => model.LocationName) %>
+                <%: Html.TextBoxFor(model => model.Address) %>
+                <%: Html.ValidationMessageFor(model => model.Address) %>
             </div>
             
             <p>
