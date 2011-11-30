@@ -233,7 +233,7 @@ namespace Omnipresence.Processing
             return userProfileModels.AsQueryable();
         }
 
-        public IQueryable<UserProfileModel> GetAllFriends(GetAllFriendsModel gafm)
+        public IQueryable<UserProfileModel> GetAllFriends(GetFriendsModel gafm)
         {
             UserProfile userProfile = db.UserProfiles.Where(u => u.UserProfileId == gafm.UserProfileId).FirstOrDefault();
             var acceptedFriends = userProfile.AcceptedFriendships;
@@ -249,6 +249,50 @@ namespace Omnipresence.Processing
             foreach (Friendship item in requestedFriends)
             {
                 friends.Add(item.AddedParty);
+            }
+
+            List<UserProfileModel> userProfileModels = new List<UserProfileModel>();
+
+            foreach (UserProfile up in friends)
+            {
+                userProfileModels.Add(Utilities.UserProfileToUserProfileModel(up));
+            }
+
+            return userProfileModels.AsQueryable();
+        }
+
+        public IQueryable<UserProfileModel> GetRequestedFriends(GetFriendsModel gafm)
+        {
+            UserProfile userProfile = db.UserProfiles.Where(u => u.UserProfileId == gafm.UserProfileId).FirstOrDefault();
+            var requestedFriends = userProfile.RequestedFriendships;
+
+            List<UserProfile> friends = new List<UserProfile>();
+
+            foreach (Friendship item in requestedFriends)
+            {
+                friends.Add(item.AddedParty);
+            }
+
+            List<UserProfileModel> userProfileModels = new List<UserProfileModel>();
+
+            foreach (UserProfile up in friends)
+            {
+                userProfileModels.Add(Utilities.UserProfileToUserProfileModel(up));
+            }
+
+            return userProfileModels.AsQueryable();
+        }
+
+        public IQueryable<UserProfileModel> GetAcceptedFriends(GetFriendsModel gafm)
+        {
+            UserProfile userProfile = db.UserProfiles.Where(u => u.UserProfileId == gafm.UserProfileId).FirstOrDefault();
+            var acceptedFriends = userProfile.AcceptedFriendships;
+
+            List<UserProfile> friends = new List<UserProfile>();
+
+            foreach (Friendship item in acceptedFriends)
+            {
+                friends.Add(item.AddingParty);
             }
 
             List<UserProfileModel> userProfileModels = new List<UserProfileModel>();
