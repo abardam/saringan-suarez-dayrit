@@ -293,16 +293,16 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// Create a new ApiUser object.
         /// </summary>
-        /// <param name="webServiceUserId">Initial value of the WebServiceUserId property.</param>
+        /// <param name="apiUserId">Initial value of the ApiUserId property.</param>
         /// <param name="apiKey">Initial value of the ApiKey property.</param>
         /// <param name="lastCallDate">Initial value of the LastCallDate property.</param>
         /// <param name="apiCallCount">Initial value of the ApiCallCount property.</param>
         /// <param name="appName">Initial value of the AppName property.</param>
         /// <param name="email">Initial value of the Email property.</param>
-        public static ApiUser CreateApiUser(global::System.Int32 webServiceUserId, global::System.String apiKey, global::System.DateTime lastCallDate, global::System.Int32 apiCallCount, global::System.String appName, global::System.String email)
+        public static ApiUser CreateApiUser(global::System.Int32 apiUserId, global::System.String apiKey, global::System.DateTime lastCallDate, global::System.Int32 apiCallCount, global::System.String appName, global::System.String email)
         {
             ApiUser apiUser = new ApiUser();
-            apiUser.WebServiceUserId = webServiceUserId;
+            apiUser.ApiUserId = apiUserId;
             apiUser.ApiKey = apiKey;
             apiUser.LastCallDate = lastCallDate;
             apiUser.ApiCallCount = apiCallCount;
@@ -319,27 +319,27 @@ namespace Omnipresence.DataAccess.Core
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 WebServiceUserId
+        public global::System.Int32 ApiUserId
         {
             get
             {
-                return _WebServiceUserId;
+                return _ApiUserId;
             }
             set
             {
-                if (_WebServiceUserId != value)
+                if (_ApiUserId != value)
                 {
-                    OnWebServiceUserIdChanging(value);
-                    ReportPropertyChanging("WebServiceUserId");
-                    _WebServiceUserId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("WebServiceUserId");
-                    OnWebServiceUserIdChanged();
+                    OnApiUserIdChanging(value);
+                    ReportPropertyChanging("ApiUserId");
+                    _ApiUserId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ApiUserId");
+                    OnApiUserIdChanged();
                 }
             }
         }
-        private global::System.Int32 _WebServiceUserId;
-        partial void OnWebServiceUserIdChanging(global::System.Int32 value);
-        partial void OnWebServiceUserIdChanged();
+        private global::System.Int32 _ApiUserId;
+        partial void OnApiUserIdChanging(global::System.Int32 value);
+        partial void OnApiUserIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/30/2011 14:30:15
+-- Date Created: 11/30/2011 19:57:57
 -- Generated from EDMX file: C:\Users\emanuel\Desktop\omni\saringan-suarez-dayrit\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
@@ -166,7 +166,7 @@ GO
 
 -- Creating table 'ApiUsers'
 CREATE TABLE [dbo].[ApiUsers] (
-    [WebServiceUserId] int IDENTITY(1,1) NOT NULL,
+    [ApiUserId] int IDENTITY(1,1) NOT NULL,
     [ApiKey] nchar(32)  NOT NULL,
     [LastCallDate] datetime  NOT NULL,
     [ApiCallCount] int  NOT NULL,
@@ -221,10 +221,10 @@ ADD CONSTRAINT [PK_Friendships]
     PRIMARY KEY NONCLUSTERED ([AdderId], [AddedId] ASC);
 GO
 
--- Creating primary key on [WebServiceUserId] in table 'ApiUsers'
+-- Creating primary key on [ApiUserId] in table 'ApiUsers'
 ALTER TABLE [dbo].[ApiUsers]
 ADD CONSTRAINT [PK_ApiUsers]
-    PRIMARY KEY CLUSTERED ([WebServiceUserId] ASC);
+    PRIMARY KEY CLUSTERED ([ApiUserId] ASC);
 GO
 
 -- --------------------------------------------------
