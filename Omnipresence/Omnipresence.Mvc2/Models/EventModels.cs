@@ -8,6 +8,7 @@ namespace Omnipresence.Mvc2.Models
 {
     public class EventViewModel
     {
+        public int EventId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime StartTime { get; set; }
@@ -21,11 +22,11 @@ namespace Omnipresence.Mvc2.Models
         public DateTime LastModified { get; set; }
         public DateTime Created { get; set; }
         public int Rating { get; set; }
+        public int CreatedById { get; set; }
     }
 
     public class EditEventViewModel
     {
-        // TODO: Update this using actual new event content (NewEventViewModel)
         public string Title { get; set; }
         public int CreatedBy { get; set; }
         public string Name { get; set; }
@@ -40,7 +41,6 @@ namespace Omnipresence.Mvc2.Models
 
     public class CreateEventViewModel
     {
-        // TODO: Update this using actual new event content (NewEventViewModel)
         public string Title { get; set; }
         public int CreatedBy { get; set; }
         public string Name { get; set; }
@@ -58,6 +58,9 @@ namespace Omnipresence.Mvc2.Models
 
     public class CommentViewModel
     {
+        public int CommentId { get; set; }
+        public int EventId { get; set; }
+        public int UserProfileId { get; set; }
         public string CommentText { get; set; }
         public DateTime Timestamp { get; set; }
     }
