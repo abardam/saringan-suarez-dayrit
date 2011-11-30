@@ -192,18 +192,18 @@ namespace Omnipresence.DataAccess.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<WebServiceUser> WebServiceUsers
+        public ObjectSet<ApiUser> ApiUsers
         {
             get
             {
-                if ((_WebServiceUsers == null))
+                if ((_ApiUsers == null))
                 {
-                    _WebServiceUsers = base.CreateObjectSet<WebServiceUser>("WebServiceUsers");
+                    _ApiUsers = base.CreateObjectSet<ApiUser>("ApiUsers");
                 }
-                return _WebServiceUsers;
+                return _ApiUsers;
             }
         }
-        private ObjectSet<WebServiceUser> _WebServiceUsers;
+        private ObjectSet<ApiUser> _ApiUsers;
 
         #endregion
         #region AddTo Methods
@@ -265,11 +265,11 @@ namespace Omnipresence.DataAccess.Core
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the WebServiceUsers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the ApiUsers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToWebServiceUsers(WebServiceUser webServiceUser)
+        public void AddToApiUsers(ApiUser apiUser)
         {
-            base.AddObject("WebServiceUsers", webServiceUser);
+            base.AddObject("ApiUsers", apiUser);
         }
 
         #endregion
@@ -279,6 +279,191 @@ namespace Omnipresence.DataAccess.Core
     #endregion
     
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="ApiUser")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ApiUser : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ApiUser object.
+        /// </summary>
+        /// <param name="webServiceUserId">Initial value of the WebServiceUserId property.</param>
+        /// <param name="apiKey">Initial value of the ApiKey property.</param>
+        /// <param name="lastCallDate">Initial value of the LastCallDate property.</param>
+        /// <param name="apiCallCount">Initial value of the ApiCallCount property.</param>
+        /// <param name="appName">Initial value of the AppName property.</param>
+        /// <param name="email">Initial value of the Email property.</param>
+        public static ApiUser CreateApiUser(global::System.Int32 webServiceUserId, global::System.String apiKey, global::System.DateTime lastCallDate, global::System.Int32 apiCallCount, global::System.String appName, global::System.String email)
+        {
+            ApiUser apiUser = new ApiUser();
+            apiUser.WebServiceUserId = webServiceUserId;
+            apiUser.ApiKey = apiKey;
+            apiUser.LastCallDate = lastCallDate;
+            apiUser.ApiCallCount = apiCallCount;
+            apiUser.AppName = appName;
+            apiUser.Email = email;
+            return apiUser;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WebServiceUserId
+        {
+            get
+            {
+                return _WebServiceUserId;
+            }
+            set
+            {
+                if (_WebServiceUserId != value)
+                {
+                    OnWebServiceUserIdChanging(value);
+                    ReportPropertyChanging("WebServiceUserId");
+                    _WebServiceUserId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("WebServiceUserId");
+                    OnWebServiceUserIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _WebServiceUserId;
+        partial void OnWebServiceUserIdChanging(global::System.Int32 value);
+        partial void OnWebServiceUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ApiKey
+        {
+            get
+            {
+                return _ApiKey;
+            }
+            set
+            {
+                OnApiKeyChanging(value);
+                ReportPropertyChanging("ApiKey");
+                _ApiKey = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ApiKey");
+                OnApiKeyChanged();
+            }
+        }
+        private global::System.String _ApiKey;
+        partial void OnApiKeyChanging(global::System.String value);
+        partial void OnApiKeyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime LastCallDate
+        {
+            get
+            {
+                return _LastCallDate;
+            }
+            set
+            {
+                OnLastCallDateChanging(value);
+                ReportPropertyChanging("LastCallDate");
+                _LastCallDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LastCallDate");
+                OnLastCallDateChanged();
+            }
+        }
+        private global::System.DateTime _LastCallDate;
+        partial void OnLastCallDateChanging(global::System.DateTime value);
+        partial void OnLastCallDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ApiCallCount
+        {
+            get
+            {
+                return _ApiCallCount;
+            }
+            set
+            {
+                OnApiCallCountChanging(value);
+                ReportPropertyChanging("ApiCallCount");
+                _ApiCallCount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ApiCallCount");
+                OnApiCallCountChanged();
+            }
+        }
+        private global::System.Int32 _ApiCallCount;
+        partial void OnApiCallCountChanging(global::System.Int32 value);
+        partial void OnApiCallCountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String AppName
+        {
+            get
+            {
+                return _AppName;
+            }
+            set
+            {
+                OnAppNameChanging(value);
+                ReportPropertyChanging("AppName");
+                _AppName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("AppName");
+                OnAppNameChanged();
+            }
+        }
+        private global::System.String _AppName;
+        partial void OnAppNameChanging(global::System.String value);
+        partial void OnAppNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
+
+        #endregion
+    
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -2387,165 +2572,6 @@ namespace Omnipresence.DataAccess.Core
         }
 
         #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="WebServiceUser")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class WebServiceUser : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new WebServiceUser object.
-        /// </summary>
-        /// <param name="webServiceUserId">Initial value of the WebServiceUserId property.</param>
-        /// <param name="apiKey">Initial value of the ApiKey property.</param>
-        /// <param name="lastCallDate">Initial value of the LastCallDate property.</param>
-        /// <param name="apiCallCount">Initial value of the ApiCallCount property.</param>
-        /// <param name="appName">Initial value of the AppName property.</param>
-        public static WebServiceUser CreateWebServiceUser(global::System.Int32 webServiceUserId, global::System.String apiKey, global::System.DateTime lastCallDate, global::System.Int32 apiCallCount, global::System.String appName)
-        {
-            WebServiceUser webServiceUser = new WebServiceUser();
-            webServiceUser.WebServiceUserId = webServiceUserId;
-            webServiceUser.ApiKey = apiKey;
-            webServiceUser.LastCallDate = lastCallDate;
-            webServiceUser.ApiCallCount = apiCallCount;
-            webServiceUser.AppName = appName;
-            return webServiceUser;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 WebServiceUserId
-        {
-            get
-            {
-                return _WebServiceUserId;
-            }
-            set
-            {
-                if (_WebServiceUserId != value)
-                {
-                    OnWebServiceUserIdChanging(value);
-                    ReportPropertyChanging("WebServiceUserId");
-                    _WebServiceUserId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("WebServiceUserId");
-                    OnWebServiceUserIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _WebServiceUserId;
-        partial void OnWebServiceUserIdChanging(global::System.Int32 value);
-        partial void OnWebServiceUserIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String ApiKey
-        {
-            get
-            {
-                return _ApiKey;
-            }
-            set
-            {
-                OnApiKeyChanging(value);
-                ReportPropertyChanging("ApiKey");
-                _ApiKey = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("ApiKey");
-                OnApiKeyChanged();
-            }
-        }
-        private global::System.String _ApiKey;
-        partial void OnApiKeyChanging(global::System.String value);
-        partial void OnApiKeyChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime LastCallDate
-        {
-            get
-            {
-                return _LastCallDate;
-            }
-            set
-            {
-                OnLastCallDateChanging(value);
-                ReportPropertyChanging("LastCallDate");
-                _LastCallDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LastCallDate");
-                OnLastCallDateChanged();
-            }
-        }
-        private global::System.DateTime _LastCallDate;
-        partial void OnLastCallDateChanging(global::System.DateTime value);
-        partial void OnLastCallDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ApiCallCount
-        {
-            get
-            {
-                return _ApiCallCount;
-            }
-            set
-            {
-                OnApiCallCountChanging(value);
-                ReportPropertyChanging("ApiCallCount");
-                _ApiCallCount = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ApiCallCount");
-                OnApiCallCountChanged();
-            }
-        }
-        private global::System.Int32 _ApiCallCount;
-        partial void OnApiCallCountChanging(global::System.Int32 value);
-        partial void OnApiCallCountChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String AppName
-        {
-            get
-            {
-                return _AppName;
-            }
-            set
-            {
-                OnAppNameChanging(value);
-                ReportPropertyChanging("AppName");
-                _AppName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("AppName");
-                OnAppNameChanged();
-            }
-        }
-        private global::System.String _AppName;
-        partial void OnAppNameChanging(global::System.String value);
-        partial void OnAppNameChanged();
-
-        #endregion
-    
     }
 
     #endregion
