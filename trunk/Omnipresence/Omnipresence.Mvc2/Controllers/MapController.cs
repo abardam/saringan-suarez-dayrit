@@ -16,7 +16,7 @@ namespace Omnipresence.Mvc2.Controllers
 
         protected override void Initialize(RequestContext requestContext)
         {
-            eventServices = new EventServices();
+            eventServices = EventServices.GetInstance(); 
             base.Initialize(requestContext);
         }
 

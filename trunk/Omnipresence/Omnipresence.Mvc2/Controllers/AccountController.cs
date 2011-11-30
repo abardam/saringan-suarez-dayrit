@@ -19,7 +19,7 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
             //if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
-            accountServices = new AccountServices();
+            accountServices = AccountServices.GetInstance();
 
             base.Initialize(requestContext);
         }

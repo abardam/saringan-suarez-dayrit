@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Omnipresence.Processing.UserProfileModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Omnipresence.Mvc2.Models.EditProfileModel>" %>
 
     <% using (Html.BeginForm()) {%>
         <%: Html.ValidationSummary(true) %>
@@ -6,16 +6,9 @@
         <fieldset>
             <legend>Fields</legend>
             
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.UserProfileId) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.UserProfileId) %>
-                <%: Html.ValidationMessageFor(model => model.UserProfileId) %>
-            </div>
             
             <div class="editor-label">
-                <%: Html.LabelFor(model => model.FirstName) %>
+                First name
             </div>
             <div class="editor-field">
                 <%: Html.TextBoxFor(model => model.FirstName) %>
@@ -23,7 +16,7 @@
             </div>
             
             <div class="editor-label">
-                <%: Html.LabelFor(model => model.LastName) %>
+                Last name
             </div>
             <div class="editor-field">
                 <%: Html.TextBoxFor(model => model.LastName) %>
@@ -34,7 +27,7 @@
                 <%: Html.LabelFor(model => model.Birthdate) %>
             </div>
             <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.Birthdate, String.Format("{0:g}", Model.Birthdate)) %>
+                <%: Html.TextBoxFor(model => model.Birthdate, String.Format("{0:g}", Model.Birthdate.ToString("dddd, dd MMMM yyyy"))) %>
                 <%: Html.ValidationMessageFor(model => model.Birthdate) %>
             </div>
             
@@ -46,31 +39,20 @@
                 <%: Html.ValidationMessageFor(model => model.Description) %>
             </div>
             
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.Reputation) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.Reputation) %>
-                <%: Html.ValidationMessageFor(model => model.Reputation) %>
-            </div>
-            <!--
+            
             
             <div class="editor-label">
-                gender
+                Gender
             </div>
             <div class="editor-field">
-                gender
+                <%: Html.DropDownListFor(model => model.GenderText, ViewData["gender"] as SelectList)%>
             </div>
-            -->
+            
             <p>
                 <input type="submit" value="Save" />
             </p>
         </fieldset>
 
     <% } %>
-
-    <div>
-        <%: Html.ActionLink("Back to List", "Index") %>
-    </div>
 
 

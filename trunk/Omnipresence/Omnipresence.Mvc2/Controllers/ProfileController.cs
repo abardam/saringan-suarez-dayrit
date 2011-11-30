@@ -12,7 +12,7 @@ namespace Omnipresence.Mvc2.Controllers
         public ProfileModel GetProfile(int id)
         {
             // TODO: This is still empty model
-            ProfileModel model = new ProfileModel { AvatarUrl = "viewprofile.png", Birthdate = DateTime.Now, Description = "Super bad-ass", FirstName = "Adrian", GenderText = "Male", LastName = "Fazinsky", Reputation = 10, Timezone = 0 };
+            ProfileModel model = new ProfileModel { AvatarUrl = "viewprofile.png", Birthdate = DateTime.Now, Description = "Super bad-ass", FirstName = "Adrian", GenderText = "Male", LastName = "Fazinsky", Reputation = 10 };
             return model;
         }
         public ActionResult Index()
