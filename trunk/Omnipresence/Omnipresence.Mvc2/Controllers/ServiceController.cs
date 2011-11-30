@@ -53,7 +53,7 @@ namespace Omnipresence.Mvc2.Controllers
                 UserProfileModel userProfileModel = accountServices.GetUserProfileByUsername(username);
                 List<EventModel> events = eventServices.GetAllEventsByUserProfileId(userProfileModel.UserProfileId).ToList();
 
-                EventViewModel[] result = new EventViewModel[events.Count()];
+                EventViewModel[] result = new EventViewModel[events.Count];
                 EventViewModel evm;
 
                 for (int i = 0; i < events.Count; i++)
@@ -92,7 +92,7 @@ namespace Omnipresence.Mvc2.Controllers
                 UserProfileModel userProfileModel = accountServices.GetUserProfileByUsername(username);
                 List<CommentModel> comments = eventServices.GetAllCommentsByUserProfileId(userProfileModel.UserProfileId).ToList();
 
-                CommentViewModel[] result = new CommentViewModel[comments.Count()];
+                CommentViewModel[] result = new CommentViewModel[comments.Count];
                 CommentViewModel cvm;
 
                 for (int i = 0; i < comments.Count; i++)
@@ -123,7 +123,7 @@ namespace Omnipresence.Mvc2.Controllers
                 EventModel ev = eventServices.GetEventById(id);
                 List<CommentModel> comments = eventServices.GetAllCommentsByEventId(ev.EventId).ToList();
 
-                CommentViewModel[] result = new CommentViewModel[comments.Count()];
+                CommentViewModel[] result = new CommentViewModel[comments.Count];
                 CommentViewModel cvm;
 
                 for (int i = 0; i < comments.Count; i++)
@@ -135,6 +135,41 @@ namespace Omnipresence.Mvc2.Controllers
                     cvm.CommentText = comments[i].CommentText;
                     cvm.Timestamp = comments[i].Timestamp;
                     result[i] = cvm;
+                }
+
+                apiServices.IncrementKeyUsage(key);
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetFriends(string key, string username)
+        {
+            if (apiServices.IsValidKey(key))
+            {
+                UserProfileModel userProfile = accountServices.GetUserProfileByUsername(username);
+                GetFriendsModel gfm = new GetFriendsModel();
+                gfm.UserProfileId = userProfile.UserProfileId;
+                List<UserProfileModel> friends = accountServices.GetAllFriends(gfm).ToList();
+                
+                ProfileViewModel[] result = new ProfileViewModel[friends.Count];
+                ProfileViewModel pvm;
+
+                for (int i = 0; i < friends.Count; i++)
+                {
+                    pvm = new ProfileViewModel();
+                    pvm.FirstName = friends[i].FirstName;
+                    pvm.LastName = friends[i].LastName;
+                    pvm.Description = friends[i].Description;
+                    pvm.Reputation = friends[i].Reputation;
+                    pvm.Birthdate = friends[i].Birthdate;
+                    pvm.GenderText = friends[i].IsFemale ? "Female" : "Male";
+
+                    result[i] = pvm;
                 }
 
                 apiServices.IncrementKeyUsage(key);
