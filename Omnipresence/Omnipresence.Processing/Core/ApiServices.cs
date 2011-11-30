@@ -54,6 +54,72 @@ namespace Omnipresence.Processing
             return true;
         }
 
+        public bool UpdateApiUser(ApiUserModel aum)
+        {
+            ApiUser apiUser = db.ApiUsers.Where(u => u.ApiUserId == aum.ApiUserId).FirstOrDefault();
+
+            if (apiUser != null)
+            {
+                apiUser.ApiKey = aum.ApiKey;
+                apiUser.ApiCallCount = aum.ApiCallCount;
+                apiUser.LastCallDate = aum.LastCallDate;
+                apiUser.AppName = aum.AppName;
+                apiUser.Email = aum.Email;
+                db.SaveChanges();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteApiUser(DeleteApiUserModel daum)
+        {
+            ApiUser apiUser = db.ApiUsers.Where(u => u.ApiUserId == daum.ApiUserId).FirstOrDefault();
+
+            if (apiUser != null)
+            {
+                db.DeleteObject(apiUser);
+                db.SaveChanges();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region [SEARCH]
+
+        public ApiUserModel GetApiUserById(int id)
+        {
+            ApiUser apiUser = db.ApiUsers.Where(account => account.ApiUserId == id).FirstOrDefault();
+            ApiUserModel apiUserModel = Utilities.UserToUserModel(apiUser);
+
+            return apiUserModel;
+        }
+
+        public ApiUserModel GetApiUserByEmail(string email)
+        {
+            ApiUser apiUser = db.ApiUsers.Where(account => account.Email == email).FirstOrDefault();
+            ApiUserModel apiUserModel = Utilities.UserToUserModel(apiUser);
+
+            return apiUserModel;
+        }
+
+        public ApiUserModel GetApiUserByApiKey(string apiKey)
+        {
+            ApiUser apiUser = db.ApiUsers.Where(account => account.ApiKey == apiKey).FirstOrDefault();
+            ApiUserModel apiUserModel = Utilities.UserToUserModel(apiUser);
+
+            return apiUserModel;
+        }
+
         #endregion
 
         #region [UTILITY METHODS]
