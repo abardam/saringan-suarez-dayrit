@@ -19,7 +19,7 @@ namespace DatabaseTests
             GetFriendRequestsModel gfrm = new GetFriendRequestsModel();
             gfrm.UserProfileId = random.Next(1, totalUsers);
 
-            Console.WriteLine("All pending friend requests of " + gfrm);
+            Console.WriteLine("All pending friend requests of " + gfrm.UserProfileId);
 
             foreach (UserProfileModel upm in accountServices.GetFriendRequests(gfrm))
             {
