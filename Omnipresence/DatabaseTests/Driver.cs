@@ -67,6 +67,16 @@ namespace DatabaseTests
                 testSuite.Add(new CreateApiUserTest("Create API User Test"));
             }
 
+            for (int i = 0; i < 100; i++)
+            {
+                testSuite.Add(new CreateFriendRequestTest("Create Friend Request Test"));
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                testSuite.Add(new GetFriendRequestsTest("Create Friend Request Test"));
+            }
+
             int numSuccess = 0;
             long totalRuntime = 0;
             Stopwatch stopwatch = Stopwatch.StartNew();

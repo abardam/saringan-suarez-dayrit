@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Tests\CreateCommentTest.cs" />
     <Compile Include="Tests\AddFriendTest.cs" />
+    <Compile Include="Tests\CreateFriendRequestTest.cs" />
     <Compile Include="Tests\CreateUserTest.cs" />
     <Compile Include="Tests\CreateEventTest.cs" />
     <Compile Include="Driver.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Tests\GetAllCommentsByUserProfileIdTest.cs" />
     <Compile Include="Tests\GetAllEventsByUserProfileIdTest.cs" />
     <Compile Include="Tests\GetAllFriendsTest.cs" />
+    <Compile Include="Tests\GetFriendRequestsTest.cs" />
     <Compile Include="Tests\Test.cs" />
     <Compile Include="Tests\VoteEventTest.cs" />
   </ItemGroup>
