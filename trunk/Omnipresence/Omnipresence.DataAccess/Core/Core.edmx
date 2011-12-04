@@ -15,6 +15,7 @@
     <EntitySet Name="Friendships" EntityType="OmnipresenceModel.Store.Friendships" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ApiUsers" EntityType="OmnipresenceModel.Store.ApiUsers" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MediaItems" EntityType="OmnipresenceModel.Store.MediaItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FriendRequests" EntityType="OmnipresenceModel.Store.FriendRequests" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_Event_Category" Association="OmnipresenceModel.Store.FK_Event_Category">
       <End Role="Categories" EntitySet="Categories" />
       <End Role="Events" EntitySet="Events" />
@@ -50,6 +51,14 @@
     <AssociationSet Name="EventMediaItem" Association="OmnipresenceModel.Store.EventMediaItem">
       <End Role="Event" EntitySet="Events" />
       <End Role="MediaItem" EntitySet="MediaItems" />
+    </AssociationSet>
+    <AssociationSet Name="UserProfileFriendRequest" Association="OmnipresenceModel.Store.UserProfileFriendRequest">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="FriendRequest" EntitySet="FriendRequests" />
+    </AssociationSet>
+    <AssociationSet Name="UserProfileFriendRequest1" Association="OmnipresenceModel.Store.UserProfileFriendRequest1">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="FriendRequest" EntitySet="FriendRequests" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Categories">
@@ -162,6 +171,14 @@
     <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
     <Property Name="EventId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="FriendRequests">
+    <Key>
+      <PropertyRef Name="AdderId" />
+      <PropertyRef Name="AddedId" />
+    </Key>
+    <Property Name="AdderId" Type="int" Nullable="false" />
+    <Property Name="AddedId" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="FK_Event_Category">
     <End Role="Categories" Type="OmnipresenceModel.Store.Categories" Multiplicity="0..1" />
     <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
@@ -270,6 +287,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="UserProfileFriendRequest">
+    <End Role="UserProfile" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
+    <End Role="FriendRequest" Type="OmnipresenceModel.Store.FriendRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserProfileId" />
+      </Principal>
+      <Dependent Role="FriendRequest">
+        <PropertyRef Name="AdderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProfileFriendRequest1">
+    <End Role="UserProfile" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
+    <End Role="FriendRequest" Type="OmnipresenceModel.Store.FriendRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserProfileId" />
+      </Principal>
+      <Dependent Role="FriendRequest">
+        <PropertyRef Name="AddedId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -319,6 +360,15 @@
           <AssociationSet Name="EventMediaItem" Association="OmnipresenceModel.EventMediaItem">
             <End Role="Event" EntitySet="Events" />
             <End Role="MediaItem" EntitySet="MediaItems" />
+          </AssociationSet>
+          <EntitySet Name="FriendRequests" EntityType="OmnipresenceModel.FriendRequest" />
+          <AssociationSet Name="UserProfileFriendRequest" Association="OmnipresenceModel.UserProfileFriendRequest">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="FriendRequest" EntitySet="FriendRequests" />
+          </AssociationSet>
+          <AssociationSet Name="UserProfileFriendRequest1" Association="OmnipresenceModel.UserProfileFriendRequest1">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="FriendRequest" EntitySet="FriendRequests" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
@@ -397,6 +447,8 @@
           <NavigationProperty Name="Comments" Relationship="OmnipresenceModel.UserProfileComment" FromRole="UserProfile" ToRole="Comment" />
           <Property Type="Boolean" Name="IsFemale" Nullable="false" />
           <NavigationProperty Name="Events" Relationship="OmnipresenceModel.UserProfileEvent" FromRole="UserProfile" ToRole="Event" />
+          <NavigationProperty Name="RequestedFriendRequests" Relationship="OmnipresenceModel.UserProfileFriendRequest" FromRole="UserProfile" ToRole="FriendRequest" />
+          <NavigationProperty Name="PendingFriendRequests" Relationship="OmnipresenceModel.UserProfileFriendRequest1" FromRole="UserProfile" ToRole="FriendRequest" />
           </EntityType>
         <EntityType Name="User">
           <Key>
@@ -557,6 +609,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FriendRequest">
+          <Key>
+            <PropertyRef Name="AdderId" />
+            <PropertyRef Name="AddedId" />
+          </Key>
+          <Property Type="Int32" Name="AdderId" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="AddingParty" Relationship="OmnipresenceModel.UserProfileFriendRequest" FromRole="FriendRequest" ToRole="UserProfile" />
+          <NavigationProperty Name="AddedParty" Relationship="OmnipresenceModel.UserProfileFriendRequest1" FromRole="FriendRequest" ToRole="UserProfile" />
+          <Property Type="Int32" Name="AddedId" Nullable="false" />
+        </EntityType>
+        <Association Name="UserProfileFriendRequest">
+          <End Type="OmnipresenceModel.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="OmnipresenceModel.FriendRequest" Role="FriendRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserProfileId" />
+            </Principal>
+            <Dependent Role="FriendRequest">
+              <PropertyRef Name="AdderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserProfileFriendRequest1">
+          <End Type="OmnipresenceModel.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="OmnipresenceModel.FriendRequest" Role="FriendRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserProfileId" />
+            </Principal>
+            <Dependent Role="FriendRequest">
+              <PropertyRef Name="AddedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -681,6 +767,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="FriendRequests">
+      <EntityTypeMapping TypeName="IsTypeOf(OmnipresenceModel.FriendRequest)">
+        <MappingFragment StoreEntitySet="FriendRequests">
+          <ScalarProperty Name="AdderId" ColumnName="AdderId" />
+          <ScalarProperty Name="AddedId" ColumnName="AddedId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -729,8 +823,8 @@
           <ConnectorPoint PointX="11.25" PointY="13.108642698302866" />
         </AssociationConnector>
         <AssociationConnector Association="OmnipresenceModel.UserProfileFriendship1">
-          <ConnectorPoint PointX="9" PointY="12.429321349151433" />
-          <ConnectorPoint PointX="11.25" PointY="12.429321349151433" />
+          <ConnectorPoint PointX="9" PointY="12.429328232750414" />
+          <ConnectorPoint PointX="11.25" PointY="12.429328232750414" />
         </AssociationConnector>
         <AssociationConnector Association="OmnipresenceModel.UserProfileComment">
           <ConnectorPoint PointX="8.25" PointY="10.75" />
@@ -747,6 +841,15 @@
         <AssociationConnector Association="OmnipresenceModel.EventMediaItem">
           <ConnectorPoint PointX="6.75" PointY="1.40625" />
           <ConnectorPoint PointX="9.75" PointY="1.40625" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="OmnipresenceModel.FriendRequest" Width="1.5" PointX="10.625" PointY="10" Height="1.7879850260416674" />
+        <AssociationConnector Association="OmnipresenceModel.UserProfileFriendRequest">
+          <ConnectorPoint PointX="9" PointY="11.434183654785157" />
+          <ConnectorPoint PointX="10.625" PointY="11.434183654785157" />
+        </AssociationConnector>
+        <AssociationConnector Association="OmnipresenceModel.UserProfileFriendRequest1">
+          <ConnectorPoint PointX="9" PointY="11.029591827392579" />
+          <ConnectorPoint PointX="10.625" PointY="11.029591827392579" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

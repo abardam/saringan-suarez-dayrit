@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/30/2011 22:01:56
+-- Date Created: 12/04/2011 21:31:20
 -- Generated from EDMX file: C:\Users\emanuel\Desktop\omni\saringan-suarez-dayrit\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
@@ -41,6 +41,15 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UserProfileEvent]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_UserProfileEvent];
 GO
+IF OBJECT_ID(N'[dbo].[FK_EventMediaItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MediaItems] DROP CONSTRAINT [FK_EventMediaItem];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendRequest]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[FriendRequests] DROP CONSTRAINT [FK_UserProfileFriendRequest];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendRequest1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[FriendRequests] DROP CONSTRAINT [FK_UserProfileFriendRequest1];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -69,6 +78,12 @@ IF OBJECT_ID(N'[dbo].[Friendships]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[ApiUsers]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ApiUsers];
+GO
+IF OBJECT_ID(N'[dbo].[MediaItems]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MediaItems];
+GO
+IF OBJECT_ID(N'[dbo].[FriendRequests]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FriendRequests];
 GO
 
 -- --------------------------------------------------
@@ -184,6 +199,13 @@ CREATE TABLE [dbo].[MediaItems] (
 );
 GO
 
+-- Creating table 'FriendRequests'
+CREATE TABLE [dbo].[FriendRequests] (
+    [AdderId] int  NOT NULL,
+    [AddedId] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -240,6 +262,12 @@ GO
 ALTER TABLE [dbo].[MediaItems]
 ADD CONSTRAINT [PK_MediaItems]
     PRIMARY KEY CLUSTERED ([MediaItemId] ASC);
+GO
+
+-- Creating primary key on [AdderId], [AddedId] in table 'FriendRequests'
+ALTER TABLE [dbo].[FriendRequests]
+ADD CONSTRAINT [PK_FriendRequests]
+    PRIMARY KEY NONCLUSTERED ([AdderId], [AddedId] ASC);
 GO
 
 -- --------------------------------------------------
@@ -360,6 +388,29 @@ ADD CONSTRAINT [FK_EventMediaItem]
 CREATE INDEX [IX_FK_EventMediaItem]
 ON [dbo].[MediaItems]
     ([EventId]);
+GO
+
+-- Creating foreign key on [AdderId] in table 'FriendRequests'
+ALTER TABLE [dbo].[FriendRequests]
+ADD CONSTRAINT [FK_UserProfileFriendRequest]
+    FOREIGN KEY ([AdderId])
+    REFERENCES [dbo].[UserProfiles]
+        ([UserProfileId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [AddedId] in table 'FriendRequests'
+ALTER TABLE [dbo].[FriendRequests]
+ADD CONSTRAINT [FK_UserProfileFriendRequest1]
+    FOREIGN KEY ([AddedId])
+    REFERENCES [dbo].[UserProfiles]
+        ([UserProfileId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserProfileFriendRequest1'
+CREATE INDEX [IX_FK_UserProfileFriendRequest1]
+ON [dbo].[FriendRequests]
+    ([AddedId]);
 GO
 
 -- --------------------------------------------------
