@@ -88,4 +88,15 @@ namespace Omnipresence.Processing
         public int AdderUserProfileId { get; set; }
         public int AddedUserProfileId { get; set; }
     }
+
+    public class CreateFriendRequestModel
+    {
+        public int AdderUserProfileId { get; set; }
+        public int AddedUserProfileId { get; set; }
+    }
+
+    public class GetFriendRequestsModel
+    {
+        public int UserProfileId { get; set; }
+    }
 }

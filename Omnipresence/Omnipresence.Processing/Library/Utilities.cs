@@ -91,6 +91,13 @@ namespace Omnipresence.Processing
         public static bool AreFriends(UserProfile a, UserProfile b)
         {
             IEnumerable<Friendship> test = a.RequestedFriendships.Where(x => x.AddedId == b.UserProfileId).Union(b.RequestedFriendships.Where(y => y.AddedId == a.UserProfileId));
+            
+            return test.Count() != 0;
+        }
+
+        public static bool HasPendingFriendRequest(UserProfile adder, UserProfile added)
+        {
+            IEnumerable<FriendRequest> test = added.PendingFriendRequests.Where(x => x.AdderId == adder.UserProfileId);
 
             return test.Count() != 0;
         }

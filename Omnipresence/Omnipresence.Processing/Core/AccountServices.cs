@@ -326,6 +326,28 @@ namespace Omnipresence.Processing
             return userProfileModels.AsQueryable();
         }
 
+        public IQueryable<UserProfileModel> GetFriendRequests(GetFriendRequestsModel gfrm)
+        {
+            UserProfile up = db.UserProfiles.Where(u => u.UserProfileId == gfrm.UserProfileId).FirstOrDefault();
+            var pendingFriendRequests = up.PendingFriendRequests;
+
+            List<UserProfile> friendRequests = new List<UserProfile>();
+
+            foreach (FriendRequest request in pendingFriendRequests)
+            {
+                friendRequests.Add(request.AddingParty);
+            }
+
+            List<UserProfileModel> userProfileModels = new List<UserProfileModel>();
+
+            foreach (UserProfile userProfile in friendRequests)
+            {
+                userProfileModels.Add(Utilities.UserProfileToUserProfileModel(userProfile));
+            }
+
+            return userProfileModels.AsQueryable();
+        }
+
         #endregion
 
         public bool UpdatePassword(UpdatePasswordModel changePasswordModel)
@@ -359,6 +381,35 @@ namespace Omnipresence.Processing
             if (userModel != null)
             {
                 return userModel.Password == validateUserModel.Password;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool CreateFriendRequest(CreateFriendRequestModel aafm)
+        {
+            UserProfile added = db.UserProfiles.Where(u => u.UserProfileId == aafm.AddedUserProfileId).FirstOrDefault();
+            UserProfile adder = db.UserProfiles.Where(u => u.UserProfileId == aafm.AdderUserProfileId).FirstOrDefault();
+
+            if ((adder != null && added != null) && (adder != added))
+            {
+                if (!Utilities.HasPendingFriendRequest(adder, added))
+                {
+                    FriendRequest friendRequest = new FriendRequest();
+                    friendRequest.AddingParty = adder;
+                    friendRequest.AddedParty = added;
+
+                    db.AddToFriendRequests(friendRequest);
+                    db.SaveChanges();
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
