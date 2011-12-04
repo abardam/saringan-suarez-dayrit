@@ -27,6 +27,8 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileComment", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Comment), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileEvent", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Event), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "EventMediaItem", "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event), "MediaItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.MediaItem), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileFriendRequest", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "FriendRequest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.FriendRequest), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileFriendRequest1", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "FriendRequest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.FriendRequest), true)]
 
 #endregion
 
@@ -221,6 +223,22 @@ namespace Omnipresence.DataAccess.Core
             }
         }
         private ObjectSet<MediaItem> _MediaItems;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<FriendRequest> FriendRequests
+        {
+            get
+            {
+                if ((_FriendRequests == null))
+                {
+                    _FriendRequests = base.CreateObjectSet<FriendRequest>("FriendRequests");
+                }
+                return _FriendRequests;
+            }
+        }
+        private ObjectSet<FriendRequest> _FriendRequests;
 
         #endregion
         #region AddTo Methods
@@ -295,6 +313,14 @@ namespace Omnipresence.DataAccess.Core
         public void AddToMediaItems(MediaItem mediaItem)
         {
             base.AddObject("MediaItems", mediaItem);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the FriendRequests EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToFriendRequests(FriendRequest friendRequest)
+        {
+            base.AddObject("FriendRequests", friendRequest);
         }
 
         #endregion
@@ -1423,6 +1449,169 @@ namespace Omnipresence.DataAccess.Core
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MediaItem>("OmnipresenceModel.EventMediaItem", "MediaItem", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="FriendRequest")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class FriendRequest : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new FriendRequest object.
+        /// </summary>
+        /// <param name="adderId">Initial value of the AdderId property.</param>
+        /// <param name="addedId">Initial value of the AddedId property.</param>
+        public static FriendRequest CreateFriendRequest(global::System.Int32 adderId, global::System.Int32 addedId)
+        {
+            FriendRequest friendRequest = new FriendRequest();
+            friendRequest.AdderId = adderId;
+            friendRequest.AddedId = addedId;
+            return friendRequest;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AdderId
+        {
+            get
+            {
+                return _AdderId;
+            }
+            set
+            {
+                if (_AdderId != value)
+                {
+                    OnAdderIdChanging(value);
+                    ReportPropertyChanging("AdderId");
+                    _AdderId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AdderId");
+                    OnAdderIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AdderId;
+        partial void OnAdderIdChanging(global::System.Int32 value);
+        partial void OnAdderIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AddedId
+        {
+            get
+            {
+                return _AddedId;
+            }
+            set
+            {
+                if (_AddedId != value)
+                {
+                    OnAddedIdChanging(value);
+                    ReportPropertyChanging("AddedId");
+                    _AddedId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AddedId");
+                    OnAddedIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AddedId;
+        partial void OnAddedIdChanging(global::System.Int32 value);
+        partial void OnAddedIdChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileFriendRequest", "UserProfile")]
+        public UserProfile AddingParty
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendRequest", "UserProfile").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendRequest", "UserProfile").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<UserProfile> AddingPartyReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendRequest", "UserProfile");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendRequest", "UserProfile", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileFriendRequest1", "UserProfile")]
+        public UserProfile AddedParty
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendRequest1", "UserProfile").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendRequest1", "UserProfile").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<UserProfile> AddedPartyReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendRequest1", "UserProfile");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserProfile>("OmnipresenceModel.UserProfileFriendRequest1", "UserProfile", value);
                 }
             }
         }
@@ -2788,6 +2977,50 @@ namespace Omnipresence.DataAccess.Core
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("OmnipresenceModel.UserProfileEvent", "Event", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileFriendRequest", "FriendRequest")]
+        public EntityCollection<FriendRequest> RequestedFriendRequests
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<FriendRequest>("OmnipresenceModel.UserProfileFriendRequest", "FriendRequest");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<FriendRequest>("OmnipresenceModel.UserProfileFriendRequest", "FriendRequest", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileFriendRequest1", "FriendRequest")]
+        public EntityCollection<FriendRequest> PendingFriendRequests
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<FriendRequest>("OmnipresenceModel.UserProfileFriendRequest1", "FriendRequest");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<FriendRequest>("OmnipresenceModel.UserProfileFriendRequest1", "FriendRequest", value);
                 }
             }
         }
