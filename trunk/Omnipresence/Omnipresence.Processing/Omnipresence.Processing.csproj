@@ -43,11 +43,13 @@
   <ItemGroup>
     <Compile Include="Core\AccountServices.cs" />
     <Compile Include="Core\ApiServices.cs" />
+    <Compile Include="Core\MediaServices.cs" />
     <Compile Include="Core\ServiceStatuses.cs" />
     <Compile Include="Models\ApiModels.cs" />
     <Compile Include="Models\EventModels.cs" />
     <Compile Include="Core\EventServices.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\MediaModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Library\Utilities.cs" />
   </ItemGroup>
