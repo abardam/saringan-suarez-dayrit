@@ -9,10 +9,10 @@ namespace Omnipresence.Mvc2.Controllers
 {
     public class ProfileController : Controller
     {
-        public ProfileModel GetProfile(int id)
+        public ProfileViewModel GetProfile(int id)
         {
             // TODO: This is still empty model
-            ProfileModel model = new ProfileModel { AvatarUrl = "viewprofile.png", Birthdate = DateTime.Now, Description = "Super bad-ass", FirstName = "Adrian", GenderText = "Male", LastName = "Fazinsky", Reputation = 10 };
+            ProfileViewModel model = new ProfileViewModel { AvatarUrl = "viewprofile.png", Birthdate = DateTime.Now, Description = "Super bad-ass", FirstName = "Adrian", GenderText = "Male", LastName = "Fazinsky", Reputation = 10 };
             return model;
         }
         public ActionResult Index()

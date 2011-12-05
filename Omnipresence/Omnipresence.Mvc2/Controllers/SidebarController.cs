@@ -34,7 +34,49 @@ namespace Omnipresence.Mvc2.Controllers
             IndexViewModel vm = new IndexViewModel();
             return PartialView("IndexUserControl",vm);
         }
+        
+        public ActionResult Profile(int userProfileId)
+        {
+            UserProfileModel p = accountServices.GetAllUserProfiles().Where<UserProfileModel>(account => account.UserProfileId == userProfileId).First<UserProfileModel>();
+            
+            if(p==null){
+                return Index();
+            }
+            
+            DateTime Birthdate;
+            if (p.Birthdate != null)
+            {
+                Birthdate = (DateTime)p.Birthdate;
+            }
+            else
+            {
+                Birthdate = DateTime.Now;
+            }
 
+            ProfileViewModel model = new ProfileViewModel
+            {  
+                Birthdate = Birthdate, 
+                Description = p.Description, 
+                FirstName = p.FirstName, 
+                GenderText = p.IsFemale?"Female":"Male", 
+                LastName = p.LastName, 
+                Reputation = p.Reputation, 
+                ViewingOwn = userProfileId.Equals(accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId),
+                ViewingFriend = false
+                 };
+
+            IEnumerable<UserProfileModel> lupm = accountServices.GetAcceptedFriends(new GetFriendsModel { UserProfileId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId });
+
+            foreach(UserProfileModel upm in lupm){
+                if(upm.UserProfileId == p.UserProfileId){
+                    model.ViewingFriend = true;
+                    break;
+                }
+            }
+            return PartialView("ProfileUserControl", model);
+        }
+        
+        /*
         public ActionResult Profile(String username)
         {
             UserProfileModel p = accountServices.GetUserProfileByUsername(username);
@@ -49,17 +91,19 @@ namespace Omnipresence.Mvc2.Controllers
                 Birthdate = DateTime.Now;
             }
 
-            ProfileModel model = new ProfileModel {  
+            ProfileViewModel model = new ProfileViewModel
+            {  
                 Birthdate = Birthdate, 
                 Description = p.Description, 
                 FirstName = p.FirstName, 
                 GenderText = p.IsFemale?"Female":"Male", 
                 LastName = p.LastName, 
                 Reputation = p.Reputation, 
+                ViewingOwn = username.Equals(User.Identity.Name)
                  };
 
             return PartialView("ProfileUserControl", model);
-        }
+        }*/
 
         public ActionResult EditProfile()
         {
@@ -71,7 +115,7 @@ namespace Omnipresence.Mvc2.Controllers
 
             string username = User.Identity.Name;
             UserProfileModel up = accountServices.GetUserProfileByUsername(username);
-            EditProfileModel u = new EditProfileModel();
+            EditProfileViewModel u = new EditProfileViewModel();
             u.Description = up.Description;
             u.FirstName = up.FirstName;
             u.LastName = up.LastName;
@@ -91,11 +135,11 @@ namespace Omnipresence.Mvc2.Controllers
             SelectList daySL = new SelectList(dayA);
 
 
-            return PartialView("EditProfileUserControl", u);
+            return PartialView("EditProfile", u);
         }
 
         [HttpPost]
-        public ActionResult EditProfile(EditProfileModel model)
+        public ActionResult EditProfile(EditProfileViewModel model)
         {
             String username = User.Identity.Name;
             UserProfileModel p = accountServices.GetUserProfileByUsername(username);
@@ -110,7 +154,7 @@ namespace Omnipresence.Mvc2.Controllers
             p.Birthdate = newDT;
             accountServices.UpdateUserProfile(p);
             //return PartialView("ProfileUserControl", model);
-            return Profile(username);
+            return Profile(p.UserProfileId);
         }
 
         // TODO: CHANGE EVENT OBJECT TYPE IN EVENTSERVICES
@@ -119,7 +163,7 @@ namespace Omnipresence.Mvc2.Controllers
             return PartialView("NewEventUserControl");
         }
         [HttpPost]
-        public ActionResult NewEvent(NewEventModel model)
+        public ActionResult NewEvent(CreateEventViewModel model)
         {
             CreateEventModel cem = new CreateEventModel();
             cem.Address = model.Address;
@@ -138,11 +182,11 @@ namespace Omnipresence.Mvc2.Controllers
         public ActionResult EditEvent(int id)
         {
             // TODO: insert logic
-            EditEventModel model = new EditEventModel{ CreatedBy = 1, CreateTime = DateTime.Now, DeleteTime = DateTime.Now, Description = "Description", Duration = 10, EndTime = DateTime.Now, Name= "Name", StartTime = DateTime.Now};
+            EditEventViewModel model = new EditEventViewModel { CreatedBy = 1, CreateTime = DateTime.Now, DeleteTime = DateTime.Now, Description = "Description", Duration = 10, EndTime = DateTime.Now, Name = "Name", StartTime = DateTime.Now };
             return PartialView("EditEvent", model);
         }
         [HttpPost]
-        public ActionResult EditEvent(EditEventModel model)
+        public ActionResult EditEvent(EditEventViewModel model)
         {
             // TODO: insert logic
             return PartialView("EditEvent", model);
@@ -220,8 +264,75 @@ namespace Omnipresence.Mvc2.Controllers
         }
         public ActionResult Search()
         {
-            SearchEventModel model = new SearchEventModel();
+            SearchEventViewModel model = new SearchEventViewModel();
             return PartialView("SearchUserControl", model);
+        }
+        [HttpPost]
+        public ActionResult Search(SearchEventViewModel model)
+        {
+            UserProfileModel upm = accountServices.GetUserProfileByUsername(model.SearchString);
+            ProfileViewModel pm = new ProfileViewModel();
+            pm.FirstName = upm.FirstName;
+            pm.LastName = upm.LastName;
+            pm.UserId = accountServices.GetUserByUsername(model.SearchString).UserId;
+            pm.UserProfileId = upm.UserProfileId;
+            //for now just searches for a user profile
+            SearchResultModel srm = new SearchResultModel();
+            srm.UserResult = new List<ProfileViewModel>();
+            srm.UserResult.Add(pm);
+            return PartialView("SearchResultUserControl", srm);
+        }
+
+        public ActionResult AddFriend(int friendUserProfileID)
+        {
+            
+            CreateFriendRequestModel cfrm = new CreateFriendRequestModel();
+            cfrm.AdderUserProfileId=accountServices.GetUserByUsername(User.Identity.Name).UserId;
+            cfrm.AddedUserProfileId=friendUserProfileID;
+
+            accountServices.CreateFriendRequest(cfrm);
+
+            return Index();
+        }
+
+        public ActionResult Notifications()
+        {
+            GetFriendRequestsModel gfrm = new GetFriendRequestsModel();
+            gfrm.UserProfileId = accountServices.GetUserByUsername(User.Identity.Name).UserId;
+            IQueryable<UserProfileModel> iq = accountServices.GetFriendRequests(gfrm);
+            NotificationModel nm = new NotificationModel();
+            nm.FriendRequestNotifications = new List<FriendRequestModel>();
+            List<UserProfileModel> lupm = iq.ToList<UserProfileModel>();
+            foreach (UserProfileModel upm in lupm)
+            {
+                FriendRequestModel frm = new FriendRequestModel();
+                frm.UserProfileId = upm.UserProfileId;
+                frm.FullName = upm.FirstName + " " + upm.LastName;
+                nm.FriendRequestNotifications.Add(frm);
+            }
+
+            return PartialView("NotificationsUserControl", nm);
+        }
+
+        public ActionResult ConfirmFriend(int adderUserProfileId)
+        {
+
+            MakeFriendsModel mfm = new MakeFriendsModel();
+            mfm.AdderUserProfileId = adderUserProfileId;
+            mfm.AddedUserProfileId = accountServices.GetUserByUsername(User.Identity.Name).UserId;
+            accountServices.MakeFriends(mfm);
+
+            return Notifications();
+        }
+
+        public ActionResult Friends()
+        {
+            GetFriendsModel gfm = new GetFriendsModel();
+            gfm.UserProfileId = accountServices.GetUserByUsername(User.Identity.Name).UserId;
+            IQueryable<UserProfileModel> iq = accountServices.GetAcceptedFriends(gfm);
+
+            
+            return PartialView("FriendsUserControl", iq);
         }
     }
 }
