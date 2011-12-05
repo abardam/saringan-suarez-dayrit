@@ -67,5 +67,10 @@ namespace Omnipresence.Mvc2.Models
 
     public class SearchEventViewModel
     {
+        public string SearchString { get; set; }
+    }
+    public class SearchResultModel
+    {
+        public List<ProfileViewModel> UserResult { get; set; }
     }
 }

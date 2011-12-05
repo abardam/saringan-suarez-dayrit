@@ -8,4 +8,10 @@ namespace Omnipresence.Mvc2.Models
     public class FriendsViewModel
     {
     }
+
+    public class FriendRequestModel
+    {
+        public int UserProfileId { get; set; }
+        public string FullName { get; set; }
+    }
 }

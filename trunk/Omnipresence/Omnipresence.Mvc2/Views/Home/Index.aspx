@@ -42,7 +42,7 @@
     else
     {
 %>
-        <span class="small-text">Logged in as: <%=Page.User.Identity.Name %> | <a class="" href="<%= Url.Action("LogOff","Account") %>" onclick="">Logout</a></span>
+        <span class="small-text">Logged in as: <%=Page.User.Identity.Name %> | <a class="sidebar-link sidebar-button" href="<%= Url.Action("Notifications", "Sidebar") %>" onclick=""> Notifications </a>| <a class="" href="<%= Url.Action("LogOff","Account") %>" onclick="">Logout</a></span>
 <%
     }
 %>
@@ -53,7 +53,8 @@
         <div id="sidebar-nav">
             <a class="sidebar-button" href="" onclick=""><img class="button unselected" src="../../Content/Images/newevent.png" alt="New Event"/></a><span class="helper">(post event)<br /></span>
             <a class="sidebar-link sidebar-button" href="<%= Url.Action("Search","Sidebar") %>" onclick=""><img class="button unselected" src="../../Content/Images/findevent.png" alt="Search"/></a><span class="helper">(find event)<br /></span>
-            <a class="sidebar-link sidebar-button" href="<%= Url.Action("Profile","Sidebar",new{username = Page.User.Identity.Name }) %>" onclick=""><img class="button unselected" src="../../Content/Images/viewprofile.png" alt="My Profile"/></a><span class="helper">(view profile)<br /></span>
+            <a class="sidebar-link sidebar-button" href="<%= Url.Action("Profile","Sidebar",new{userProfileId = Omnipresence.Processing.AccountServices.GetInstance().GetUserProfileByUsername(Page.User.Identity.Name).UserProfileId }) %>" onclick=""><img class="button unselected" src="../../Content/Images/viewprofile.png" alt="My Profile"/></a><span class="helper">(view profile)<br /></span>
+            <a class="sidebar-link sidebar-button" href="<%= Url.Action("Friends","Sidebar") %>" onclick=""><img class="button unselected" src="../../Content/Images/viewprofile.png" alt="My Friends"/></a><span class="helper">(view friends)<br /></span>
         </div>
         <% } %>
             <div id="sidebar" class="">

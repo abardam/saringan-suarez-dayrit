@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Omnipresence.Mvc2.Models.NewEventModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Omnipresence.Mvc2.Models.CreateEventViewModel>" %>
 <div class="control-container">
     <% using (Html.BeginForm()) {%>
         <%: Html.ValidationSummary(true) %>

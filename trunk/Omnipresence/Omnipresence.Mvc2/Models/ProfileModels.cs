@@ -9,6 +9,8 @@ namespace Omnipresence.Mvc2.Models
 {
     public class ProfileViewModel
     {
+        public int UserId { get; set; }
+        public string Username { get; set; }
         public int UserProfileId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -17,6 +19,8 @@ namespace Omnipresence.Mvc2.Models
         public string AvatarUrl { get; set; }
         public int Reputation { get; set; }
         public string GenderText { get; set; }
+        public Boolean ViewingOwn { get; set; }
+        public Boolean ViewingFriend { get; set; }
     }
 
     public class EditProfileViewModel
@@ -47,5 +51,11 @@ namespace Omnipresence.Mvc2.Models
             }
         }
         public int BirthdateYear { get; set; }
+    }
+
+    public class NotificationModel
+    {
+        public List<FriendRequestModel> FriendRequestNotifications { get; set; }
+        //add others
     }
 }

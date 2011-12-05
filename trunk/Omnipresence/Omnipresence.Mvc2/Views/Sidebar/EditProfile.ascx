@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Omnipresence.Mvc2.Models.EditProfileModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Omnipresence.Mvc2.Models.EditProfileViewModel>" %>
 
     <% using (Html.BeginForm()) {%>
         <%: Html.ValidationSummary(true) %>
