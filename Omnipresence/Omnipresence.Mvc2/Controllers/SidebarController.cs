@@ -24,7 +24,6 @@ namespace Omnipresence.Mvc2.Controllers
             //if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
             accountServices = AccountServices.GetInstance();
             eventServices = EventServices.GetInstance();
-
             base.Initialize(requestContext);
         }
 

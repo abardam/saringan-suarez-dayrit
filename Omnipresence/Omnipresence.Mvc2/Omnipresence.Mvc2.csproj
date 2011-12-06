@@ -101,6 +101,7 @@
     <Resource Include="Content\Images\talk.png" />
     <Resource Include="Content\Images\traffic.png" />
     <Resource Include="Content\Images\none.png" />
+    <Content Include="Content\gmaps.PNG" />
     <Content Include="Content\Images\addfriend.png" />
     <Content Include="Content\Images\bg_button_a.gif" />
     <Content Include="Content\Images\bg_button_span.gif" />
