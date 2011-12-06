@@ -1,30 +1,19 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Omnipresence.Mvc2.Models.RegisterModel>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Basic.Master" Inherits="System.Web.Mvc.ViewPage<Omnipresence.Mvc2.Models.RegisterModel>" %>
 
-<asp:Content ID="TitleContent" ContentPlaceHolderID="Title" runat="server">
+<asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">
     Register
 </asp:Content>
 
-<asp:Content ID="HeadContent" ContentPlaceHolderID="Head" runat="server">
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript" src="../../Scripts/omnimap-registration.js"></script>
 </asp:Content>
 
-<asp:Content ID="HeaderContent" ContentPlaceHolderID="Header" runat="server">
-</asp:Content>
-
-<asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
-    <h2>Create a New Account</h2>
-    <p>
-        Use the form below to create a new account. 
-    </p>
-    <p>
-        Passwords are required to be a minimum of <%: ViewData["PasswordLength"]%> characters in length.
-    </p>
-
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <h1>Register</h1>
     <% using (Html.BeginForm()) { %>
         <%: Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")%>
         <div>
             <fieldset>
-                <legend>Account Information</legend>
                 
                 <div class="editor-label">
                     <label id="username-label" for="username">
@@ -116,7 +105,4 @@
             </fieldset>
         </div>
     <%} %>
-</asp:Content>
-
-<asp:Content ID="FooterContent" ContentPlaceHolderID="Footer" runat="server">
 </asp:Content>
