@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Objects;
+using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Text;
 using Omnipresence.DataAccess.Core;
@@ -201,11 +202,11 @@ namespace Omnipresence.Processing
 
         public UserProfileModel GetUserProfileById(int id)
         {
-            UserModel userModel = GetUserById(id);
+            UserProfile up = db.UserProfiles.Where(u => u.UserProfileId == id).FirstOrDefault();
 
-            if (userModel != null)
+            if (up != null)
             {
-                return Utilities.UserProfileToUserProfileModel(userModel.UserProfile);
+                return Utilities.UserProfileToUserProfileModel(up);
             }
             else
             {
@@ -329,7 +330,7 @@ namespace Omnipresence.Processing
         public IQueryable<UserProfileModel> GetFriendRequests(GetFriendRequestsModel gfrm)
         {
             UserProfile up = db.UserProfiles.Where(u => u.UserProfileId == gfrm.UserProfileId).FirstOrDefault();
-            var pendingFriendRequests = up.PendingFriendRequests;
+            EntityCollection<FriendRequest> pendingFriendRequests = up.PendingFriendRequests;
 
             List<UserProfile> friendRequests = new List<UserProfile>();
 
