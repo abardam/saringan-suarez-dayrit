@@ -4,18 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Omnipresence.Processing;
-using Omnipresence.Mvc2.Models;
+using Omnipresence.DataAccess;
 
 namespace Omnipresence.Mvc2.Controllers
 {
     [HandleError]
     public class HomeController : Controller
     {
+        private EventServices service;
+        private EventServices getEventService()
+        {
+            if (service == null) service = EventServices.GetInstance();
+            return service;
+        }
+
         public ActionResult Index()
         {
-            ViewData["Message"] = "World Map";
-
-            return View();
+            IEnumerable<EventModel> events = getEventService().GetAllEvents().Reverse().Take(10);
+            return View(events);
         }
 
         public ActionResult About()
@@ -31,9 +37,12 @@ namespace Omnipresence.Mvc2.Controllers
 
         public ActionResult Default()
         {
+            return View();
             // TODO: When indexviewmodel has content, do this.
+            /*
             IndexViewModel vm = new IndexViewModel();
             return PartialView("IndexUserControl",vm);
+             * */
         }
 
         //[HttpPost]

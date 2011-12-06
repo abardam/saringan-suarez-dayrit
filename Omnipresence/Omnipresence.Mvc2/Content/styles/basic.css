@@ -1,0 +1,70 @@
+﻿h1, h2, h3, h4, h5, p
+{
+    font-size: 1em;
+    font-weight: normal;
+    color: black;
+    display: block;
+    line-height:1em;
+    margin-bottom: 0.2em;
+    margin-top: 0.2em;
+}
+
+h1, h2, h3
+{
+    font-size:2em;
+    font-family: 'FrancoisOneRegular' , verdana, sans-serif;
+}
+
+fieldset
+{
+    border:none;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+body
+{
+    font-family: Georgia, Serif;
+    background-color: transparent;
+    background-image: url('../../Content/Images/bg-repeat.png');
+}
+
+div#main
+{
+    padding: 50px 30px 40px 30px;
+    background-color: White;
+    margin: 50px 10px 50px 10px;
+    float: left;
+    border-radius: 20px;
+    width: 800px;
+}
+
+legend 
+{
+    font-style:italic;
+    font-size:1.2em;
+    font-weight:bold;
+    line-height:2em;
+}
+
+input[type=text], input[type=password] 
+{
+    width:80%;
+    line-height:2em;
+}
+
+label 
+{
+    line-height:2em;
+}
+
+fieldset 
+{
+    padding:0px;
+}
+
+h1 
+{
+    text-transform:uppercase;
+    font-size:3em;
+}

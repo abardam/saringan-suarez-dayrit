@@ -1,0 +1,80 @@
+﻿div#event-list
+{
+}
+
+h1, h2, h3, h4, h5, p
+{
+    font-size: 1em;
+    font-weight: normal;
+    color: black;
+    display: block;
+    line-height:1em;
+    margin-bottom: 0.2em;
+    margin-top: 0.2em;
+}
+
+h1, h2, h3
+{
+    font-family: 'FrancoisOneRegular' , verdana, sans-serif;
+}
+
+div.event-box
+{
+    display: block;
+    overflow: hidden;
+    margin-bottom:1em;
+}
+
+div.unselected
+{
+    height: 100%;
+}
+
+div.unselected > *
+{
+    display: none;
+}
+
+div.unselected h3
+{
+    font-size: 1.8em;
+    display: block;
+    text-align: center;
+}
+
+div.selected
+{
+    height: 100%;
+}
+
+div.selected > *
+{
+    display: block;
+}
+
+div.selected > h3
+{
+    font-size: 1.2 em;
+}
+
+
+body
+{
+    background-color: transparent;
+    background-image: url('../../Content/Images/bg-repeat.png');
+}
+
+div#main, div#user
+{
+    padding: 50px 10px 25px 10px;
+    background-color: White;
+    margin: 50px 10px 50px 10px;
+    float: left;
+    border-radius: 20px;
+    width: 500px;
+}
+
+div#user
+{
+    width: 300px;
+}
