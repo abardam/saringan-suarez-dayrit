@@ -3,7 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title><asp:ContentPlaceHolder ID="Title" runat="server" /></title>
+    <title>
+        <asp:ContentPlaceHolder ID="Title" runat="server" />
+    </title>
     <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/MapStyles.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
@@ -12,13 +14,31 @@
     <script type="text/javascript" src="../../Scripts/jquery.jeditable.js"></script>
     <script type="text/javascript" src="../../Scripts/jquery-utils.js"></script>
     <script type="text/javascript" src="../../Scripts/omnimap-sidebar-scripts.js"></script>
+    
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="../../Scripts/omnimap-scripts.js"></script>
+    <script type="text/javascript">
+        /*$.get('<%=Url.Action("Index","Sidebar") %>', function (d) {
+            sideShow(d);
+        });*/
+
+        function showNewEvent() {
+            $.get('<%= Url.Action("NewEvent","Sidebar") %>', function (d) {
+                sideShowNew(d, function () {
+                    $('#Latitude').attr("disabled", "disabled");
+                    $('#Longitude').attr("disabled", "disabled");
+                });
+
+            });
+        }
+    </script>
     <asp:ContentPlaceHolder ID="Head" runat="server" />
 </head>
-
 <body>
     <div class="page">
         <div id="top">
-        <!--
+            <!--
             <h1>Omnipresence: A Location Based Social Network</h1>
             <div id="menucontainer">
                 <ul id="menu">
@@ -26,16 +46,22 @@
                 </ul>
             </div>
             -->
-            <asp:ContentPlaceHolder ID="Header" runat="server"/>
+            <asp:ContentPlaceHolder ID="Header" runat="server" />
         </div>
-
         <div id="middle">
-            <asp:ContentPlaceHolder ID="Body" runat="server" />
+            <div id="map_container">
+                <div id="sidebar-big">
+                <div class="control-container">
+                    <asp:ContentPlaceHolder ID="Body" runat="server" />
+                </div>
+                </div>
+        <div id="map_canvas">
         </div>
-
-        <div id="bottom">
-            <asp:ContentPlaceHolder ID="Footer" runat="server" />
-        </div>
+    </div>
+    </div>
+    <div id="bottom">
+        <asp:ContentPlaceHolder ID="Footer" runat="server" />
+    </div>
     </div>
 </body>
 </html>

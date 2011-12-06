@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/04/2011 21:31:20
--- Generated from EDMX file: C:\Users\emanuel\Desktop\omni\saringan-suarez-dayrit\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
+-- Date Created: 12/06/2011 13:39:46
+-- Generated from EDMX file: C:\Users\Mr Suarez\Documents\thesis\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [Omnipresence];
+USE [omnidev];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
