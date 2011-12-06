@@ -36,12 +36,15 @@ namespace Omnipresence.Mvc2.Controllers
         
         public ActionResult Profile(int userProfileId)
         {
-            UserProfileModel p = accountServices.GetAllUserProfiles().Where<UserProfileModel>(account => account.UserProfileId == userProfileId).First<UserProfileModel>();
+            /*UserProfileModel p = accountServices.GetAllUserProfiles().Where<UserProfileModel>(account => account.UserProfileId == userProfileId).First<UserProfileModel>();
             
-            if(p==null){
+            */
+
+            UserProfileModel p = accountServices.GetUserProfileById(userProfileId);
+            if (p == null)
+            {
                 return Index();
             }
-            
             DateTime Birthdate;
             if (p.Birthdate != null)
             {
@@ -61,7 +64,8 @@ namespace Omnipresence.Mvc2.Controllers
                 LastName = p.LastName, 
                 Reputation = p.Reputation, 
                 ViewingOwn = userProfileId.Equals(accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId),
-                ViewingFriend = false
+                ViewingFriend = false,
+                UserProfileId = userProfileId
                  };
 
             IEnumerable<UserProfileModel> lupm = accountServices.GetAcceptedFriends(new GetFriendsModel { UserProfileId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId });
