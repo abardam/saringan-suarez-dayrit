@@ -161,6 +161,7 @@
     <Property Name="ApiCallCount" Type="int" Nullable="false" />
     <Property Name="AppName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ApiCallLimit" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="MediaItems">
     <Key>
@@ -586,6 +587,7 @@
           <Property Type="Int32" Name="ApiCallCount" Nullable="false" />
           <Property Type="String" Name="AppName" Nullable="false" />
           <Property Type="String" Name="Email" Nullable="false" />
+          <Property Type="Int32" Name="ApiCallLimit" Nullable="false" />
         </EntityType>
         <EntityType Name="MediaItem">
           <Key>
@@ -754,6 +756,7 @@
           <ScalarProperty Name="ApiCallCount" ColumnName="ApiCallCount" />
           <ScalarProperty Name="AppName" ColumnName="AppName" />
           <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ApiCallLimit" ColumnName="ApiCallLimit" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -836,7 +839,7 @@
           <ConnectorPoint PointX="7.125" PointY="4.3774113481445314" />
           <ConnectorPoint PointX="6.75" PointY="4.3774113481445314" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="OmnipresenceModel.ApiUser" Width="1.5" PointX="0.875" PointY="7.625" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="OmnipresenceModel.ApiUser" Width="1.5" PointX="0.875" PointY="7.625" Height="2.3648893229166656" />
         <EntityTypeShape EntityType="OmnipresenceModel.MediaItem" Width="1.5" PointX="9.75" PointY="1" Height="1.9802864583333339" />
         <AssociationConnector Association="OmnipresenceModel.EventMediaItem">
           <ConnectorPoint PointX="6.75" PointY="1.40625" />
