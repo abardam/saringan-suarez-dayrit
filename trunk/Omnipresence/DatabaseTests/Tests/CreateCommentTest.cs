@@ -26,7 +26,7 @@ namespace DatabaseTests
             addCommentModel.UserProfileId = userProfileId;
             addCommentModel.Comment = "OHOHOHO " + Name + " " + DateTime.Now.ToString();
 
-            return eventServices.CreateComment(addCommentModel);
+            return commentServices.CreateComment(addCommentModel);
         }
     }
 }

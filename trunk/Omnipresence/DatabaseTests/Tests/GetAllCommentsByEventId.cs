@@ -17,7 +17,7 @@ namespace DatabaseTests
         {
             int eventId = random.Next(1, eventServices.GetAllEvents().Count());
 
-            IQueryable<CommentModel> comments = eventServices.GetAllCommentsByEventId(eventId);
+            IQueryable<CommentModel> comments = commentServices.GetAllCommentsByEventId(eventId);
 
             Console.WriteLine("Comments posted about {0}", eventId);
 

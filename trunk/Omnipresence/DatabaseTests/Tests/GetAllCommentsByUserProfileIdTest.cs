@@ -17,7 +17,7 @@ namespace DatabaseTests
         {
             int userProfileId = random.Next(1, accountServices.GetAllUserProfiles().Count());
 
-            IQueryable<CommentModel> comments = eventServices.GetAllCommentsByUserProfileId(userProfileId);
+            IQueryable<CommentModel> comments = commentServices.GetAllCommentsByUserProfileId(userProfileId);
 
             Console.WriteLine("Comments posted by {0}", userProfileId);
 

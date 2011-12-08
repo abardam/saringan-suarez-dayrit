@@ -44,11 +44,6 @@ namespace DatabaseTests
 
             for (int i = 0; i < 100; i++)
             {
-                testSuite.Add(new AddFriendTest("Add Friend Test"));
-            }
-
-            for (int i = 0; i < 100; i++)
-            {
                 testSuite.Add(new GetAllCommentsByEventId("Get Comments By Event Test"));
             }
 
@@ -76,6 +71,18 @@ namespace DatabaseTests
             {
                 testSuite.Add(new GetFriendRequestsTest("Create Friend Request Test"));
             }
+
+            for (int i = 0; i < 100; i++)
+            {
+                testSuite.Add(new AddFriendTest("Add Friend Test"));
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                testSuite.Add(new QueryUsersTest("Query Users Test"));
+            }
+
+            testSuite.Add(new QueryEventsTest("Query Events Test"));
 
             int numSuccess = 0;
             long totalRuntime = 0;
@@ -106,7 +113,7 @@ namespace DatabaseTests
             Console.WriteLine("Total Failed: " + (testSuite.Count - numSuccess));
             Console.WriteLine("Total Runtime: " + totalRuntime);
 
-            //Console.ReadKey();
+            Console.ReadKey();
         }
     }
 }

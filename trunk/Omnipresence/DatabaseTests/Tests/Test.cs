@@ -15,6 +15,7 @@ namespace DatabaseTests
         protected static Random random = new Random();
         protected AccountServices accountServices = AccountServices.GetInstance();
         protected EventServices eventServices = EventServices.GetInstance();
+        protected CommentServices commentServices = CommentServices.GetInstance();
         protected ApiServices apiServices = ApiServices.GetInstance();
     }
 }
