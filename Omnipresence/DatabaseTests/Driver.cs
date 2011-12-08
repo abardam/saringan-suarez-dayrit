@@ -44,7 +44,7 @@ namespace DatabaseTests
 
             for (int i = 0; i < 100; i++)
             {
-                testSuite.Add(new GetAllCommentsByEventId("Get Comments By Event Test"));
+                testSuite.Add(new GetAllCommentsByEventIdTest("Get Comments By Event Test"));
             }
 
             for (int i = 0; i < 100; i++)

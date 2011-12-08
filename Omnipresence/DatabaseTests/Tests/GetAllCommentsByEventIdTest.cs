@@ -6,9 +6,9 @@ using Omnipresence.Processing;
 
 namespace DatabaseTests
 {
-    public class GetAllCommentsByEventId : Test
+    public class GetAllCommentsByEventIdTest : Test
     {
-        public GetAllCommentsByEventId(string name)
+        public GetAllCommentsByEventIdTest(string name)
         {
             Name = name;
         }
