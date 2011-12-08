@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Objects;
-using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Text;
 using Omnipresence.DataAccess.Core;
 
 namespace Omnipresence.Processing
 {
-    public class AccountServices:IDisposable
+    public class AccountServices : IDisposable
     {
         #region [FIELDS]
 
@@ -78,7 +77,7 @@ namespace Omnipresence.Processing
         {
             User user = db.Users.Where(u => u.UserId == userModel.UserId).FirstOrDefault();
 
-            if(user != null)
+            if (user != null)
             {
                 user.Username = userModel.Username;
                 user.Password = userModel.Password;
@@ -202,11 +201,11 @@ namespace Omnipresence.Processing
 
         public UserProfileModel GetUserProfileById(int id)
         {
-            UserProfile up = db.UserProfiles.Where(u => u.UserProfileId == id).FirstOrDefault();
+            UserProfile userProfile = db.UserProfiles.Where(u => u.UserProfileId == id).FirstOrDefault();
 
-            if (up != null)
+            if (userProfile != null)
             {
-                return Utilities.UserProfileToUserProfileModel(up);
+                return Utilities.UserProfileToUserProfileModel(userProfile);
             }
             else
             {
@@ -330,7 +329,7 @@ namespace Omnipresence.Processing
         public IQueryable<UserProfileModel> GetFriendRequests(GetFriendRequestsModel gfrm)
         {
             UserProfile up = db.UserProfiles.Where(u => u.UserProfileId == gfrm.UserProfileId).FirstOrDefault();
-            EntityCollection<FriendRequest> pendingFriendRequests = up.PendingFriendRequests;
+            var pendingFriendRequests = up.PendingFriendRequests;
 
             List<UserProfile> friendRequests = new List<UserProfile>();
 
@@ -396,7 +395,7 @@ namespace Omnipresence.Processing
 
             if ((adder != null && added != null) && (adder != added))
             {
-                if (!Utilities.HasPendingFriendRequest(adder, added))
+                if (!Utilities.HasPendingFriendRequest(adder, added) && !Utilities.AreFriends(adder, added))
                 {
                     FriendRequest friendRequest = new FriendRequest();
                     friendRequest.AddingParty = adder;
@@ -418,11 +417,11 @@ namespace Omnipresence.Processing
             }
         }
 
-        public bool MakeFriends(MakeFriendsModel makeFriendsModel)
+        public bool ConfirmFriendRequest(FriendRequestModel friendRequestModel)
         {
-            UserProfile requester = db.UserProfiles.Where(up => up.UserProfileId == makeFriendsModel.AdderUserProfileId).FirstOrDefault();
-            UserProfile accepter = db.UserProfiles.Where(up => up.UserProfileId == makeFriendsModel.AddedUserProfileId).FirstOrDefault();
-            
+            UserProfile requester = db.UserProfiles.Where(up => up.UserProfileId == friendRequestModel.AdderUserProfileId).FirstOrDefault();
+            UserProfile accepter = db.UserProfiles.Where(up => up.UserProfileId == friendRequestModel.AddedUserProfileId).FirstOrDefault();
+
             if ((requester != null && accepter != null) && (requester != accepter))
             {
                 if (!Utilities.AreFriends(requester, accepter))
@@ -432,6 +431,10 @@ namespace Omnipresence.Processing
                     friendship.AddedParty = accepter;
 
                     db.AddToFriendships(friendship);
+
+                    FriendRequest friendRequest = db.FriendRequests.Where(x => x.AdderId == friendRequestModel.AdderUserProfileId && x.AddedId == friendRequestModel.AddedUserProfileId).FirstOrDefault();
+                    db.DeleteObject(friendRequest);
+
                     db.SaveChanges();
 
                     return true;
@@ -445,6 +448,55 @@ namespace Omnipresence.Processing
             {
                 return false;
             }
+        }
+
+        public bool DenyFriendRequest(FriendRequestModel friendRequestModel)
+        {
+            FriendRequest friendRequest = db.FriendRequests.Where(x => x.AdderId == friendRequestModel.AdderUserProfileId && x.AddedId == friendRequestModel.AddedUserProfileId).FirstOrDefault();
+
+            if (friendRequest != null)
+            {
+                db.DeleteObject(friendRequest);
+                db.SaveChanges();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public IEnumerable<UserProfileModel> QueryUsers(QueryUserModel queryModel)
+        {
+            IQueryable<User> usernameMatches = db.Users.Where(u => u.Username.ToLower().Contains(queryModel.Username.ToLower()));
+            IQueryable<UserProfile> firstNameMatches = db.UserProfiles.Where(up => up.FirstName.ToLower().Contains(queryModel.FirstName.ToLower()));
+            IQueryable<UserProfile> lastNameMatches = db.UserProfiles.Where(up => up.LastName.ToLower().Contains(queryModel.LastName.ToLower()));
+            IQueryable<User> emailMatches = db.Users.Where(u => u.Email.ToLower().Contains(queryModel.Email.ToLower()));
+
+            List<UserProfileModel> results = new List<UserProfileModel>();
+
+            foreach (User user in usernameMatches)
+            {
+                results.Add(Utilities.UserProfileToUserProfileModel(user.UserProfile));
+            }
+
+            foreach (UserProfile userProfile in firstNameMatches)
+            {
+                results.Add(Utilities.UserProfileToUserProfileModel(userProfile));
+            }
+
+            foreach (UserProfile userProfile in lastNameMatches)
+            {
+                results.Add(Utilities.UserProfileToUserProfileModel(userProfile));
+            }
+
+            foreach (User user in emailMatches)
+            {
+                results.Add(Utilities.UserProfileToUserProfileModel(user.UserProfile));
+            }
+
+            return results.AsQueryable();
         }
 
         public void Dispose()
