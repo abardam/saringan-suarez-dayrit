@@ -79,6 +79,8 @@ namespace Omnipresence.Processing
                 userProfileModel.Comments = userProfile.Comments;
                 userProfileModel.Reputation = userProfile.Reputation;
                 userProfileModel.Avatar = userProfile.Avatar;
+                userProfileModel.PendingFriendRequests = userProfile.PendingFriendRequests;
+                userProfileModel.RequestedFriendRequests = userProfile.RequestedFriendRequests;
 
                 return userProfileModel;
             }
@@ -98,8 +100,9 @@ namespace Omnipresence.Processing
         public static bool HasPendingFriendRequest(UserProfile adder, UserProfile added)
         {
             IEnumerable<FriendRequest> test = added.PendingFriendRequests.Where(x => x.AdderId == adder.UserProfileId);
+            IEnumerable<FriendRequest> test2 = adder.PendingFriendRequests.Where(x => x.AdderId == added.UserProfileId);
 
-            return test.Count() != 0;
+            return (test.Union(test2)).Count() != 0;
         }
 
         public static bool AreWithinRadius(Location a, Location b, double radius)

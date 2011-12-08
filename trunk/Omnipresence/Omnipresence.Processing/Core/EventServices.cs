@@ -110,66 +110,6 @@ namespace Omnipresence.Processing
             }
         }
 
-        public bool CreateComment(CreateCommentModel createCommentModel)
-        {
-            Comment comment = new Comment();
-            comment.CommentText = createCommentModel.Comment;
-            comment.Timestamp = DateTime.Now;
-            
-            Event evt = db.Events.Where(ev => ev.EventId == createCommentModel.EventId).FirstOrDefault();
-            UserProfile userProfile = db.UserProfiles.Where(up => up.UserProfileId == createCommentModel.UserProfileId).FirstOrDefault();
-
-            comment.Event = evt;
-            comment.UserProfile = userProfile;
-
-            if (comment.Event != null && comment.UserProfile != null)
-            {
-                db.AddToComments(comment);
-                db.SaveChanges();
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool UpdateComment(CommentModel updateCommentModel)
-        {
-            Comment comment = db.Comments.Where(c => c.CommentId == updateCommentModel.CommentId).FirstOrDefault();
-
-            if (comment != null)
-            {
-                comment.CommentText = updateCommentModel.CommentText;
-                comment.Timestamp = DateTime.Now;
-                db.SaveChanges();
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool DeleteComment(DeleteCommentModel dcm)
-        {
-            Comment comment = db.Comments.Where(c => c.CommentId == dcm.CommentId).FirstOrDefault();
-
-            if (comment != null)
-            {
-                db.DeleteObject(comment);
-                db.SaveChanges();
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         public bool Vote(VoteEventModel voteEventModel)
         {
             Event curEvent = db.Events.Where(ev => (ev.EventId == voteEventModel.EventId)).FirstOrDefault();
@@ -251,51 +191,6 @@ namespace Omnipresence.Processing
             return eventModels.AsQueryable();
         }
 
-        public CommentModel GetCommentById(int id)
-        {
-            Comment comment = db.Comments.Where(c => c.CommentId == id).FirstOrDefault();
-            return Utilities.CommentToCommentModel(comment);
-        }
-
-        public IQueryable<CommentModel> GetAllCommentsByUserProfileId(int id)
-        {
-            List<CommentModel> commentModels = new List<CommentModel>();
-            IQueryable<Comment> comments = db.Comments.Where(c => c.UserProfileId == id);
-
-            foreach (Comment comment in comments)
-            {
-                commentModels.Add(Utilities.CommentToCommentModel(comment));
-            }
-
-            return commentModels.AsQueryable();
-        }
-
-        public IQueryable<CommentModel> GetAllCommentsByEventId(int id)
-        {
-            List<CommentModel> commentModels = new List<CommentModel>();
-            IQueryable<Comment> comments = db.Comments.Where(c => c.EventId == id);
-
-            foreach (Comment comment in comments)
-            {
-                commentModels.Add(Utilities.CommentToCommentModel(comment));
-            }
-
-            return commentModels.AsQueryable();
-        }
-
-        public IQueryable<CommentModel> GetAllComments()
-        {
-            List<CommentModel> commentModels = new List<CommentModel>();
-            IQueryable<Comment> comments = db.Comments;
-
-            foreach (Comment comment in comments)
-            {
-                commentModels.Add(Utilities.CommentToCommentModel(comment));
-            }
-
-            return commentModels.AsQueryable();
-        }
-
         public IEnumerable<EventModel> QueryEvents(QueryEventModel queryModel)
         {
             IEnumerable<Event> titleMatches;
@@ -310,10 +205,10 @@ namespace Omnipresence.Processing
             IEnumerable<Event> endTimeMatches;
             endTimeMatches = db.Events.Where(x => queryModel.EndTime != null ? x.EndTime <= queryModel.EndTime : true);
 
-            IEnumerable<Event> locationMatches;
-            locationMatches = db.Events.Where(x => x.Location != null ? Utilities.AreWithinRadius(x.Location, queryModel.Location, 0.1) : true);
+            //IEnumerable<Event> locationMatches;
+            //locationMatches = db.Events.Where(x => x.Location != null ? Utilities.AreWithinRadius(x.Location, queryModel.Location, 0.1) : true);
 
-            IEnumerable<Event> result = titleMatches.Intersect(descriptionMatches.Intersect(startTimeMatches.Intersect(endTimeMatches)).Intersect(locationMatches));
+            IEnumerable<Event> result = titleMatches.Union(descriptionMatches.Union(startTimeMatches.Union(endTimeMatches)));
 
             List<EventModel> eventModels = new List<EventModel>();
             EventModel evtModel = null;

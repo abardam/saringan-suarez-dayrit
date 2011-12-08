@@ -49,6 +49,8 @@ namespace Omnipresence.Processing
         public System.Data.Objects.DataClasses.EntityCollection<Friendship> AcceptedFriendships { get; set; }
         public System.Data.Objects.DataClasses.EntityCollection<Friendship> RequestedFriendships { get; set; }
         public System.Data.Objects.DataClasses.EntityCollection<Comment> Comments { get; set; }
+        public System.Data.Objects.DataClasses.EntityCollection<FriendRequest> PendingFriendRequests { get; set; }
+        public System.Data.Objects.DataClasses.EntityCollection<FriendRequest> RequestedFriendRequests { get; set; }
     }
 
     public class CreateUserProfileModel
@@ -83,7 +85,7 @@ namespace Omnipresence.Processing
         public string Password { get; set; }
     }
 
-    public class MakeFriendsModel
+    public class FriendRequestModel
     {
         public int AdderUserProfileId { get; set; }
         public int AddedUserProfileId { get; set; }
@@ -98,5 +100,13 @@ namespace Omnipresence.Processing
     public class GetFriendRequestsModel
     {
         public int UserProfileId { get; set; }
+    }
+
+    public class QueryUserModel
+    {
+        public string Username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
     }
 }

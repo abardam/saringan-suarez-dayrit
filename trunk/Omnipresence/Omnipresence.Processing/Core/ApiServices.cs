@@ -13,7 +13,6 @@ namespace Omnipresence.Processing
 
         private OmnipresenceEntities db;
         private static ApiServices instance;
-        private const int API_CALL_LIMIT = 100000;
 
         #endregion
 
@@ -145,7 +144,7 @@ namespace Omnipresence.Processing
         {
             ApiUser apiUser = db.ApiUsers.Where(u => u.ApiKey == key).FirstOrDefault();
 
-            if (apiUser != null && apiUser.ApiCallCount <= API_CALL_LIMIT)
+            if (apiUser != null && apiUser.ApiCallCount <= apiUser.ApiCallLimit)
             {
                 return true;
             }
