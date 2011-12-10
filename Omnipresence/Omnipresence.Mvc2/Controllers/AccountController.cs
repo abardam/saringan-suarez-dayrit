@@ -93,7 +93,7 @@ namespace Omnipresence.Mvc2.Controllers
                 cum.Email = model.Email.Trim();
                 CreateUserProfileModel cupm = new CreateUserProfileModel();
                 cupm.FirstName = model.FirstName.Trim();
-                cupm.LastName = model.FirstName.Trim();
+                cupm.LastName = model.LastName.Trim();
                 cupm.Birthdate = model.Birthdate;
                 cupm.Description = "";
                 cupm.IsFemale = false;

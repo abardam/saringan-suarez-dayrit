@@ -145,6 +145,7 @@
     <Content Include="Views\Sidebar\EditEventUserControl.ascx" />
     <Content Include="Views\Sidebar\EditProfile.ascx" />
     <Content Include="Views\Sidebar\FriendsUserControl.ascx" />
+    <Content Include="Views\Sidebar\Index.aspx" />
     <Content Include="Views\Sidebar\IndexUserControl.ascx" />
     <Content Include="Views\Sidebar\LoginUserControl.ascx" />
     <Content Include="Views\Sidebar\NewEventUserControl.ascx" />
