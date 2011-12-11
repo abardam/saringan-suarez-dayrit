@@ -24,8 +24,6 @@ namespace Omnipresence.Mvc2.Controllers
             base.Initialize(requestContext);
         }
 
-        //TODO: LOGON FEATURE FOR SIDEBAR HAS SEPARATE CODE
-
         public ActionResult LogOn()
         {
             return View();
@@ -98,10 +96,11 @@ namespace Omnipresence.Mvc2.Controllers
                 cupm.Description = "";
                 cupm.IsFemale = false;
 
-                
+
 
                 if (accountServices.CreateUser(cum, cupm))
                 {
+                    return true;
                 }
                 else
                 {

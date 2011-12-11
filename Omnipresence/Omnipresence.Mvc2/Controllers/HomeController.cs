@@ -23,27 +23,17 @@ namespace Omnipresence.Mvc2.Controllers
             IEnumerable<EventModel> events = getEventService().GetAllEvents().Reverse().Take(10);
             return View(events);
         }
-
         public ActionResult About()
         {
             return View();
         }
-
+        /*
         [HttpPost]
         public ActionResult About(string comm, int markerNum)
         {
             return null;
         }
-
-        public ActionResult Default()
-        {
-            return View();
-            // TODO: When indexviewmodel has content, do this.
-            /*
-            IndexViewModel vm = new IndexViewModel();
-            return PartialView("IndexUserControl",vm);
-             * */
-        }
+        */
 
         //[HttpPost]
         //public ActionResult Query(EventQueryModel model)

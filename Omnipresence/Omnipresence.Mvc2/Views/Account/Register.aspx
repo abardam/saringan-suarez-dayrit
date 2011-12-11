@@ -9,7 +9,10 @@
 </asp:Content>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Register</h1>
+    <h3>Register</h3>
+    <p>
+        You're one step away from creating your own account. <%: Html.ActionLink("Sign in", "LogOn") %> if you already have an account.
+    </p>
     <% using (Html.BeginForm()) { %>
         <%: Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")%>
         <div>
@@ -100,7 +103,7 @@
                 </div>
 
                 <p>
-                    <input id="register-button" type="submit" value="Register" disabled="disabled"/>
+                    <input id="register-button" type="submit" value="Register"/>
                 </p>
             </fieldset>
         </div>

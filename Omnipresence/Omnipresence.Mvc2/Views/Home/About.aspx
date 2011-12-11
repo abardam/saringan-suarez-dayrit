@@ -1,17 +1,14 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Basic.Master" Inherits="System.Web.Mvc.ViewPage" %>
 
-<asp:Content ID="TitleContent" ContentPlaceHolderID="Title" runat="server">
+<asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">
     About
 </asp:Content>
 
-<asp:Content ID="HeadContent" ContentPlaceHolderID="Head" runat="server">
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 
-<asp:Content ID="HeaderContent" ContentPlaceHolderID="Header" runat="server">
-</asp:Content>
-
-<asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
-</asp:Content>
-
-<asp:Content ID="FooterContent" ContentPlaceHolderID="Footer" runat="server">
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+<h1>About</h1>
+<% //TODO: WRITE ABOUT PAGE %>
+<p>Lorem ipsum.</p>
 </asp:Content>
