@@ -575,3 +575,28 @@ function getEventIcon(eventType) {
     }*/
     return "/Content/Images/" + eventType + ".png";
 }
+
+function panTo(latLng){
+    map.panTo(latLng);
+}
+
+function setMap(divName, latLng) {
+    var myOptions = {
+        zoom: 16,
+        center: latLng,
+        disableDefaultUI: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    if(map != null){
+        delete map;
+    }
+
+    map = new google.maps.Map(document.getElementById(divName), myOptions);
+    
+    var logoDiv = document.createElement('DIV');
+    formatLogo(logoDiv,'<img src="../../Content/Images/omnilogo.png" />');
+    logoDiv.index=1;
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(logoDiv);
+
+}
