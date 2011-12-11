@@ -29,6 +29,9 @@ a, a:visited, a:hover
 {
     text-decoration:none;
     color:Black;
+}
+p > a
+{
     font-weight:bold;
 }
 
@@ -130,4 +133,10 @@ div.event-box
 {
     padding-top:0.8em;
     padding-bottom:0.8em;
+}
+
+::selection, ::-moz-selection, ::-webkit-selection 
+{
+    background:#cc0000;
+    color:White;
 }

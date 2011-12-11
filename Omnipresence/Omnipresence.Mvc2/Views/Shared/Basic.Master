@@ -17,7 +17,7 @@
 <body>
     <div id="container">
         <div id="main">
-        <h1 class="title">OMNIPRESENCE</h1>
+        <h1 class="title"><%:Html.ActionLink("OMNIPRESENCE", "Index", "Home") %></h1>
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div>
     </div>

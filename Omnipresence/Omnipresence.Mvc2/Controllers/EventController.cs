@@ -13,9 +13,19 @@ namespace Omnipresence.Mvc2.Controllers
         //
         // GET: /Event/
 
-        public ActionResult Index()
+        private EventServices eventServices;
+        
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
-            return View();
+            eventServices = EventServices.GetInstance();
+            base.Initialize(requestContext);
+        }
+        [Authorize]
+        public ActionResult Index(int id)
+        {
+            EventModel model = eventServices.GetEventById(id);
+            if (model == null) return RedirectToAction("Index", "Home");
+            return View(model);
         }
 
     }

@@ -10,6 +10,7 @@
 <p>Date of birth: <%:Model.Birthdate.ToLongDateString() %></p>
 <p>Description: <%:Model.Description %></p>
 <p>Reputation: <%:Model.Reputation %></p>
+<%:Html.ActionLink("edit", "Edit") %>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
