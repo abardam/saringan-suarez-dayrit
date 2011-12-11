@@ -119,10 +119,26 @@
     <Content Include="Content\Images\viewprofile.png" />
     <Content Include="Content\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\MapStyles.css" />
+    <Content Include="Content\Scripts\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Content\Scripts\jquery.min.js" />
     <Content Include="Content\styles\basic.css" />
+    <Content Include="Content\styles\Capsuula-font\Capsuula-webfont.svg" />
+    <Content Include="Content\styles\Capsuula-font\stylesheet.css" />
     <Content Include="Content\styles\event-list.css" />
     <Content Include="Content\styles\FrancoisOne-font\FrancoisOne-webfont.svg" />
     <Content Include="Content\styles\FrancoisOne-font\stylesheet.css" />
+    <Content Include="Content\styles\Metrophobic-font\Metrophobic-webfont.svg" />
+    <Content Include="Content\styles\Metrophobic-font\stylesheet.css" />
+    <Content Include="Content\styles\OstrichSans-font\ostrich-black-webfont.svg" />
+    <Content Include="Content\styles\OstrichSans-font\ostrich-bold-webfont.svg" />
+    <Content Include="Content\styles\OstrichSans-font\ostrich-dashed-webfont.svg" />
+    <Content Include="Content\styles\OstrichSans-font\ostrich-light-webfont.svg" />
+    <Content Include="Content\styles\OstrichSans-font\ostrich-regular-webfont.svg" />
+    <Content Include="Content\styles\OstrichSans-font\ostrich-rounded-webfont.svg" />
+    <Content Include="Content\styles\OstrichSans-font\SIL Open Font License 1.1.txt" />
+    <Content Include="Content\styles\OstrichSans-font\stylesheet.css" />
+    <Content Include="Content\styles\Raleway-font\raleway_thin-webfont.svg" />
+    <Content Include="Content\styles\Raleway-font\stylesheet.css" />
     <Content Include="Global.asax" />
     <Resource Include="Content\Images\circle.png" />
     <Content Include="Scripts\jquery-ui-1.8.16.custom.min.js" />
@@ -206,11 +222,39 @@
     <Content Include="Views\Shared\EventList.Master" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\styles\Capsuula-font\Capsuula-webfont.eot" />
+    <None Include="Content\styles\Capsuula-font\Capsuula-webfont.ttf" />
+    <None Include="Content\styles\Capsuula-font\Capsuula-webfont.woff" />
     <None Include="Content\styles\FrancoisOne-font\FrancoisOne-webfont.eot" />
     <None Include="Content\styles\FrancoisOne-font\FrancoisOne-webfont.ttf" />
     <None Include="Content\styles\FrancoisOne-font\FrancoisOne-webfont.woff" />
     <Content Include="Views\Shared\Basic.Master" />
+    <None Include="Content\styles\Metrophobic-font\Metrophobic-webfont.eot" />
+    <None Include="Content\styles\Metrophobic-font\Metrophobic-webfont.ttf" />
+    <None Include="Content\styles\Metrophobic-font\Metrophobic-webfont.woff" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-black-webfont.eot" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-black-webfont.ttf" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-black-webfont.woff" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-bold-webfont.eot" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-bold-webfont.ttf" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-bold-webfont.woff" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-dashed-webfont.eot" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-dashed-webfont.ttf" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-dashed-webfont.woff" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-light-webfont.eot" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-light-webfont.ttf" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-light-webfont.woff" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-regular-webfont.eot" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-regular-webfont.ttf" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-regular-webfont.woff" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-rounded-webfont.eot" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-rounded-webfont.ttf" />
+    <None Include="Content\styles\OstrichSans-font\ostrich-rounded-webfont.woff" />
+    <None Include="Content\styles\Raleway-font\raleway_thin-webfont.eot" />
+    <None Include="Content\styles\Raleway-font\raleway_thin-webfont.ttf" />
+    <None Include="Content\styles\Raleway-font\raleway_thin-webfont.woff" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

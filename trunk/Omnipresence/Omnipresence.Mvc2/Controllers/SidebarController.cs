@@ -7,7 +7,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using Omnipresence.Mvc2.Models;
 using Omnipresence.Processing;
-using Omnipresence.DataAccess.Core; // TODO: REMOVE ACCESS TO THIS
+//using Omnipresence.DataAccess.Core; // TODO: REMOVE ACCESS TO THIS
 
 namespace Omnipresence.Mvc2.Controllers
 {
@@ -297,7 +297,7 @@ namespace Omnipresence.Mvc2.Controllers
 
             return Index();
         }
-
+        /*
         public ActionResult Notifications()
         {
             GetFriendRequestsModel gfrm = new GetFriendRequestsModel();
@@ -336,6 +336,6 @@ namespace Omnipresence.Mvc2.Controllers
 
             
             return PartialView("FriendsUserControl", iq);
-        }
+        }*/
     }
 }

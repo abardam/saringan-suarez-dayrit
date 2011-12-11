@@ -1,4 +1,6 @@
-﻿div#event-list
+﻿div.selected {cursor:auto;}
+div.unselected {cursor:pointer;}
+div#event-list
 {
 }
 
@@ -8,21 +10,33 @@ h1, h2, h3, h4, h5, p
     font-weight: normal;
     color: black;
     display: block;
-    line-height:1em;
-    margin-bottom: 0.2em;
-    margin-top: 0.2em;
+    margin-bottom:0.2em;
+    margin-top:0.2em;
+}
+
+body 
+{
+    font-family: 'MetrophobicRegular', Verdana, Arial, Sans-Serif;
 }
 
 h1, h2, h3
 {
-    font-family: 'FrancoisOneRegular' , verdana, sans-serif;
+    font-family: 'RalewayThin' , verdana, sans-serif;
+    text-transform:uppercase;
+}
+
+a, a:visited, a:hover 
+{
+    text-decoration:none;
+    color:Black;
+    font-weight:bold;
 }
 
 div.event-box
 {
     display: block;
     overflow: hidden;
-    margin-bottom:1em;
+    border-top: 2px solid black;
 }
 
 div.unselected
@@ -40,6 +54,7 @@ div.unselected h3
     font-size: 1.8em;
     display: block;
     text-align: center;
+    font-family: 'RalewayThin', Verdana, Arial, Sans-Serif;
 }
 
 div.selected
@@ -54,27 +69,65 @@ div.selected > *
 
 div.selected > h3
 {
-    font-size: 1.2 em;
+    font-size: 1.3em;
 }
-
-
 body
 {
     background-color: transparent;
     background-image: url('../../Content/Images/bg-repeat.png');
 }
 
-div#main, div#user
+div#container
 {
-    padding: 50px 10px 25px 10px;
+    position: relative;
+    clear: both;
+    width: 1060px;
+    padding: 0px;
+    margin: 0px auto 0;
+    outline: none;
+    display: block;
+}
+
+div#main
+{
     background-color: White;
-    margin: 50px 10px 50px 10px;
-    float: left;
-    border-radius: 20px;
-    width: 500px;
+    margin: 0px 0 22px;
+    width: 680px;
+    float: right;
+    outline: none;
+    display: block;
+    padding: 0px 30px 25px;
 }
 
 div#user
 {
-    width: 300px;
+    background-color: White;
+    width: 260px;
+    overflow: hidden;
+    margin-right: 20px;
+    margin-top: 30px;
+    position: fixed;
+    outline: none;
+    display: block;
+    border-radius: 20px;
+    padding: 50px 20px 25px 20px;
+    text-align:center;
+}
+
+body 
+{
+    margin:0px;
+}
+
+h1.title 
+{
+    font-family:'OstrichSansMedium';
+    font-size:60px;
+    text-align:center;
+    text-shadow:0 1px rgba(0, 0, 0, .2);
+}
+div.event-box 
+{
+    padding-top:0.8em;
+    padding-bottom:0.8em;
 }

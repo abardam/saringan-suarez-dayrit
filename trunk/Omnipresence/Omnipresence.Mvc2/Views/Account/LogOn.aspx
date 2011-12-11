@@ -1,17 +1,14 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Omnipresence.Mvc2.Models.LogOnModel>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Basic.Master" Inherits="System.Web.Mvc.ViewPage<Omnipresence.Mvc2.Models.LogOnModel>" %>
 
-<asp:Content ID="TitleContent" ContentPlaceHolderID="Title" runat="server">
+<asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">
     Log On
 </asp:Content>
 
-<asp:Content ID="HeadContent" ContentPlaceHolderID="Head" runat="server">
+<asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 
-<asp:Content ID="HeaderContent" ContentPlaceHolderID="Header" runat="server">
-</asp:Content>
-
-<asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
-    <h2>Log On</h2>
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <h3>Sign In</h3>
     <p>
         Please enter your username and password. <%: Html.ActionLink("Register", "Register") %> if you don't have an account.
     </p>
@@ -20,8 +17,6 @@
         <%: Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.") %>
         <div>
             <fieldset>
-                <legend>Account Information</legend>
-                
                 <div class="editor-label">
                     <%: Html.LabelFor(m => m.UserName) %>
                 </div>
@@ -49,7 +44,4 @@
             </fieldset>
         </div>
     <% } %>
-</asp:Content>
-
-<asp:Content ID="FooterContent" ContentPlaceHolderID="Footer" runat="server">
 </asp:Content>

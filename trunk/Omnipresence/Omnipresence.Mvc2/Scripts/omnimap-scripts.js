@@ -579,7 +579,7 @@ function getEventIcon(eventType) {
 function panTo(latLng){
     map.panTo(latLng);
 }
-
+/*
 function setMap(divName, latLng) {
     var myOptions = {
         zoom: 16,
@@ -599,4 +599,12 @@ function setMap(divName, latLng) {
     logoDiv.index=1;
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(logoDiv);
 
-}
+}*/
+
+function setMap(divName) {
+    alert(divName);/*
+    var lat = $("div#"+divName).attr("data-lat");
+    var lng = $("div#"+divName).attr("data-lng");
+    var latlng = new google.maps.LatLng(lat, lng);
+    setMap(divName, latlng);*/
+};
