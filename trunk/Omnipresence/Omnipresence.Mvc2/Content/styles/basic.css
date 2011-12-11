@@ -23,7 +23,10 @@ a, a:visited, a:hover
 {
     text-decoration: none;
     color: Black;
-    font-weight: bold;
+}
+p > a
+{
+    font-weight:bold;
 }
 
 fieldset
@@ -145,4 +148,9 @@ input
 div#main
 {
     margin-bottom: 50px;
+}
+
+::selected 
+{
+    background-color:Fuchsia;
 }

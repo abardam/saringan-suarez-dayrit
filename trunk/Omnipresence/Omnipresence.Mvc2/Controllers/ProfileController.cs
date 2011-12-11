@@ -17,12 +17,6 @@ namespace Omnipresence.Mvc2.Controllers
             base.Initialize(requestContext);
             accountServices = AccountServices.GetInstance();
         }
-        public ProfileViewModel GetProfile(int id)
-        {
-            // TODO: This is still empty model
-            ProfileViewModel model = new ProfileViewModel { AvatarUrl = "viewprofile.png", Birthdate = DateTime.Now, Description = "Super bad-ass", FirstName = "Adrian", GenderText = "Male", LastName = "Fazinsky", Reputation = 10 };
-            return model;
-        }
 
         public ActionResult Index(int id = 0)
         {
@@ -44,14 +38,30 @@ namespace Omnipresence.Mvc2.Controllers
         //
         // GET: /Profile/Edit/5
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
-            return View();
+            UserProfileModel model = accountServices.GetUserProfileByUsername(User.Identity.Name);
+            if (model == null) return RedirectToAction("Index", "Home");
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(UserProfileModel model)
+        {
+            if (accountServices.UpdateUserProfile(model))
+            {
+                ViewData["Message"] = "Edit profile successful";
+            }
+            else
+            {
+                ViewData["Message"] = "Edit profile unsuccessful";
+            }
+            return View(model);
         }
 
         //
         // POST: /Profile/Edit/5
-
+        /*
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -65,6 +75,6 @@ namespace Omnipresence.Mvc2.Controllers
             {
                 return View();
             }
-        }
+        }*/
     }
 }
