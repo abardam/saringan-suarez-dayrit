@@ -15,6 +15,10 @@
     <p><%=mode.Description%></p>
     </div>
     <% } %>
+    <script type="text/javascript">$(document).ready(function() {
+	<% foreach (Omnipresence.Processing.EventModel mode in Model) { %>
+    alert("map<%:mode.EventId %>");
+    <% } %>});</script>
     <% } else { %>
     <p>There are no events to display.</p>
     <% } %>
