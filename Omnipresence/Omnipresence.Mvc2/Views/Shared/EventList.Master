@@ -15,7 +15,8 @@
     <link rel="Stylesheet" href="../../Content/styles/Raleway-font/stylesheet.css" />
     <script type="text/javascript" src="../../Content/Scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../../Content/Scripts/jquery-ui-1.8.16.custom.min.js"></script>
-    <script type="text/javascript" src="../../Scripts/omnimap-scripts.js"></script>
+    <!--<script type="text/javascript" src="../../Scripts/omnimap-scripts.js"></script>-->
+    <script type="text/javascript" src="../../Content/Scripts/omnimap-scripts-2.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("div.event-box").click(function () {

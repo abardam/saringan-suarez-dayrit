@@ -9,16 +9,17 @@
 	<% bool x = false;  foreach (Omnipresence.Processing.EventModel mode in Model)
     { %>
     <div class="event-box<%if (!x) { x=true; %> selected<%} else {%> unselected<%} %>">
-    <div id="map<%: mode.EventId %>" data-lat="<%:mode.Location.Latitude %>" data-lng="<%:mode.Location.Longitude %>" style="background-image:url('../../Content/gmaps.png');background-position:center;width:680px; height:200px;"></div>
+    <div id="map<%: mode.EventId %>" data-lat="<%:mode.Location.Latitude %>" data-lng="<%:mode.Location.Longitude %>" style="background-position:center;width:680px; height:200px;"></div>
     <h3><%=mode.Title%></h3>
     <h5><%=mode.Location.Name%></h5>
     <p><%=mode.Description%></p>
     </div>
     <% } %>
-    <script type="text/javascript">$(document).ready(function() {
+    <!-- dude tinanggal ko yung document ready dito -->
+    <script type="text/javascript">function realInitialize() {
 	<% foreach (Omnipresence.Processing.EventModel mode in Model) { %>
-    alert("map<%:mode.EventId %>");
-    <% } %>});</script>
+    setMap("map<%:mode.EventId %>");
+    <% } %>}</script>
     <% } else { %>
     <p>There are no events to display.</p>
     <% } %>
