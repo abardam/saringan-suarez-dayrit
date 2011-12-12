@@ -204,60 +204,8 @@ function closeBoxes() {
     };
 }
 
-function initialize() {
-    //myLatlng = new google.maps.LatLng(-25.363882, 131.044922);
-    myLatlng = new google.maps.LatLng(14.639064, 121.077758);
-    var myOptions = {
-        zoom: 16,
-        center: myLatlng,
-        disableDefaultUI: true,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-
-
-    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-    google.maps.event.addListener(map, 'click', function (event) {
-        addRandomMarker(event.latLng);
-        closeBoxes();
-    });
-
-    // Create the DIV to hold the control and call the HomeControl() constructor
-    // passing in this DIV.
-    //COMMENTED OUT: nasa right sidebar na dapat
-    /*var homeControlDiv = document.createElement('DIV');
-    var homeControl = new HomeControl(homeControlDiv, map);
-
-    homeControlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(homeControlDiv);*/
-
-    var logoDiv = document.createElement('DIV');
-    formatLogo(logoDiv,'<img src="../../Content/Images/omnilogo.png" />');
-    logoDiv.index=1;
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(logoDiv);
-
-    //formatting the window divs
-
-    searchDiv = document.createElement('DIV');
-    formatWindow(searchDiv, '<form action=""> <input type="text"></input> <input type="submit" value="Search" /> </form>');
-    searchDiv.style.display = 'none';
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(searchDiv);
-
-    eventTypeDiv = document.createElement('DIV');
-
-    var buttonRows = "";
-    for (type in TypeEnum) {
-        buttonRows += '<button id=' + type + ' onclick="eventTypeButtonClicked(this)">' + TypeEnum[type] + '</button> <br>';
-    }
-
-    //formatWindow(eventTypeDiv, '<button id="disaster" onclick="eventTypeButtonClicked(this)">Disaster</button> <br> <button id="talk" onclick="eventTypeButtonClicked(this)">Seminar</button> <br> <button id="traffic" onclick="eventTypeButtonClicked(this)">Traffic</button>');
-    formatWindow(eventTypeDiv, buttonRows);
-    eventTypeDiv.style.display = 'none';
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(eventTypeDiv);
-
-    eventDateDiv = document.createElement('DIV');
-    formatWindow(eventDateDiv, '<a href="http://google.com">test</a>');
-    eventDateDiv.style.display = 'none';
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(eventDateDiv);
+function initialize(){
+    alert("hello!");
 }
 
 function loadScript() {
@@ -575,10 +523,10 @@ function getEventIcon(eventType) {
     }*/
     return "/Content/Images/" + eventType + ".png";
 }
-
+/*
 function panTo(latLng){
     map.panTo(latLng);
-}
+}*/
 /*
 function setMap(divName, latLng) {
     var myOptions = {
@@ -600,11 +548,11 @@ function setMap(divName, latLng) {
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(logoDiv);
 
 }*/
-
+/*
 function setMap(divName) {
-    alert(divName);/*
+    alert(divName);
     var lat = $("div#"+divName).attr("data-lat");
     var lng = $("div#"+divName).attr("data-lng");
     var latlng = new google.maps.LatLng(lat, lng);
-    setMap(divName, latlng);*/
-};
+    setMap(divName, latlng);
+};*/
