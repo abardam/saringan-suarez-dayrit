@@ -16,13 +16,24 @@
     <script type="text/javascript" src="../../Content/Scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../../Content/Scripts/jquery-ui-1.8.16.custom.min.js"></script>
     <!--<script type="text/javascript" src="../../Scripts/omnimap-scripts.js"></script>-->
-    <script type="text/javascript" src="../../Content/Scripts/omnimap-scripts-2.js"></script>
+    <script type="text/javascript" src="../../Content/Scripts/omnimap-scripts.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("div.event-box").click(function () {
                 if (!$(this).hasClass("selected")) {
-                    $(".selected").switchClass("selected", "unselected", 50);
-                    $(this).switchClass("unselected", "selected", 50);
+                    //$(".selected").switchClass("selected", "unselected", 50);
+                    $(".selected").removeClass("selected").addClass("unselected");
+                    //$(this).switchClass("unselected", "selected", 50);
+                    $(this).removeClass("unselected").addClass("selected");
+                    $(this).children("div").each(function () {
+                        setMap($(this).attr("id"));
+                    });
+                    /*
+                    setMap($(this).contents().filter(function () {
+                    alert(this.class);
+                    return this.class == 'map-container';
+
+                    }).attr('id'));*/
                 }
             });
         }
