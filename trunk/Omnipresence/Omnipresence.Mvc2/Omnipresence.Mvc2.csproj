@@ -121,6 +121,7 @@
     <Content Include="Content\MapStyles.css" />
     <Content Include="Content\Scripts\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="Content\Scripts\jquery.min.js" />
+    <Content Include="Content\Scripts\omnimap-scripts.js" />
     <Content Include="Content\styles\basic.css" />
     <Content Include="Content\styles\Capsuula-font\Capsuula-webfont.svg" />
     <Content Include="Content\styles\Capsuula-font\stylesheet.css" />

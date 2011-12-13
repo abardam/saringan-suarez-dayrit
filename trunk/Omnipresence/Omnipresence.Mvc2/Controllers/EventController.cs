@@ -21,7 +21,7 @@ namespace Omnipresence.Mvc2.Controllers
             base.Initialize(requestContext);
         }
         [Authorize]
-        public ActionResult Index(int id)
+        public ActionResult Index(int id = 0)
         {
             EventModel model = eventServices.GetEventById(id);
             if (model == null) return RedirectToAction("Index", "Home");
