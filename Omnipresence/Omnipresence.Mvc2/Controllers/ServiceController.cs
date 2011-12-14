@@ -13,12 +13,14 @@ namespace Omnipresence.Mvc2.Controllers
         private AccountServices accountServices;
         private EventServices eventServices;
         private ApiServices apiServices;
+        private CommentServices commentServices;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             accountServices = AccountServices.GetInstance();
             eventServices = EventServices.GetInstance();
             apiServices = ApiServices.GetInstance();
+            commentServices = CommentServices.GetInstance();
 
             base.Initialize(requestContext);
         }
@@ -90,7 +92,7 @@ namespace Omnipresence.Mvc2.Controllers
             if (apiServices.IsValidKey(key))
             {
                 UserProfileModel userProfileModel = accountServices.GetUserProfileByUsername(username);
-                List<CommentModel> comments = eventServices.GetAllCommentsByUserProfileId(userProfileModel.UserProfileId).ToList();
+                List<CommentModel> comments = commentServices.GetAllCommentsByUserProfileId(userProfileModel.UserProfileId).ToList();
 
                 CommentViewModel[] result = new CommentViewModel[comments.Count];
                 CommentViewModel cvm;
@@ -121,7 +123,7 @@ namespace Omnipresence.Mvc2.Controllers
             if (apiServices.IsValidKey(key))
             {
                 EventModel ev = eventServices.GetEventById(id);
-                List<CommentModel> comments = eventServices.GetAllCommentsByEventId(ev.EventId).ToList();
+                List<CommentModel> comments = commentServices.GetAllCommentsByEventId(ev.EventId).ToList();
 
                 CommentViewModel[] result = new CommentViewModel[comments.Count];
                 CommentViewModel cvm;
