@@ -304,11 +304,11 @@ namespace Omnipresence.Mvc2.Controllers
             gfrm.UserProfileId = accountServices.GetUserByUsername(User.Identity.Name).UserId;
             IQueryable<UserProfileModel> iq = accountServices.GetFriendRequests(gfrm);
             NotificationModel nm = new NotificationModel();
-            nm.FriendRequestNotifications = new List<FriendRequestModel>();
+            nm.FriendRequestNotifications = new List<Omnipresence.Mvc2.Models.FriendRequestModel>();
             List<UserProfileModel> lupm = iq.ToList<UserProfileModel>();
             foreach (UserProfileModel upm in lupm)
             {
-                FriendRequestModel frm = new FriendRequestModel();
+                Omnipresence.Mvc2.Models.FriendRequestModel frm = new Omnipresence.Mvc2.Models.FriendRequestModel();
                 frm.UserProfileId = upm.UserProfileId;
                 frm.FullName = upm.FirstName + " " + upm.LastName;
                 nm.FriendRequestNotifications.Add(frm);
@@ -320,10 +320,10 @@ namespace Omnipresence.Mvc2.Controllers
         public ActionResult ConfirmFriend(int adderUserProfileId)
         {
 
-            MakeFriendsModel mfm = new MakeFriendsModel();
+            Omnipresence.Processing.FriendRequestModel mfm = new Omnipresence.Processing.FriendRequestModel();
             mfm.AdderUserProfileId = adderUserProfileId;
             mfm.AddedUserProfileId = accountServices.GetUserByUsername(User.Identity.Name).UserId;
-            accountServices.MakeFriends(mfm);
+            accountServices.ConfirmFriendRequest(mfm);
 
             return Notifications();
         }

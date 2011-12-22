@@ -16,11 +16,13 @@ namespace Omnipresence.Mvc2.Models
         public string LastName { get; set; }
         public DateTime Birthdate { get; set; }
         public string Description { get; set; }
-        public string AvatarUrl { get; set; }
+        public string Avatar { get; set; }
         public int Reputation { get; set; }
         public string GenderText { get; set; }
         public Boolean ViewingOwn { get; set; }
         public Boolean ViewingFriend { get; set; }
+        public Boolean FriendRequested { get; set; }
+        public Boolean ThisDudeHasSentAFriendRequestToYou { get; set; }
     }
 
     public class EditProfileViewModel

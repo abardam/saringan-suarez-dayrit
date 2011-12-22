@@ -51,11 +51,13 @@
                 <img src="../../Content/Images/viewprofile.png" alt="" />
                 <h1>
                     <a href="/Profile/"><%=Page.User.Identity.Name%></a></h1>
+                    <p><a href="/Notifications/">notifications</a></p>
                     <p><a href="/Account/LogOff/">logout</a></p>
                 <%}
                    else
                    { %><p>Welcome, Guest. To continue, please <a href="/Account/LogOn">login</a> or <a href="/Account/Register">register</a>.</p>
                 <%} %>
+                <p><a href="/Home/Search/">search</a></p>
             </div>
             <div id="main">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server" />

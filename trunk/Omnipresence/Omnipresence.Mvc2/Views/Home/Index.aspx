@@ -23,6 +23,7 @@
     <% } else { %>
     <p>There are no events to display.</p>
     <% } %>
+    <a href="/Event/New/">Create new event</a>
     </div>
 </asp:Content>
 

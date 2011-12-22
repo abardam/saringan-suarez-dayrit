@@ -16,9 +16,9 @@
         <div>
             <p><%: Model.Description %></p></div>
         <div>
-            <p>From <%: String.Format("{0:g}", Model.StartTime) %> to String.Format("{0:g}", Model.EndTime) %></p></div>
+            <p>From <%: String.Format("{0:g}", Model.StartTime) %> to <%:String.Format("{0:g}", Model.EndTime) %></p></div>
         <div><p>Rating: <%: Model.Rating %></p></div>
-        <%: Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) %>
+        <%: Html.ActionLink("Edit", "Edit", new {  id=Model.EventId  }) %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
