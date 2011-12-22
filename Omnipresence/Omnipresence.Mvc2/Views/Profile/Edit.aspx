@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Basic.Master" Inherits="System.Web.Mvc.ViewPage<Omnipresence.Processing.UserProfileModel>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Basic.Master" Inherits="System.Web.Mvc.ViewPage<Omnipresence.Mvc2.Models.EditProfileViewModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Edit
@@ -10,12 +10,13 @@
 
     <% using (Html.BeginForm()) {%>
         <%: Html.ValidationSummary(true) %>
-        <p><%= Html.Encode(ViewData["Message"]) %></p>
+        
         <fieldset>
-                <%: Html.HiddenFor(model => model.UserProfileId) %>
+            <legend>Fields</legend>
+            
             
             <div class="editor-label">
-                <%: Html.LabelFor(model => model.FirstName) %>
+                First name
             </div>
             <div class="editor-field">
                 <%: Html.TextBoxFor(model => model.FirstName) %>
@@ -23,11 +24,20 @@
             </div>
             
             <div class="editor-label">
-                <%: Html.LabelFor(model => model.LastName) %>
+                Last name
             </div>
             <div class="editor-field">
                 <%: Html.TextBoxFor(model => model.LastName) %>
                 <%: Html.ValidationMessageFor(model => model.LastName) %>
+            </div>
+            
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.Birthdate) %>
+            </div>
+            <div class="editor-field">
+                <%: Html.TextBoxFor(model => model.BirthdateDay) %>
+                <%: Html.DropDownListFor(model => model.BirthdateMonth, Model.Months) %>
+                <%: Html.TextBoxFor(model => model.BirthdateYear) %>
             </div>
             
             <div class="editor-label">
@@ -38,28 +48,22 @@
                 <%: Html.ValidationMessageFor(model => model.Description) %>
             </div>
             
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.Birthdate) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.Birthdate, String.Format("{0:g}", Model.Birthdate)) %>
-                <%: Html.ValidationMessageFor(model => model.Birthdate) %>
-            </div>
+            
             
             <div class="editor-label">
-                <%: Html.LabelFor(model => model.IsFemale) %>
+                Gender
             </div>
             <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.IsFemale) %>
-                <%: Html.ValidationMessageFor(model => model.IsFemale) %>
+                <%: Html.DropDownListFor(model => model.GenderText, ViewData["gender"] as SelectList)%>
             </div>
-                <%: Html.HiddenFor(model => model.Reputation) %>
+            
             <p>
                 <input type="submit" value="Save" />
             </p>
         </fieldset>
 
     <% } %>
+
 
     <div>
         <%: Html.ActionLink("Back to Profile", "Index") %>

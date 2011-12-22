@@ -20,19 +20,82 @@ namespace Omnipresence.Mvc2.Controllers
 
         public ActionResult Index(int id = 0)
         {
+            UserProfileModel profile;
             //TODO: Actual model
             if (id == 0)
             {
-                UserProfileModel profile = accountServices.GetUserProfileByUsername(User.Identity.Name);
-                if (profile == null) return RedirectToAction("Index", "Home");
-                return View(profile);
+                profile = accountServices.GetUserProfileByUsername(User.Identity.Name);
+                
             }
             else
             {
-                UserProfileModel profile = accountServices.GetUserProfileById(id);
-                if (profile != null) return View(profile);
-                else return RedirectToAction("Index", "Home");
+                profile = accountServices.GetUserProfileById(id);
             }
+            
+            if (profile == null) return RedirectToAction("Index", "Home");
+
+            int viewerId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
+
+            ProfileViewModel pvm = new ProfileViewModel
+            {
+                Birthdate = profile.Birthdate,
+                Description = profile.Description,
+                FirstName = profile.FirstName,
+                GenderText = profile.IsFemale ? "Female" : "Male",
+                LastName = profile.LastName,
+                Reputation = profile.Reputation,
+                ViewingOwn = id==0||id.Equals(viewerId),
+                ViewingFriend = false,
+                UserProfileId = id,
+                FriendRequested = false,
+                ThisDudeHasSentAFriendRequestToYou = false
+            };
+
+            if (!pvm.ViewingOwn)
+            {
+                IEnumerable<UserProfileModel> lupm = accountServices.GetAcceptedFriends(new GetFriendsModel { UserProfileId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId });
+
+                foreach (UserProfileModel upm in lupm)
+                {
+                    if (upm.UserProfileId == profile.UserProfileId)
+                    {
+                        pvm.ViewingFriend = true;
+                        break;
+                    }
+                }
+                if (!pvm.ViewingFriend)
+                {
+                    GetFriendRequestsModel gfrm1 = new GetFriendRequestsModel{UserProfileId = viewerId};
+
+                    IQueryable<UserProfileModel> lupm1 = accountServices.GetFriendRequests(gfrm1);
+
+                    foreach (UserProfileModel upm in lupm1){
+                        if(upm.UserProfileId == profile.UserProfileId){
+                            pvm.ThisDudeHasSentAFriendRequestToYou = true;
+                            break;
+                        }
+                    }
+
+                    if(!pvm.ThisDudeHasSentAFriendRequestToYou)
+                    {
+                        GetFriendRequestsModel gfrm = new GetFriendRequestsModel();
+                        gfrm.UserProfileId = profile.UserProfileId;
+                        IQueryable<UserProfileModel> lupm2 = accountServices.GetFriendRequests(gfrm);
+
+                        foreach (UserProfileModel upm in lupm2)
+                        {
+                            if (upm.UserProfileId == viewerId)
+                            {
+                                pvm.FriendRequested = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            return View(pvm);
         }
 
         //
@@ -40,15 +103,53 @@ namespace Omnipresence.Mvc2.Controllers
 
         public ActionResult Edit()
         {
-            UserProfileModel model = accountServices.GetUserProfileByUsername(User.Identity.Name);
-            if (model == null) return RedirectToAction("Index", "Home");
-            return View(model);
+            List<string> genderList = new List<string>();
+            genderList.Add("Male");
+            genderList.Add("Female");
+            SelectList list = new SelectList(genderList);
+            ViewData["gender"] = list;
+
+            string username = User.Identity.Name;
+            UserProfileModel up = accountServices.GetUserProfileByUsername(username);
+            EditProfileViewModel u = new EditProfileViewModel();
+            u.Description = up.Description;
+            u.FirstName = up.FirstName;
+            u.LastName = up.LastName;
+            u.GenderText = up.IsFemale ? "Female" : "Male";
+            u.Reputation = up.Reputation;
+            u.BirthdateDay = up.Birthdate.Day;
+            u.BirthdateMonth = up.Birthdate.ToString("MMMM");
+            u.BirthdateYear = up.Birthdate.Year;
+
+            int[] dayA = new int[31];
+
+            for (int i = 0; i < 31; i++)
+            {
+                dayA[i] = i + 1;
+            }
+
+            SelectList daySL = new SelectList(dayA);
+
+
+            return View(u);
         }
 
         [HttpPost]
-        public ActionResult Edit(UserProfileModel model)
+        public ActionResult Edit(EditProfileViewModel model)
         {
-            if (accountServices.UpdateUserProfile(model))
+            String username = User.Identity.Name;
+            UserProfileModel p = accountServices.GetUserProfileByUsername(username);
+            p.Birthdate = model.Birthdate;
+            p.Description = model.Description;
+            p.LastName = model.LastName;
+            p.FirstName = model.FirstName;
+            p.IsFemale = model.GenderText.Equals("Female");
+
+            DateTime newDT = DateTime.Parse(model.BirthdateMonth + "/" + model.BirthdateDay + "/" + model.BirthdateYear);
+
+            p.Birthdate = newDT;
+            //return PartialView("ProfileUserControl", model);
+            if (accountServices.UpdateUserProfile(p))
             {
                 ViewData["Message"] = "Edit profile successful";
             }
@@ -56,8 +157,10 @@ namespace Omnipresence.Mvc2.Controllers
             {
                 ViewData["Message"] = "Edit profile unsuccessful";
             }
-            return View(model);
+            return Edit();
         }
+
+
 
         //
         // POST: /Profile/Edit/5
