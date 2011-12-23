@@ -13,9 +13,19 @@
 
     <script language="javascript" type="text/javascript">
         window.onload = function () {
-            document.getElementById("BirthdateMonth").onchange = setDays;
+            var monthSelect = document.getElementById("BirthdateMonth");
+            monthSelect.onchange = setDays;
             document.getElementById("BirthdateYear").onchange = setDays;
             document.getElementById("BirthdateMonth").remove(12);
+
+            for(var i = 0; i < monthSelect.length;i++){
+                if(monthSelect.options.item(i).text == "<%= Model.BirthdateMonth %>"){
+                    monthSelect.selectedIndex = i;
+                    break;
+                }
+            }
+
+            monthSelect.remove(12);
 
             setDays();
 
@@ -74,7 +84,6 @@
         
         <fieldset>
             <legend>Fields</legend>
-            
             
             <div class="editor-label">
                 First name

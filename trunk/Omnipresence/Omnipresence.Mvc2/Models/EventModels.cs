@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Omnipresence.Processing;
 namespace Omnipresence.Mvc2.Models
 {
     public class EventViewModel
@@ -56,6 +56,27 @@ namespace Omnipresence.Mvc2.Models
         public double Longitude { get; set; }
     }
 
+    public class EventCommentViewModel
+    {
+        public int EventId { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public string CategoryString { get; set; }
+        public bool IsPrivate { get; set; }
+        public string Address { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime LastModified { get; set; }
+        public DateTime Created { get; set; }
+        public int Rating { get; set; }
+        public int CreatedById { get; set; }
+        public IEnumerable<CommentModel> CommentList { get; set; }
+
+    }
+
     public class CommentViewModel
     {
         public int CommentId { get; set; }
@@ -74,4 +95,6 @@ namespace Omnipresence.Mvc2.Models
         public string SearchString { get; set; }
         public List<ProfileViewModel> UserResult { get; set; }
     }
+
+
 }
