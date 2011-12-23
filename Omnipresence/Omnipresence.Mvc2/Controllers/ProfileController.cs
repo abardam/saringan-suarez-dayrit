@@ -128,8 +128,18 @@ namespace Omnipresence.Mvc2.Controllers
                 dayA[i] = i + 1;
             }
 
-            SelectList daySL = new SelectList(dayA);
+            int[] yearA = new int[100];
 
+            for (int i = 0; i < 100; i++)
+            {
+                yearA[i] = DateTime.Now.Year - i;
+            }
+
+            SelectList daySL = new SelectList(dayA);
+            ViewData["days"] = daySL;
+
+            SelectList yearSL = new SelectList(yearA);
+            ViewData["years"] = yearSL;
 
             return View(u);
         }
@@ -137,6 +147,13 @@ namespace Omnipresence.Mvc2.Controllers
         [HttpPost]
         public ActionResult Edit(EditProfileViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                //do some stuff here
+                ViewData["Message"] = "Edit profile unsuccessful";
+                return Edit();
+            }
+
             String username = User.Identity.Name;
             UserProfileModel p = accountServices.GetUserProfileByUsername(username);
             p.Birthdate = model.Birthdate;
