@@ -16,11 +16,13 @@ namespace Omnipresence.Mvc2.Controllers
 
         private AccountServices accountServices;
         private EventServices eventServices;
+        private CommentServices commentServices;
         
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             eventServices = EventServices.GetInstance();
             accountServices = AccountServices.GetInstance();
+            commentServices = CommentServices.GetInstance();
             base.Initialize(requestContext);
         }
         [Authorize]
@@ -28,7 +30,30 @@ namespace Omnipresence.Mvc2.Controllers
         {
             EventModel model = eventServices.GetEventById(id);
             if (model == null) return RedirectToAction("Index", "Home");
-            return View(model);
+
+            EventCommentViewModel ecvm = new EventCommentViewModel
+            {
+                Address = model.Location.Address,
+                Latitude = model.Location.Latitude,
+                Longitude = model.Location.Longitude,
+                EventId = model.EventId,
+                StartTime = model.StartTime,
+                EndTime = model.EndTime,
+                Title = model.Title,
+                Description = model.Description,
+                Created = model.Created,
+                CreatedById = model.CreatedById,
+                IsActive = model.IsActive,
+                IsPrivate = model.IsPrivate,
+                LastModified = model.LastModified,
+                Rating = model.Rating/*,
+                CategoryString = model.Category.Description*/
+            };
+
+            ecvm.CommentList = commentServices.GetAllCommentsByEventId(model.EventId);
+            
+
+            return View(ecvm);
         }
 
         public ActionResult New()

@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Basic.Master" Inherits="System.Web.Mvc.ViewPage<Omnipresence.Processing.EventModel>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Basic.Master" Inherits="System.Web.Mvc.ViewPage<Omnipresence.Mvc2.Models.EventCommentViewModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div id="map<%: Model.EventId %>" data-lat="<%:Model.Location.Latitude %>" data-lng="<%:Model.Location.Longitude %>" style="background-position:center;width:100%; height:200px;">
+    <div id="map<%: Model.EventId %>" data-lat="<%:Model.Latitude %>" data-lng="<%:Model.Longitude %>" style="background-position:center;width:100%; height:200px;">
     </div>
     <script type="text/javascript">
         function realInitialize() {
