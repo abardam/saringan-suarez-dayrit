@@ -54,9 +54,10 @@ namespace Omnipresence.Mvc2.Controllers
             IEnumerable<CommentModel> tempie = commentServices.GetAllCommentsByEventId(model.EventId);
             List<CommentViewModel> commentList = new List<CommentViewModel>();
 
+            DateTime now = DateTime.Now;
             foreach(CommentModel cm in tempie){
                 UserProfileModel upm = accountServices.GetUserProfileById(cm.UserProfileId);
-                commentList.Add(new CommentViewModel
+                CommentViewModel cvm = new CommentViewModel
                 {
                     CommenterName = upm.FirstName + " " + upm.LastName,
                     CommentId = cm.CommentId,
@@ -64,11 +65,41 @@ namespace Omnipresence.Mvc2.Controllers
                     EventId = cm.EventId,
                     Timestamp = cm.Timestamp,
                     UserProfileId = cm.UserProfileId
-                });
+                };
 
+                if (now.Month == cm.Timestamp.Month)
+                {
+                    if (now.Day == cm.Timestamp.Day)
+                    {
+                        if (now.Hour == cm.Timestamp.Hour)
+                        {
+                            cvm.TimeString = (now.Minute - cm.Timestamp.Minute) + " minutes ago";
+                        }
+                        else if (now.Hour == cm.Timestamp.Hour + 1 && (now.Minute + 60 - cm.Timestamp.Minute) < 60)
+                        {
+                            cvm.TimeString = (now.Minute + 60 - cm.Timestamp.Minute) + " minutes ago";
+                        }
+                        else
+                        {
+                            cvm.TimeString = cm.Timestamp.ToShortTimeString();
+                        }
+                    }
+                    else
+                    {
+                        cvm.TimeString = cm.Timestamp.ToShortDateString();
+                    }
+                }
+                else
+                {
+                    cvm.TimeString = cm.Timestamp.ToShortDateString();
+                }
+                
+                commentList.Add(cvm);
             }
 
             ecvm.CommentList = commentList;
+
+
 
             return View(ecvm);
         }
