@@ -73,14 +73,15 @@ namespace Omnipresence.Mvc2.Models
         public DateTime Created { get; set; }
         public int Rating { get; set; }
         public int CreatedById { get; set; }
-        public IEnumerable<CommentModel> CommentList { get; set; }
-
+        public IEnumerable<CommentViewModel> CommentList { get; set; }
+        public string NewComment { get; set; }
     }
 
     public class CommentViewModel
     {
         public int CommentId { get; set; }
         public int EventId { get; set; }
+        public string CommenterName { get; set; }
         public int UserProfileId { get; set; }
         public string CommentText { get; set; }
         public DateTime Timestamp { get; set; }

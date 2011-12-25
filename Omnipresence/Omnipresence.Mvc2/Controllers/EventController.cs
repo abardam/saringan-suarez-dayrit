@@ -46,14 +46,45 @@ namespace Omnipresence.Mvc2.Controllers
                 IsActive = model.IsActive,
                 IsPrivate = model.IsPrivate,
                 LastModified = model.LastModified,
-                Rating = model.Rating/*,
+                Rating = model.Rating,
+                NewComment = ""/*,
                 CategoryString = model.Category.Description*/
             };
 
-            ecvm.CommentList = commentServices.GetAllCommentsByEventId(model.EventId);
-            
+            IEnumerable<CommentModel> tempie = commentServices.GetAllCommentsByEventId(model.EventId);
+            List<CommentViewModel> commentList = new List<CommentViewModel>();
+
+            foreach(CommentModel cm in tempie){
+                UserProfileModel upm = accountServices.GetUserProfileById(cm.UserProfileId);
+                commentList.Add(new CommentViewModel
+                {
+                    CommenterName = upm.FirstName + " " + upm.LastName,
+                    CommentId = cm.CommentId,
+                    CommentText = cm.CommentText,
+                    EventId = cm.EventId,
+                    Timestamp = cm.Timestamp,
+                    UserProfileId = cm.UserProfileId
+                });
+
+            }
+
+            ecvm.CommentList = commentList;
 
             return View(ecvm);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Index(int id, EventCommentViewModel model)
+        {
+            CreateCommentModel ccm = new CreateCommentModel
+            {
+                Comment = model.NewComment,
+                EventId = id,
+                UserProfileId = AccountServices.GetInstance().GetUserByUsername(User.Identity.Name).UserProfile.UserProfileId
+            };
+            commentServices.CreateComment(ccm);
+            return Index(id);
         }
 
         public ActionResult New()
