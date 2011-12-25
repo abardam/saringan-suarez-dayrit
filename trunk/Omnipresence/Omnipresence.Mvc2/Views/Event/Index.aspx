@@ -26,7 +26,7 @@
            {
              %>
 
-             <p><%= cm.CommenterName %> said: <%= cm.CommentText %> (<%=cm.Timestamp.ToShortTimeString() %>)</p>
+             <p><%= cm.CommenterName %> said: <%= cm.CommentText %> (<%=cm.TimeString %>)</p>
 
              <%} %>
 
