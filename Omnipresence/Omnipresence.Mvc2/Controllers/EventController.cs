@@ -76,18 +76,36 @@ namespace Omnipresence.Mvc2.Controllers
                 {
                     if (now.Day == cm.Timestamp.Day)
                     {
+                        int mins;
                         if (now.Hour == cm.Timestamp.Hour)
                         {
-                            cvm.TimeString = (now.Minute - cm.Timestamp.Minute) + " minutes ago";
+                            mins = (now.Minute - cm.Timestamp.Minute);
                         }
-                        else if (now.Hour == cm.Timestamp.Hour + 1 && (now.Minute + 60 - cm.Timestamp.Minute) < 60)
+                        else if(now.Hour == cm.Timestamp.Hour + 1 && (now.Minute + 60 - cm.Timestamp.Minute) < 60)
                         {
-                            cvm.TimeString = (now.Minute + 60 - cm.Timestamp.Minute) + " minutes ago";
+                            mins = (now.Minute + 60 - cm.Timestamp.Minute);
+                        }
+                        else{
+                            mins = -1;
+                        }
+
+                        if (mins == 0)
+                        {
+                            cvm.TimeString = "Just now";
+                        }
+                        else if (mins == 1)
+                        {
+                            cvm.TimeString = "1 minute ago";
+                        }
+                        else if(mins == -1){
+                            cvm.TimeString = cm.Timestamp.ToShortTimeString();
                         }
                         else
                         {
-                            cvm.TimeString = cm.Timestamp.ToShortTimeString();
+                            cvm.TimeString = mins + " minutes ago";
                         }
+
+                        
                     }
                     else
                     {
