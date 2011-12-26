@@ -52,6 +52,7 @@
                 <h1>
                     <a href="/Profile/"><%=Page.User.Identity.Name%></a></h1>
                     <p><a href="/Notifications/">notifications</a></p>
+                    <p><a href="/Friends/">friends</a></p>
                     <p><a href="/Account/LogOff/">logout</a></p>
                 <%}
                    else

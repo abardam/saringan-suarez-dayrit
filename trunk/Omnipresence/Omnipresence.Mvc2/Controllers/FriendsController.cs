@@ -13,7 +13,10 @@ namespace Omnipresence.Mvc2.Controllers
         private AccountServices accountServices = AccountServices.GetInstance();
         public ActionResult Index()
         {
-            return View();
+            return View(accountServices.GetAllFriends(new GetFriendsModel
+            {
+                UserProfileId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId
+            }));
         }
 
         public ActionResult Add(int id)
