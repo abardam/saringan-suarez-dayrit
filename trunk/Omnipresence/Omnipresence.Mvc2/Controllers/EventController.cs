@@ -55,8 +55,12 @@ namespace Omnipresence.Mvc2.Controllers
             List<CommentViewModel> commentList = new List<CommentViewModel>();
 
             DateTime now = DateTime.Now;
+
+            int userProfileId = accountServices.GetUserByUsername(User.Identity.Name).UserProfile.UserProfileId;
+
             foreach(CommentModel cm in tempie){
                 UserProfileModel upm = accountServices.GetUserProfileById(cm.UserProfileId);
+                
                 CommentViewModel cvm = new CommentViewModel
                 {
                     CommenterName = upm.FirstName + " " + upm.LastName,
@@ -64,7 +68,8 @@ namespace Omnipresence.Mvc2.Controllers
                     CommentText = cm.CommentText,
                     EventId = cm.EventId,
                     Timestamp = cm.Timestamp,
-                    UserProfileId = cm.UserProfileId
+                    UserProfileId = cm.UserProfileId,
+                    UserIsAuthor = cm.UserProfileId == userProfileId
                 };
 
                 if (now.Month == cm.Timestamp.Month)

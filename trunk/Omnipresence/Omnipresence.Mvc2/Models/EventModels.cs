@@ -86,6 +86,7 @@ namespace Omnipresence.Mvc2.Models
         public string CommentText { get; set; }
         public DateTime Timestamp { get; set; }
         public string TimeString { get; set; }
+        public bool UserIsAuthor { get; set; }
     }
 
     public class SearchEventViewModel

@@ -26,7 +26,8 @@
            {
              %>
 
-             <p><%= cm.CommenterName %> said: <%= cm.CommentText %> (<%=cm.TimeString %>)</p>
+             <p><%= cm.CommenterName %> said: <%= cm.CommentText %> (<%=cm.TimeString %>) <% if (cm.UserIsAuthor)
+                                                                                             { %>[<a href="/Comment/Delete/<%=cm.CommentId %>">x</a>]<%} %></p>
 
              <%} %>
 
