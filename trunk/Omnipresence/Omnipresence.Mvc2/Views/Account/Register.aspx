@@ -101,7 +101,12 @@
                 <div class="validation-field">
                     <label id="birthdate-validation" />
                 </div>
-
+                <div class="editor-label">
+                    Gender
+                </div>
+                <div class="editor-field">
+                    <%: Html.DropDownListFor(model => model.GenderText, ViewData["gender"] as SelectList)%>
+                </div>
                 <p>
                     <input id="register-button" type="submit" value="Register"/>
                 </p>

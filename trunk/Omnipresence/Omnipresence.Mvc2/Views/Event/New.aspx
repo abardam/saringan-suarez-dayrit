@@ -48,29 +48,7 @@
                 <%: Html.ValidationMessageFor(model => model.Description) %>
             </div>
             
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.StartTime) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.StartTime) %>
-                <%: Html.ValidationMessageFor(model => model.StartTime) %>
-            </div>
             
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.EndTime) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.EndTime) %>
-                <%: Html.ValidationMessageFor(model => model.EndTime) %>
-            </div>
-            
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.Duration) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.Duration) %>
-                <%: Html.ValidationMessageFor(model => model.Duration) %>
-            </div>
             
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.CreateTime) %>

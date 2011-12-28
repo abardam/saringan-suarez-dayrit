@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
@@ -68,6 +69,12 @@ namespace Omnipresence.Mvc2.Controllers
 
         public ActionResult Register()
         {
+            List<string> genderList = new List<string>();
+            genderList.Add("Male");
+            genderList.Add("Female");
+            SelectList list = new SelectList(genderList);
+            ViewData["gender"] = list;
+
             ViewData["PasswordLength"] = 6;
             return View();
         }
@@ -77,6 +84,11 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (AddUser(model)) return RedirectToAction("Index", "Home");
 
+            List<string> genderList = new List<string>();
+            genderList.Add("Male");
+            genderList.Add("Female");
+            SelectList list = new SelectList(genderList);
+            ViewData["gender"] = list;
             ViewData["PasswordLength"] = 6;
             return View(model);
         }
@@ -94,7 +106,7 @@ namespace Omnipresence.Mvc2.Controllers
                 cupm.LastName = model.LastName.Trim();
                 cupm.Birthdate = model.Birthdate;
                 cupm.Description = "";
-                cupm.IsFemale = false;
+                cupm.IsFemale = model.GenderText.Equals("Female");
 
 
 
