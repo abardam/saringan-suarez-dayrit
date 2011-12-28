@@ -109,35 +109,7 @@ namespace Omnipresence.Mvc2.Controllers
             return View(pvm);
         }
 
-        public static void SetViewDataForDate(ViewDataDictionary ViewData){
-            List<string> genderList = new List<string>();
-            genderList.Add("Male");
-            genderList.Add("Female");
-            SelectList list = new SelectList(genderList);
-            ViewData["gender"] = list;
-            
-            int[] dayA = new int[31];
-
-            for (int i = 0; i < 31; i++)
-            {
-                dayA[i] = i + 1;
-            }
-
-            int[] yearA = new int[100];
-
-            for (int i = 0; i < 100; i++)
-            {
-                yearA[i] = DateTime.Now.Year - i;
-            }
-
-            SelectList daySL = new SelectList(dayA);
-            ViewData["days"] = daySL;
-
-            SelectList yearSL = new SelectList(yearA);
-            ViewData["years"] = yearSL;
-
-
-        }
+        
 
         //
         // GET: /Profile/Edit/5
@@ -218,5 +190,58 @@ namespace Omnipresence.Mvc2.Controllers
                 return View();
             }
         }*/
+
+        public static void SetViewDataForTime(ViewDataDictionary ViewData)
+        {
+            int[] hourA = new int[12];
+            for (int i = 1; i <= 12; i++)
+            {
+                hourA[i - 1] = i;
+            }
+            ViewData["hours"] = new SelectList(hourA);
+
+            string[] minuteA = new string[60];
+            for (int i = 0; i < 60; i++)
+            {
+                minuteA[i] = i.ToString("00");
+            }
+            ViewData["minutes"] = new SelectList(minuteA);
+
+            List<string> ampmList = new List<string>();
+            ampmList.Add("AM");
+            ampmList.Add("PM");
+            ViewData["ampm"] = new SelectList(ampmList);
+        }
+
+        public static void SetViewDataForDate(ViewDataDictionary ViewData)
+        {
+            List<string> genderList = new List<string>();
+            genderList.Add("Male");
+            genderList.Add("Female");
+            SelectList list = new SelectList(genderList);
+            ViewData["gender"] = list;
+
+            int[] dayA = new int[31];
+
+            for (int i = 0; i < 31; i++)
+            {
+                dayA[i] = i + 1;
+            }
+
+            int[] yearA = new int[100];
+
+            for (int i = 0; i < 100; i++)
+            {
+                yearA[i] = DateTime.Now.Year - i;
+            }
+
+            SelectList daySL = new SelectList(dayA);
+            ViewData["days"] = daySL;
+
+            SelectList yearSL = new SelectList(yearA);
+            ViewData["years"] = yearSL;
+
+
+        }
     }
 }

@@ -53,23 +53,6 @@
             </div>
             
             
-            
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.CreateTime) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.CreateTime) %>
-                <%: Html.ValidationMessageFor(model => model.CreateTime) %>
-            </div>
-            
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.DeleteTime) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.DeleteTime) %>
-                <%: Html.ValidationMessageFor(model => model.DeleteTime) %>
-            </div>
-            
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.CategoryString) %>
             </div>
@@ -93,6 +76,9 @@
                 <%: Html.DropDownListFor(model => model.StartDay, (SelectList)ViewData["days"]) %>
                 <%: Html.DropDownListFor(model => model.StartMonth, Model.Months) %>
                 <%: Html.DropDownListFor(model => model.StartYear, (SelectList)ViewData["years"]) %>
+                <%: Html.DropDownListFor(model => model.StartHour, (SelectList)ViewData["hours"]) %>
+                <%: Html.DropDownListFor(model => model.StartMinute, (SelectList)ViewData["minutes"]) %>
+                <%: Html.DropDownListFor(model => model.StartAMPM, (SelectList)ViewData["ampm"]) %>
             </div>
 
             <div class="editor-label">
@@ -102,6 +88,9 @@
                 <%: Html.DropDownListFor(model => model.EndDay, (SelectList)ViewData["days"]) %>
                 <%: Html.DropDownListFor(model => model.EndMonth, Model.Months) %>
                 <%: Html.DropDownListFor(model => model.EndYear, (SelectList)ViewData["years"]) %>
+                <%: Html.DropDownListFor(model => model.EndHour, (SelectList)ViewData["hours"]) %>
+                <%: Html.DropDownListFor(model => model.EndMinute, (SelectList)ViewData["minutes"]) %>
+                <%: Html.DropDownListFor(model => model.EndAMPM, (SelectList)ViewData["ampm"]) %>
             </div>
 
             
@@ -128,9 +117,6 @@
 
     <% } %>
 
-    <div>
-        <%: Html.ActionLink("Back to List", "Index") %>
-    </div>
 
 </asp:Content>
 
