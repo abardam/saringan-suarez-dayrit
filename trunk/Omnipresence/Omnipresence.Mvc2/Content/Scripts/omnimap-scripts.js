@@ -17,9 +17,10 @@ function formatLogo(controlUI, innerHtml) {
     controlUI.appendChild(controlText);
 }
 var map;
+var mainMarker;
 window.onload = loadScript;
 
-function setMap2(divName, latLng) {
+function setMap2(divName, latLng, isNew) {
     var myOptions = {
         zoom: 16,
         center: latLng,
@@ -30,7 +31,20 @@ function setMap2(divName, latLng) {
 
     map = new google.maps.Map(document.getElementById(divName), myOptions);
 
-    addMarker(latLng);
+    if (!isNew) {
+        mainMarker = addMarker(latLng);
+    }
+    else {
+        google.maps.event.addListener(map, 'click', function (event) {
+            if (mainMarker != null) {
+                mainMarker.setMap(null);
+            }
+            mainMarker = addMarker(event.latLng);
+
+            document.getElementById("Latitude").value = event.latLng.lat();
+            document.getElementById("Longitude").value = event.latLng.lng();
+        });
+    }
     /*
     var logoDiv = document.createElement('DIV');
     formatLogo(logoDiv, '<img src="../../Content/Images/omnilogo.png" />');
@@ -40,10 +54,14 @@ function setMap2(divName, latLng) {
 }
 
 function setMap(divName) {
-    var lat = $("div#" + divName).attr("data-lat");
-    var lng = $("div#" + divName).attr("data-lng");
+    var mapDiv = $("div#" + divName);
+    var lat = mapDiv.attr("data-lat");
+    var lng = mapDiv.attr("data-lng");
     var latlng = new google.maps.LatLng(lat, lng);
-    setMap2(divName, latlng);
+
+    var isNew = mapDiv.attr("new") == "true" || mapDiv.attr("new") != null;
+
+    setMap2(divName, latlng, isNew);
 }
 function getEventIcon(eventType) {
     return "/Content/Images/" + eventType + ".png";
@@ -67,4 +85,5 @@ function addMarker(latlng) {
 
         });*/
         //showNewEvent();
+        return marker;
 }

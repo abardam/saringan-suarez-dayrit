@@ -143,6 +143,8 @@ namespace Omnipresence.Mvc2.Controllers
 
         public ActionResult New()
         {
+            UserModel um = accountServices.GetUserByUsername(User.Identity.Name);
+
             CreateEventViewModel model = new CreateEventViewModel();
             model.Title = "";
             model.CreateTime = DateTime.Now;
@@ -155,6 +157,7 @@ namespace Omnipresence.Mvc2.Controllers
         [HttpPost]
         public ActionResult New(CreateEventViewModel model)
         {
+            UserModel um = accountServices.GetUserByUsername(User.Identity.Name);
             CreateEventModel cem = new CreateEventModel();
             cem.Address = model.Address;
             cem.CategoryString = model.CategoryString;
