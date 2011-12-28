@@ -149,6 +149,9 @@ namespace Omnipresence.Mvc2.Controllers
             model.Title = "";
             model.CreateTime = DateTime.Now;
             model.DeleteTime = DateTime.Now;
+
+            ProfileController.SetViewDataForDate(ViewData);
+
             return View(model);
         }
 
