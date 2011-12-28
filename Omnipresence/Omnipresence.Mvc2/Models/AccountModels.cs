@@ -102,6 +102,8 @@ namespace Omnipresence.Mvc2.Models
         [Required]
         [DisplayName("Birthdate")]
         public DateTime Birthdate { get; set; }
+
+        public string GenderText { get; set; }
     }
     #endregion
 
