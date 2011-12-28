@@ -75,8 +75,28 @@ namespace Omnipresence.Mvc2.Controllers
             SelectList list = new SelectList(genderList);
             ViewData["gender"] = list;
 
+            int[] dayA = new int[31];
+
+            for (int i = 0; i < 31; i++)
+            {
+                dayA[i] = i + 1;
+            }
+
+            int[] yearA = new int[100];
+
+            for (int i = 0; i < 100; i++)
+            {
+                yearA[i] = DateTime.Now.Year - i;
+            }
+
+            SelectList daySL = new SelectList(dayA);
+            ViewData["days"] = daySL;
+
+            SelectList yearSL = new SelectList(yearA);
+            ViewData["years"] = yearSL;
+
             ViewData["PasswordLength"] = 6;
-            return View();
+            return View(new RegisterModel());
         }
 
         [HttpPost]
@@ -90,6 +110,29 @@ namespace Omnipresence.Mvc2.Controllers
             SelectList list = new SelectList(genderList);
             ViewData["gender"] = list;
             ViewData["PasswordLength"] = 6;
+
+
+            int[] dayA = new int[31];
+
+            for (int i = 0; i < 31; i++)
+            {
+                dayA[i] = i + 1;
+            }
+
+            int[] yearA = new int[100];
+
+            for (int i = 0; i < 100; i++)
+            {
+                yearA[i] = DateTime.Now.Year - i;
+            }
+
+            SelectList daySL = new SelectList(dayA);
+            ViewData["days"] = daySL;
+
+            SelectList yearSL = new SelectList(yearA);
+            ViewData["years"] = yearSL;
+
+
             return View(model);
         }
         //TODO: Transfer this to services
@@ -104,11 +147,12 @@ namespace Omnipresence.Mvc2.Controllers
                 CreateUserProfileModel cupm = new CreateUserProfileModel();
                 cupm.FirstName = model.FirstName.Trim();
                 cupm.LastName = model.LastName.Trim();
-                cupm.Birthdate = model.Birthdate;
                 cupm.Description = "";
                 cupm.IsFemale = model.GenderText.Equals("Female");
 
+                DateTime newDT = DateTime.Parse(model.BirthdateMonth + "/" + model.BirthdateDay + "/" + model.BirthdateYear);
 
+                cupm.Birthdate = newDT;
 
                 if (accountServices.CreateUser(cum, cupm))
                 {

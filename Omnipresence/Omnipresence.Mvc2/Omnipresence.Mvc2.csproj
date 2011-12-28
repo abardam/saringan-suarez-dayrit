@@ -121,6 +121,7 @@
     <Content Include="Content\Images\viewprofile.png" />
     <Content Include="Content\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\MapStyles.css" />
+    <Content Include="Content\Scripts\datepicker-custom.js" />
     <Content Include="Content\Scripts\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="Content\Scripts\jquery.min.js" />
     <Content Include="Content\Scripts\omnimap-scripts.js" />
