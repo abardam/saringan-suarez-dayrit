@@ -149,8 +149,6 @@ namespace Omnipresence.Mvc2.Controllers
             model.Title = "";
             model.CreateTime = DateTime.Now;
             model.DeleteTime = DateTime.Now;
-            model.StartTime = DateTime.Now;
-            model.EndTime = DateTime.Now;
             return View(model);
         }
 
@@ -162,10 +160,10 @@ namespace Omnipresence.Mvc2.Controllers
             cem.Address = model.Address;
             cem.CategoryString = model.CategoryString;
             cem.Description = model.Description;
-            cem.EndTime = model.EndTime;
+            cem.EndTime = DateTime.Parse(model.EndMonth + "/" + model.EndDay + "/" + model.EndYear);
             cem.Latitude = model.Latitude;
             cem.Longitude = model.Longitude;
-            cem.StartTime = model.StartTime;
+            cem.StartTime = DateTime.Parse(model.StartMonth + "/" + model.StartDay + "/" + model.StartYear);
             cem.Title = model.Title;
             string username = User.Identity.Name;
             cem.UserProfileId = accountServices.GetUserProfileByUsername(username).UserProfileId;

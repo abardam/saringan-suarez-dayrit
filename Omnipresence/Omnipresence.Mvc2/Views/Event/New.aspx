@@ -81,6 +81,16 @@
                 <%: Html.TextBoxFor(model => model.Address) %>
                 <%: Html.ValidationMessageFor(model => model.Address) %>
             </div>
+
+            <div class="editor-label">
+                Start time
+            </div>
+            <div class="editor-field">
+                <%: Html.DropDownListFor(model => model.StartDay, (SelectList)ViewData["days"]) %>
+                <%: Html.DropDownListFor(model => model.StartMonth, Model.Months) %>
+                <%: Html.DropDownListFor(model => model.StartYear, (SelectList)ViewData["years"]) %>
+            </div>
+
             
             <!--<div class="editor-label">
                 <%: Html.LabelFor(model => model.Latitude) %>
