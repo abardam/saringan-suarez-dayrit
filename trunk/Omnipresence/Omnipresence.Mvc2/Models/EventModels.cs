@@ -47,12 +47,18 @@ namespace Omnipresence.Mvc2.Models
         public int CreatedBy { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string StartDay { get; set; }
+        public int StartDay { get; set; }
         public string StartMonth { get; set; }
-        public string StartYear { get; set; }
-        public string EndDay { get; set; }
+        public int StartYear { get; set; }
+        public int StartHour { get; set; }
+        public string StartMinute { get; set; }
+        public string StartAMPM { get; set; }
+        public int EndDay { get; set; }
         public string EndMonth { get; set; }
-        public string EndYear { get; set; }
+        public int EndYear { get; set; }
+        public int EndHour { get; set; }
+        public string EndMinute { get; set; }
+        public string EndAMPM { get; set; }
         public int Duration { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime DeleteTime { get; set; }

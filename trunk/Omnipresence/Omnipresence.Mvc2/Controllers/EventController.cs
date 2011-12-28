@@ -151,7 +151,7 @@ namespace Omnipresence.Mvc2.Controllers
             model.DeleteTime = DateTime.Now;
 
             ProfileController.SetViewDataForDate(ViewData);
-
+            ProfileController.SetViewDataForTime(ViewData);
             return View(model);
         }
 
@@ -163,10 +163,10 @@ namespace Omnipresence.Mvc2.Controllers
             cem.Address = model.Address;
             cem.CategoryString = model.CategoryString;
             cem.Description = model.Description;
-            cem.EndTime = DateTime.Parse(model.EndMonth + "/" + model.EndDay + "/" + model.EndYear);
+            cem.EndTime = DateTime.Parse(model.EndMonth + "/" + model.EndDay + "/" + model.EndYear + " " + model.EndHour + ":" + model.EndMinute + " " + model.EndAMPM);
             cem.Latitude = model.Latitude;
             cem.Longitude = model.Longitude;
-            cem.StartTime = DateTime.Parse(model.StartMonth + "/" + model.StartDay + "/" + model.StartYear);
+            cem.StartTime = DateTime.Parse(model.StartMonth + "/" + model.StartDay + "/" + model.StartYear + " "+model.StartHour+":"+model.StartMinute+" "+model.StartAMPM);
             cem.Title = model.Title;
             string username = User.Identity.Name;
             cem.UserProfileId = accountServices.GetUserProfileByUsername(username).UserProfileId;
@@ -183,6 +183,8 @@ namespace Omnipresence.Mvc2.Controllers
                     ViewData["message"] = e.Data["Entity"] + " cannot be left blank!";
                 }
 
+                ProfileController.SetViewDataForDate(ViewData);
+                ProfileController.SetViewDataForTime(ViewData);
                 return View(model);
             }
             return Redirect("/");
