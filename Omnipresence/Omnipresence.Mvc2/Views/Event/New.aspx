@@ -15,7 +15,7 @@
             setDatePicker("EndMonth", "EndDay", "EndYear", "");
         };
         </script>
-    <h2>Create new event</h2>
+    <h2>Click anywhere</h2>
 
     <div id="map" class="map-container" style="width:540px; height:400px; margin-left:auto; margin-right:auto" data-lat="14.632524261766926" data-lng="121.07566595077515" new="true"></div>
 
@@ -25,7 +25,6 @@
         <%: Html.ValidationSummary(true) %>
 
         <fieldset>
-            <legend>Fields</legend>
             
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Title) %>
