@@ -59,6 +59,7 @@
                    { %><p>Welcome, Guest. To continue, please <a href="/Account/LogOn">login</a> or <a href="/Account/Register">register</a>.</p>
                 <%} %>
                 <p><a href="/Home/Search/">search</a></p>
+                <p><a href="/Event/All">all events</a></p>
             </div>
             <div id="main">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server" />

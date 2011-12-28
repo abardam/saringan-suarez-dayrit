@@ -197,6 +197,11 @@ namespace Omnipresence.Mvc2.Controllers
             return View(em);
         }
 
+        public ActionResult All()
+        {
+            return View(eventServices.GetAllEvents());
+        }
+
     }
     
 }

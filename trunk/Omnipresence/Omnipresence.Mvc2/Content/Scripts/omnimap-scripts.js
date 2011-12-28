@@ -67,10 +67,10 @@ function getEventIcon(eventType) {
     return "/Content/Images/" + eventType + ".png";
 }
 
-function addMarker(latlng) {
+function addMarker(latlng, title) {
         var marker = new google.maps.Marker({
             position: latlng,
-            title: "Hello World!"
+            title: title
         });
 
         marker.setMap(map);
