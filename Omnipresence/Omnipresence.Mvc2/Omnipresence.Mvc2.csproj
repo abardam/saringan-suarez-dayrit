@@ -152,6 +152,7 @@
     <Content Include="Scripts\omnimap-scripts.js" />
     <Content Include="Scripts\jquery-utils.js" />
     <Content Include="Scripts\omnimap-sidebar-scripts.js" />
+    <Content Include="Views\Event\All.aspx" />
     <Content Include="Views\Event\Edit.aspx" />
     <Content Include="Views\Event\New.aspx" />
     <Content Include="Views\Event\Index.aspx" />
