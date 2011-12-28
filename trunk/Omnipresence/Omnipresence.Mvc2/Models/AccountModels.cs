@@ -104,6 +104,24 @@ namespace Omnipresence.Mvc2.Models
         public DateTime Birthdate { get; set; }
 
         public string GenderText { get; set; }
+
+        public int BirthdateDay { get; set; }
+        public string BirthdateMonth { get; set; }
+        public IEnumerable<SelectListItem> Months
+        {
+            get
+            {
+                return DateTimeFormatInfo
+                       .InvariantInfo
+                       .MonthNames
+                       .Select((monthName, index) => new SelectListItem
+                       {
+                           Value = (index + 1).ToString(),
+                           Text = monthName
+                       });
+            }
+        }
+        public int BirthdateYear { get; set; }
     }
     #endregion
 

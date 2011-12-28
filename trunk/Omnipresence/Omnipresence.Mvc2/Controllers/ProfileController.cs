@@ -132,6 +132,7 @@ namespace Omnipresence.Mvc2.Controllers
             u.BirthdateMonth = up.Birthdate.ToString("MMMM");
             u.BirthdateYear = up.Birthdate.Year;
 
+
             int[] dayA = new int[31];
 
             for (int i = 0; i < 31; i++)
@@ -169,6 +170,9 @@ namespace Omnipresence.Mvc2.Controllers
             UserProfileModel p = accountServices.GetUserProfileByUsername(username);
             p.Birthdate = model.Birthdate;
             p.Description = model.Description;
+
+            if (p.Description == null) { p.Description = ""; }
+
             p.LastName = model.LastName;
             p.FirstName = model.FirstName;
             p.IsFemale = model.GenderText.Equals("Female");

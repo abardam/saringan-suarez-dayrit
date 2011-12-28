@@ -6,9 +6,18 @@
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript" src="../../Scripts/omnimap-registration.js"></script>
+    <script type="text/javascript" src="../../Content/Scripts/datepicker-custom.js"></script>
+
+    <script type="text/javascript" language="javascript">
+        function realInitialize() {
+            setDatePicker("BirthdateMonth", "BirthdateDate", "BirthdateYear", "");
+        }
+    </script>
 </asp:Content>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    
+
     <h3>Register</h3>
     <p>
         You're one step away from creating your own account. <%: Html.ActionLink("Sign in", "LogOn") %> if you already have an account.
@@ -91,12 +100,12 @@
                 </div>
 
                 <div class="editor-label">
-                    <label id="birthdate-label" for="birthdate">
-                        Birthdate
-                    </label>
+                    <%: Html.LabelFor(model => model.Birthdate) %>
                 </div>
                 <div class="editor-field">
-                    <%:Html.TextBoxFor(m => m.Birthdate)%>
+                    <%: Html.DropDownListFor(model => model.BirthdateDay, (SelectList)ViewData["days"]) %>
+                    <%: Html.DropDownListFor(model => model.BirthdateMonth, Model.Months) %>
+                    <%: Html.DropDownListFor(model => model.BirthdateYear, (SelectList)ViewData["years"]) %>
                 </div>
                 <div class="validation-field">
                     <label id="birthdate-validation" />

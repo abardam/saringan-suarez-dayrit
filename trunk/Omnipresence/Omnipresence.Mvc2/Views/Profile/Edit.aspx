@@ -10,71 +10,13 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-    <script language="javascript" type="text/javascript">
-        window.onload = function () {
-            var monthSelect = document.getElementById("BirthdateMonth");
-            monthSelect.onchange = setDays;
-            document.getElementById("BirthdateYear").onchange = setDays;
-            document.getElementById("BirthdateMonth").remove(12);
-
-            for(var i = 0; i < monthSelect.length;i++){
-                if(monthSelect.options.item(i).text == "<%= Model.BirthdateMonth %>"){
-                    monthSelect.selectedIndex = i;
-                    break;
-                }
-            }
-
-            monthSelect.remove(12);
-
-            setDays();
-
-        }
-
-        function setDays() {
-            var daySelect = document.getElementById("BirthdateDay");
-            var monthSelect = document.getElementById("BirthdateMonth");
-            var yearSelect = document.getElementById("BirthdateYear");
-
-            var selectedYear = yearSelect.options.item(yearSelect.selectedIndex).value;
-
-
-            var numDays;
-            switch (monthSelect.selectedIndex) {
-                case 0:
-                case 2:
-                case 4:
-                case 7:
-                case 9:
-                case 11:
-                    numDays = 31;
-                    break;
-                case 3:
-                case 5:
-                case 6:
-                case 8:
-                case 10:
-                    numDays = 30;
-                    break;
-                default:
-                    if (selectedYear % 4 == 0 && (selectedYear % 100 != 0 || selectedYear % 400 == 0)) {
-                        numDays = 29;
-                    }
-                    else {
-                        numDays = 28;
-                    }
-            }
-            while (daySelect.length < numDays) {
-                var option = document.createElement("option");
-                option.text = (daySelect.length + 1);
-                daySelect.add(option);
-            }
-            while (daySelect.length > numDays) {
-                daySelect.remove(daySelect.length - 1);
-            }
-
-        }
     
+    <script type="text/javascript" src="../../Content/Scripts/datepicker-custom.js"></script>
+
+    <script type="text/javascript" language="javascript">
+        function realInitialize() {
+            setDatePicker("BirthdateMonth", "BirthdateDate", "BirthdateYear", "<%=Model.BirthdateMonth %>");
+        }
     </script>
 
     <h2>Edit</h2>
