@@ -12,23 +12,22 @@
         <%: Html.ValidationSummary(true) %>
 
         <fieldset>
-            <legend>Fields</legend>
-            
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.SearchString) %>
-            </div>
             <div class="editor-field">
                 <%: Html.TextBoxFor(model => model.SearchString) %>
                 <%: Html.ValidationMessageFor(model => model.SearchString) %>
             </div>
             
             <p>
-                <input type="submit" value="Create" />
+                <input type="submit" value="Search" />
             </p>
         </fieldset>
 
     <% } %>
 
+    <% if (!("").Equals(Model.SearchString))
+       { %>
+        <h2>Results</h2>
+        <%} %>
     <% if (Model.UserResult != null)
        {
            foreach (Omnipresence.Mvc2.Models.ProfileViewModel pm in Model.UserResult)
