@@ -10,7 +10,7 @@
 
     <script type="text/javascript" language="javascript">
         function realInitialize() {
-            setDatePicker("BirthdateMonth", "BirthdateDate", "BirthdateYear", "");
+            setDatePicker("BirthdateMonth", "BirthdateDay", "BirthdateYear", "");
         }
     </script>
 </asp:Content>

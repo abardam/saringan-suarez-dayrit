@@ -5,10 +5,14 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <script type="text/javascript" src="../../Content/Scripts/datepicker-custom.js"></script>
+
     <script type="text/javascript">        function realInitialize() {
             setMap("map");
             //document.getElementById("Longitude").readonly = true;
             //document.getElementById("Latitude").readonly = true;
+            setDatePicker("StartMonth", "StartDay", "StartYear", "");
+            setDatePicker("EndMonth", "EndDay", "EndYear", "");
         };
         </script>
     <h2>Create new event</h2>
@@ -89,6 +93,15 @@
                 <%: Html.DropDownListFor(model => model.StartDay, (SelectList)ViewData["days"]) %>
                 <%: Html.DropDownListFor(model => model.StartMonth, Model.Months) %>
                 <%: Html.DropDownListFor(model => model.StartYear, (SelectList)ViewData["years"]) %>
+            </div>
+
+            <div class="editor-label">
+                End time
+            </div>
+            <div class="editor-field">
+                <%: Html.DropDownListFor(model => model.EndDay, (SelectList)ViewData["days"]) %>
+                <%: Html.DropDownListFor(model => model.EndMonth, Model.Months) %>
+                <%: Html.DropDownListFor(model => model.EndYear, (SelectList)ViewData["years"]) %>
             </div>
 
             

@@ -69,31 +69,7 @@ namespace Omnipresence.Mvc2.Controllers
 
         public ActionResult Register()
         {
-            List<string> genderList = new List<string>();
-            genderList.Add("Male");
-            genderList.Add("Female");
-            SelectList list = new SelectList(genderList);
-            ViewData["gender"] = list;
-
-            int[] dayA = new int[31];
-
-            for (int i = 0; i < 31; i++)
-            {
-                dayA[i] = i + 1;
-            }
-
-            int[] yearA = new int[100];
-
-            for (int i = 0; i < 100; i++)
-            {
-                yearA[i] = DateTime.Now.Year - i;
-            }
-
-            SelectList daySL = new SelectList(dayA);
-            ViewData["days"] = daySL;
-
-            SelectList yearSL = new SelectList(yearA);
-            ViewData["years"] = yearSL;
+            ProfileController.SetViewDataForDate(ViewData);
 
             ViewData["PasswordLength"] = 6;
             return View(new RegisterModel());
@@ -104,34 +80,9 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (AddUser(model)) return RedirectToAction("Index", "Home");
 
-            List<string> genderList = new List<string>();
-            genderList.Add("Male");
-            genderList.Add("Female");
-            SelectList list = new SelectList(genderList);
-            ViewData["gender"] = list;
             ViewData["PasswordLength"] = 6;
 
-
-            int[] dayA = new int[31];
-
-            for (int i = 0; i < 31; i++)
-            {
-                dayA[i] = i + 1;
-            }
-
-            int[] yearA = new int[100];
-
-            for (int i = 0; i < 100; i++)
-            {
-                yearA[i] = DateTime.Now.Year - i;
-            }
-
-            SelectList daySL = new SelectList(dayA);
-            ViewData["days"] = daySL;
-
-            SelectList yearSL = new SelectList(yearA);
-            ViewData["years"] = yearSL;
-
+            ProfileController.SetViewDataForDate(ViewData);
 
             return View(model);
         }
