@@ -32,6 +32,7 @@ namespace Omnipresence.Mvc2.Controllers
         public ActionResult Search()
         {
             SearchResultModel model = new SearchResultModel();
+            model.SearchString = "";
             return View(model);
         }
 
