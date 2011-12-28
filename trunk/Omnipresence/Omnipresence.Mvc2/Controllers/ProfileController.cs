@@ -34,8 +34,7 @@ namespace Omnipresence.Mvc2.Controllers
             
             if (profile == null) return RedirectToAction("Index", "Home");
 
-            int viewerId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
-
+            
             ProfileViewModel pvm = new ProfileViewModel
             {
                 Birthdate = profile.Birthdate,
@@ -44,55 +43,67 @@ namespace Omnipresence.Mvc2.Controllers
                 GenderText = profile.IsFemale ? "Female" : "Male",
                 LastName = profile.LastName,
                 Reputation = profile.Reputation,
-                ViewingOwn = id==0||id.Equals(viewerId),
+                ViewingOwn = false,
                 ViewingFriend = false,
                 UserProfileId = id,
                 FriendRequested = false,
                 ThisDudeHasSentAFriendRequestToYou = false
             };
 
-            if (!pvm.ViewingOwn)
+            if (!User.Identity.Name.Equals(""))
             {
-                IEnumerable<UserProfileModel> lupm = accountServices.GetAcceptedFriends(new GetFriendsModel { UserProfileId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId });
+                int viewerId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
 
-                foreach (UserProfileModel upm in lupm)
+                pvm.ViewingOwn = id == 0 || id.Equals(viewerId);
+
+
+                if (!pvm.ViewingOwn)
                 {
-                    if (upm.UserProfileId == profile.UserProfileId)
+                    IEnumerable<UserProfileModel> lupm = accountServices.GetAcceptedFriends(new GetFriendsModel { UserProfileId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId });
+
+                    foreach (UserProfileModel upm in lupm)
                     {
-                        pvm.ViewingFriend = true;
-                        break;
-                    }
-                }
-                if (!pvm.ViewingFriend)
-                {
-                    GetFriendRequestsModel gfrm1 = new GetFriendRequestsModel{UserProfileId = viewerId};
-
-                    IQueryable<UserProfileModel> lupm1 = accountServices.GetFriendRequests(gfrm1);
-
-                    foreach (UserProfileModel upm in lupm1){
-                        if(upm.UserProfileId == profile.UserProfileId){
-                            pvm.ThisDudeHasSentAFriendRequestToYou = true;
+                        if (upm.UserProfileId == profile.UserProfileId)
+                        {
+                            pvm.ViewingFriend = true;
                             break;
                         }
                     }
-
-                    if(!pvm.ThisDudeHasSentAFriendRequestToYou)
+                    if (!pvm.ViewingFriend)
                     {
-                        GetFriendRequestsModel gfrm = new GetFriendRequestsModel();
-                        gfrm.UserProfileId = profile.UserProfileId;
-                        IQueryable<UserProfileModel> lupm2 = accountServices.GetFriendRequests(gfrm);
+                        GetFriendRequestsModel gfrm1 = new GetFriendRequestsModel { UserProfileId = viewerId };
 
-                        foreach (UserProfileModel upm in lupm2)
+                        IQueryable<UserProfileModel> lupm1 = accountServices.GetFriendRequests(gfrm1);
+
+                        foreach (UserProfileModel upm in lupm1)
                         {
-                            if (upm.UserProfileId == viewerId)
+                            if (upm.UserProfileId == profile.UserProfileId)
                             {
-                                pvm.FriendRequested = true;
+                                pvm.ThisDudeHasSentAFriendRequestToYou = true;
                                 break;
+                            }
+                        }
+
+                        if (!pvm.ThisDudeHasSentAFriendRequestToYou)
+                        {
+                            GetFriendRequestsModel gfrm = new GetFriendRequestsModel();
+                            gfrm.UserProfileId = profile.UserProfileId;
+                            IQueryable<UserProfileModel> lupm2 = accountServices.GetFriendRequests(gfrm);
+
+                            foreach (UserProfileModel upm in lupm2)
+                            {
+                                if (upm.UserProfileId == viewerId)
+                                {
+                                    pvm.FriendRequested = true;
+                                    break;
+                                }
                             }
                         }
                     }
                 }
             }
+
+            
 
 
             return View(pvm);
