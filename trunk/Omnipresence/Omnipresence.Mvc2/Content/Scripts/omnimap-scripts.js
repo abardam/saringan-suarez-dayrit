@@ -1,5 +1,5 @@
 ﻿function initialize() {
-     realInitialize();
+    realInitialize();
 }
 
 function loadScript() {

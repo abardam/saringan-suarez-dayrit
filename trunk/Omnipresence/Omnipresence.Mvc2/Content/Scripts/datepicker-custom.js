@@ -2,8 +2,17 @@
 
 function setDatePicker(monthId, dayId, yearId, dateMonth) {
     var monthSelect = document.getElementById(monthId);
-    monthSelect.onchange = setDays;
-    document.getElementById(yearId).onchange = setDays;
+    var yearSelect = document.getElementById(yearId);
+    monthSelect.onchange = setDaysEvent;
+    yearSelect.onchange = setDaysEvent;
+
+    monthSelect.setAttribute("month-id", monthId);
+    monthSelect.setAttribute("day-id", dayId);
+    monthSelect.setAttribute("year-id", yearId);
+
+    yearSelect.setAttribute("month-id", monthId);
+    yearSelect.setAttribute("day-id", dayId);
+    yearSelect.setAttribute("year-id", yearId);
 
     for (var i = 0; i < monthSelect.length; i++) {
         if (monthSelect.options.item(i).text == dateMonth) {
@@ -18,7 +27,17 @@ function setDatePicker(monthId, dayId, yearId, dateMonth) {
 
 };
 
+function setDaysEvent(event) {
+
+    var dayId = event.currentTarget.getAttribute("day-id");
+    var monthId = event.currentTarget.getAttribute("month-id");
+    var yearId = event.currentTarget.getAttribute("year-id");
+
+    setDays(monthId, dayId, yearId);
+}
+
 function setDays(monthId, dayId, yearId) {
+
     var daySelect = document.getElementById(dayId);
     var monthSelect = document.getElementById(monthId);
     var yearSelect = document.getElementById(yearId);

@@ -109,30 +109,13 @@ namespace Omnipresence.Mvc2.Controllers
             return View(pvm);
         }
 
-        //
-        // GET: /Profile/Edit/5
-
-        public ActionResult Edit()
-        {
+        public static void SetViewDataForDate(ViewDataDictionary ViewData){
             List<string> genderList = new List<string>();
             genderList.Add("Male");
             genderList.Add("Female");
             SelectList list = new SelectList(genderList);
             ViewData["gender"] = list;
-
-            string username = User.Identity.Name;
-            UserProfileModel up = accountServices.GetUserProfileByUsername(username);
-            EditProfileViewModel u = new EditProfileViewModel();
-            u.Description = up.Description;
-            u.FirstName = up.FirstName;
-            u.LastName = up.LastName;
-            u.GenderText = up.IsFemale ? "Female" : "Male";
-            u.Reputation = up.Reputation;
-            u.BirthdateDay = up.Birthdate.Day;
-            u.BirthdateMonth = up.Birthdate.ToString("MMMM");
-            u.BirthdateYear = up.Birthdate.Year;
-
-
+            
             int[] dayA = new int[31];
 
             for (int i = 0; i < 31; i++)
@@ -152,6 +135,30 @@ namespace Omnipresence.Mvc2.Controllers
 
             SelectList yearSL = new SelectList(yearA);
             ViewData["years"] = yearSL;
+
+
+        }
+
+        //
+        // GET: /Profile/Edit/5
+
+        public ActionResult Edit()
+        {
+            
+
+            string username = User.Identity.Name;
+            UserProfileModel up = accountServices.GetUserProfileByUsername(username);
+            EditProfileViewModel u = new EditProfileViewModel();
+            u.Description = up.Description;
+            u.FirstName = up.FirstName;
+            u.LastName = up.LastName;
+            u.GenderText = up.IsFemale ? "Female" : "Male";
+            u.Reputation = up.Reputation;
+            u.BirthdateDay = up.Birthdate.Day;
+            u.BirthdateMonth = up.Birthdate.ToString("MMMM");
+            u.BirthdateYear = up.Birthdate.Year;
+
+            SetViewDataForDate(ViewData);
 
             return View(u);
         }

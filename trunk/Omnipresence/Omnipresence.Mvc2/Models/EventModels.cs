@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Globalization;
 using Omnipresence.Processing;
 namespace Omnipresence.Mvc2.Models
 {
@@ -41,12 +42,17 @@ namespace Omnipresence.Mvc2.Models
 
     public class CreateEventViewModel
     {
+        public DateTime StartTime { get; set; }
         public string Title { get; set; }
         public int CreatedBy { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public string StartDay { get; set; }
+        public string StartMonth { get; set; }
+        public string StartYear { get; set; }
+        public string EndDay { get; set; }
+        public string EndMonth { get; set; }
+        public string EndYear { get; set; }
         public int Duration { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime DeleteTime { get; set; }
@@ -54,6 +60,22 @@ namespace Omnipresence.Mvc2.Models
         public string Address { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public IEnumerable<SelectListItem> Months
+        {
+            get
+            {
+                return DateTimeFormatInfo
+                       .InvariantInfo
+                       .MonthNames
+                       .Select((monthName, index) => new SelectListItem
+                       {
+                           Value = (index + 1).ToString(),
+                           Text = monthName
+                       });
+            }
+        }
+
+        public DateTime EndTime { get; set; }
     }
 
     public class EventCommentViewModel
