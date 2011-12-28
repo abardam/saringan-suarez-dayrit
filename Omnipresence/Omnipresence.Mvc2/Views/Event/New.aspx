@@ -5,8 +5,15 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <script type="text/javascript">        function realInitialize() {
+            setMap("map");
+            //document.getElementById("Longitude").readonly = true;
+            //document.getElementById("Latitude").readonly = true;
+        };
+        </script>
+    <h2>Create new event</h2>
 
-    <h2>CreateEventView</h2>
+    <div id="map" class="map-container" style="width:540px; height:400px; margin-left:auto; margin-right:auto" data-lat="14.632524261766926" data-lng="121.07566595077515" new="true"></div>
 
     <%=ViewData["message"] %>
 
@@ -23,14 +30,7 @@
                 <%: Html.TextBoxFor(model => model.Title) %>
                 <%: Html.ValidationMessageFor(model => model.Title) %>
             </div>
-            
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.CreatedBy) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.CreatedBy) %>
-                <%: Html.ValidationMessageFor(model => model.CreatedBy) %>
-            </div>
+ 
             
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Name) %>
@@ -104,21 +104,21 @@
                 <%: Html.ValidationMessageFor(model => model.Address) %>
             </div>
             
-            <div class="editor-label">
+            <!--<div class="editor-label">
                 <%: Html.LabelFor(model => model.Latitude) %>
             </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.Latitude) %>
-                <%: Html.ValidationMessageFor(model => model.Latitude) %>
+            <div class="editor-field">-->
+                <%: Html.HiddenFor(model => model.Latitude) %>
+                <!--<%: Html.ValidationMessageFor(model => model.Latitude) %>
             </div>
             
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Longitude) %>
             </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.Longitude) %>
-                <%: Html.ValidationMessageFor(model => model.Longitude) %>
-            </div>
+            <div class="editor-field">-->
+                <%: Html.HiddenFor(model => model.Longitude) %>
+                <!--<%: Html.ValidationMessageFor(model => model.Longitude) %>
+            </div>-->
             
             <p>
                 <input type="submit" value="Create" />
