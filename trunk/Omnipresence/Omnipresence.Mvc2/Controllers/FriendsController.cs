@@ -3,55 +3,65 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Omnipresence.Mvc2.Models;
 using Omnipresence.Processing;
+using Omnipresence.Mvc2.Models;
 
 namespace Omnipresence.Mvc2.Controllers
 {
     public class FriendsController : Controller
     {
         private AccountServices accountServices = AccountServices.GetInstance();
+
+        [Authorize]
         public ActionResult Index()
         {
-            return View(accountServices.GetAllFriends(new GetFriendsModel
-            {
-                UserProfileId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId
-            }));
+            return RedirectToAction("Friends", new { id = User.Identity.Name });
         }
-
+        public ActionResult Friends(string id = "")
+        {
+            AccountServices db = AccountServices.GetInstance();
+            UserProfileModel profile = db.GetUserProfileByUsername(id);
+            if (profile == null) return RedirectToAction("Index", "Home");
+            IEnumerable<ProfileIdModel> friends = db.GetFriendsList(profile.UserProfileId);
+            return View(new FriendsViewModel { Friends = friends, Username = id });
+        }
+        [Authorize]
         public ActionResult Add(int id)
         {
-            //this bit of code confirms the friend request, if the other dude has sent one.
-            int viewerId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
-
-            GetFriendRequestsModel gfrm1 = new GetFriendRequestsModel { UserProfileId = viewerId };
-
-            IQueryable<UserProfileModel> lupm1 = accountServices.GetFriendRequests(gfrm1);
-
-            foreach (UserProfileModel upm in lupm1)
+            UserModel user = accountServices.GetUserByUsername(User.Identity.Name);
+            bool success = accountServices.CreateFriendRequest(new CreateFriendRequestModel
             {
-                if (upm.UserProfileId == id)
-                {
-                    //added!
-                    accountServices.ConfirmFriendRequest(new Processing.FriendRequestModel { AdderUserProfileId = id, AddedUserProfileId = viewerId });
-                    return Redirect("/Profile/Index/"+id);
-                }
-            }
-
-
-            //otherwise gagawa siya ng bagong friend request
-            CreateFriendRequestModel cfrm = new CreateFriendRequestModel();
-            cfrm.AdderUserProfileId = accountServices.GetUserByUsername(User.Identity.Name).UserId;
-            cfrm.AddedUserProfileId = id;
-
-            accountServices.CreateFriendRequest(cfrm);
-
-            return Redirect("/Profile/Index/"+id);
+                AddedUserProfileId = id,
+                AdderUserProfileId = user.UserProfile.UserProfileId
+            });
+            return RedirectToAction("Profile", "Profile", new { id = id }); ;
         }
 
-        public ActionResult Delete()
+        [Authorize]
+        public ActionResult Accept(int id = 0)
         {
-            return View();
+            if (id == 0) RedirectToAction("Index", "Home");
+            AccountServices db = AccountServices.GetInstance();
+            int thisuser = db.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
+
+            if (!db.ConfirmFriendRequest(new FriendRequestModel { AddedUserProfileId = thisuser, AdderUserProfileId = id }))
+            {
+                return RedirectToAction("Notifications", "Home", new { message = "An error occurred." });
+            }
+            return RedirectToAction("Notifications", "Home", new { message = "Friend request confirmed." });
+        }
+        [Authorize]
+        public ActionResult Decline(int id = 0)
+        {
+            if (id == 0) RedirectToAction("Index", "Home");
+            AccountServices db = AccountServices.GetInstance();
+            int thisuser = db.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
+
+            if (!db.DenyFriendRequest(new FriendRequestModel { AddedUserProfileId = thisuser, AdderUserProfileId = id }))
+            {
+                return RedirectToAction("Notifications", "Home", new { message = "An error occurred." });
+            }
+            return RedirectToAction("Notifications", "Home", new { message = "Friend request deleted." });
         }
     }
 }

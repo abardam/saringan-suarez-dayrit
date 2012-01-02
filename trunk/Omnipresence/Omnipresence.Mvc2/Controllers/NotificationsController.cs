@@ -20,11 +20,11 @@ namespace Omnipresence.Mvc2.Controllers
             gfrm.UserProfileId = accountServices.GetUserByUsername(User.Identity.Name).UserId;
             IQueryable<UserProfileModel> iq = accountServices.GetFriendRequests(gfrm);
             NotificationModel nm = new NotificationModel();
-            nm.FriendRequestNotifications = new List<Omnipresence.Mvc2.Models.FriendRequestModel>();
+            nm.FriendRequestNotifications = new List<FriendRequestViewModel>();
             List<UserProfileModel> lupm = iq.ToList<UserProfileModel>();
             foreach (UserProfileModel upm in lupm)
             {
-                Omnipresence.Mvc2.Models.FriendRequestModel frm = new Omnipresence.Mvc2.Models.FriendRequestModel();
+                FriendRequestViewModel frm = new FriendRequestViewModel();
                 frm.UserProfileId = upm.UserProfileId;
                 frm.FullName = upm.FirstName + " " + upm.LastName;
                 nm.FriendRequestNotifications.Add(frm);

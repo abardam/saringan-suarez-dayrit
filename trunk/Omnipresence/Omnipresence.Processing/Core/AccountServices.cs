@@ -62,6 +62,7 @@ namespace Omnipresence.Processing
             userProfile.Birthdate = userProfileModel.Birthdate;
             userProfile.IsFemale = userProfileModel.IsFemale;
             userProfile.Description = userProfileModel.Description;
+            userProfile.Avatar = "/Content/Images/viewprofile.png";
 
             userProfile.Reputation = 0;
 
@@ -162,7 +163,7 @@ namespace Omnipresence.Processing
 
         #region [SEARCH]
 
-        public UserModel GetUserById(int id)
+        public UserModel GetUserByUserId(int id)
         {
             User user = db.Users.Where(account => account.UserId == id).FirstOrDefault();
             UserModel userModel = Utilities.UserToUserModel(user);
@@ -199,7 +200,7 @@ namespace Omnipresence.Processing
             return userModels.AsQueryable();
         }
 
-        public UserProfileModel GetUserProfileById(int id)
+        public UserProfileModel GetUserProfileByUserProfileId(int id)
         {
             UserProfile userProfile = db.UserProfiles.Where(u => u.UserProfileId == id).FirstOrDefault();
 
@@ -325,7 +326,7 @@ namespace Omnipresence.Processing
 
             return userProfileModels.AsQueryable();
         }
-
+        // TODO: CHECK: IS THIS THE PENDING FRIEND REQUESTS MADE BY THE USER?
         public IQueryable<UserProfileModel> GetFriendRequests(GetFriendRequestsModel gfrm)
         {
             UserProfile up = db.UserProfiles.Where(u => u.UserProfileId == gfrm.UserProfileId).FirstOrDefault();
@@ -406,6 +407,10 @@ namespace Omnipresence.Processing
 
                     return true;
                 }
+                else if (Utilities.HasPendingFriendRequest(adder, added) && !Utilities.AreFriends(adder, added))
+                {
+                    return ConfirmFriendRequest(new FriendRequestModel { AddedUserProfileId = adder.UserProfileId, AdderUserProfileId = added.UserProfileId });
+                }
                 else
                 {
                     return false;
@@ -467,6 +472,37 @@ namespace Omnipresence.Processing
             }
         }
 
+        public UserProfileModel GetUserProfileByUserId(int userId)
+        {
+            UserProfile temp = db.UserProfiles.Where(x => x.User.UserId == userId).FirstOrDefault();
+            if (temp == null) return null;
+            UserProfileModel ret = Utilities.UserProfileToUserProfileModel(temp);
+            return ret;
+        }
+
+        public UserModel GetUserByUserProfileId(int profileId)
+        {
+            User temp = db.Users.Where(x => x.UserProfile.UserProfileId == profileId).FirstOrDefault();
+            if (temp == null) return null;
+            UserModel ret = Utilities.UserToUserModel(temp);
+            return ret;
+        }
+
+        public IEnumerable<ProfileIdModel> GetFriendsList(int profileId, int count = 0)
+        {
+            IQueryable<UserProfileModel> temp;
+            if (count > 0) temp = GetAllFriends(new GetFriendsModel { UserProfileId = profileId }).Take(count);
+            else temp = GetAllFriends(new GetFriendsModel { UserProfileId = profileId });
+
+            List<ProfileIdModel> ret = new List<ProfileIdModel>();
+            foreach (UserProfileModel b in temp)
+            {
+                UserModel buser = GetUserByUserProfileId(b.UserProfileId);
+                ret.Add(new ProfileIdModel { AvatarUrl = b.Avatar, ProfileUrl = "UNIMPLEMENTED", UserId = buser.UserId, Username = buser.Username, ProfileId = b.UserProfileId });
+            }
+            return ret;
+        }
+
         public IEnumerable<UserProfileModel> QueryUsers(QueryUserModel queryModel)
         {
             IQueryable<User> usernameMatches = db.Users.Where(u => u.Username.ToLower().Contains(queryModel.Username.ToLower()));
@@ -499,9 +535,35 @@ namespace Omnipresence.Processing
             return results.AsQueryable();
         }
 
+        public bool AreFriends(string username1, string username2)
+        {
+            UserProfileModel profile1 = GetUserProfileByUsername(username1);
+            UserProfileModel profile2 = GetUserProfileByUsername(username2);
+            IQueryable<UserProfileModel> temp = GetAcceptedFriends(new GetFriendsModel { UserProfileId = profile1.UserProfileId });
+            foreach (UserProfileModel b in temp)
+            {
+                if (b.UserProfileId == profile2.UserProfileId) return true;
+            }
+            return false;
+        }
+
         public void Dispose()
         {
             db.Connection.Close();
+        }
+
+        public bool HasPendingFriendRequest(string adderUsername, string addedUsername)
+        {
+            UserProfile adder = db.UserProfiles.Where(x => x.User.Username == adderUsername).FirstOrDefault();
+            UserProfile added = db.UserProfiles.Where(x => x.User.Username == addedUsername).FirstOrDefault();
+            if (adder != null && added != null)
+            {
+                return Utilities.HasPendingFriendRequest(adder, added);
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

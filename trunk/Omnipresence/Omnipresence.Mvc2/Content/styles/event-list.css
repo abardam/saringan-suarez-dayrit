@@ -140,3 +140,13 @@ div.event-box
     background:#cc0000;
     color:White;
 }
+
+div.section 
+{
+}
+
+div.section > h1 
+{
+    display:block;
+    border-bottom: 1px solid black;
+}

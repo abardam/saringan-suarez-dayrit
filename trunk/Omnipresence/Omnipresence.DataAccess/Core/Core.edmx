@@ -119,7 +119,7 @@
     <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="128" />
     <Property Name="Birthdate" Type="datetime" Nullable="false" />
     <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="1024" />
-    <Property Name="Avatar" Type="varbinary(max)" Nullable="true" />
+    <Property Name="Avatar" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Reputation" Type="int" Nullable="false" />
     <Property Name="Timezone" Type="int" Nullable="false" />
     <Property Name="IsFemale" Type="bit" Nullable="false" />
@@ -439,7 +439,7 @@
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
           <Property Name="Birthdate" Type="DateTime" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" Nullable="false" />
-          <Property Name="Avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Avatar" Type="String" />
           <Property Name="Reputation" Type="Int32" Nullable="false" />
           <Property Name="Timezone" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="OmnipresenceModel.FK_UserProfile_User" FromRole="UserProfiles" ToRole="Users" />

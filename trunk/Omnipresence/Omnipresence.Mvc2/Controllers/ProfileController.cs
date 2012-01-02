@@ -8,8 +8,11 @@ using Omnipresence.Processing;
 
 namespace Omnipresence.Mvc2.Controllers
 {
+
     public class ProfileController : Controller
     {
+        public const int NUM_FRIENDS = 10;
+        public const int NUM_EVENTS = 10;
         private AccountServices accountServices;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
@@ -18,106 +21,72 @@ namespace Omnipresence.Mvc2.Controllers
             accountServices = AccountServices.GetInstance();
         }
 
-        public ActionResult Index(int id = 0)
+        public ActionResult Index()
         {
-            UserProfileModel profile;
-            //TODO: Actual model
-            if (id == 0)
-            {
-                profile = accountServices.GetUserProfileByUsername(User.Identity.Name);
-                
-            }
-            else
-            {
-                profile = accountServices.GetUserProfileById(id);
-            }
-            
+            if (User.Identity.Name == "") return RedirectToAction("Index", "Home");
+            ProfileViewModel profile = GetProfileViewModel(User.Identity.Name);
             if (profile == null) return RedirectToAction("Index", "Home");
+            return RedirectToAction("Profile", new { id = profile.Username });
+        }
 
-            
-            ProfileViewModel pvm = new ProfileViewModel
+        // id here is username
+        public ActionResult Profile(string id = "")
+        {
+            if (id == "") return RedirectToAction("Index", "Home");
+            ProfileViewModel model = GetProfileViewModel(id);
+            if (model == null) return RedirectToAction("Index", "Home");
+            return View(model);
+        }
+
+        public ActionResult ProfileById(int id = 0)
+        {
+            if (id == 0) return RedirectToAction("Index", "Home");
+            UserModel temp = accountServices.GetUserByUserProfileId(id);
+            return RedirectToAction("Profile", new { id = temp.Username });
+        }
+
+        private ProfileViewModel GetProfileViewModel(string username)
+        {
+            UserProfileModel profile = accountServices.GetUserProfileByUsername(username);
+            if (profile == null) return null;
+
+            ProfileViewModel model = new ProfileViewModel
             {
+                AvatarUrl = profile.Avatar,
                 Birthdate = profile.Birthdate,
                 Description = profile.Description,
                 FirstName = profile.FirstName,
                 GenderText = profile.IsFemale ? "Female" : "Male",
                 LastName = profile.LastName,
                 Reputation = profile.Reputation,
-                ViewingOwn = false,
-                ViewingFriend = false,
-                UserProfileId = id,
-                FriendRequested = false,
-                ThisDudeHasSentAFriendRequestToYou = false
+                UserProfileId = profile.UserProfileId
             };
 
-            if (!User.Identity.Name.Equals(""))
-            {
-                int viewerId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
+            model.Friends = accountServices.GetFriendsList(profile.UserProfileId, NUM_FRIENDS);
+            model.UserEvents = EventServices.GetInstance().GetAllEventsByUserProfileId(profile.UserProfileId).Take(NUM_EVENTS);
+            UserModel temp = accountServices.GetUserByUsername(username);
+            model.Username = username;
+            model.UserId = temp.UserId;
 
-                pvm.ViewingOwn = id == 0 || id.Equals(viewerId);
+            model.ViewingFriend = accountServices.AreFriends(User.Identity.Name, username);
+            model.ViewingOwn = User.Identity.Name == username;
 
+            int numFriends = accountServices.GetAllFriends(new GetFriendsModel { UserProfileId = profile.UserProfileId }).Count();
 
-                if (!pvm.ViewingOwn)
-                {
-                    IEnumerable<UserProfileModel> lupm = accountServices.GetAcceptedFriends(new GetFriendsModel { UserProfileId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId });
+            model.Sidebar = new ProfileSidebarViewModel { AvatarUrl = profile.Avatar, FriendCount = numFriends, Name = profile.FirstName + " " + profile.LastName, Reputation = profile.Reputation, Username = username };
 
-                    foreach (UserProfileModel upm in lupm)
-                    {
-                        if (upm.UserProfileId == profile.UserProfileId)
-                        {
-                            pvm.ViewingFriend = true;
-                            break;
-                        }
-                    }
-                    if (!pvm.ViewingFriend)
-                    {
-                        GetFriendRequestsModel gfrm1 = new GetFriendRequestsModel { UserProfileId = viewerId };
-
-                        IQueryable<UserProfileModel> lupm1 = accountServices.GetFriendRequests(gfrm1);
-
-                        foreach (UserProfileModel upm in lupm1)
-                        {
-                            if (upm.UserProfileId == profile.UserProfileId)
-                            {
-                                pvm.ThisDudeHasSentAFriendRequestToYou = true;
-                                break;
-                            }
-                        }
-
-                        if (!pvm.ThisDudeHasSentAFriendRequestToYou)
-                        {
-                            GetFriendRequestsModel gfrm = new GetFriendRequestsModel();
-                            gfrm.UserProfileId = profile.UserProfileId;
-                            IQueryable<UserProfileModel> lupm2 = accountServices.GetFriendRequests(gfrm);
-
-                            foreach (UserProfileModel upm in lupm2)
-                            {
-                                if (upm.UserProfileId == viewerId)
-                                {
-                                    pvm.FriendRequested = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            
-
-
-            return View(pvm);
+            model.ThisDudeHasSentAFriendRequestToYou = (User.Identity.Name == "") ? false : accountServices.HasPendingFriendRequest(username, User.Identity.Name);
+            model.FriendRequested = (User.Identity.Name == "") ? false : accountServices.HasPendingFriendRequest(User.Identity.Name, username);
+            return model;
         }
 
-        
+
 
         //
         // GET: /Profile/Edit/5
 
         public ActionResult Edit()
         {
-            
-
             string username = User.Identity.Name;
             UserProfileModel up = accountServices.GetUserProfileByUsername(username);
             EditProfileViewModel u = new EditProfileViewModel();
@@ -170,26 +139,6 @@ namespace Omnipresence.Mvc2.Controllers
             }
             return Edit();
         }
-
-
-
-        //
-        // POST: /Profile/Edit/5
-        /*
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }*/
 
         public static void SetViewDataForTime(ViewDataDictionary ViewData)
         {
