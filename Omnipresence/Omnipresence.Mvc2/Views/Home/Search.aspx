@@ -32,7 +32,7 @@
        {
            foreach (Omnipresence.Mvc2.Models.ProfileViewModel pm in Model.UserResult)
            { %>
-           <p><a href="/Profile/Index/<%=pm.UserProfileId %>"><%=pm.FirstName + " " + pm.LastName %></a></p>
+           <p><%: Html.ActionLink(pm.FirstName + " " + pm.LastName,"ProfileById", "Profile", new {id = pm.UserProfileId}, null) %></p>
             <%}
        } %>
 

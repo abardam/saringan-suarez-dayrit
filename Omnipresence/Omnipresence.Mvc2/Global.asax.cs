@@ -17,6 +17,21 @@ namespace Omnipresence.Mvc2
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "PrettyProfileRoute",
+                "p/{id}",
+                new { id = "", controller = "Profile", action = "Profile" }
+                );
+            routes.MapRoute(
+                "PrettyEventRoute",
+                "e/{id}",
+                new { id = 0, controller = "Event", action = "Index" }
+                );
+            routes.MapRoute(
+                "PrettyFriendsRoute",
+                "p/{id}/friends",
+                new { id = "", controller = "Friends", action = "Friends" }
+                );
+            routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults

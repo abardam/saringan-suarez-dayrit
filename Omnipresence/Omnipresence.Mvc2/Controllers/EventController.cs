@@ -59,7 +59,7 @@ namespace Omnipresence.Mvc2.Controllers
             int userProfileId = accountServices.GetUserByUsername(User.Identity.Name).UserProfile.UserProfileId;
 
             foreach(CommentModel cm in tempie){
-                UserProfileModel upm = accountServices.GetUserProfileById(cm.UserProfileId);
+                UserProfileModel upm = accountServices.GetUserProfileByUserProfileId(cm.UserProfileId);
                 
                 CommentViewModel cvm = new CommentViewModel
                 {

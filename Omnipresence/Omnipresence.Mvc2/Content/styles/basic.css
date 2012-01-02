@@ -150,7 +150,16 @@ div#main
     margin-bottom: 50px;
 }
 
-::selected 
+img.thumb 
 {
-    background-color:Fuchsia;
+    height: auto;
+    width: auto;
+    max-height: 100px;
+    max-width: 100px;
+}
+
+::selection, ::-moz-selection, ::-webkit-selection 
+{
+    background:#cc0000;
+    color:White;
 }

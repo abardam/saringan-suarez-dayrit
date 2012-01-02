@@ -17,7 +17,7 @@ namespace DatabaseTests
         {
             GetFriendsModel getAllFriendsModel = new GetFriendsModel();
             int randomId = random.Next(1, accountServices.GetAllUserProfiles().Count());
-            UserProfileModel userProfileModel = accountServices.GetUserProfileById(randomId);
+            UserProfileModel userProfileModel = accountServices.GetUserProfileByUserProfileId(randomId);
 
             if (userProfileModel != null)
             {

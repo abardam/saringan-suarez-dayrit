@@ -2786,11 +2786,11 @@ namespace Omnipresence.DataAccess.Core
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Byte[] Avatar
+        public global::System.String Avatar
         {
             get
             {
-                return StructuralObject.GetValidValue(_Avatar);
+                return _Avatar;
             }
             set
             {
@@ -2801,8 +2801,8 @@ namespace Omnipresence.DataAccess.Core
                 OnAvatarChanged();
             }
         }
-        private global::System.Byte[] _Avatar;
-        partial void OnAvatarChanging(global::System.Byte[] value);
+        private global::System.String _Avatar;
+        partial void OnAvatarChanging(global::System.String value);
         partial void OnAvatarChanged();
     
         /// <summary>

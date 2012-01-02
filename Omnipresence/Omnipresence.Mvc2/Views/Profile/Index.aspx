@@ -5,10 +5,18 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<<<<<<< .mine
+<!-- TODO: Remove this. Wala na tong use mga pare dudes -->
+=======
 <img src=<%:Model.Avatar %> alt=""/>
+>>>>>>> .r178
 <h1><%: Model.FirstName %> <%: Model.LastName %></h1>
+<<<<<<< .mine
+<img src="<%:Model.Avatar %>" alt=""/>
+=======
 <h2><%:Model.Description %></h2>
 <p><%:Model.GenderText %></p>
+>>>>>>> .r178
 <p>Date of birth: <%:Model.Birthdate.ToLongDateString() %></p>
 <p>Reputation: <%:Model.Reputation %></p>
 <% if (!Page.User.Identity.Name.Equals(""))

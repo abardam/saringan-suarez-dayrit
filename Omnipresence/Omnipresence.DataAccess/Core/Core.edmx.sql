@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/11/2011 19:41:28
+-- Date Created: 12/29/2011 19:04:04
 -- Generated from EDMX file: C:\Users\Mr Suarez\Documents\thesis\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
@@ -146,7 +146,7 @@ CREATE TABLE [dbo].[UserProfiles] (
     [LastName] nvarchar(128)  NOT NULL,
     [Birthdate] datetime  NOT NULL,
     [Description] nvarchar(1024)  NOT NULL,
-    [Avatar] varbinary(max)  NULL,
+    [Avatar] nvarchar(max)  NULL,
     [Reputation] int  NOT NULL,
     [Timezone] int  NOT NULL,
     [IsFemale] bit  NOT NULL

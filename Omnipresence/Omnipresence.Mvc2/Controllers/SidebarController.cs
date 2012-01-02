@@ -40,7 +40,7 @@ namespace Omnipresence.Mvc2.Controllers
             
             */
 
-            UserProfileModel p = accountServices.GetUserProfileById(userProfileId);
+            UserProfileModel p = accountServices.GetUserProfileByUserProfileId(userProfileId);
             if (p == null)
             {
                 return Index();

@@ -6,6 +6,15 @@ using Omnipresence.DataAccess.Core;
 
 namespace Omnipresence.Processing
 {
+    public class ProfileIdModel
+    {
+        public int UserId { get; set; }
+        public int ProfileId { get; set; } // TODO: Implement some kind of alternate url for profiles, editable by user :D
+        public string Username { get; set; }
+        public string ProfileUrl { get; set; }
+        public string AvatarUrl { get; set; }
+    }
+
     public class UserModel
     {
         public int UserId { get; set; }
@@ -45,7 +54,7 @@ namespace Omnipresence.Processing
         public DateTime Birthdate { get; set; }
         public bool IsFemale { get; set; }
         public int Reputation { get; set; }
-        public byte[] Avatar { get; set; }
+        public string Avatar { get; set; }
         public System.Data.Objects.DataClasses.EntityCollection<Friendship> AcceptedFriendships { get; set; }
         public System.Data.Objects.DataClasses.EntityCollection<Friendship> RequestedFriendships { get; set; }
         public System.Data.Objects.DataClasses.EntityCollection<Comment> Comments { get; set; }

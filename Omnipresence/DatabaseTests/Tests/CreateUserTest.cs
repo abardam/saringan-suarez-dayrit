@@ -15,15 +15,16 @@ namespace DatabaseTests
 
         public override bool Execute()
         {
+            int index = (accountServices.GetAllUsers().Count()+1);
             CreateUserModel createUserModel = new CreateUserModel();
-            createUserModel.Username = ("" + DateTime.Now.ToString()).Replace(" ", "");
+            createUserModel.Username = "user" + index;
             createUserModel.Password = "password";
             createUserModel.Email = "saringan.emanuel@gmail.com";
 
             CreateUserProfileModel createUserProfileModel = new CreateUserProfileModel();
-            createUserProfileModel.FirstName = "FName-" + DateTime.Now.ToString();
-            createUserProfileModel.LastName = "LName-" + DateTime.Now.ToString();
-            createUserProfileModel.Description = "Desc-" + DateTime.Now.ToString();
+            createUserProfileModel.FirstName = "FName-" + index;
+            createUserProfileModel.LastName = "LName-" + index;
+            createUserProfileModel.Description = "Desc-" + index;
             createUserProfileModel.Birthdate = DateTime.Now;
             createUserProfileModel.IsFemale = false;
 
