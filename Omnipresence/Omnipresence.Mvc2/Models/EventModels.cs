@@ -26,7 +26,7 @@ namespace Omnipresence.Mvc2.Models
         public int CreatedById { get; set; }
     }
 
-    public class EditEventViewModel
+    /*public class EditEventViewModel
     {
         public string Title { get; set; }
         public int CreatedBy { get; set; }
@@ -38,10 +38,55 @@ namespace Omnipresence.Mvc2.Models
         public int Duration { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime DeleteTime { get; set; }
-    }
+    }*/
 
     public class CreateEventViewModel
     {
+        public DateTime StartTime { get; set; }
+        public string Title { get; set; }
+        public int CreatedBy { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int StartDay { get; set; }
+        public string StartMonth { get; set; }
+        public int StartYear { get; set; }
+        public int StartHour { get; set; }
+        public string StartMinute { get; set; }
+        public string StartAMPM { get; set; }
+        public int EndDay { get; set; }
+        public string EndMonth { get; set; }
+        public int EndYear { get; set; }
+        public int EndHour { get; set; }
+        public string EndMinute { get; set; }
+        public string EndAMPM { get; set; }
+        public int Duration { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime DeleteTime { get; set; }
+        public string CategoryString { get; set; }
+        public string Address { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public IEnumerable<SelectListItem> Months
+        {
+            get
+            {
+                return DateTimeFormatInfo
+                       .InvariantInfo
+                       .MonthNames
+                       .Select((monthName, index) => new SelectListItem
+                       {
+                           Value = (index + 1).ToString(),
+                           Text = monthName
+                       });
+            }
+        }
+
+        public DateTime EndTime { get; set; }
+    }
+
+    public class EditEventViewModel
+    {
+        public int EventId { get; set; }
         public DateTime StartTime { get; set; }
         public string Title { get; set; }
         public int CreatedBy { get; set; }

@@ -29,6 +29,10 @@ namespace DatabaseTests
             {
                 VoteEventModel voteEventModel = new VoteEventModel();
                 voteEventModel.EventId = e.EventId;
+                //voteEventModel.UserProfileId = accountServices.GetAllUserProfiles().ToList()[]\
+                int totalUsers = accountServices.GetAllUserProfiles().Count();
+                voteEventModel.UserProfileId = random.Next(1, totalUsers);
+                //CHeck for null later
 
                 return eventServices.Vote(voteEventModel);
             }

@@ -27,8 +27,13 @@
     <h3><%: Html.ActionLink(mode.Title, "Index", "Event", new {id = mode.EventId}, null) %></h3>
     <h5><%=mode.Location.Name%></h5>
     <p><%=mode.Description%></p>
+    <%--<%if (mode.IsLikedByUser)
+      { %><div class="VoteDown"><%: Html.ActionLink(":)", "VoteDown", "Event", null, null)%></div>
+    <%}else{ %>
+    <div class="VoteUp"><%: Html.ActionLink(":)","VoteUp","Event", null,null) %></div>
+    <%} %>
     </div>
-    <% } %>
+    <% } %>--%>
     <script type="text/javascript">        function realInitialize() {
         <% foreach (Omnipresence.Processing.EventModel mode in Model.Events) { %>
             setMap("map<%:mode.EventId %>");
@@ -67,6 +72,18 @@
     td.menu:hover 
     {
         background-color: #C00;
+    }
+    div.VoteDown 
+    {
+        padding:10px;
+        background-color:Yellow;
+        color:Black;
+    }
+    div.VoteUp 
+    {
+        padding:10px;
+        background-color:Black;
+        color:White;
     }
 </style>
 </asp:Content>

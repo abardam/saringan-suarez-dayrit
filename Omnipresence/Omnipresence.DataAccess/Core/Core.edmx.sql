@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/29/2011 19:04:04
--- Generated from EDMX file: C:\Users\Mr Suarez\Documents\thesis\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
+-- Date Created: 01/13/2012 13:13:46
+-- Generated from EDMX file: C:\Users\enzo\Documents\Visual Studio 2010\Projects\Omnipresence(2)\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -50,6 +50,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendRequest1]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[FriendRequests] DROP CONSTRAINT [FK_UserProfileFriendRequest1];
 GO
+IF OBJECT_ID(N'[dbo].[FK_EventEventVotes]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EventVotes1] DROP CONSTRAINT [FK_EventEventVotes];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserProfileEventVotes]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EventVotes1] DROP CONSTRAINT [FK_UserProfileEventVotes];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -84,6 +90,9 @@ IF OBJECT_ID(N'[dbo].[MediaItems]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FriendRequests]', 'U') IS NOT NULL
     DROP TABLE [dbo].[FriendRequests];
+GO
+IF OBJECT_ID(N'[dbo].[EventVotes1]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EventVotes1];
 GO
 
 -- --------------------------------------------------
@@ -207,6 +216,13 @@ CREATE TABLE [dbo].[FriendRequests] (
 );
 GO
 
+-- Creating table 'EventVotes'
+CREATE TABLE [dbo].[EventVotes] (
+    [EventId] int  NOT NULL,
+    [UserProfileId] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -269,6 +285,12 @@ GO
 ALTER TABLE [dbo].[FriendRequests]
 ADD CONSTRAINT [PK_FriendRequests]
     PRIMARY KEY NONCLUSTERED ([AdderId], [AddedId] ASC);
+GO
+
+-- Creating primary key on [EventId], [UserProfileId] in table 'EventVotes'
+ALTER TABLE [dbo].[EventVotes]
+ADD CONSTRAINT [PK_EventVotes]
+    PRIMARY KEY NONCLUSTERED ([EventId], [UserProfileId] ASC);
 GO
 
 -- --------------------------------------------------
@@ -412,6 +434,29 @@ ADD CONSTRAINT [FK_UserProfileFriendRequest1]
 CREATE INDEX [IX_FK_UserProfileFriendRequest1]
 ON [dbo].[FriendRequests]
     ([AddedId]);
+GO
+
+-- Creating foreign key on [EventId] in table 'EventVotes'
+ALTER TABLE [dbo].[EventVotes]
+ADD CONSTRAINT [FK_EventEventVotes]
+    FOREIGN KEY ([EventId])
+    REFERENCES [dbo].[Events]
+        ([EventId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [UserProfileId] in table 'EventVotes'
+ALTER TABLE [dbo].[EventVotes]
+ADD CONSTRAINT [FK_UserProfileEventVotes]
+    FOREIGN KEY ([UserProfileId])
+    REFERENCES [dbo].[UserProfiles]
+        ([UserProfileId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserProfileEventVotes'
+CREATE INDEX [IX_FK_UserProfileEventVotes]
+ON [dbo].[EventVotes]
+    ([UserProfileId]);
 GO
 
 -- --------------------------------------------------
