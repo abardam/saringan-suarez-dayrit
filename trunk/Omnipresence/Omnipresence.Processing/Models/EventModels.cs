@@ -21,8 +21,9 @@ namespace Omnipresence.Processing
         public DateTime Created { get; set; }
         public int Rating { get; set; }
         public int CreatedById { get; set; }
+        public bool IsLikedByUser { get; set; }
     }
-    
+
     public class CreateEventModel
     {
         public int UserProfileId { get; set; }
@@ -47,7 +48,9 @@ namespace Omnipresence.Processing
         public DateTime EndTime { get; set; }
         public Category Category { get; set; }
         public bool IsPrivate { get; set; }
-        public Location Location { get; set; }
+        public string Address { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public bool IsActive { get; set; }
         public int Rating { get; set; }
     }
@@ -60,6 +63,7 @@ namespace Omnipresence.Processing
     public class VoteEventModel
     {
         public int EventId { get; set; }
+        public int UserProfileId { get; set; }
         public bool IsDownvote { get; set; }
     }
     

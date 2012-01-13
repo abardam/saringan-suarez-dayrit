@@ -207,19 +207,116 @@ namespace Omnipresence.Mvc2.Controllers
 
         public ActionResult Edit(int id)
         {
+            ProfileController.SetViewDataForDate(ViewData);
+            ProfileController.SetViewDataForTime(ViewData);
             EventModel em = eventServices.GetEventById(id);
+            EditEventViewModel cem = new EditEventViewModel
+            {
+                EventId = id,
+                Address = em.Location.Address,
+                CategoryString = em.Category != null ? em.Category.Description : "",
+                Description = em.Description,
+                EndTime = em.EndTime,
+                Latitude = em.Location.Latitude,
+                Longitude = em.Location.Latitude,
+                StartTime = em.StartTime,
+                Title = em.Title,
+                CreatedBy = em.CreatedById,
+                CreateTime = em.Created,
+                StartDay = em.StartTime.Day,
+                StartMinute = em.StartTime.Minute.ToString(),
+                StartYear = em.StartTime.Year,
+                EndDay = em.EndTime.Day,
+                EndMinute = em.EndTime.Minute.ToString(),
+                EndYear = em.EndTime.Year
+            };
+
+            cem.StartMonth = cem.Months.ToArray()[em.StartTime.Month - 1].Value;
+            cem.EndMonth = cem.Months.ToArray()[em.EndTime.Month - 1].Value;
+
+            if (em.StartTime.Hour > 12)
+            {
+                cem.StartAMPM = "PM";
+                cem.StartHour = em.StartTime.Hour - 12;
+            }
+            else
+            {
+                cem.StartAMPM = "AM";
+                cem.StartHour = em.StartTime.Hour;
+            }
+
+            if (em.EndTime.Hour > 12)
+            {
+                cem.EndAMPM = "PM";
+                cem.EndHour = em.EndTime.Hour - 12;
+            }
+            else
+            {
+                cem.EndAMPM = "AM";
+                cem.EndHour = em.EndTime.Hour;
+            }
             UserProfileModel profile = accountServices.GetUserProfileByUsername(User.Identity.Name);
             if (profile != null && em != null)
             {
                 if (em.CreatedById == profile.UserProfileId)
                 {
-                    return View(em);
+                    return View(cem);
                 }
             }
 
             return RedirectToAction("Index", "Home");
         }
         // TODO: Wala pang httppost
+
+        // ito na.
+
+        [HttpPost]
+        public ActionResult Edit(EditEventViewModel model)
+        {
+            UserModel um = accountServices.GetUserByUsername(User.Identity.Name);
+            CreateEventModel cem = new CreateEventModel();
+            cem.Address = model.Address;
+            cem.CategoryString = model.CategoryString;
+            cem.Description = model.Description;
+            cem.EndTime = DateTime.Parse(model.EndMonth + "/" + model.EndDay + "/" + model.EndYear + " " + model.EndHour + ":" + model.EndMinute + " " + model.EndAMPM);
+            cem.Latitude = model.Latitude;
+            cem.Longitude = model.Longitude;
+            cem.StartTime = DateTime.Parse(model.StartMonth + "/" + model.StartDay + "/" + model.StartYear + " " + model.StartHour + ":" + model.StartMinute + " " + model.StartAMPM);
+            cem.Title = model.Title;
+            string username = User.Identity.Name;
+            cem.UserProfileId = accountServices.GetUserProfileByUsername(username).UserProfileId;
+            try
+            {
+
+                eventServices.UpdateEvent(new UpdateEventModel
+                {
+                    Description = cem.Description,
+                    EndTime = cem.EndTime,
+                    EventId = model.EventId,
+                    IsPrivate = cem.IsPrivate,
+                    Address = model.Address,
+                    Latitude = model.Latitude,
+                    Longitude = model.Longitude,
+                    StartTime = cem.StartTime,
+                    Title = cem.Title,
+                });
+            }
+            catch (ConstraintException e)
+            {
+                ViewData["message"] = e.Message;
+
+                if (e.Data.Contains("Entity"))
+                {
+                    ViewData["message"] = e.Data["Entity"] + " cannot be left blank!";
+                }
+
+                ProfileController.SetViewDataForDate(ViewData);
+                ProfileController.SetViewDataForTime(ViewData);
+
+                return View(model);
+            }
+            return Redirect("/e/" + model.EventId);
+        }
 
         public ActionResult All()
         {
@@ -249,6 +346,28 @@ namespace Omnipresence.Mvc2.Controllers
             if (profile == null) profile = new UserProfileModel { Avatar = "", FirstName = "", LastName = "" };
             IndexSidebarViewModel sidebar = new IndexSidebarViewModel { AvatarUrl = profile.Avatar, Name = profile.FirstName + " " + profile.LastName, Notifications = notifications, Username = User.Identity.Name };
             return (new IndexViewModel { DisplayName = sidebar.Name, Events = events, Sidebar = sidebar });
+        }
+        [Authorize]
+        public ActionResult VoteUp(int id = 0)
+        {
+            if (id != 0)
+            {
+                int profId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
+                eventServices.Vote(new VoteEventModel { UserProfileId = profId, EventId = id, IsDownvote = false });
+                // TODO: UPDATE IFORHDFHRLIUV|UHDRAWI
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        [Authorize]
+        public ActionResult VoteDown(int id = 0)
+        {
+            if (id != 0)
+            {
+                int profId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
+                eventServices.Vote(new VoteEventModel {UserProfileId = profId, EventId = id, IsDownvote = true });
+                // TODO: UPDATE IFORHDFHRLIUV|UHDRAWI
+            }
+            return RedirectToAction("Index", "Home");
         }
 
     }

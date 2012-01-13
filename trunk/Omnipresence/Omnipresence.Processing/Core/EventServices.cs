@@ -78,11 +78,17 @@ namespace Omnipresence.Processing
                 evt.Title = uem.Title;
                 evt.Description = uem.Description;
                 evt.StartTime = uem.StartTime;
+                evt.EndTime = uem.EndTime;
                 evt.Category = uem.Category;
                 evt.IsPrivate = uem.IsPrivate;
-                evt.Location = uem.Location;
                 evt.IsActive = uem.IsActive;
                 evt.Rating = uem.Rating;
+
+                evt.Location = db.Locations.Where(x => x.LocationId == evt.LocationId).FirstOrDefault();
+                evt.Location.Address = uem.Address;
+                evt.Location.Latitude = uem.Latitude;
+                evt.Location.Longitude = uem.Longitude;
+
                 db.SaveChanges();
 
                 return true;
@@ -112,9 +118,15 @@ namespace Omnipresence.Processing
 
         public bool Vote(VoteEventModel voteEventModel)
         {
+            if (voteEventModel.UserProfileId < 1 || voteEventModel.EventId < 1)
+            {
+                return false;
+            }
             Event curEvent = db.Events.Where(ev => (ev.EventId == voteEventModel.EventId)).FirstOrDefault();
+            UserProfile userProfile = db.UserProfiles.Where(up => up.UserProfileId == voteEventModel.UserProfileId).FirstOrDefault();
+            EventVote eventVote = db.EventVotes.Where(e => e.EventId == curEvent.EventId && e.UserProfileId == userProfile.UserProfileId).FirstOrDefault();
 
-            if (curEvent != null)
+            if (eventVote == null || curEvent != null)
             {
                 if (voteEventModel.IsDownvote)
                 {
@@ -124,6 +136,11 @@ namespace Omnipresence.Processing
                 {
                     curEvent.Rating++;
                 }
+
+                EventVote newVote = new EventVote();
+                newVote.UserProfileId = userProfile.UserProfileId;
+                newVote.EventId = curEvent.EventId;
+                db.EventVotes.AddObject(newVote);
 
                 db.SaveChanges();
                 return true;

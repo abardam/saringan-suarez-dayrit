@@ -29,6 +29,8 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "EventMediaItem", "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event), "MediaItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.MediaItem), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileFriendRequest", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "FriendRequest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.FriendRequest), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileFriendRequest1", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "FriendRequest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.FriendRequest), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "EventEventVotes", "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event), "EventVotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.EventVote), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileEventVotes", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "EventVotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.EventVote), true)]
 
 #endregion
 
@@ -239,6 +241,22 @@ namespace Omnipresence.DataAccess.Core
             }
         }
         private ObjectSet<FriendRequest> _FriendRequests;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<EventVote> EventVotes
+        {
+            get
+            {
+                if ((_EventVotes == null))
+                {
+                    _EventVotes = base.CreateObjectSet<EventVote>("EventVotes");
+                }
+                return _EventVotes;
+            }
+        }
+        private ObjectSet<EventVote> _EventVotes;
 
         #endregion
         #region AddTo Methods
@@ -321,6 +339,14 @@ namespace Omnipresence.DataAccess.Core
         public void AddToFriendRequests(FriendRequest friendRequest)
         {
             base.AddObject("FriendRequests", friendRequest);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the EventVotes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToEventVotes(EventVote eventVote)
+        {
+            base.AddObject("EventVotes", eventVote);
         }
 
         #endregion
@@ -1475,6 +1501,191 @@ namespace Omnipresence.DataAccess.Core
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MediaItem>("OmnipresenceModel.EventMediaItem", "MediaItem", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "EventEventVotes", "EventVotes")]
+        public EntityCollection<EventVote> EventVotes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EventVote>("OmnipresenceModel.EventEventVotes", "EventVotes");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EventVote>("OmnipresenceModel.EventEventVotes", "EventVotes", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="EventVote")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class EventVote : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new EventVote object.
+        /// </summary>
+        /// <param name="eventId">Initial value of the EventId property.</param>
+        /// <param name="userProfileId">Initial value of the UserProfileId property.</param>
+        public static EventVote CreateEventVote(global::System.Int32 eventId, global::System.Int32 userProfileId)
+        {
+            EventVote eventVote = new EventVote();
+            eventVote.EventId = eventId;
+            eventVote.UserProfileId = userProfileId;
+            return eventVote;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EventId
+        {
+            get
+            {
+                return _EventId;
+            }
+            set
+            {
+                if (_EventId != value)
+                {
+                    OnEventIdChanging(value);
+                    ReportPropertyChanging("EventId");
+                    _EventId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("EventId");
+                    OnEventIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _EventId;
+        partial void OnEventIdChanging(global::System.Int32 value);
+        partial void OnEventIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserProfileId
+        {
+            get
+            {
+                return _UserProfileId;
+            }
+            set
+            {
+                if (_UserProfileId != value)
+                {
+                    OnUserProfileIdChanging(value);
+                    ReportPropertyChanging("UserProfileId");
+                    _UserProfileId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("UserProfileId");
+                    OnUserProfileIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _UserProfileId;
+        partial void OnUserProfileIdChanging(global::System.Int32 value);
+        partial void OnUserProfileIdChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "EventEventVotes", "Event")]
+        public Event Event
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.EventEventVotes", "Event").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.EventEventVotes", "Event").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Event> EventReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.EventEventVotes", "Event");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Event>("OmnipresenceModel.EventEventVotes", "Event", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileEventVotes", "UserProfile")]
+        public UserProfile UserProfile
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileEventVotes", "UserProfile").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileEventVotes", "UserProfile").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<UserProfile> UserProfileReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileEventVotes", "UserProfile");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserProfile>("OmnipresenceModel.UserProfileEventVotes", "UserProfile", value);
                 }
             }
         }
@@ -3047,6 +3258,28 @@ namespace Omnipresence.DataAccess.Core
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<FriendRequest>("OmnipresenceModel.UserProfileFriendRequest1", "FriendRequest", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileEventVotes", "EventVotes")]
+        public EntityCollection<EventVote> EventVotes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EventVote>("OmnipresenceModel.UserProfileEventVotes", "EventVotes");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EventVote>("OmnipresenceModel.UserProfileEventVotes", "EventVotes", value);
                 }
             }
         }
