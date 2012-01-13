@@ -14,13 +14,7 @@
         <fieldset>
             <legend>Fields</legend>
             
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.EventId) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.EventId) %>
-                <%: Html.ValidationMessageFor(model => model.EventId) %>
-            </div>
+                <%: Html.HiddenFor(model => model.EventId) %>
             
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Title) %>

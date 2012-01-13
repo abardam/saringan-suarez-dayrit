@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Omnipresence.Mvc2.Models;
 using Omnipresence.Processing;
 using System.Data;
+using System.Web.Routing;
 
 namespace Omnipresence.Mvc2.Controllers
 {
@@ -17,7 +18,7 @@ namespace Omnipresence.Mvc2.Controllers
         private AccountServices accountServices;
         private EventServices eventServices;
         private CommentServices commentServices;
-        
+
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             eventServices = EventServices.GetInstance();
@@ -30,6 +31,7 @@ namespace Omnipresence.Mvc2.Controllers
         {
             EventModel model = eventServices.GetEventById(id);
             if (model == null) return RedirectToAction("Index", "Home");
+
 
             EventCommentViewModel ecvm = new EventCommentViewModel
             {
@@ -51,6 +53,16 @@ namespace Omnipresence.Mvc2.Controllers
                 CategoryString = model.Category.Description*/
             };
 
+            ecvm.CreatedByUser = false;
+            UserProfileModel profile = accountServices.GetUserProfileByUsername(User.Identity.Name);
+            if (profile != null)
+            {
+                if (ecvm.CreatedById == profile.UserProfileId)
+                {
+                    ecvm.CreatedByUser = true;
+                }
+            }
+
             IEnumerable<CommentModel> tempie = commentServices.GetAllCommentsByEventId(model.EventId);
             List<CommentViewModel> commentList = new List<CommentViewModel>();
 
@@ -58,9 +70,10 @@ namespace Omnipresence.Mvc2.Controllers
 
             int userProfileId = accountServices.GetUserByUsername(User.Identity.Name).UserProfile.UserProfileId;
 
-            foreach(CommentModel cm in tempie){
+            foreach (CommentModel cm in tempie)
+            {
                 UserProfileModel upm = accountServices.GetUserProfileByUserProfileId(cm.UserProfileId);
-                
+
                 CommentViewModel cvm = new CommentViewModel
                 {
                     CommenterName = upm.FirstName + " " + upm.LastName,
@@ -81,11 +94,12 @@ namespace Omnipresence.Mvc2.Controllers
                         {
                             mins = (now.Minute - cm.Timestamp.Minute);
                         }
-                        else if(now.Hour == cm.Timestamp.Hour + 1 && (now.Minute + 60 - cm.Timestamp.Minute) < 60)
+                        else if (now.Hour == cm.Timestamp.Hour + 1 && (now.Minute + 60 - cm.Timestamp.Minute) < 60)
                         {
                             mins = (now.Minute + 60 - cm.Timestamp.Minute);
                         }
-                        else{
+                        else
+                        {
                             mins = -1;
                         }
 
@@ -97,7 +111,8 @@ namespace Omnipresence.Mvc2.Controllers
                         {
                             cvm.TimeString = "1 minute ago";
                         }
-                        else if(mins == -1){
+                        else if (mins == -1)
+                        {
                             cvm.TimeString = cm.Timestamp.ToShortTimeString();
                         }
                         else
@@ -105,7 +120,7 @@ namespace Omnipresence.Mvc2.Controllers
                             cvm.TimeString = mins + " minutes ago";
                         }
 
-                        
+
                     }
                     else
                     {
@@ -116,7 +131,7 @@ namespace Omnipresence.Mvc2.Controllers
                 {
                     cvm.TimeString = cm.Timestamp.ToShortDateString();
                 }
-                
+
                 commentList.Add(cvm);
             }
 
@@ -166,7 +181,7 @@ namespace Omnipresence.Mvc2.Controllers
             cem.EndTime = DateTime.Parse(model.EndMonth + "/" + model.EndDay + "/" + model.EndYear + " " + model.EndHour + ":" + model.EndMinute + " " + model.EndAMPM);
             cem.Latitude = model.Latitude;
             cem.Longitude = model.Longitude;
-            cem.StartTime = DateTime.Parse(model.StartMonth + "/" + model.StartDay + "/" + model.StartYear + " "+model.StartHour+":"+model.StartMinute+" "+model.StartAMPM);
+            cem.StartTime = DateTime.Parse(model.StartMonth + "/" + model.StartDay + "/" + model.StartYear + " " + model.StartHour + ":" + model.StartMinute + " " + model.StartAMPM);
             cem.Title = model.Title;
             string username = User.Identity.Name;
             cem.UserProfileId = accountServices.GetUserProfileByUsername(username).UserProfileId;
@@ -193,15 +208,49 @@ namespace Omnipresence.Mvc2.Controllers
         public ActionResult Edit(int id)
         {
             EventModel em = eventServices.GetEventById(id);
+            UserProfileModel profile = accountServices.GetUserProfileByUsername(User.Identity.Name);
+            if (profile != null && em != null)
+            {
+                if (em.CreatedById == profile.UserProfileId)
+                {
+                    return View(em);
+                }
+            }
 
-            return View(em);
+            return RedirectToAction("Index", "Home");
         }
+        // TODO: Wala pang httppost
 
         public ActionResult All()
         {
-            return View(eventServices.GetAllEvents());
+            return View(generateIndexViewModel(eventServices.GetAllEvents().Take(10)));
+        }
+
+        public ActionResult Hot(int id = 0)
+        {
+            return View(generateIndexViewModel(eventServices.GetHotEvents(id)));
+        }
+
+        public ActionResult Top(int id = 0)
+        {
+            return View(generateIndexViewModel(eventServices.GetTopEvents(id)));
+        }
+        [Authorize]
+        public ActionResult Subscriptions(int id = 0)
+        {
+            return View(generateIndexViewModel(
+                eventServices.GetSubscriptionEvents(accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId, id)
+                ));
+        }
+        private IndexViewModel generateIndexViewModel(IEnumerable<EventModel> events)
+        {
+            UserProfileModel profile = accountServices.GetUserProfileByUsername(User.Identity.Name);
+            NotificationsShortList notifications = profile != null ? new NotificationsShortList { FriendRequests = accountServices.GetFriendRequests(new GetFriendRequestsModel { UserProfileId = profile.UserProfileId }).Count() } : null;
+            if (profile == null) profile = new UserProfileModel { Avatar = "", FirstName = "", LastName = "" };
+            IndexSidebarViewModel sidebar = new IndexSidebarViewModel { AvatarUrl = profile.Avatar, Name = profile.FirstName + " " + profile.LastName, Notifications = notifications, Username = User.Identity.Name };
+            return (new IndexViewModel { DisplayName = sidebar.Name, Events = events, Sidebar = sidebar });
         }
 
     }
-    
+
 }

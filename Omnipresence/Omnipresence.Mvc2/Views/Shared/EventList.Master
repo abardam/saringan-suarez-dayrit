@@ -21,19 +21,13 @@
         $(document).ready(function () {
             $("div.event-box").click(function () {
                 if (!$(this).hasClass("selected")) {
-                    //$(".selected").switchClass("selected", "unselected", 50);
                     $(".selected").removeClass("selected").addClass("unselected");
-                    //$(this).switchClass("unselected", "selected", 50);
                     $(this).removeClass("unselected").addClass("selected");
                     $(this).children("div").each(function () {
                         setMap($(this).attr("id"));
                     });
-                    /*
-                    setMap($(this).contents().filter(function () {
-                    alert(this.class);
-                    return this.class == 'map-container';
-
-                    }).attr('id'));*/
+                    $(".unselected a").click(function () { return false; });
+                    $(".selected a").click(function () { });
                 }
             });
         }

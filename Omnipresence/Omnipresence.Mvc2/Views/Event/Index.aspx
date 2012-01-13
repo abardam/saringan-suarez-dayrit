@@ -18,7 +18,8 @@
         <div>
             <p>From <%: String.Format("{0:g}", Model.StartTime) %> to <%:String.Format("{0:g}", Model.EndTime) %></p></div>
         <div><p>Rating: <%: Model.Rating %></p></div>
-        <%: Html.ActionLink("Edit", "Edit", new {  id=Model.EventId  }) %>
+        <% if (Model.CreatedByUser)
+           { %><%: Html.ActionLink("Edit", "Edit", new { id = Model.EventId })%><%} %>
 
         <h2>Comments</h2>
 
@@ -31,12 +32,15 @@
 
              <%} %>
 
-    <% using (Html.BeginForm())
-       { %>
+    <% if (!User.Identity.Name.Equals(""))
+       {
+           using (Html.BeginForm())
+           { %>
     <%: Html.ValidationSummary(true)%>
     <%: Html.TextAreaFor(model => model.NewComment)%>
     <input type="submit" value="Comment" />
-    <%} %>
+    <%}
+       } %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>

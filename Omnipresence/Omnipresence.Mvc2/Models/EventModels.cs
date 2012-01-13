@@ -103,6 +103,7 @@ namespace Omnipresence.Mvc2.Models
         public int CreatedById { get; set; }
         public IEnumerable<CommentViewModel> CommentList { get; set; }
         public string NewComment { get; set; }
+        public bool CreatedByUser { get; set; }
     }
 
     public class CommentViewModel

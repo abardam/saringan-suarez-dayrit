@@ -79,6 +79,7 @@
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\SidebarController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -155,8 +156,11 @@
     <Content Include="Scripts\omnimap-sidebar-scripts.js" />
     <Content Include="Views\Event\All.aspx" />
     <Content Include="Views\Event\Edit.aspx" />
+    <Content Include="Views\Event\Hot.aspx" />
     <Content Include="Views\Event\New.aspx" />
     <Content Include="Views\Event\Index.aspx" />
+    <Content Include="Views\Event\Subscriptions.aspx" />
+    <Content Include="Views\Event\Top.aspx" />
     <Content Include="Views\Friends\Delete.aspx" />
     <Content Include="Views\Friends\Friends.aspx" />
     <Content Include="Views\Friends\Index.aspx" />
@@ -171,6 +175,7 @@
     <Content Include="Views\Profile\Edit.aspx" />
     <Content Include="Views\Profile\Index.aspx" />
     <Content Include="Views\Profile\Profile.aspx" />
+    <Content Include="Views\Shared\EventList.ascx" />
     <Content Include="Views\Shared\IndexSidebar.ascx" />
     <Content Include="Views\Shared\ProfileSidebar.ascx" />
     <Content Include="Views\Sidebar\EditEventUserControl.ascx" />
