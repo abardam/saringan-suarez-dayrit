@@ -25,9 +25,9 @@ namespace Omnipresence.Mvc2.Controllers
             return accountService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(IEnumerable<EventModel> events = null)
         {
-            IEnumerable<EventModel> events = getEventService().GetAllEvents().Reverse().Take(10);
+            if (events == null) events = getEventService().GetAllEvents().Reverse().Take(10);
             UserProfileModel profile = getAccountService().GetUserProfileByUsername(User.Identity.Name);
             NotificationsShortList notifications = profile != null ? new NotificationsShortList{ FriendRequests = accountService.GetFriendRequests(new GetFriendRequestsModel{ UserProfileId = profile.UserProfileId}).Count() } : null;
             if (profile == null) profile = new UserProfileModel { Avatar = "", FirstName = "", LastName = "" };

@@ -222,6 +222,48 @@ namespace Omnipresence.Processing
             return eventModels.AsQueryable();
         }
 
+        public IQueryable<EventModel> GetHotEvents(int page = 1, int itemsPerPage = 10)
+        {
+            // TODO: Actual logic
+            List<EventModel> eventModels = new List<EventModel>();
+            IQueryable<Event> events = db.Events.OrderBy(x => x.EventId).Skip((page) * itemsPerPage).Take(itemsPerPage);
+
+            foreach (Event evt in events)
+            {
+                eventModels.Add(Utilities.EventToEventModel(evt));
+            }
+
+            return eventModels.AsQueryable();
+        }
+
+        public IQueryable<EventModel> GetTopEvents(int page = 1, int itemsPerPage = 10)
+        {
+            // TODO: Actual logic
+            List<EventModel> eventModels = new List<EventModel>();
+            IQueryable<Event> events = db.Events.OrderBy(x => x.EventId).Skip((page) * itemsPerPage).Take(itemsPerPage);
+
+            foreach (Event evt in events)
+            {
+                eventModels.Add(Utilities.EventToEventModel(evt));
+            }
+
+            return eventModels.AsQueryable();
+        }
+
+        public IQueryable<EventModel> GetSubscriptionEvents(int userProfileId, int page = 1, int itemsPerPage = 10)
+        {
+            // TODO: Actual logic
+            List<EventModel> eventModels = new List<EventModel>();
+            IQueryable<Event> events = db.Events.OrderBy(x => x.EventId).Skip((page) * itemsPerPage).Take(itemsPerPage);
+
+            foreach (Event evt in events)
+            {
+                eventModels.Add(Utilities.EventToEventModel(evt));
+            }
+
+            return eventModels.AsQueryable();
+        }
+
         #endregion
 
         public void Dispose()
