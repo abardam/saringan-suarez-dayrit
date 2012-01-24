@@ -23,14 +23,18 @@
         function realInitialize(){
             setMap("map");
         <% foreach(Omnipresence.Processing.EventModel item in Model.Events){ %>
-            addMarker(new google.maps.LatLng(<%= item.Location.Latitude %>, <%= item.Location.Longitude %>), "<%= item.Title %>");
+            addClickableMarker(new google.maps.LatLng(<%= item.Location.Latitude %>, <%= item.Location.Longitude %>), "<%= item.Title %>", <%= item.EventId%>);
             <%} %>
+        }
+
+        function goEvent(eventId){
+            window.location = "/e/"+eventId;
         }
     </script>
     
     <h2>All</h2>
 
-    <div class="map-container" id="map" data-lat="0" data-lng="0" style="width:680px; height:400px;"></div>
+    <div class="map-container" id="map" data-lat="0" data-lng="0" all="true" style="width:680px; height:400px;"></div>
     </div>
 </asp:Content>
 
