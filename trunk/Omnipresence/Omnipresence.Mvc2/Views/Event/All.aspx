@@ -19,25 +19,18 @@
 <%} %>
 </tr>
 </table>
-<% if (Model.Events.Count()>0) { %>
-	<% bool x = false;  foreach (Omnipresence.Processing.EventModel mode in Model.Events)
-    { %>
-    <div class="event-box <%if (!x) { %> selected<%} else {%> unselected<%} %>">
-    <div class="map-container" id="map<%: mode.EventId %>" data-lat="<%:mode.Location.Latitude %>" data-lng="<%:mode.Location.Longitude %>" style="width:680px; height:200px;"></div>
-    <h3><%: Html.ActionLink(mode.Title, "Index", "Event", new {id = mode.EventId}, null) %></h3>
-    <h5><%=mode.Location.Name%></h5>
-    <p><%=mode.Description%></p>
-    </div>
-    <% } %>
-    <script type="text/javascript">        function realInitialize() {
-        <% foreach (Omnipresence.Processing.EventModel mode in Model.Events) { %>
-            setMap("map<%:mode.EventId %>");
+<script type="text/javascript" language="javascript">
+        function realInitialize(){
+            setMap("map");
+        <% foreach(Omnipresence.Processing.EventModel item in Model.Events){ %>
+            addMarker(new google.maps.LatLng(<%= item.Location.Latitude %>, <%= item.Location.Longitude %>), "<%= item.Title %>");
             <%} %>
-        };
+        }
     </script>
-    <% } else { %>
-    <p>There are no events to display.</p>
-    <% } %>
+    
+    <h2>All</h2>
+
+    <div class="map-container" id="map" data-lat="0" data-lng="0" style="width:680px; height:400px;"></div>
     </div>
 </asp:Content>
 
