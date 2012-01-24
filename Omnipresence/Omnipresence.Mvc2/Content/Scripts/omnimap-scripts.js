@@ -20,7 +20,7 @@ var map;
 var mainMarker;
 window.onload = loadScript;
 
-function setMap2(divName, latLng, isNew) {
+function setMap2(divName, latLng, isNew, all) {
     var myOptions = {
         zoom: 16,
         center: latLng,
@@ -31,20 +31,26 @@ function setMap2(divName, latLng, isNew) {
 
     map = new google.maps.Map(document.getElementById(divName), myOptions);
 
-    if (!isNew) {
-        mainMarker = addMarker(latLng);
-    }
-    else {
-        google.maps.event.addListener(map, 'click', function (event) {
-            if (mainMarker != null) {
-                mainMarker.setMap(null);
-            }
-            mainMarker = addMarker(event.latLng);
 
-            document.getElementById("Latitude").value = event.latLng.lat();
-            document.getElementById("Longitude").value = event.latLng.lng();
-        });
+    if (!all) {
+        if (!isNew) {
+            mainMarker = addMarker(latLng);
+
+        }
+        else {
+            google.maps.event.addListener(map, 'click', function (event) {
+                if (mainMarker != null) {
+                    mainMarker.setMap(null);
+                }
+                mainMarker = addMarker(event.latLng);
+
+                document.getElementById("Latitude").value = event.latLng.lat();
+                document.getElementById("Longitude").value = event.latLng.lng();
+            });
+        }
     }
+
+
     /*
     var logoDiv = document.createElement('DIV');
     formatLogo(logoDiv, '<img src="../../Content/Images/omnilogo.png" />');
@@ -60,11 +66,22 @@ function setMap(divName) {
     var latlng = new google.maps.LatLng(lat, lng);
 
     var isNew = mapDiv.attr("new") == "true" || mapDiv.attr("new") != null;
+    var all = mapDiv.attr("all") != null;
 
-    setMap2(divName, latlng, isNew);
+    setMap2(divName, latlng, isNew, all);
 }
 function getEventIcon(eventType) {
     return "/Content/Images/" + eventType + ".png";
+}
+
+function addClickableMarker(latlng, title, eventId) {
+    var tempMarker = addMarker(latlng, title);
+
+    google.maps.event.addListener(tempMarker, 'click', function () {
+        goEvent(eventId);
+    });
+
+    return tempMarker;
 }
 
 function addMarker(latlng, title) {
