@@ -19,7 +19,15 @@
             <p>From <%: String.Format("{0:g}", Model.StartTime) %> to <%:String.Format("{0:g}", Model.EndTime) %></p></div>
         <div><p>Rating: <%: Model.Rating %></p></div>
         <% if (Model.CreatedByUser)
-           { %><%: Html.ActionLink("Edit", "Edit", new { id = Model.EventId })%><%} %>
+           { %><%: Html.ActionLink("Edit", "Edit", new { id = Model.EventId })%><%}
+           else
+           {
+                %>Vote up!<%
+                              } %>
+
+        <h2>Media</h2>
+        Media goes here.
+        Upload media
 
         <h2>Comments</h2>
 
