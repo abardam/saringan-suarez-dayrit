@@ -31,10 +31,34 @@
         <div class="display-field">
             <%: Model.GenderText %></div>
     </div>
-    <% if (Model.ViewingOwn)
-       {%>
-    <%: Html.ActionLink("edit", "Edit") %>
-    <%} %>
+    <% if (!Page.User.Identity.Name.Equals(""))
+   {
+       if (Model.ViewingOwn)
+       { %>
+
+<%: Html.ActionLink("edit", "Edit")%>
+<%}
+       else
+       {
+           if (Model.ViewingFriend)
+           {
+               %>
+               <p>Friend. </p>
+               <%}
+           else if (Model.ThisDudeHasSentAFriendRequestToYou)
+           {
+               %><p>Friend request pending. <a href="/Friends/Add/<%=Model.UserProfileId%>">Confirm.</a> Reject.</p><%
+    }
+           else if (Model.FriendRequested)
+           {
+               %><p>Friend request sent!</p><%
+    }
+           else
+           { %>
+       <p><a href="/Friends/Add/<%=Model.UserProfileId%>">Add as friend</a></p>
+    <%}
+       }
+   } %>
     <div class="section">
         <h1>
             Friends</h1>
