@@ -370,6 +370,43 @@ namespace Omnipresence.Mvc2.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize]
+        public ActionResult Share(int id = 0)
+        {
+            if (id != 0)
+            {
+                ShareEventViewModel sevm = new ShareEventViewModel();
+                sevm.EventID = id;
+                int profId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
+                sevm.SharerID = profId;
+
+                return View(sevm);
+            }
+
+            return RedirectToAction("Index", "Home"); //error ito dapat
+        }
+
+        [HttpPost]
+        public ActionResult Share(ShareEventViewModel model)
+        {
+            string[] usernames = model.SharedIDList.Split(',',';','\t','\n');
+            List<int> userIDs = new List<int>();
+
+            foreach(String s in usernames){
+                userIDs.Add(accountServices.GetUserByUsername(s).UserId);
+            }
+
+            eventServices.Share(new ShareEventModel
+            {
+                EventID = model.EventID,
+                Message = model.Message,
+                SharerID = model.SharerID,
+                SharedIDList = userIDs
+            });
+
+            return RedirectToAction("Index", new { id = model.EventID });
+        }
+
     }
 
 }

@@ -173,5 +173,11 @@ namespace Omnipresence.Mvc2.Models
         public List<ProfileViewModel> UserResult { get; set; }
     }
 
-
+    public class ShareEventViewModel
+    {
+        public int SharerID { get; set; }
+        public String SharedIDList { get; set; }
+        public int EventID { get; set; }
+        public String Message { get; set; }
+    }
 }
