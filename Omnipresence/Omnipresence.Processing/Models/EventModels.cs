@@ -76,6 +76,14 @@ namespace Omnipresence.Processing
         public Location Location { get; set; }
     }
 
+    public class ShareEventModel
+    {
+        public int SharerID { get; set; }
+        public List<int> SharedIDList { get; set; }
+        public int EventID { get; set; }
+        public String Message { get; set; }
+    }
+
     public static class EventValidation
     {
         public static string ErrorCodeToString(CreateEventStatus createStatus)
@@ -91,4 +99,5 @@ namespace Omnipresence.Processing
             }
         }
     }
+
 }

@@ -116,6 +116,13 @@ namespace Omnipresence.Processing
             }
         }
 
+        public bool Share(ShareEventModel shareEventModel)
+        {
+            //TODO: stub.
+
+            return false;
+        }
+
         public bool Vote(VoteEventModel voteEventModel)
         {
             if (voteEventModel.UserProfileId < 1 || voteEventModel.EventId < 1)
