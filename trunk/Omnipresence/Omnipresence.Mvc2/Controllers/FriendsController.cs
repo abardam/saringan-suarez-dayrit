@@ -19,6 +19,11 @@ namespace Omnipresence.Mvc2.Controllers
         }
         public ActionResult Friends(string id = "")
         {
+            if (id.Equals(""))
+            {
+                id = User.Identity.Name;
+            }
+
             AccountServices db = AccountServices.GetInstance();
             UserProfileModel profile = db.GetUserProfileByUsername(id);
             if (profile == null) return RedirectToAction("Index", "Home");
