@@ -31,6 +31,9 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileFriendRequest1", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "FriendRequest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.FriendRequest), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "EventEventVotes", "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.Event), "EventVotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.EventVote), true)]
 [assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileEventVotes", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "EventVotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.EventVote), true)]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "MailEvent", "Mail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Mail), "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Omnipresence.DataAccess.Core.Event))]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileMail", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Mail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Mail))]
+[assembly: EdmRelationshipAttribute("OmnipresenceModel", "UserProfileMail1", "UserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Omnipresence.DataAccess.Core.UserProfile), "Mail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Omnipresence.DataAccess.Core.Mail))]
 
 #endregion
 
@@ -257,6 +260,22 @@ namespace Omnipresence.DataAccess.Core
             }
         }
         private ObjectSet<EventVote> _EventVotes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Mail> Mails
+        {
+            get
+            {
+                if ((_Mails == null))
+                {
+                    _Mails = base.CreateObjectSet<Mail>("Mails");
+                }
+                return _Mails;
+            }
+        }
+        private ObjectSet<Mail> _Mails;
 
         #endregion
         #region AddTo Methods
@@ -347,6 +366,14 @@ namespace Omnipresence.DataAccess.Core
         public void AddToEventVotes(EventVote eventVote)
         {
             base.AddObject("EventVotes", eventVote);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Mails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToMails(Mail mail)
+        {
+            base.AddObject("Mails", mail);
         }
 
         #endregion
@@ -1526,6 +1553,28 @@ namespace Omnipresence.DataAccess.Core
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "MailEvent", "Mail")]
+        public EntityCollection<Mail> Mail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Mail>("OmnipresenceModel.MailEvent", "Mail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Mail>("OmnipresenceModel.MailEvent", "Mail", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -1545,11 +1594,13 @@ namespace Omnipresence.DataAccess.Core
         /// </summary>
         /// <param name="eventId">Initial value of the EventId property.</param>
         /// <param name="userProfileId">Initial value of the UserProfileId property.</param>
-        public static EventVote CreateEventVote(global::System.Int32 eventId, global::System.Int32 userProfileId)
+        /// <param name="isUpVote">Initial value of the IsUpVote property.</param>
+        public static EventVote CreateEventVote(global::System.Int32 eventId, global::System.Int32 userProfileId, global::System.Boolean isUpVote)
         {
             EventVote eventVote = new EventVote();
             eventVote.EventId = eventId;
             eventVote.UserProfileId = userProfileId;
+            eventVote.IsUpVote = isUpVote;
             return eventVote;
         }
 
@@ -1609,6 +1660,30 @@ namespace Omnipresence.DataAccess.Core
         private global::System.Int32 _UserProfileId;
         partial void OnUserProfileIdChanging(global::System.Int32 value);
         partial void OnUserProfileIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsUpVote
+        {
+            get
+            {
+                return _IsUpVote;
+            }
+            set
+            {
+                OnIsUpVoteChanging(value);
+                ReportPropertyChanging("IsUpVote");
+                _IsUpVote = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsUpVote");
+                OnIsUpVoteChanged();
+            }
+        }
+        private global::System.Boolean _IsUpVote;
+        partial void OnIsUpVoteChanging(global::System.Boolean value);
+        partial void OnIsUpVoteChanged();
 
         #endregion
     
@@ -2218,6 +2293,256 @@ namespace Omnipresence.DataAccess.Core
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("OmnipresenceModel.FK_Event_Location", "Events", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="OmnipresenceModel", Name="Mail")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Mail : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Mail object.
+        /// </summary>
+        /// <param name="mailId">Initial value of the MailId property.</param>
+        /// <param name="mailMessage">Initial value of the MailMessage property.</param>
+        /// <param name="read">Initial value of the Read property.</param>
+        /// <param name="starred">Initial value of the Starred property.</param>
+        public static Mail CreateMail(global::System.Guid mailId, global::System.String mailMessage, global::System.Boolean read, global::System.Boolean starred)
+        {
+            Mail mail = new Mail();
+            mail.MailId = mailId;
+            mail.MailMessage = mailMessage;
+            mail.Read = read;
+            mail.Starred = starred;
+            return mail;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid MailId
+        {
+            get
+            {
+                return _MailId;
+            }
+            set
+            {
+                if (_MailId != value)
+                {
+                    OnMailIdChanging(value);
+                    ReportPropertyChanging("MailId");
+                    _MailId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("MailId");
+                    OnMailIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _MailId;
+        partial void OnMailIdChanging(global::System.Guid value);
+        partial void OnMailIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String MailMessage
+        {
+            get
+            {
+                return _MailMessage;
+            }
+            set
+            {
+                OnMailMessageChanging(value);
+                ReportPropertyChanging("MailMessage");
+                _MailMessage = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("MailMessage");
+                OnMailMessageChanged();
+            }
+        }
+        private global::System.String _MailMessage;
+        partial void OnMailMessageChanging(global::System.String value);
+        partial void OnMailMessageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Read
+        {
+            get
+            {
+                return _Read;
+            }
+            set
+            {
+                OnReadChanging(value);
+                ReportPropertyChanging("Read");
+                _Read = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Read");
+                OnReadChanged();
+            }
+        }
+        private global::System.Boolean _Read;
+        partial void OnReadChanging(global::System.Boolean value);
+        partial void OnReadChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Starred
+        {
+            get
+            {
+                return _Starred;
+            }
+            set
+            {
+                OnStarredChanging(value);
+                ReportPropertyChanging("Starred");
+                _Starred = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Starred");
+                OnStarredChanged();
+            }
+        }
+        private global::System.Boolean _Starred;
+        partial void OnStarredChanging(global::System.Boolean value);
+        partial void OnStarredChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "MailEvent", "Event")]
+        public Event ReferredEvent
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.MailEvent", "Event").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.MailEvent", "Event").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Event> ReferredEventReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Event>("OmnipresenceModel.MailEvent", "Event");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Event>("OmnipresenceModel.MailEvent", "Event", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileMail", "UserProfile")]
+        public UserProfile FromUserProfile
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileMail", "UserProfile").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileMail", "UserProfile").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<UserProfile> FromUserProfileReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileMail", "UserProfile");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserProfile>("OmnipresenceModel.UserProfileMail", "UserProfile", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileMail1", "UserProfile")]
+        public UserProfile ToUserProfile
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileMail1", "UserProfile").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileMail1", "UserProfile").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<UserProfile> ToUserProfileReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserProfile>("OmnipresenceModel.UserProfileMail1", "UserProfile");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserProfile>("OmnipresenceModel.UserProfileMail1", "UserProfile", value);
                 }
             }
         }
@@ -3280,6 +3605,50 @@ namespace Omnipresence.DataAccess.Core
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EventVote>("OmnipresenceModel.UserProfileEventVotes", "EventVotes", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileMail", "Mail")]
+        public EntityCollection<Mail> SentMail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Mail>("OmnipresenceModel.UserProfileMail", "Mail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Mail>("OmnipresenceModel.UserProfileMail", "Mail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OmnipresenceModel", "UserProfileMail1", "Mail")]
+        public EntityCollection<Mail> ReceivedMail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Mail>("OmnipresenceModel.UserProfileMail1", "Mail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Mail>("OmnipresenceModel.UserProfileMail1", "Mail", value);
                 }
             }
         }

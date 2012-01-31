@@ -412,8 +412,8 @@ namespace Omnipresence.Mvc2.Controllers
             {
                 EventID = model.EventID,
                 Message = model.Message,
-                SharerID = model.SharerID,
-                SharedIDList = userIDs
+                SharerProfileId = model.SharerID,
+                SharedProfileIDList = userIDs
             });
 
             return RedirectToAction("Index", new { id = model.EventID });

@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 01/13/2012 13:13:46
--- Generated from EDMX file: C:\Users\enzo\Documents\Visual Studio 2010\Projects\Omnipresence(2)\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
+-- Date Created: 01/31/2012 19:26:01
+-- Generated from EDMX file: C:\Users\Mr Suarez\Documents\thesis\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -51,10 +51,19 @@ IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendRequest1]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[FriendRequests] DROP CONSTRAINT [FK_UserProfileFriendRequest1];
 GO
 IF OBJECT_ID(N'[dbo].[FK_EventEventVotes]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EventVotes1] DROP CONSTRAINT [FK_EventEventVotes];
+    ALTER TABLE [dbo].[EventVotes] DROP CONSTRAINT [FK_EventEventVotes];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserProfileEventVotes]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EventVotes1] DROP CONSTRAINT [FK_UserProfileEventVotes];
+    ALTER TABLE [dbo].[EventVotes] DROP CONSTRAINT [FK_UserProfileEventVotes];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MailEvent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Mails] DROP CONSTRAINT [FK_MailEvent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserMail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Mails] DROP CONSTRAINT [FK_UserMail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserMail1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Mails] DROP CONSTRAINT [FK_UserMail1];
 GO
 
 -- --------------------------------------------------
@@ -91,8 +100,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FriendRequests]', 'U') IS NOT NULL
     DROP TABLE [dbo].[FriendRequests];
 GO
-IF OBJECT_ID(N'[dbo].[EventVotes1]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[EventVotes1];
+IF OBJECT_ID(N'[dbo].[EventVotes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EventVotes];
+GO
+IF OBJECT_ID(N'[dbo].[Mails]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Mails];
 GO
 
 -- --------------------------------------------------
@@ -219,7 +231,20 @@ GO
 -- Creating table 'EventVotes'
 CREATE TABLE [dbo].[EventVotes] (
     [EventId] int  NOT NULL,
-    [UserProfileId] int  NOT NULL
+    [UserProfileId] int  NOT NULL,
+    [IsUpVote] bit  NOT NULL
+);
+GO
+
+-- Creating table 'Mails'
+CREATE TABLE [dbo].[Mails] (
+    [MailId] uniqueidentifier  NOT NULL,
+    [MailMessage] nvarchar(max)  NOT NULL,
+    [Read] bit  NOT NULL,
+    [Starred] bit  NOT NULL,
+    [ReferredEvent_EventId] int  NULL,
+    [FromUserProfile_UserProfileId] int  NOT NULL,
+    [ToUserProfile_UserProfileId] int  NOT NULL
 );
 GO
 
@@ -290,7 +315,13 @@ GO
 -- Creating primary key on [EventId], [UserProfileId] in table 'EventVotes'
 ALTER TABLE [dbo].[EventVotes]
 ADD CONSTRAINT [PK_EventVotes]
-    PRIMARY KEY NONCLUSTERED ([EventId], [UserProfileId] ASC);
+    PRIMARY KEY CLUSTERED ([EventId], [UserProfileId] ASC);
+GO
+
+-- Creating primary key on [MailId] in table 'Mails'
+ALTER TABLE [dbo].[Mails]
+ADD CONSTRAINT [PK_Mails]
+    PRIMARY KEY CLUSTERED ([MailId] ASC);
 GO
 
 -- --------------------------------------------------
@@ -457,6 +488,48 @@ ADD CONSTRAINT [FK_UserProfileEventVotes]
 CREATE INDEX [IX_FK_UserProfileEventVotes]
 ON [dbo].[EventVotes]
     ([UserProfileId]);
+GO
+
+-- Creating foreign key on [ReferredEvent_EventId] in table 'Mails'
+ALTER TABLE [dbo].[Mails]
+ADD CONSTRAINT [FK_MailEvent]
+    FOREIGN KEY ([ReferredEvent_EventId])
+    REFERENCES [dbo].[Events]
+        ([EventId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_MailEvent'
+CREATE INDEX [IX_FK_MailEvent]
+ON [dbo].[Mails]
+    ([ReferredEvent_EventId]);
+GO
+
+-- Creating foreign key on [FromUserProfile_UserProfileId] in table 'Mails'
+ALTER TABLE [dbo].[Mails]
+ADD CONSTRAINT [FK_UserProfileMail]
+    FOREIGN KEY ([FromUserProfile_UserProfileId])
+    REFERENCES [dbo].[UserProfiles]
+        ([UserProfileId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserProfileMail'
+CREATE INDEX [IX_FK_UserProfileMail]
+ON [dbo].[Mails]
+    ([FromUserProfile_UserProfileId]);
+GO
+
+-- Creating foreign key on [ToUserProfile_UserProfileId] in table 'Mails'
+ALTER TABLE [dbo].[Mails]
+ADD CONSTRAINT [FK_UserProfileMail1]
+    FOREIGN KEY ([ToUserProfile_UserProfileId])
+    REFERENCES [dbo].[UserProfiles]
+        ([UserProfileId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserProfileMail1'
+CREATE INDEX [IX_FK_UserProfileMail1]
+ON [dbo].[Mails]
+    ([ToUserProfile_UserProfileId]);
 GO
 
 -- --------------------------------------------------

@@ -118,9 +118,27 @@ namespace Omnipresence.Processing
 
         public bool Share(ShareEventModel shareEventModel)
         {
-            //TODO: stub.
+            Event _event = db.Events.Where(ev => ev.EventId == shareEventModel.EventID).FirstOrDefault();
+            UserProfile _profile = db.UserProfiles.Where(up => up.UserProfileId == shareEventModel.SharerProfileId).FirstOrDefault();
+            IEnumerable<UserProfile> _recipients = db.UserProfiles.Where(rec => shareEventModel.SharedProfileIDList.Contains(rec.UserProfileId));
+            if (_event == null || _profile == null || _recipients.Count() <= 0) return false;
 
-            return false;
+            foreach (UserProfile _recipient in _recipients)
+            {
+                db.Mails.AddObject(
+                    new Mail
+                    {
+                        MailMessage = shareEventModel.Message,
+                        FromUserProfile = _profile,
+                        ToUserProfile = _recipient,
+                        Read = false,
+                        Starred = false
+                    });
+            }
+
+            db.SaveChanges();
+
+            return true;
         }
 
         public bool Vote(VoteEventModel voteEventModel)
@@ -133,29 +151,41 @@ namespace Omnipresence.Processing
             UserProfile userProfile = db.UserProfiles.Where(up => up.UserProfileId == voteEventModel.UserProfileId).FirstOrDefault();
             EventVote eventVote = db.EventVotes.Where(e => e.EventId == curEvent.EventId && e.UserProfileId == userProfile.UserProfileId).FirstOrDefault();
 
-            if (eventVote == null || curEvent != null)
+            if (curEvent == null || userProfile == null) return false;
+            if (eventVote == null)
+            {
+                if (voteEventModel.IsDownvote) curEvent.Rating--;
+                else curEvent.Rating++;
+                db.EventVotes.AddObject(
+                    new EventVote
+                    {
+                        UserProfileId = userProfile.UserProfileId,
+                        EventId = curEvent.EventId,
+                        IsUpVote = !voteEventModel.IsDownvote
+                    });
+                db.SaveChanges();
+
+                return true;
+            }
+            // New: added new functionality for upvote and downvote.
+            if (eventVote.IsUpVote)
             {
                 if (voteEventModel.IsDownvote)
                 {
-                    curEvent.Rating--;
+                    curEvent.Rating -= 2;
                 }
-                else
-                {
-                    curEvent.Rating++;
-                }
-
-                EventVote newVote = new EventVote();
-                newVote.UserProfileId = userProfile.UserProfileId;
-                newVote.EventId = curEvent.EventId;
-                db.EventVotes.AddObject(newVote);
-
-                db.SaveChanges();
-                return true;
+                eventVote.IsUpVote = false;
             }
             else
             {
-                return false;
+                if (!voteEventModel.IsDownvote)
+                {
+                    curEvent.Rating += 2;
+                }
+                eventVote.IsUpVote = true;
             }
+            db.SaveChanges();
+            return true;
         }
 
         #endregion
