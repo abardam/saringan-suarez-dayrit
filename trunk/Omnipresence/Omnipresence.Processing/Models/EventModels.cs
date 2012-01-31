@@ -78,8 +78,8 @@ namespace Omnipresence.Processing
 
     public class ShareEventModel
     {
-        public int SharerID { get; set; }
-        public List<int> SharedIDList { get; set; }
+        public int SharerProfileId { get; set; }
+        public List<int> SharedProfileIDList { get; set; }
         public int EventID { get; set; }
         public String Message { get; set; }
     }
