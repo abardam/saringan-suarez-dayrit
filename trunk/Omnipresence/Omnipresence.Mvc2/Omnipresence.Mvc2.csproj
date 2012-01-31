@@ -18,6 +18,7 @@
     <SccLocalPath>Svn</SccLocalPath>
     <SccAuxPath>Svn</SccAuxPath>
     <SccProvider>SubversionScc</SccProvider>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -125,6 +126,7 @@
     <Content Include="Content\MapStyles.css" />
     <Content Include="Content\Scripts\datepicker-custom.js" />
     <Content Include="Content\Scripts\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Content\Scripts\jquery.autocomplete.js" />
     <Content Include="Content\Scripts\jquery.min.js" />
     <Content Include="Content\Scripts\omnimap-scripts.js" />
     <Content Include="Content\styles\basic.css" />
@@ -148,6 +150,7 @@
     <Content Include="Global.asax" />
     <Resource Include="Content\Images\circle.png" />
     <Content Include="Scripts\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Scripts\jquery.autocomplete.js" />
     <Content Include="Scripts\jquery.jeditable.js" />
     <Content Include="Scripts\json.js" />
     <Content Include="Scripts\omnimap-registration.js" />
@@ -159,6 +162,7 @@
     <Content Include="Views\Event\Hot.aspx" />
     <Content Include="Views\Event\New.aspx" />
     <Content Include="Views\Event\Index.aspx" />
+    <Content Include="Views\Event\Share.aspx" />
     <Content Include="Views\Event\Subscriptions.aspx" />
     <Content Include="Views\Event\Top.aspx" />
     <Content Include="Views\Friends\Delete.aspx" />
@@ -274,7 +278,10 @@
     <None Include="Content\styles\Raleway-font\raleway_thin-webfont.ttf" />
     <None Include="Content\styles\Raleway-font\raleway_thin-webfont.woff" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Handlers\" />
+    <Folder Include="Modules\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

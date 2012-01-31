@@ -177,7 +177,9 @@ namespace Omnipresence.Mvc2.Models
     {
         public int SharerID { get; set; }
         public String SharedIDList { get; set; }
+        public String SharedUserProfileIDList { get; set; }
         public int EventID { get; set; }
         public String Message { get; set; }
+        public IQueryable<UserProfileModel> FriendList { get; set; }
     }
 }

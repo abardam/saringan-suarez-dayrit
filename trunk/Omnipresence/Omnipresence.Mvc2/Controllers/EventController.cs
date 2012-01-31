@@ -379,7 +379,11 @@ namespace Omnipresence.Mvc2.Controllers
                 sevm.EventID = id;
                 int profId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
                 sevm.SharerID = profId;
-
+                sevm.FriendList = accountServices.GetAllFriends(new GetFriendsModel
+                {
+                    UserProfileId = profId
+                });
+                sevm.SharedUserProfileIDList = "";
                 return View(sevm);
             }
 
@@ -389,12 +393,20 @@ namespace Omnipresence.Mvc2.Controllers
         [HttpPost]
         public ActionResult Share(ShareEventViewModel model)
         {
-            string[] usernames = model.SharedIDList.Split(',',';','\t','\n');
+            string[] userProfileIDstring = model.SharedUserProfileIDList.Split(',');
+            HashSet<int> userProfileIDs = new HashSet<int>();
+
+            foreach(String s in userProfileIDstring){
+                if(!s.Equals(""))
+                    userProfileIDs.Add(Int32.Parse(s));
+            }
+
             List<int> userIDs = new List<int>();
 
-            foreach(String s in usernames){
-                userIDs.Add(accountServices.GetUserByUsername(s).UserId);
+            foreach(int i in userProfileIDs){
+                userIDs.Add(accountServices.GetUserByUserProfileId(i).UserId);
             }
+
 
             eventServices.Share(new ShareEventModel
             {
