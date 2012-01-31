@@ -8,6 +8,28 @@
 
     <h2>Share</h2>
 
+    <script language="javascript" type="text/javascript" >
+
+    function realInitialize(){
+        var a = $('#SharedIDList').autocomplete({
+            lookup: [ <% foreach(Omnipresence.Processing.UserProfileModel um in Model.FriendList){
+             %> '<%: um.FirstName %> <%: um.LastName %>',
+             <%} %>
+             ],
+             data: [<% foreach(Omnipresence.Processing.UserProfileModel um in Model.FriendList){
+             %> '<%: um.UserProfileId %>',
+             <%} %>
+             ],
+                 onSelect: function(value, data){ $('#SharedUserProfileIDList').val($('#SharedUserProfileIDList').val()+data+",");
+                 },
+
+                 delimiter: ','
+
+             }
+             );
+     }
+    </script>
+
     <% using (Html.BeginForm()) {%>
         <%: Html.ValidationSummary(true) %>
 
@@ -31,6 +53,9 @@
                 <%: Html.TextAreaFor(model => model.Message) %>
                 <%: Html.ValidationMessageFor(model => model.Message) %>
             </div>
+
+            <%: Html.HiddenFor(model => model.EventID ) %>
+            <%: Html.HiddenFor(model => model.SharedUserProfileIDList ) %>
             
             <p>
                 <input type="submit" value="Send" />

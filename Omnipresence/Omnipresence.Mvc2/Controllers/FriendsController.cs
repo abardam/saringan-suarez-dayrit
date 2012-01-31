@@ -58,6 +58,7 @@ namespace Omnipresence.Mvc2.Controllers
         [Authorize]
         public ActionResult Decline(int id = 0)
         {
+
             if (id == 0) RedirectToAction("Index", "Home");
             AccountServices db = AccountServices.GetInstance();
             int thisuser = db.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
