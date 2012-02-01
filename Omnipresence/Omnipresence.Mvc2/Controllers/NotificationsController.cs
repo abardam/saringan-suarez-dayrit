@@ -30,6 +30,31 @@ namespace Omnipresence.Mvc2.Controllers
                 nm.FriendRequestNotifications.Add(frm);
             }
 
+            IQueryable<MessageModel> messageList = EventServices.GetInstance().GetMessages(new GetMessagesModel
+            {
+                GetUnreadOnly = true,
+                UserProfileID = gfrm.UserProfileId
+            });
+
+            List<MessageViewModel> messageViewList = new List<MessageViewModel>();
+
+            foreach (MessageModel mm in messageList)
+            {
+                UserProfileModel sender = accountServices.GetUserProfileByUserProfileId(mm.SenderProfileID);
+
+                messageViewList.Add(new MessageViewModel
+                {
+                    EventID = mm.EventID,
+                    EventName = EventServices.GetInstance().GetEventById(mm.EventID).Title,
+                    Message = mm.Message,
+                    MessageID = mm.MessageID,
+                    SenderName = sender.FirstName + " " + sender.LastName,
+                    SenderProfileID = mm.SenderProfileID
+                });
+            }
+
+            nm.UnreadMessages = messageViewList;
+
             return View(nm);
         }
 

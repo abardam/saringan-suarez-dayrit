@@ -16,6 +16,7 @@ namespace Omnipresence.Mvc2.Models
     {
         public string Message { get; set; }
         public IEnumerable<UserProfileModel> PendingFriendRequests { get; set; }
+        public IEnumerable<MessageViewModel> UnreadMessages { get; set; }
         // TODO: Add stuff when there are other notifications.
     }
 }

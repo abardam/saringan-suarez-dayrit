@@ -342,7 +342,11 @@ namespace Omnipresence.Mvc2.Controllers
         private IndexViewModel generateIndexViewModel(IEnumerable<EventModel> events)
         {
             UserProfileModel profile = accountServices.GetUserProfileByUsername(User.Identity.Name);
-            NotificationsShortList notifications = profile != null ? new NotificationsShortList { FriendRequests = accountServices.GetFriendRequests(new GetFriendRequestsModel { UserProfileId = profile.UserProfileId }).Count() } : null;
+            NotificationsShortList notifications = profile != null ? new NotificationsShortList {
+                UnreadMessages = eventServices.GetMessages(new GetMessagesModel{
+                    GetUnreadOnly = true,
+                    UserProfileID = profile.UserProfileId}).Count(),
+                FriendRequests = accountServices.GetFriendRequests(new GetFriendRequestsModel { UserProfileId = profile.UserProfileId }).Count() } : null;
             if (profile == null) profile = new UserProfileModel { Avatar = "", FirstName = "", LastName = "" };
             IndexSidebarViewModel sidebar = new IndexSidebarViewModel { AvatarUrl = profile.Avatar, Name = profile.FirstName + " " + profile.LastName, Notifications = notifications, Username = User.Identity.Name };
             return (new IndexViewModel { DisplayName = sidebar.Name, Events = events, Sidebar = sidebar });

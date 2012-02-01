@@ -27,7 +27,25 @@
             </td>
         </tr>
         <% } %>
-    </table></div>
+
+
+
+
+
+    </table>
+    
+    
+
+    
+
+        <% foreach (Omnipresence.Mvc2.Models.MessageViewModel unread in Model.UnreadMessages)
+           { %>
+           <p><%: unread.SenderName %>: <%: unread.Message %></p>
+        <% } %>
+
+    
+    
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>

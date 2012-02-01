@@ -62,6 +62,7 @@ namespace Omnipresence.Mvc2.Models
     public class NotificationModel
     {
         public List<FriendRequestViewModel> FriendRequestNotifications { get; set; }
+        public List<MessageViewModel> UnreadMessages { get; set; }
         //add others
     }
 }

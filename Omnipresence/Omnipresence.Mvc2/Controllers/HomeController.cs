@@ -29,7 +29,15 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (events == null) events = getEventService().GetAllEvents().Reverse().Take(10);
             UserProfileModel profile = getAccountService().GetUserProfileByUsername(User.Identity.Name);
-            NotificationsShortList notifications = profile != null ? new NotificationsShortList{ FriendRequests = accountService.GetFriendRequests(new GetFriendRequestsModel{ UserProfileId = profile.UserProfileId}).Count() } : null;
+            NotificationsShortList notifications = profile != null ? new NotificationsShortList
+            {
+                UnreadMessages = getEventService().GetMessages(new GetMessagesModel
+                {
+                    GetUnreadOnly = true,
+                    UserProfileID = profile.UserProfileId
+                }).Count(),
+                FriendRequests = getAccountService().GetFriendRequests(new GetFriendRequestsModel { UserProfileId = profile.UserProfileId }).Count()
+            } : null;
             if (profile == null) profile = new UserProfileModel { Avatar = "", FirstName = "", LastName = "" };
             IndexSidebarViewModel sidebar = new IndexSidebarViewModel { AvatarUrl = profile.Avatar, Name = profile.FirstName + " " + profile.LastName, Notifications = notifications, Username = User.Identity.Name };
             return View(new IndexViewModel { DisplayName = sidebar.Name, Events = events, Sidebar = sidebar });
@@ -46,7 +54,30 @@ namespace Omnipresence.Mvc2.Controllers
             if (user == null) return RedirectToAction("Index", "Home");
             IEnumerable<UserProfileModel> pendingRequests = getAccountService().GetFriendRequests(new GetFriendRequestsModel { UserProfileId = user.UserProfileId });
 
-            return View(new NotificationsViewModel { PendingFriendRequests = pendingRequests, Message = message });
+            IQueryable<MessageModel> messageList = EventServices.GetInstance().GetMessages(new GetMessagesModel
+            {
+                GetUnreadOnly = true,
+                UserProfileID = user.UserProfileId
+            });
+
+            List<MessageViewModel> messageViewList = new List<MessageViewModel>();
+
+            foreach (MessageModel mm in messageList)
+            {
+                UserProfileModel sender = accountServices.GetUserProfileByUserProfileId(mm.SenderProfileID);
+
+                messageViewList.Add(new MessageViewModel
+                {
+                    EventID = mm.EventID,
+                    EventName = EventServices.GetInstance().GetEventById(mm.EventID).Title,
+                    Message = mm.Message,
+                    MessageID = mm.MessageID,
+                    SenderName = sender.FirstName + " " + sender.LastName,
+                    SenderProfileID = mm.SenderProfileID
+                });
+            }
+
+            return View(new NotificationsViewModel { PendingFriendRequests = pendingRequests, Message = message, UnreadMessages=messageViewList.AsQueryable()});
         }
 
         public ActionResult Search()
