@@ -84,6 +84,20 @@ namespace Omnipresence.Processing
         public String Message { get; set; }
     }
 
+    public class MessageModel
+    {
+        public int SenderProfileID { get; set; }
+        public int ReceipientProfileID { get; set; }
+        public String Message { get; set; }
+        public int EventID { get; set; } //if ever
+    }
+
+    public class GetMessagesModel
+    {
+        public int UserProfileID { get; set; }
+    }
+
+
     public static class EventValidation
     {
         public static string ErrorCodeToString(CreateEventStatus createStatus)
