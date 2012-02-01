@@ -182,4 +182,14 @@ namespace Omnipresence.Mvc2.Models
         public String Message { get; set; }
         public IQueryable<UserProfileModel> FriendList { get; set; }
     }
+
+    public class MessageViewModel
+    {
+        public String SenderName { get; set; }
+        public int SenderProfileID { get; set; }
+        public String Message { get; set; }
+        public int MessageID { get; set; }
+        public int EventID { get; set; }
+        public String EventName { get; set; }
+    }
 }
