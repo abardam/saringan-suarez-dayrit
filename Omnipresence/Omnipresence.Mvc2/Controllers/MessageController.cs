@@ -57,5 +57,28 @@ namespace Omnipresence.Mvc2.Controllers
             return null;
         }
 
+        [Authorize]
+        public ActionResult Send(int replyToProfileId = -1)
+        {
+            ShareEventViewModel sevm = new ShareEventViewModel();
+            sevm.EventID = -1;
+            int profId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
+            sevm.SharerID = profId;
+            sevm.FriendList = accountServices.GetAllFriends(new GetFriendsModel
+            {
+                UserProfileId = profId
+            });
+            sevm.SharedUserProfileIDList = "";
+
+            UserProfileModel friend = accountServices.GetUserProfileByUserProfileId(replyToProfileId);
+
+            if(friend!=null){
+                sevm.SharedUserProfileIDList += ""+ friend.UserProfileId;
+                sevm.SharedIDList += (friend.FirstName + " " + friend.LastName);
+            }
+
+            return View(sevm);
+        }
+
     }
 }

@@ -92,6 +92,7 @@
     <Compile Include="Models\EventModels.cs" />
     <Compile Include="Models\FriendModels.cs" />
     <Compile Include="Models\HomeModels.cs" />
+    <Compile Include="Models\MessageModels.cs" />
     <Compile Include="Models\MyMembershipProvider.cs" />
     <Compile Include="Models\ProfileModels.cs" />
     <Compile Include="Models\SharedModels.cs" />
@@ -177,6 +178,7 @@
     <Content Include="Views\Home\Search.aspx" />
     <Content Include="Views\Map\Index.aspx" />
     <Content Include="Views\Message\Index.aspx" />
+    <Content Include="Views\Message\Send.aspx" />
     <Content Include="Views\Notifications\Index.aspx" />
     <Content Include="Views\Profile\Edit.aspx" />
     <Content Include="Views\Profile\Index.aspx" />
