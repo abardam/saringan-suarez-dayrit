@@ -86,6 +86,7 @@ namespace Omnipresence.Processing
 
     public class MessageModel
     {
+        public int MessageID { get; set; }
         public int SenderProfileID { get; set; }
         public int ReceipientProfileID { get; set; }
         public String Message { get; set; }
