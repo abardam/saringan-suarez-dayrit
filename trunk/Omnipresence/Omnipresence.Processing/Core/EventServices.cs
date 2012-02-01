@@ -318,6 +318,26 @@ namespace Omnipresence.Processing
             return eventModels.AsQueryable();
         }
 
+        public IQueryable<MessageModel> GetMessages(GetMessagesModel getMessagesModel)
+        {
+            //TODO.
+
+            //test shiz.
+
+            MessageModel testMessage = new MessageModel
+            {
+                EventID = 1,
+                Message = "HOWDy.",
+                ReceipientProfileID = 1,
+                SenderProfileID = 43
+            };
+
+            List<MessageModel> testList = new List<MessageModel>();
+            testList.Add(testMessage);
+
+            return testList.AsQueryable();
+        }
+
         #endregion
 
         public void Dispose()
