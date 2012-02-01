@@ -19,7 +19,18 @@
 
                <p><%= friendRequest.FullName%> (<a href="/Friends/Add/<%=friendRequest.UserProfileId %>">Confirm.</a> Reject.) </p>
                <%} %>
+        <% bool printedUnreadMessages = false; %>
+        <%foreach (var unreadMessage in Model.UnreadMessages)
+          {
+               %>
+               <% if (!printedUnreadMessages)
+                  {
+                      printedUnreadMessages = true; %>
+                      <h2>Unread messages</h2>
+                      <%} %>
 
+               <p><%= unreadMessage.SenderName%>: <%= unreadMessage.Message  %> </p>
+               <%} %>
     <p>
         <a href="/">Back</a>
     </p>
