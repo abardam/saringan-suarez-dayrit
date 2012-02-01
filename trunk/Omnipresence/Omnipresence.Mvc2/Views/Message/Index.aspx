@@ -40,7 +40,7 @@
     </table>
 
     <p>
-        <%: Html.ActionLink("Create New", "Create") %>
+        <%: Html.ActionLink("Send", "Send") %>
     </p>
 
 </asp:Content>
