@@ -219,6 +219,7 @@
     <Property Name="MailMessage" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Read" Type="bit" Nullable="false" />
     <Property Name="Starred" Type="bit" Nullable="false" />
+    <Property Name="DateSent" Type="datetime" Nullable="false" />
     <Property Name="ReferredEvent_EventId" Type="int" Nullable="true" />
     <Property Name="FromUserProfile_UserProfileId" Type="int" Nullable="false" />
     <Property Name="ToUserProfile_UserProfileId" Type="int" Nullable="false" />
@@ -821,6 +822,7 @@
           <Property Type="Boolean" Name="Starred" Nullable="false" />
           <NavigationProperty Name="FromUserProfile" Relationship="OmnipresenceModel.UserProfileMail" FromRole="Mail" ToRole="UserProfile" />
           <NavigationProperty Name="ToUserProfile" Relationship="OmnipresenceModel.UserProfileMail1" FromRole="Mail" ToRole="UserProfile" />
+          <Property Type="DateTime" Name="DateSent" Nullable="false" />
         </EntityType>
         <Association Name="MailEvent">
           <End Type="OmnipresenceModel.Mail" Role="Mail" Multiplicity="*" />
@@ -983,6 +985,7 @@
           <ScalarProperty Name="MailMessage" ColumnName="MailMessage" />
           <ScalarProperty Name="Read" ColumnName="Read" />
           <ScalarProperty Name="Starred" ColumnName="Starred" />
+          <ScalarProperty Name="DateSent" ColumnName="DateSent" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1057,16 +1060,16 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="OmnipresenceModel.Friendship" Width="1.5" PointX="11.25" PointY="11.875" Height="1.7879850260416674" />
         <AssociationConnector Association="OmnipresenceModel.UserProfileFriendship">
-          <ConnectorPoint PointX="9" PointY="13.108656670369843" />
-          <ConnectorPoint PointX="10.447916666666666" PointY="13.108656670369843" />
-          <ConnectorPoint PointX="10.614583333333334" PointY="13.108656670369843" />
-          <ConnectorPoint PointX="11.25" PointY="13.108656670369843" />
+          <ConnectorPoint PointX="9" PointY="13.108656680613294" />
+          <ConnectorPoint PointX="10.437418619791666" PointY="13.108656680613294" />
+          <ConnectorPoint PointX="10.624837239583334" PointY="13.108656680613294" />
+          <ConnectorPoint PointX="11.25" PointY="13.108656680613294" />
         </AssociationConnector>
         <AssociationConnector Association="OmnipresenceModel.UserProfileFriendship1">
-          <ConnectorPoint PointX="9" PointY="12.429328335184922" />
-          <ConnectorPoint PointX="10.447916666666666" PointY="12.429328335184922" />
-          <ConnectorPoint PointX="10.614583333333334" PointY="12.429328335184922" />
-          <ConnectorPoint PointX="11.25" PointY="12.429328335184922" />
+          <ConnectorPoint PointX="9" PointY="12.429328340306647" />
+          <ConnectorPoint PointX="10.437418619791666" PointY="12.429328340306647" />
+          <ConnectorPoint PointX="10.624837239583334" PointY="12.429328340306647" />
+          <ConnectorPoint PointX="11.25" PointY="12.429328340306647" />
         </AssociationConnector>
         <AssociationConnector Association="OmnipresenceModel.UserProfileComment">
           <ConnectorPoint PointX="8.8749975" PointY="10.75" />
@@ -1087,16 +1090,16 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="OmnipresenceModel.FriendRequest" Width="1.5" PointX="10.625" PointY="10" Height="1.7879850260416674" />
         <AssociationConnector Association="OmnipresenceModel.UserProfileFriendRequest">
-          <ConnectorPoint PointX="9" PointY="11.480564619700115" />
-          <ConnectorPoint PointX="10.447916666666666" PointY="11.480564619700115" />
-          <ConnectorPoint PointX="10.614583333333334" PointY="11.480564619700115" />
-          <ConnectorPoint PointX="10.625" PointY="11.480564619700115" />
+          <ConnectorPoint PointX="9" PointY="11.482883667945863" />
+          <ConnectorPoint PointX="10.437418619791666" PointY="11.482883667945863" />
+          <ConnectorPoint PointX="10.624837239583334" PointY="11.482883667945863" />
+          <ConnectorPoint PointX="10.625" PointY="11.482883667945863" />
         </AssociationConnector>
         <AssociationConnector Association="OmnipresenceModel.UserProfileFriendRequest1">
-          <ConnectorPoint PointX="9" PointY="11.052782309850057" />
-          <ConnectorPoint PointX="10.447916666666666" PointY="11.052782309850057" />
-          <ConnectorPoint PointX="10.614583333333334" PointY="11.052782309850057" />
-          <ConnectorPoint PointX="10.625" PointY="11.052782309850057" />
+          <ConnectorPoint PointX="9" PointY="11.053941833972932" />
+          <ConnectorPoint PointX="10.437418619791666" PointY="11.053941833972932" />
+          <ConnectorPoint PointX="10.624837239583334" PointY="11.053941833972932" />
+          <ConnectorPoint PointX="10.625" PointY="11.053941833972932" />
         </AssociationConnector>
         <EntityTypeShape EntityType="OmnipresenceModel.EventVote" Width="1.5" PointX="7.25" PointY="6.125" Height="1.9802864583333335" />
         <AssociationConnector Association="OmnipresenceModel.EventEventVotes">
@@ -1107,22 +1110,22 @@
           <ConnectorPoint PointX="8.125" PointY="10.75" />
           <ConnectorPoint PointX="8.125" PointY="8.1052864583333335" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="OmnipresenceModel.Mail" PointX="10.5" PointY="2.25" Width="1.5" Height="1.9802864583333335" />
+        <EntityTypeShape EntityType="OmnipresenceModel.Mail" PointX="10.5" PointY="2.25" Width="1.5" Height="2.5571907552083326" />
         <AssociationConnector Association="OmnipresenceModel.MailEvent">
-          <ConnectorPoint PointX="10.5" PointY="4.3624886067708326" />
-          <ConnectorPoint PointX="8.9895833333333339" PointY="4.3624886067708317" />
-          <ConnectorPoint PointX="8.8229166666666661" PointY="4.3624886067708326" />
-          <ConnectorPoint PointX="6.75" PointY="4.3624886067708326" />
+          <ConnectorPoint PointX="10.5" PointY="4.5547900390625" />
+          <ConnectorPoint PointX="8.9583308333333331" PointY="4.5547900390624987" />
+          <ConnectorPoint PointX="8.7916641666666653" PointY="4.5547900390625" />
+          <ConnectorPoint PointX="6.75" PointY="4.5547900390625" />
         </AssociationConnector>
         <AssociationConnector Association="OmnipresenceModel.UserProfileMail">
-          <ConnectorPoint PointX="9" PointY="14.477845052083334" />
-          <ConnectorPoint PointX="10.53125" PointY="14.477845052083334" />
-          <ConnectorPoint PointX="10.53125" PointY="4.422587890625" />
+          <ConnectorPoint PointX="9" PointY="14.943475823728075" />
+          <ConnectorPoint PointX="10.54150390625" PointY="14.943475823728075" />
+          <ConnectorPoint PointX="10.54150390625" PointY="4.8071907552083326" />
         </AssociationConnector>
         <AssociationConnector Association="OmnipresenceModel.UserProfileMail1">
-          <ConnectorPoint PointX="9" PointY="14.231938416625869" />
-          <ConnectorPoint PointX="10.51953125" PointY="14.231938416625869" />
-          <ConnectorPoint PointX="10.51953125" PointY="4.6148893229166665" />
+          <ConnectorPoint PointX="9" PointY="14.303227924884871" />
+          <ConnectorPoint PointX="10.520751953125" PointY="14.303227924884871" />
+          <ConnectorPoint PointX="10.520751953125" PointY="4.8071907552083326" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

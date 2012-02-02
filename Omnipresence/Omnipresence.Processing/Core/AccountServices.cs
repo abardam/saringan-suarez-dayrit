@@ -409,7 +409,7 @@ namespace Omnipresence.Processing
                 }
                 else if (Utilities.HasPendingFriendRequest(adder, added) && !Utilities.AreFriends(adder, added))
                 {
-                    return ConfirmFriendRequest(new FriendRequestModel { AddedUserProfileId = adder.UserProfileId, AdderUserProfileId = added.UserProfileId });
+                    return ConfirmFriendRequest(new FriendRequestModel { AdderUserProfileId = adder.UserProfileId, AddedUserProfileId = added.UserProfileId });
                 }
                 else
                 {

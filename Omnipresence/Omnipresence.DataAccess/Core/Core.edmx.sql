@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 01/31/2012 19:26:01
+-- Date Created: 02/02/2012 15:49:29
 -- Generated from EDMX file: C:\Users\Mr Suarez\Documents\thesis\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
@@ -59,11 +59,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_MailEvent]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Mails] DROP CONSTRAINT [FK_MailEvent];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UserMail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Mails] DROP CONSTRAINT [FK_UserMail];
+IF OBJECT_ID(N'[dbo].[FK_UserProfileMail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Mails] DROP CONSTRAINT [FK_UserProfileMail];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UserMail1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Mails] DROP CONSTRAINT [FK_UserMail1];
+IF OBJECT_ID(N'[dbo].[FK_UserProfileMail1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Mails] DROP CONSTRAINT [FK_UserProfileMail1];
 GO
 
 -- --------------------------------------------------
@@ -242,6 +242,7 @@ CREATE TABLE [dbo].[Mails] (
     [MailMessage] nvarchar(max)  NOT NULL,
     [Read] bit  NOT NULL,
     [Starred] bit  NOT NULL,
+    [DateSent] datetime  NOT NULL,
     [ReferredEvent_EventId] int  NULL,
     [FromUserProfile_UserProfileId] int  NOT NULL,
     [ToUserProfile_UserProfileId] int  NOT NULL
