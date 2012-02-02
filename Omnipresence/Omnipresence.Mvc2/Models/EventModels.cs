@@ -167,10 +167,32 @@ namespace Omnipresence.Mvc2.Models
     {
         public string SearchString { get; set; }
     }
+
+    public enum SearchType
+    {
+        PERSON,
+        EVENT,
+        PLACE,
+        DATE
+    }
+
     public class SearchResultModel
     {
         public string SearchString { get; set; }
-        public List<ProfileViewModel> UserResult { get; set; }
+        public SearchType SearchType { get; set; }
+        public IEnumerable<UserProfileModel> UserResult { get; set; }
+        public SelectList SearchTypes
+        {
+            get
+            {
+                List<string> list = new List<string>();
+                list.Add(SearchType.PERSON.ToString());
+                list.Add(SearchType.EVENT.ToString());
+                list.Add(SearchType.PLACE.ToString());
+                list.Add(SearchType.DATE.ToString());
+                return new SelectList(list);
+            }
+        }
     }
 
     public class ShareEventViewModel

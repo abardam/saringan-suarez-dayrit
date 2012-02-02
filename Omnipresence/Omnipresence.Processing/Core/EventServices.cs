@@ -10,7 +10,7 @@ namespace Omnipresence.Processing
     public class EventServices : IDisposable
     {
         #region CONSTANTS
-        public static const int MIN_RESULTS = 10;
+        public const int MIN_RESULTS = 10;
         #endregion
 
         #region [FIELDS]

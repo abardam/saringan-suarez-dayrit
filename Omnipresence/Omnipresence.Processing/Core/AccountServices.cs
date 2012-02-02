@@ -539,6 +539,10 @@ namespace Omnipresence.Processing
         {
             UserProfileModel profile1 = GetUserProfileByUsername(username1);
             UserProfileModel profile2 = GetUserProfileByUsername(username2);
+
+            if (profile1 == null)
+                return false;
+
             IQueryable<UserProfileModel> temp = GetAcceptedFriends(new GetFriendsModel { UserProfileId = profile1.UserProfileId });
             foreach (UserProfileModel b in temp)
             {

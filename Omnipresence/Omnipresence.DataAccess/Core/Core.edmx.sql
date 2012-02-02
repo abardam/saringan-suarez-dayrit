@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/02/2012 15:49:29
--- Generated from EDMX file: C:\Users\Mr Suarez\Documents\thesis\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
+-- Date Created: 02/02/2012 17:38:42
+-- Generated from EDMX file: C:\Users\enzo\Documents\Visual Studio 2010\Projects\Omnipresence(2)\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;

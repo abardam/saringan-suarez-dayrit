@@ -52,6 +52,7 @@
     <Compile Include="Core\EventServices.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\MediaModels.cs" />
+    <Compile Include="Models\SearchModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Library\Utilities.cs" />
   </ItemGroup>
