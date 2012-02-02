@@ -11,7 +11,7 @@ namespace Omnipresence.Mvc2.Controllers
     [HandleError]
     public class HomeController : Controller
     {
-        private EventServices eventService;
+        private EventServices eventService = EventServices.GetInstance();
         private AccountServices accountServices = AccountServices.GetInstance();
         private EventServices getEventService()
         {
@@ -84,15 +84,37 @@ namespace Omnipresence.Mvc2.Controllers
         {
             SearchResultModel model = new SearchResultModel();
             model.SearchString = "";
+            model.SearchType = SearchType.PERSON;
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Search(SearchResultModel model)
         {
+            if (model.SearchType == SearchType.EVENT)
+            {
+                return RedirectToAction("All", "Event", new
+                {
+                    ivm = eventService.QueryEvents(new QueryEventModel
+                        {
+                            Description = model.SearchString,
+                            Title = model.SearchString
+                        })
+                });
+            }
             UserProfileModel upm = accountServices.GetUserProfileByUsername(model.SearchString);
 
             SearchResultModel srm = new SearchResultModel();
+
+
+
+            srm.UserResult = accountServices.QueryUsers(new QueryUserModel
+            {
+                FirstName = model.SearchString,
+                LastName = model.SearchString,
+                Username = model.SearchString
+            });
+            /*
             srm.UserResult = new List<ProfileViewModel>();
             if (upm != null)
             {
@@ -103,7 +125,7 @@ namespace Omnipresence.Mvc2.Controllers
                 pm.UserProfileId = upm.UserProfileId;
                 pm.Username = getAccountService().GetUserByUserProfileId(upm.UserProfileId).Username;
                 srm.UserResult.Add(pm);
-            }
+            }*/
             //for now just searches for a user profile
             return View(srm);
         }

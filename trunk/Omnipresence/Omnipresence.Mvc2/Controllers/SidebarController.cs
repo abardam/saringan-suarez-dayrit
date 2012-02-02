@@ -270,7 +270,7 @@ namespace Omnipresence.Mvc2.Controllers
             SearchEventViewModel model = new SearchEventViewModel();
             return PartialView("SearchUserControl", model);
         }
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult Search(SearchEventViewModel model)
         {
             UserProfileModel upm = accountServices.GetUserProfileByUsername(model.SearchString);
@@ -284,7 +284,7 @@ namespace Omnipresence.Mvc2.Controllers
             srm.UserResult = new List<ProfileViewModel>();
             srm.UserResult.Add(pm);
             return PartialView("SearchResultUserControl", srm);
-        }
+        }*/
 
         public ActionResult AddFriend(int friendUserProfileID)
         {

@@ -318,9 +318,14 @@ namespace Omnipresence.Mvc2.Controllers
             return Redirect("/e/" + model.EventId);
         }
 
-        public ActionResult All()
+
+        public ActionResult All(IndexViewModel ivm=null)
         {
-            return View(generateIndexViewModel(eventServices.GetAllEvents().Take(10)));
+            if (ivm == null)
+            {
+                ivm = generateIndexViewModel(eventServices.GetAllEvents().Take(10));
+            }
+            return View(ivm);
         }
 
         public ActionResult Hot(int id = 0)

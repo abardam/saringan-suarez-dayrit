@@ -16,6 +16,10 @@
                 <%: Html.TextBoxFor(model => model.SearchString) %>
                 <%: Html.ValidationMessageFor(model => model.SearchString) %>
             </div>
+
+            <div class="editor-field">
+                <%: Html.DropDownListFor(model => model.SearchType, Model.SearchTypes) %>
+            </div>
             
             <p>
                 <input type="submit" value="Search" />
@@ -30,7 +34,7 @@
         <%} %>
     <% if (Model.UserResult != null)
        {
-           foreach (Omnipresence.Mvc2.Models.ProfileViewModel pm in Model.UserResult)
+           foreach (Omnipresence.Processing.UserProfileModel pm in Model.UserResult)
            { %>
            <p><%: Html.ActionLink(pm.FirstName + " " + pm.LastName,"ProfileById", "Profile", new {id = pm.UserProfileId}, null) %></p>
             <%}
