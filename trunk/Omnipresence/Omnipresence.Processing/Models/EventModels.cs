@@ -86,7 +86,7 @@ namespace Omnipresence.Processing
 
     public class MessageModel
     {
-        public int MessageID { get; set; }
+        public Guid MessageID { get; set; } //TODO: ENZO guid id ng messages :S
         public int SenderProfileID { get; set; }
         public int ReceipientProfileID { get; set; }
         public String Message { get; set; }
@@ -97,6 +97,8 @@ namespace Omnipresence.Processing
     {
         public int UserProfileID { get; set; }
         public bool GetUnreadOnly { get; set; }
+        public int PageNumber { get; set; }
+        public int NumberOfResults { get; set; }
     }
 
 

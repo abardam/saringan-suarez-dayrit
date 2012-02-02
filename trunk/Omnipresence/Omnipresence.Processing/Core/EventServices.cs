@@ -9,6 +9,10 @@ namespace Omnipresence.Processing
 {
     public class EventServices : IDisposable
     {
+        #region CONSTANTS
+        public static const int MIN_RESULTS = 10;
+        #endregion
+
         #region [FIELDS]
 
         private OmnipresenceEntities db;
@@ -130,6 +134,7 @@ namespace Omnipresence.Processing
                     {
                         MailMessage = shareEventModel.Message,
                         FromUserProfile = _profile,
+                        ReferredEvent = _event,
                         ToUserProfile = _recipient,
                         Read = false,
                         Starred = false
@@ -320,22 +325,34 @@ namespace Omnipresence.Processing
 
         public IQueryable<MessageModel> GetMessages(GetMessagesModel getMessagesModel)
         {
-            //TODO.
+            UserProfile _user = db.UserProfiles.Where(us => us.UserProfileId == getMessagesModel.UserProfileID).FirstOrDefault();
+            if (_user == null) return null;
+            if (getMessagesModel.NumberOfResults == 0) getMessagesModel.NumberOfResults = MIN_RESULTS;
+            IEnumerable<Mail> query;
 
-            //test shiz.
-
-            MessageModel testMessage = new MessageModel
+            if (getMessagesModel.GetUnreadOnly)
             {
-                EventID = 1,
-                Message = "HOWDy.",
-                ReceipientProfileID = 1,
-                SenderProfileID = 43
-            };
+                query = db.Mails.Where(mail => mail.ToUserProfile == _user && !mail.Read).OrderBy(sort => sort.DateSent).Skip((getMessagesModel.PageNumber) * getMessagesModel.NumberOfResults).Take(getMessagesModel.NumberOfResults);
+            }
+            else
+            {
+                query = db.Mails.Where(mail => mail.ToUserProfile == _user).OrderBy(sort => sort.DateSent).Skip((getMessagesModel.PageNumber) * getMessagesModel.NumberOfResults).Take(getMessagesModel.NumberOfResults);
+            }
 
-            List<MessageModel> testList = new List<MessageModel>();
-            testList.Add(testMessage);
+            List<MessageModel> retval = new List<MessageModel>();
 
-            return testList.AsQueryable();
+            foreach (Mail g in query)
+            {
+                retval.Add(new MessageModel
+                {
+                    EventID = g.ReferredEvent.EventId,
+                    Message = g.MailMessage,
+                    MessageID = g.MailId,
+                    ReceipientProfileID = g.ToUserProfile.UserProfileId,
+                    SenderProfileID = g.FromUserProfile.UserProfileId
+                });
+            }
+            return retval.AsQueryable();
         }
 
         #endregion

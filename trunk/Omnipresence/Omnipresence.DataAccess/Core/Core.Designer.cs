@@ -2317,13 +2317,15 @@ namespace Omnipresence.DataAccess.Core
         /// <param name="mailMessage">Initial value of the MailMessage property.</param>
         /// <param name="read">Initial value of the Read property.</param>
         /// <param name="starred">Initial value of the Starred property.</param>
-        public static Mail CreateMail(global::System.Guid mailId, global::System.String mailMessage, global::System.Boolean read, global::System.Boolean starred)
+        /// <param name="dateSent">Initial value of the DateSent property.</param>
+        public static Mail CreateMail(global::System.Guid mailId, global::System.String mailMessage, global::System.Boolean read, global::System.Boolean starred, global::System.DateTime dateSent)
         {
             Mail mail = new Mail();
             mail.MailId = mailId;
             mail.MailMessage = mailMessage;
             mail.Read = read;
             mail.Starred = starred;
+            mail.DateSent = dateSent;
             return mail;
         }
 
@@ -2428,6 +2430,30 @@ namespace Omnipresence.DataAccess.Core
         private global::System.Boolean _Starred;
         partial void OnStarredChanging(global::System.Boolean value);
         partial void OnStarredChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DateSent
+        {
+            get
+            {
+                return _DateSent;
+            }
+            set
+            {
+                OnDateSentChanging(value);
+                ReportPropertyChanging("DateSent");
+                _DateSent = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateSent");
+                OnDateSentChanged();
+            }
+        }
+        private global::System.DateTime _DateSent;
+        partial void OnDateSentChanging(global::System.DateTime value);
+        partial void OnDateSentChanged();
 
         #endregion
     
