@@ -57,8 +57,10 @@
     <Compile Include="Tests\GetAllEventsByUserProfileIdTest.cs" />
     <Compile Include="Tests\GetAllFriendsTest.cs" />
     <Compile Include="Tests\GetFriendRequestsTest.cs" />
+    <Compile Include="Tests\GetMessagesTest.cs" />
     <Compile Include="Tests\QueryEventsTest.cs" />
     <Compile Include="Tests\QueryUsersTest.cs" />
+    <Compile Include="Tests\SendMessageTest.cs" />
     <Compile Include="Tests\Test.cs" />
     <Compile Include="Tests\VoteEventTest.cs" />
   </ItemGroup>

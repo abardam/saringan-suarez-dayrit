@@ -13,8 +13,12 @@ namespace DatabaseTests
             Name = name;
         }
 
+        private int JAAAAY;
+
         public override bool Execute()
         {
+            int totalUsers = accountServices.GetAllUserProfiles().Count();
+            JAAAAY = random.Next(1, totalUsers);
             bool upvote = TestUpvoteEvent();
             bool downvote = TestDownvoteEvent();
 
@@ -30,8 +34,7 @@ namespace DatabaseTests
                 VoteEventModel voteEventModel = new VoteEventModel();
                 voteEventModel.EventId = e.EventId;
                 //voteEventModel.UserProfileId = accountServices.GetAllUserProfiles().ToList()[]\
-                int totalUsers = accountServices.GetAllUserProfiles().Count();
-                voteEventModel.UserProfileId = random.Next(1, totalUsers);
+                voteEventModel.UserProfileId = JAAAAY;
                 //CHeck for null later
 
                 return eventServices.Vote(voteEventModel);
@@ -51,6 +54,7 @@ namespace DatabaseTests
                 VoteEventModel voteEventModel = new VoteEventModel();
                 voteEventModel.EventId = e.EventId;
                 voteEventModel.IsDownvote = true;
+                voteEventModel.UserProfileId = JAAAAY;
 
                 return eventServices.Vote(voteEventModel);
             }
