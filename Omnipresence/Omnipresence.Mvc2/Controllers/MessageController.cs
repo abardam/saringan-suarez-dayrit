@@ -42,8 +42,8 @@ namespace Omnipresence.Mvc2.Controllers
 
                     returnValue.Add(new MessageViewModel
                     {
-                        EventID = mm.EventID,
-                        EventName = eventServices.GetEventById(mm.EventID).Title,
+                        EventID = mm.EventID!=null?(int)mm.EventID:-1,
+                        EventName = eventServices.GetEventById(mm.EventID != null ? (int)mm.EventID : -1).Title,
                         Message = mm.Message,
                         MessageID = mm.MessageID,
                         SenderName = sender.FirstName + " " + sender.LastName,

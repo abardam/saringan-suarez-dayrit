@@ -257,17 +257,29 @@ namespace Omnipresence.Processing
 
             IEnumerable<Event> descriptionMatches;
             descriptionMatches = db.Events.Where(x => queryModel.Description != null ? x.Description.Contains(queryModel.Description) : true);
+            
+            IEnumerable<Event> startTimeMatches = null;
+            IEnumerable<Event> endTimeMatches = null;
+            if (queryModel.DateSearch)
+            {
 
-            IEnumerable<Event> startTimeMatches;
-            startTimeMatches = db.Events.Where(x => queryModel.StartTime != null ? x.StartTime >= queryModel.StartTime : true);
+                startTimeMatches = db.Events.Where(x => queryModel.StartTime != null ? x.StartTime >= queryModel.StartTime : true);
 
-            IEnumerable<Event> endTimeMatches;
-            endTimeMatches = db.Events.Where(x => queryModel.EndTime != null ? x.EndTime <= queryModel.EndTime : true);
-
+                endTimeMatches = db.Events.Where(x => queryModel.EndTime != null ? x.EndTime <= queryModel.EndTime : true);
+            }
             //IEnumerable<Event> locationMatches;
             //locationMatches = db.Events.Where(x => x.Location != null ? Utilities.AreWithinRadius(x.Location, queryModel.Location, 0.1) : true);
 
-            IEnumerable<Event> result = titleMatches.Union(descriptionMatches.Union(startTimeMatches.Union(endTimeMatches)));
+            IEnumerable<Event> result = titleMatches;
+            result = result.Union(descriptionMatches);
+            if(startTimeMatches != null)
+            {
+                result = result.Union(startTimeMatches);
+            }
+            
+            if(endTimeMatches != null){
+                result = result.Union(endTimeMatches);
+            }
 
             List<EventModel> eventModels = new List<EventModel>();
             EventModel evtModel = null;

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Omnipresence.Processing;
 using Omnipresence.Mvc2.Models;
+using Omnipresence.Processing.Models;
 
 namespace Omnipresence.Mvc2.Controllers
 {
@@ -68,8 +69,8 @@ namespace Omnipresence.Mvc2.Controllers
 
                 messageViewList.Add(new MessageViewModel
                 {
-                    EventID = mm.EventID,
-                    EventName = EventServices.GetInstance().GetEventById(mm.EventID).Title,
+                    EventID = mm.EventID != null ? (int)mm.EventID : -1,
+                    EventName = EventServices.GetInstance().GetEventById(mm.EventID != null ? (int)mm.EventID : -1).Title,
                     Message = mm.Message,
                     MessageID = mm.MessageID,
                     SenderName = sender.FirstName + " " + sender.LastName,
@@ -93,13 +94,11 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (model.SearchType == SearchType.EVENT)
             {
+
                 return RedirectToAction("All", "Event", new
                 {
-                    ivm = eventService.QueryEvents(new QueryEventModel
-                        {
-                            Description = model.SearchString,
-                            Title = model.SearchString
-                        })
+                    SeachString = model.SearchString,
+                    DateSearch = false
                 });
             }
             UserProfileModel upm = accountServices.GetUserProfileByUsername(model.SearchString);

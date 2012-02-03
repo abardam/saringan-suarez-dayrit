@@ -74,6 +74,7 @@ namespace Omnipresence.Processing
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public Location Location { get; set; }
+        public bool DateSearch { get; set; }
     }
 
     public class ShareEventModel

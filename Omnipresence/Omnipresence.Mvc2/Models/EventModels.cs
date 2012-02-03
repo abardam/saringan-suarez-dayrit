@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Globalization;
 using Omnipresence.Processing;
+using Omnipresence.Processing.Models;
 namespace Omnipresence.Mvc2.Models
 {
     public class EventViewModel
@@ -168,14 +169,7 @@ namespace Omnipresence.Mvc2.Models
         public string SearchString { get; set; }
     }
 
-    public enum SearchType
-    {
-        PERSON,
-        EVENT,
-        PLACE,
-        DATE
-    }
-
+    
     public class SearchResultModel
     {
         public string SearchString { get; set; }
