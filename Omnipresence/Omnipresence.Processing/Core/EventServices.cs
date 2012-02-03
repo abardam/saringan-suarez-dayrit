@@ -257,7 +257,7 @@ namespace Omnipresence.Processing
 
             IEnumerable<Event> descriptionMatches;
             descriptionMatches = db.Events.Where(x => queryModel.Description != null ? x.Description.Contains(queryModel.Description) : true);
-            
+
             IEnumerable<Event> startTimeMatches = null;
             IEnumerable<Event> endTimeMatches = null;
             if (queryModel.DateSearch)
@@ -272,12 +272,13 @@ namespace Omnipresence.Processing
 
             IEnumerable<Event> result = titleMatches;
             result = result.Union(descriptionMatches);
-            if(startTimeMatches != null)
+            if (startTimeMatches != null)
             {
                 result = result.Union(startTimeMatches);
             }
-            
-            if(endTimeMatches != null){
+
+            if (endTimeMatches != null)
+            {
                 result = result.Union(endTimeMatches);
             }
 
@@ -295,9 +296,10 @@ namespace Omnipresence.Processing
 
         public IQueryable<EventModel> GetHotEvents(int page = 1, int itemsPerPage = 10)
         {
-            // TODO: Actual logic
             List<EventModel> eventModels = new List<EventModel>();
-            IQueryable<Event> events = db.Events.OrderBy(x => x.EventId).Skip((page) * itemsPerPage).Take(itemsPerPage);
+            DateTime now = DateTime.Now.Subtract(new TimeSpan(4, 0, 0, 0));
+            DateTime later = DateTime.Now.AddDays(4);
+            IQueryable<Event> events = db.Events.Where(ev => ev.StartTime > now && ev.StartTime < later).OrderBy(x => x.Rating).Skip((page) * itemsPerPage).Take(itemsPerPage);
 
             foreach (Event evt in events)
             {
@@ -309,9 +311,8 @@ namespace Omnipresence.Processing
 
         public IQueryable<EventModel> GetTopEvents(int page = 1, int itemsPerPage = 10)
         {
-            // TODO: Actual logic
             List<EventModel> eventModels = new List<EventModel>();
-            IQueryable<Event> events = db.Events.OrderBy(x => x.EventId).Skip((page) * itemsPerPage).Take(itemsPerPage);
+            IQueryable<Event> events = db.Events.OrderBy(x => x.Rating).Skip((page) * itemsPerPage).Take(itemsPerPage);
 
             foreach (Event evt in events)
             {
@@ -323,16 +324,22 @@ namespace Omnipresence.Processing
 
         public IQueryable<EventModel> GetSubscriptionEvents(int userProfileId, int page = 1, int itemsPerPage = 10)
         {
-            // TODO: Actual logic
             List<EventModel> eventModels = new List<EventModel>();
-            IQueryable<Event> events = db.Events.OrderBy(x => x.EventId).Skip((page) * itemsPerPage).Take(itemsPerPage);
+            IQueryable<UserProfileModel> _friends = AccountServices.GetInstance().GetAllFriends(new GetFriendsModel { UserProfileId = userProfileId });
+
+            DateTime now = DateTime.Now.Subtract(new TimeSpan(4, 0, 0, 0));
+            DateTime later = DateTime.Now.AddDays(4);
+            IQueryable<Event> events = db.Events.Where(ev => ev.StartTime > now && ev.StartTime < later);
 
             foreach (Event evt in events)
             {
-                eventModels.Add(Utilities.EventToEventModel(evt));
+                if (_friends.Where(x => x.UserProfileId == evt.CreatedById).Count() > 0)
+                {
+                    eventModels.Add(Utilities.EventToEventModel(evt));
+                }
             }
 
-            return eventModels.AsQueryable();
+            return eventModels.AsQueryable().Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
         }
 
         public IQueryable<MessageModel> GetMessages(GetMessagesModel getMessagesModel)
