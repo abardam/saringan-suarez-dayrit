@@ -328,15 +328,16 @@ namespace Omnipresence.Processing
             UserProfile _user = db.UserProfiles.Where(us => us.UserProfileId == getMessagesModel.UserProfileID).FirstOrDefault();
             if (_user == null) return null;
             if (getMessagesModel.NumberOfResults == 0) getMessagesModel.NumberOfResults = MIN_RESULTS;
+            if (getMessagesModel.PageNumber < 1) getMessagesModel.PageNumber = 1;
             IEnumerable<Mail> query;
 
             if (getMessagesModel.GetUnreadOnly)
             {
-                query = db.Mails.Where(mail => mail.ToUserProfile == _user && !mail.Read).OrderBy(sort => sort.DateSent).Skip((getMessagesModel.PageNumber) * getMessagesModel.NumberOfResults).Take(getMessagesModel.NumberOfResults);
+                query = db.Mails.Where(mail => mail.ToUserProfile.UserProfileId == _user.UserProfileId && !mail.Read).OrderBy(sort => sort.DateSent).Skip((getMessagesModel.PageNumber - 1) * getMessagesModel.NumberOfResults).Take(getMessagesModel.NumberOfResults).ToList();
             }
             else
             {
-                query = db.Mails.Where(mail => mail.ToUserProfile == _user).OrderBy(sort => sort.DateSent).Skip((getMessagesModel.PageNumber) * getMessagesModel.NumberOfResults).Take(getMessagesModel.NumberOfResults);
+                query = db.Mails.Where(mail => mail.ToUserProfile.UserProfileId == _user.UserProfileId).OrderBy(sort => sort.DateSent).Skip((getMessagesModel.PageNumber - 1) * getMessagesModel.NumberOfResults).Take(getMessagesModel.NumberOfResults).ToList();
             }
 
             List<MessageModel> retval = new List<MessageModel>();
@@ -353,6 +354,38 @@ namespace Omnipresence.Processing
                 });
             }
             return retval.AsQueryable();
+        }
+
+        public bool SendMessage(MessageModel messageModel)
+        {
+            if (messageModel.ReceipientProfileID < 1 || messageModel.SenderProfileID < 1)
+            {
+                return false;
+            }
+            UserProfile _sender = db.UserProfiles.Where(x => x.UserProfileId == messageModel.SenderProfileID).FirstOrDefault();
+            UserProfile _recipient = db.UserProfiles.Where(x => x.UserProfileId == messageModel.ReceipientProfileID).FirstOrDefault();
+
+            if (_sender == null || _recipient == null)
+            {
+                return false;
+            }
+
+            Event _event = db.Events.Where(ev => ev.EventId == messageModel.EventID).FirstOrDefault();
+
+            Mail newMail = new Mail
+            {
+                DateSent = DateTime.Now,
+                FromUserProfile = _sender,
+                MailMessage = messageModel.Message,
+                Read = false,
+                ReferredEvent = _event,
+                Starred = false,
+                ToUserProfile = _recipient
+            };
+
+            db.Mails.AddObject(newMail);
+            db.SaveChanges();
+            return true;
         }
 
         #endregion

@@ -11,7 +11,22 @@ namespace DatabaseTests
         static void Main(string[] args)
         {
             List<Test> testSuite = new List<Test>();
+            Dictionary<string, int> failed = new Dictionary<string, int>();
 
+            for (int i = 0; i < 100; i++)
+            {
+                testSuite.Add(new GetMessagesTest { Name = "GetMessages First" });
+            }
+            for (int i = 0; i < 500; i++)
+            {
+                testSuite.Add(new SendMessageTest { Name = "Message Creation Test" });
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                testSuite.Add(new GetMessagesTest { Name = "GetMessages Last" });
+            }
+
+            /*
             for (int i = 0; i < 100; i++)
             {
                 testSuite.Add(new CreateUserTest("Account Creation Test"));
@@ -21,12 +36,10 @@ namespace DatabaseTests
             {
                 testSuite.Add(new CreateEventTest("Event Creation Test"));
             }
-
             for (int i = 0; i < 100; i++)
             {
                 testSuite.Add(new VoteEventTest("Event Voting Test"));
             }
-
             for (int i = 0; i < 100; i++)
             {
                 testSuite.Add(new CreateCommentTest("Comment Test"));
@@ -81,9 +94,8 @@ namespace DatabaseTests
             {
                 testSuite.Add(new QueryUsersTest("Query Users Test"));
             }
-
             testSuite.Add(new QueryEventsTest("Query Events Test"));
-
+            */
             int numSuccess = 0;
             long totalRuntime = 0;
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -105,6 +117,11 @@ namespace DatabaseTests
                 {
                     numSuccess++;
                 }
+                else
+                {
+                    if (!failed.ContainsKey(test.Name)) failed.Add(test.Name, 1);
+                    else failed[test.Name]++;
+                }
             }
 
             Console.WriteLine("Tests Have Been Executed!");
@@ -112,6 +129,12 @@ namespace DatabaseTests
             Console.WriteLine("Total Passed: " + numSuccess);
             Console.WriteLine("Total Failed: " + (testSuite.Count - numSuccess));
             Console.WriteLine("Total Runtime: " + totalRuntime);
+
+            Console.WriteLine("Failed tests:");
+            foreach (string failures in failed.Keys)
+            {
+                Console.WriteLine("\t" + failures + ": " + failed[failures]);
+            }
 
             Console.ReadKey();
         }
