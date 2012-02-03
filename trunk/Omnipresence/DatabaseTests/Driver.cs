@@ -13,20 +13,7 @@ namespace DatabaseTests
             List<Test> testSuite = new List<Test>();
             Dictionary<string, int> failed = new Dictionary<string, int>();
 
-            for (int i = 0; i < 100; i++)
-            {
-                testSuite.Add(new GetMessagesTest { Name = "GetMessages First" });
-            }
-            for (int i = 0; i < 500; i++)
-            {
-                testSuite.Add(new SendMessageTest { Name = "Message Creation Test" });
-            }
-            for (int i = 0; i < 100; i++)
-            {
-                testSuite.Add(new GetMessagesTest { Name = "GetMessages Last" });
-            }
-
-            /*
+            
             for (int i = 0; i < 100; i++)
             {
                 testSuite.Add(new CreateUserTest("Account Creation Test"));
@@ -95,7 +82,21 @@ namespace DatabaseTests
                 testSuite.Add(new QueryUsersTest("Query Users Test"));
             }
             testSuite.Add(new QueryEventsTest("Query Events Test"));
-            */
+
+            for (int i = 0; i < 100; i++)
+            {
+                testSuite.Add(new GetMessagesTest { Name = "GetMessages First" });
+            }
+            for (int i = 0; i < 500; i++)
+            {
+                testSuite.Add(new SendMessageTest { Name = "Message Creation Test" });
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                testSuite.Add(new GetMessagesTest { Name = "GetMessages Last" });
+            }
+
+            
             int numSuccess = 0;
             long totalRuntime = 0;
             Stopwatch stopwatch = Stopwatch.StartNew();

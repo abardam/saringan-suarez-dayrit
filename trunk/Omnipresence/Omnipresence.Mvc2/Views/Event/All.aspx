@@ -23,7 +23,9 @@
         function realInitialize(){
             setMap("map");
         <% foreach(Omnipresence.Processing.EventModel item in Model.Events){ %>
-            addClickableMarker(new google.maps.LatLng(<%= item.Location.Latitude %>, <%= item.Location.Longitude %>), "<%= item.Title %>", <%= item.EventId%>);
+            var tempLatlng = new google.maps.LatLng(<%= item.Location.Latitude %>, <%= item.Location.Longitude %>);
+            addClickableMarker(tempLatlng, "<%= item.Title %>", <%= item.EventId%>);
+            mapPanTo(tempLatlng);
             <%} %>
         }
 

@@ -22,8 +22,8 @@ namespace DatabaseTests
             c.EndTime = DateTime.Now;
             c.CategoryString = "Party";
             c.IsPrivate = false;
-            c.Latitude = 10.0;
-            c.Longitude = 120.0;
+            c.Latitude = 3.9 + (15.1*random.NextDouble()); // min : 18.812718 3.973861
+            c.Longitude = 117 + (14*random.NextDouble()); // min: 117.13623 ,130.12207
             c.LocationName = "Ateneo";
             c.Address = "Katipunan Avenue";
             c.UserProfileId = random.Next(1, accountServices.GetAllUserProfiles().Count());

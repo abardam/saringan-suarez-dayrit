@@ -82,21 +82,8 @@
             </div>
 
             
-            <!--<div class="editor-label">
-                <%: Html.LabelFor(model => model.Latitude) %>
-            </div>
-            <div class="editor-field">-->
                 <%: Html.HiddenFor(model => model.Latitude) %>
-                <!--<%: Html.ValidationMessageFor(model => model.Latitude) %>
-            </div>
-            
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.Longitude) %>
-            </div>
-            <div class="editor-field">-->
                 <%: Html.HiddenFor(model => model.Longitude) %>
-                <!--<%: Html.ValidationMessageFor(model => model.Longitude) %>
-            </div>-->
             
             <p>
                 <input type="submit" value="Edit" />

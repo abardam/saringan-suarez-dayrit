@@ -84,6 +84,10 @@ function addClickableMarker(latlng, title, eventId) {
     return tempMarker;
 }
 
+function mapPanTo(latlng) {
+    map.panTo(latlng);
+}
+
 function addMarker(latlng, title) {
         var marker = new google.maps.Marker({
             position: latlng,

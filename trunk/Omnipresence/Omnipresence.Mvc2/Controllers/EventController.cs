@@ -218,7 +218,7 @@ namespace Omnipresence.Mvc2.Controllers
                 Description = em.Description,
                 EndTime = em.EndTime,
                 Latitude = em.Location.Latitude,
-                Longitude = em.Location.Latitude,
+                Longitude = em.Location.Longitude,
                 StartTime = em.StartTime,
                 Title = em.Title,
                 CreatedBy = em.CreatedById,
@@ -319,11 +319,22 @@ namespace Omnipresence.Mvc2.Controllers
         }
 
 
-        public ActionResult All(IndexViewModel ivm=null)
+        public ActionResult All(String SearchString="", bool DateSearch=false)
         {
-            if (ivm == null)
+            IndexViewModel ivm;
+
+            if (SearchString == null)
             {
                 ivm = generateIndexViewModel(eventServices.GetAllEvents().Take(10));
+            }
+            else
+            {
+                ivm = generateIndexViewModel(eventServices.QueryEvents(new QueryEventModel
+                        {
+                            Description = SearchString,
+                            Title = SearchString,
+                            DateSearch = false
+                        }));
             }
             return View(ivm);
         }
