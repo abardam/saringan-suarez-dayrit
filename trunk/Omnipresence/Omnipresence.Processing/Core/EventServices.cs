@@ -346,7 +346,7 @@ namespace Omnipresence.Processing
             {
                 retval.Add(new MessageModel
                 {
-                    EventID = g.ReferredEvent.EventId,
+                    EventID = g.ReferredEvent == null ? (int?)null : g.ReferredEvent.EventId,
                     Message = g.MailMessage,
                     MessageID = g.MailId,
                     ReceipientProfileID = g.ToUserProfile.UserProfileId,

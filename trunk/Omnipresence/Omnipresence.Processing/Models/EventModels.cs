@@ -90,7 +90,7 @@ namespace Omnipresence.Processing
         public int SenderProfileID { get; set; }
         public int ReceipientProfileID { get; set; }
         public String Message { get; set; }
-        public int EventID { get; set; } //if ever
+        public int? EventID { get; set; } //if ever
     }
 
     public class GetMessagesModel
