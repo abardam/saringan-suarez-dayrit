@@ -11,4 +11,10 @@ namespace Omnipresence.Processing
         public string FilePath { get; set; }
         public int EventId { get; set; }
     }
+    public class MediaItemModel
+    {
+        public string FileName { get; set; }
+        public string FilePath { get; set; }
+        public int EventId { get; set; }
+    }
 }
