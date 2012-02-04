@@ -27,8 +27,13 @@
         <%: Html.ActionLink("Share", "Share", new { id = Model.EventId })%>
 
         <h2>Media</h2>
-        Media goes here.
-        Upload media
+        
+        <% foreach (String s in Model.MediaFileNameList)
+           {%>
+            <img src="<%= Url.Content("~/Uploads/Images/" + s) %>" alt="image"/>
+            <%} %>
+
+        <%: Html.ActionLink("Upload media", "UploadMedia", new { id = Model.EventId }) %>
 
         <h2>Comments</h2>
 
