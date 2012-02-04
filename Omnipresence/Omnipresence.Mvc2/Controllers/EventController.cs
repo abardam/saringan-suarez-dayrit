@@ -32,6 +32,13 @@ namespace Omnipresence.Mvc2.Controllers
             EventModel model = eventServices.GetEventById(id);
             if (model == null) return RedirectToAction("Index", "Home");
 
+            IEnumerable<MediaItemModel> medias = MediaServices.GetInstance().GetMediaItemsByEvent(model.EventId);
+            List<String> mediasFilesnames = new List<String>();
+
+            foreach(MediaItemModel mim in medias){
+                //mediasFilesnames.Add(HttpContext.Server.MapPath("~/Uploads/Images/" + mim.FileName));
+                mediasFilesnames.Add(mim.FileName);
+            }
 
             EventCommentViewModel ecvm = new EventCommentViewModel
             {
@@ -49,7 +56,8 @@ namespace Omnipresence.Mvc2.Controllers
                 IsPrivate = model.IsPrivate,
                 LastModified = model.LastModified,
                 Rating = model.Rating,
-                NewComment = ""/*,
+                NewComment = "",
+                MediaFileNameList = mediasFilesnames.AsEnumerable()/*,
                 CategoryString = model.Category.Description*/
             };
 
@@ -437,6 +445,44 @@ namespace Omnipresence.Mvc2.Controllers
             });
 
             return RedirectToAction("Index", new { id = model.EventID });
+        }
+
+
+        public ActionResult UploadMedia(int id=0)
+        {
+            return View(new UploadViewModel
+            {
+                EventID = id
+            });
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult UploadMedia(HttpPostedFileBase uploadFile, UploadViewModel model)
+        {
+            
+
+            if (uploadFile.ContentLength > 0)
+            {
+                byte[] randomArray = new byte[50];
+                new Random().NextBytes(randomArray);
+
+                String fileName = model.EventID + "_";
+
+                foreach (byte b in randomArray)
+                {
+                    fileName += b;
+                }
+
+                uploadFile.SaveAs(Server.MapPath("../../Uploads/Images/"+fileName));
+
+                MediaServices.GetInstance().CreateMediaItem(new CreateMediaItemModel
+                {
+                    EventId = model.EventID,
+                    FileName = fileName,
+                    FilePath = Server.MapPath("../../Uploads/Images/")
+                });
+            }
+            return View();
         }
 
     }

@@ -150,6 +150,7 @@ namespace Omnipresence.Mvc2.Models
         public IEnumerable<CommentViewModel> CommentList { get; set; }
         public string NewComment { get; set; }
         public bool CreatedByUser { get; set; }
+        public IEnumerable<String> MediaFileNameList { get; set; }
     }
 
     public class CommentViewModel
@@ -197,5 +198,10 @@ namespace Omnipresence.Mvc2.Models
         public int EventID { get; set; }
         public String Message { get; set; }
         public IQueryable<UserProfileModel> FriendList { get; set; }
+    }
+
+    public class UploadViewModel
+    {
+        public int EventID { get; set; }
     }
 }
