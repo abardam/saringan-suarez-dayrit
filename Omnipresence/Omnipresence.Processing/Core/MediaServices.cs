@@ -38,6 +38,18 @@ namespace Omnipresence.Processing
 
         #region [CRUD]
 
+        public IEnumerable<MediaItemModel> GetMediaItemsByEvent(int eventId)
+        {
+            List<MediaItemModel> retVal = new List<MediaItemModel>();
+            if (eventId <1) return null;
+            var temp = db.MediaItems.Where(x => x.EventId == eventId);
+            foreach (MediaItem b in temp)
+            {
+                retVal.Add(new MediaItemModel { EventId = b.EventId, FileName = b.FileName, FilePath = b.FilePath });
+            }
+            return retVal;
+        }
+
         public bool CreateMediaItem(CreateMediaItemModel cmim)
         {
             if (cmim != null)
