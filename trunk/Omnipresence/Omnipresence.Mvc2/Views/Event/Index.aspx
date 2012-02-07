@@ -4,10 +4,11 @@
     Index
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
-        <%: Model.Title %></h2><p>, by <%:Html.ActionLink(Model.CreatorUsername, "Profile","Profile", new {id = Model.CreatorUsername}, null)%></p>
+    <h1>
+        <%: Model.Title %></h1><p><%:Html.ActionLink(Model.CreatorUsername, "Profile","Profile", new {id = Model.CreatorUsername}, null)%></p>
     <div id="map<%: Model.EventId %>" data-lat="<%:Model.Latitude %>" data-lng="<%:Model.Longitude %>"
-        style="background-position: center; width: 100%; height: 200px;">
+        style="background-position: center; width: 100%; height: 200px; margin-top:20px; margin-bottom:20px;
+    ">
     </div>
     <script type="text/javascript">
         function realInitialize() {
@@ -15,15 +16,14 @@
         }
     </script>
     <div>
-        <p>
-            <%: Model.Description %></p>
+        <h3>
+            <%: Model.Description %></h3>
     </div>
     <div>
         <p>
-            From
-            <%: String.Format("{0:D}", Model.StartTime) %>
-            to
-            <%:String.Format("{0:D}", Model.EndTime) %></p>
+            Start date: <%: String.Format("{0:D}", Model.StartTime) %> </p>
+            <p>
+            End date: <%:String.Format("{0:D}", Model.EndTime) %></p>
     </div>
     <div>
         <p>
@@ -31,41 +31,47 @@
             <%: Model.Rating %></p>
     </div>
     <% if (Model.CreatedByUser)
-       { %><%: Html.ActionLink("Edit", "Edit", new { id = Model.EventId })%><%}
+       { %><p><%: Html.ActionLink("Edit", "Edit", new { id = Model.EventId })%></p><%}
        else
        {
-           %><%:Html.ActionLink("Vote up", "VoteUp", new { id = Model.EventId }) %><%:Html.ActionLink("Vote down", "VoteDown", new { id = Model.EventId }) %><%
+           %><p><%:Html.ActionLink("Vote up", "VoteUp", new { id = Model.EventId }) %> | <%:Html.ActionLink("Vote down", "VoteDown", new { id = Model.EventId }) %></p><%
                                                                                                                                                                  } %>
-    <%: Html.ActionLink("Share", "Share", new { id = Model.EventId })%>
-    <h2>
-        Media</h2>
+    <p><%: Html.ActionLink("Share", "Share", new { id = Model.EventId })%></p>
+    <div class="section">
+    <h1>
+        Media</h1>
     <% foreach (String s in Model.MediaFileNameList)
        {%>
     <img src="<%= Url.Content("~/Uploads/Images/" + s) %>" alt="image" />
     <%} %>
-    <%: Html.ActionLink("Upload media", "UploadMedia", new { id = Model.EventId }) %>
-    <h2>
-        Comments</h2>
+    <p><%: Html.ActionLink("Upload media", "UploadMedia", new { id = Model.EventId }) %></p>
+    </div>
+    <div class="section">
+    <h1>
+        Comments</h1>
+        <table style="width:100%;font-size:1em;">
     <% foreach (Omnipresence.Mvc2.Models.CommentViewModel cm in Model.CommentList)
        {
     %>
-    <p>
-        <%= cm.CommenterName %>
-        said:
-        <%= cm.CommentText %>
-        (<%=cm.TimeString %>)
+    <tr><td>
+        <h2 style="float:left; clear:both;"><%= cm.CommenterName %> says:</h2></td></tr><tr><td>
+        <p style="float:left"><%= cm.CommentText %>(<%=String.Format("{0:D}",cm.TimeString) %>)
         <% if (cm.UserIsAuthor)
-           { %>[<a href="/Comment/Delete/<%=cm.CommentId %>">x</a>]<%} %></p>
+           { %>[<%:Html.ActionLink("x","Delete","Comment", new {id = cm.CommentId}, null) %>]<%} %></p>
+           </td></tr>
     <%} %>
     <% if (!User.Identity.Name.Equals(""))
        {
            using (Html.BeginForm())
            { %>
-    <%: Html.ValidationSummary(true)%>
-    <%: Html.TextAreaFor(model => model.NewComment)%>
-    <input type="submit" value="Comment" />
+           <tr><td>
+    <%: Html.ValidationSummary(true)%></td></tr>
+           <tr><td>
+    <%: Html.TextAreaFor(model => model.NewComment)%></td></tr>
+           <tr><td>
+    <input type="submit" value="Comment" /></td></tr>
     <%}
-       } %>
+       } %></table></div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
