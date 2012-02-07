@@ -58,7 +58,8 @@ namespace Omnipresence.Mvc2.Controllers
                 Rating = model.Rating,
                 NewComment = "",
                 MediaFileNameList = mediasFilesnames.AsEnumerable()/*,
-                CategoryString = model.Category.Description*/
+                CategoryString = model.Category.Description*/,
+                CreatorUsername = accountServices.GetUserByUserProfileId(model.CreatedById).Username
             };
 
             ecvm.CreatedByUser = false;

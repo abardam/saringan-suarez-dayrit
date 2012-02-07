@@ -151,6 +151,7 @@ namespace Omnipresence.Mvc2.Models
         public string NewComment { get; set; }
         public bool CreatedByUser { get; set; }
         public IEnumerable<String> MediaFileNameList { get; set; }
+        public string CreatorUsername { get; set; }
     }
 
     public class CommentViewModel
