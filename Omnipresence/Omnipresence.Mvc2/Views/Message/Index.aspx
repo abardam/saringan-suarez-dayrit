@@ -28,10 +28,13 @@
                 <%: Html.ActionLink(item.SenderName, "ProfileById", "Profile", new {id = item.SenderProfileID}, null) %>
             </td>
             <td>
-                <%: item.Message %>
+                <%: Html.ActionLink(item.Message, "ViewMessage", "Message", new {id = item.MessageID.ToString()}, null) %>
             </td>
             <td>
-                <%: Html.ActionLink(item.EventName, "Index", "Event", new {id = item.EventID}, null) %>
+            <% if (item.EventName != null)
+               { %>
+                <%: Html.ActionLink(item.EventName, "Index", "Event", new { id = item.EventID }, null)%>
+                <%} %>
             </td>
         </tr>
     

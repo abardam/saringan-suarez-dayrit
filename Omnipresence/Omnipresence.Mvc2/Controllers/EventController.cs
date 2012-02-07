@@ -443,7 +443,7 @@ namespace Omnipresence.Mvc2.Controllers
             {
                 EventID = model.EventID,
                 Message = model.Message,
-                SharerProfileId = model.SharerID,
+                SharerProfileId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId,
                 SharedProfileIDList = userIDs
             });
 

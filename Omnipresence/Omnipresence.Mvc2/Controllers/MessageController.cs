@@ -37,15 +37,26 @@ namespace Omnipresence.Mvc2.Controllers
             {
                 UserProfileModel sender = accountServices.GetUserProfileByUserProfileId(mm.SenderProfileID);
 
-                returnValue.Add(new MessageViewModel
+                MessageViewModel mvm = new MessageViewModel
                 {
                     EventID = mm.EventID != null ? (int)mm.EventID : -1,
-                    EventName = eventServices.GetEventById(mm.EventID != null ? (int)mm.EventID : -1).Title,
+                    
                     Message = mm.Message,
                     MessageID = mm.MessageID,
                     SenderName = sender.FirstName + " " + sender.LastName,
                     SenderProfileID = mm.SenderProfileID
-                });
+                };
+
+                EventModel em = eventServices.GetEventById(mm.EventID != null ? (int)mm.EventID : -1);
+
+                if (em != null)
+                {
+                    mvm.EventName = em.Title;
+                }
+
+                returnValue.Add(mvm);
+
+                
             }
 
             return View(returnValue.AsQueryable());
@@ -74,6 +85,77 @@ namespace Omnipresence.Mvc2.Controllers
 
             return View(sevm);
         }
+
+        [HttpPost]
+        public ActionResult Send(ShareEventViewModel model)
+        {
+            string[] userProfileIDstring = model.SharedUserProfileIDList.Split(',');
+            HashSet<int> userProfileIDs = new HashSet<int>();
+
+            foreach (String s in userProfileIDstring)
+            {
+                if (!s.Equals(""))
+                    userProfileIDs.Add(Int32.Parse(s));
+            }
+
+            List<int> userIDs = new List<int>();
+
+            foreach (int i in userProfileIDs)
+            {
+                userIDs.Add(accountServices.GetUserByUserProfileId(i).UserId);
+            }
+
+
+            eventServices.Share(new ShareEventModel
+            {
+                EventID = model.EventID,
+                Message = model.Message,
+                SharerProfileId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId,
+                SharedProfileIDList = userIDs
+            });
+
+            return RedirectToAction("Index");
+        }
+
+
+        [Authorize]
+        public ActionResult ViewMessage(String id = "00000000-0000-0000-0000-000000000000")
+        {
+            
+            MessageModel mm = eventServices.GetMessage(new GetMessageModel
+            {
+                MessageID = new Guid(id)
+            });
+            UserProfileModel sender = accountServices.GetUserProfileByUserProfileId(mm.SenderProfileID);
+            MessageViewModel mvm = new MessageViewModel
+            {
+                EventID = mm.EventID != null ? (int)mm.EventID : -1,
+
+                Message = mm.Message,
+                MessageID = mm.MessageID,
+                SenderName = sender.FirstName + " " + sender.LastName,
+                SenderProfileID = mm.SenderProfileID
+            };
+
+            EventModel em = eventServices.GetEventById(mm.EventID != null ? (int)mm.EventID : -1);
+
+            if (em != null)
+            {
+                mvm.EventName = em.Title;
+            }
+
+            try
+            {
+                eventServices.MarkAsRead(mm.MessageID, true);
+            }
+            catch (Exception e)
+            {
+                //temp
+            }
+
+            return View(mvm);
+        }
+
 
     }
 }
