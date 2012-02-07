@@ -46,7 +46,7 @@ namespace Omnipresence.Processing
         public string Description { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public Category Category { get; set; }
+        public String CategoryString { get; set; }
         public bool IsPrivate { get; set; }
         public string Address { get; set; }
         public double Latitude { get; set; }

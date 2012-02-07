@@ -56,7 +56,7 @@
                 <%: Html.LabelFor(model => model.CategoryString) %>
             </div>
             <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.CategoryString) %>
+                <%: Html.DropDownListFor(model => model.CategoryString, Model.Categories) %>
                 <%: Html.ValidationMessageFor(model => model.CategoryString) %>
             </div>
             

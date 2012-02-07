@@ -12,7 +12,7 @@
     </div>
     <script type="text/javascript">
         function realInitialize() {
-            setMap("map<%:Model.EventId %>");
+            setMap("map<%:Model.EventId %>", "<%:Model.Title %>", "<%:Model.CategoryString.ToLower() %>");
         }
     </script>
     <div>

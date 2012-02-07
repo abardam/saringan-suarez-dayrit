@@ -83,7 +83,7 @@ namespace Omnipresence.Processing
                 evt.Description = uem.Description;
                 evt.StartTime = uem.StartTime;
                 evt.EndTime = uem.EndTime;
-                evt.Category = uem.Category;
+                evt.Category = GetCategory(uem.CategoryString);
                 evt.IsPrivate = uem.IsPrivate;
                 evt.IsActive = uem.IsActive;
                 evt.Rating = uem.Rating;
@@ -478,6 +478,20 @@ namespace Omnipresence.Processing
 
             db.Mails.AddObject(newMail);
             return true;
+        }
+
+
+        public IEnumerable<string> GetCategories()
+        {
+            //TODO.
+
+            List<string> retval = new List<string>();
+
+            retval.Add("Party");
+            retval.Add("Disaster");
+            retval.Add("Traffic");
+
+            return retval.AsEnumerable();
         }
 
         public IEnumerable<EventModel> QueryEventsByDate(DateTime date, int dayOffset)

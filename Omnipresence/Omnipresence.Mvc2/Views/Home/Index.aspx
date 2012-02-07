@@ -41,7 +41,7 @@ Home
     <% } %>
     <script type="text/javascript">        function realInitialize() {
         <% foreach (Omnipresence.Processing.EventModel mode in Model.Events) { %>
-            setMap("map<%:mode.EventId %>");
+            setMap("map<%:mode.EventId %>", "<%:mode.Title %>", "<%:mode.Category.Name.ToLower() %>");
             <%} %>
         };
     </script>
