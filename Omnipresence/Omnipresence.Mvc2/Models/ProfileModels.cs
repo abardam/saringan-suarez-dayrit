@@ -65,4 +65,9 @@ namespace Omnipresence.Mvc2.Models
         public List<MessageViewModel> UnreadMessages { get; set; }
         //add others
     }
+
+    public class ChangeDisplayPictureModel
+    {
+        public int UserProfileID { get; set; }
+    }
 }

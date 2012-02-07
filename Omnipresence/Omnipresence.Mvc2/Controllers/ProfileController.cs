@@ -140,6 +140,41 @@ namespace Omnipresence.Mvc2.Controllers
             return Edit();
         }
 
+
+        [Authorize]
+        public ActionResult ChangeDisplayPicture(int id = 0)
+        {
+            return View(new ChangeDisplayPictureModel
+            {
+                UserProfileID = id
+            });
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult ChangeDisplayPicture(HttpPostedFileBase uploadFile, ChangeDisplayPictureModel model)
+        {
+
+
+            if (uploadFile.ContentLength > 0 && uploadFile.ContentType.Contains("image"))
+            {
+
+                String fileName = model.UserProfileID + "_dp";
+
+
+                uploadFile.SaveAs(Server.MapPath("../../Uploads/Display/" + fileName));
+
+                accountServices.UpdateAvatar(new UpdateAvatarModel
+                {
+                    UserProfileID = model.UserProfileID,
+                    FileName = fileName,
+                    FilePath = "../../Uploads/Display/"
+                });
+
+
+            }
+            return View(model);
+        }
+
         public static void SetViewDataForTime(ViewDataDictionary ViewData)
         {
             int[] hourA = new int[12];

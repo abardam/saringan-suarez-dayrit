@@ -356,7 +356,7 @@ namespace Omnipresence.Processing
         {
             var prof = db.UserProfiles.Where(user => user.UserProfileId == updateAvatarModel.UserProfileID).First();
             if (prof == null) return false;
-            prof.Avatar = updateAvatarModel.FilePath;
+            prof.Avatar = updateAvatarModel.FilePath + updateAvatarModel.FileName;
             db.SaveChanges();
             return true;
         }
