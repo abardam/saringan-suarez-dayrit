@@ -135,11 +135,26 @@ namespace Omnipresence.Processing
             Event _event = db.Events.Where(ev => ev.EventId == shareEventModel.EventID).FirstOrDefault();
             UserProfile _profile = db.UserProfiles.Where(up => up.UserProfileId == shareEventModel.SharerProfileId).FirstOrDefault();
             IEnumerable<UserProfile> _recipients = db.UserProfiles.Where(rec => shareEventModel.SharedProfileIDList.Contains(rec.UserProfileId));
-            if (_event == null || _profile == null || _recipients.Count() <= 0) return false;
+            if (_profile == null || _recipients.Count() <= 0) return false;
 
             foreach (UserProfile _recipient in _recipients)
             {
-                db.Mails.AddObject(
+                MessageModel mm = new MessageModel
+                {
+                    Message = shareEventModel.Message,
+                    SenderProfileID = shareEventModel.SharerProfileId,
+                    ReceipientProfileID = _recipient.UserProfileId
+                };
+
+                
+                if(_event!=null){
+                    mm.EventID = shareEventModel.EventID;
+                }
+
+                _sendMessage(mm);
+
+
+                /*db.Mails.AddObject(
                     new Mail
                     {
                         MailMessage = shareEventModel.Message,
@@ -148,9 +163,9 @@ namespace Omnipresence.Processing
                         ToUserProfile = _recipient,
                         Read = false,
                         Starred = false
-                    });
+                    });*/
             }
-
+            
             db.SaveChanges();
 
             return true;
@@ -352,6 +367,18 @@ namespace Omnipresence.Processing
             return eventModels.AsQueryable().Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
         }
 
+        public MessageModel GetMessage(GetMessageModel getMessageModel)
+        {
+            //TODO. the method.
+
+            return new MessageModel
+            {
+                Message = "sup ho",
+                ReceipientProfileID = 1,
+                SenderProfileID = 2
+            };
+        }
+
         public IQueryable<MessageModel> GetMessages(GetMessagesModel getMessagesModel)
         {
             UserProfile _user = db.UserProfiles.Where(us => us.UserProfileId == getMessagesModel.UserProfileID).FirstOrDefault();
@@ -414,6 +441,39 @@ namespace Omnipresence.Processing
 
             db.Mails.AddObject(newMail);
             db.SaveChanges();
+            return true;
+        }
+
+
+        //same as above, pero walang db.save changes
+        private bool _sendMessage(MessageModel messageModel)
+        {
+            if (messageModel.ReceipientProfileID < 1 || messageModel.SenderProfileID < 1)
+            {
+                return false;
+            }
+            UserProfile _sender = db.UserProfiles.Where(x => x.UserProfileId == messageModel.SenderProfileID).FirstOrDefault();
+            UserProfile _recipient = db.UserProfiles.Where(x => x.UserProfileId == messageModel.ReceipientProfileID).FirstOrDefault();
+
+            if (_sender == null || _recipient == null)
+            {
+                return false;
+            }
+
+            Event _event = db.Events.Where(ev => ev.EventId == messageModel.EventID).FirstOrDefault();
+
+            Mail newMail = new Mail
+            {
+                DateSent = DateTime.Now,
+                FromUserProfile = _sender,
+                MailMessage = messageModel.Message,
+                Read = false,
+                ReferredEvent = _event,
+                Starred = false,
+                ToUserProfile = _recipient
+            };
+
+            db.Mails.AddObject(newMail);
             return true;
         }
 

@@ -102,6 +102,11 @@ namespace Omnipresence.Processing
         public int NumberOfResults { get; set; }
     }
 
+    public class GetMessageModel
+    {
+        public Guid MessageID { get; set; }
+    }
+
     public static class EventValidation
     {
         public static string ErrorCodeToString(CreateEventStatus createStatus)
