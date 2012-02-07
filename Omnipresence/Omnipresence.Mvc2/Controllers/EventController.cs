@@ -464,7 +464,7 @@ namespace Omnipresence.Mvc2.Controllers
         {
             
 
-            if (uploadFile.ContentLength > 0)
+            if (uploadFile.ContentLength > 0 && uploadFile.ContentType.Contains("image"))
             {
                 byte[] randomArray = new byte[50];
                 new Random().NextBytes(randomArray);
@@ -485,7 +485,7 @@ namespace Omnipresence.Mvc2.Controllers
                     FilePath = Server.MapPath("../../Uploads/Images/")
                 });
             }
-            return View();
+            return View(model);
         }
 
     }
