@@ -17,5 +17,6 @@ namespace DatabaseTests
         protected EventServices eventServices = EventServices.GetInstance();
         protected CommentServices commentServices = CommentServices.GetInstance();
         protected ApiServices apiServices = ApiServices.GetInstance();
+        protected CategoryServices categoryServices = CategoryServices.GetInstance();
     }
 }
