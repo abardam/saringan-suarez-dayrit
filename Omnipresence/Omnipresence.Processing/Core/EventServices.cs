@@ -480,6 +480,33 @@ namespace Omnipresence.Processing
             return true;
         }
 
+        public IEnumerable<EventModel> QueryEventsByDate(DateTime date, int dayOffset)
+        {
+            DateTime before = date.Subtract(new TimeSpan(dayOffset, 0, 0, 0));
+            DateTime after = date.AddDays(dayOffset);
+
+            List<Event> b = db.Events.Where(ev => ev.StartTime > before && ev.StartTime < after).ToList();
+            b.Reverse();
+            List<EventModel> x = new List<EventModel>();
+            foreach (Event tem in b)
+            {
+                x.Add(Utilities.EventToEventModel(tem));
+            }
+            return x;
+        }
+
+        public IEnumerable<EventModel> QueryEventsByLocation(string location)
+        {
+            location = location.ToLower();
+            var b = db.Events.Where(ev => ev.Location.Name.ToLower().Contains(location) || ev.Location.Address.ToLower().Contains(location));
+            List<EventModel> x = new List<EventModel>();
+            foreach (Event tem in b)
+            {
+                x.Add(Utilities.EventToEventModel(tem));
+            }
+            return x;
+        }
+
         #endregion
 
         public void Dispose()

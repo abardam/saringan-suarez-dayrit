@@ -9,9 +9,9 @@
                     <p><%: Html.ActionLink("view your profile","Index","Profile") %></p>-->
                     <p><%: Html.ActionLink("friends","Friends","Friends") %>
                     <% if (Model.Notifications.FriendRequests > 1) { %>
-                    <%:Html.ActionLink(" ("+Model.Notifications.FriendRequests+" pending)","Index","Notifications") %><%} %>
+                    <%:Html.ActionLink(" (" + Model.Notifications.FriendRequests + " pending)", "Notifications", "Home")%><%} %>
                     <% else if (Model.Notifications.FriendRequests == 1) { %>
-                    <%:Html.ActionLink(" ("+Model.Notifications.FriendRequests+" pending)","Index","Notifications") %><%} %></p>
+                    <%:Html.ActionLink(" (" + Model.Notifications.FriendRequests + " pending)", "Notifications", "Home")%><%} %></p>
                     <p><%: Html.ActionLink("messages","Index","Message") %></p>
                     <p><%: Html.ActionLink("logout","LogOff","Account") %></p>
                     <%}else{ %>

@@ -176,7 +176,9 @@ namespace Omnipresence.Mvc2.Models
     {
         public string SearchString { get; set; }
         public SearchType SearchType { get; set; }
+        public string Message { get; set; }
         public IEnumerable<UserProfileModel> UserResult { get; set; }
+        public IEnumerable<EventModel> EventResult { get; set; }
         public SelectList SearchTypes
         {
             get
