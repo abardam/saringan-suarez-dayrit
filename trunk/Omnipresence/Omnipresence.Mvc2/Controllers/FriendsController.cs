@@ -39,7 +39,7 @@ namespace Omnipresence.Mvc2.Controllers
                 AddedUserProfileId = id,
                 AdderUserProfileId = user.UserProfile.UserProfileId
             });
-            return RedirectToAction("Profile", "Profile", new { id = id }); ;
+            return RedirectToAction("Profile", "Profile", new { id = accountServices.GetUserByUserId(id).Username }); ;
         }
 
         [Authorize]

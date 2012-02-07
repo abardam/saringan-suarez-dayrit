@@ -1083,10 +1083,10 @@
           <ConnectorPoint PointX="5.968748" PointY="6.057109375" />
         </AssociationConnector>
         <EntityTypeShape EntityType="OmnipresenceModel.ApiUser" Width="1.5" PointX="0.875" PointY="7.625" Height="2.3648893229166656" />
-        <EntityTypeShape EntityType="OmnipresenceModel.MediaItem" Width="1.5" PointX="9.75" PointY="1" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="OmnipresenceModel.MediaItem" Width="1.5" PointX="9.75" PointY="1" Height="1.9802864583333339" IsExpanded="true" />
         <AssociationConnector Association="OmnipresenceModel.EventMediaItem">
-          <ConnectorPoint PointX="6.75" PointY="1.0796868749999997" />
-          <ConnectorPoint PointX="9.75" PointY="1.0796868749999997" />
+          <ConnectorPoint PointX="6.75" PointY="1.40625" />
+          <ConnectorPoint PointX="9.75" PointY="1.40625" />
         </AssociationConnector>
         <EntityTypeShape EntityType="OmnipresenceModel.FriendRequest" Width="1.5" PointX="10.625" PointY="10" Height="1.7879850260416674" />
         <AssociationConnector Association="OmnipresenceModel.UserProfileFriendRequest">

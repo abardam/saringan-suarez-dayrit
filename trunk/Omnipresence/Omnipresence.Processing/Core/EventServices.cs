@@ -120,6 +120,16 @@ namespace Omnipresence.Processing
             }
         }
 
+        public bool MarkAsRead(Guid MessageId, bool isRead)
+        {
+            Mail mail = db.Mails.Where(p => p.MailId == MessageId).First();
+
+            if (mail == null) return false;
+            mail.Read = isRead;
+            db.SaveChanges();
+            return true;
+        }
+
         public bool Share(ShareEventModel shareEventModel)
         {
             Event _event = db.Events.Where(ev => ev.EventId == shareEventModel.EventID).FirstOrDefault();

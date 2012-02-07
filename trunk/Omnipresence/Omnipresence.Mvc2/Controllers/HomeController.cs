@@ -62,7 +62,7 @@ namespace Omnipresence.Mvc2.Controllers
             });
 
             List<MessageViewModel> messageViewList = new List<MessageViewModel>();
-
+            /*
             foreach (MessageModel mm in messageList)
             {
                 UserProfileModel sender = accountServices.GetUserProfileByUserProfileId(mm.SenderProfileID);
@@ -76,7 +76,7 @@ namespace Omnipresence.Mvc2.Controllers
                     SenderName = sender.FirstName + " " + sender.LastName,
                     SenderProfileID = mm.SenderProfileID
                 });
-            }
+            }*/
 
             return View(new NotificationsViewModel { PendingFriendRequests = pendingRequests, Message = message, UnreadMessages=messageViewList.AsQueryable()});
         }

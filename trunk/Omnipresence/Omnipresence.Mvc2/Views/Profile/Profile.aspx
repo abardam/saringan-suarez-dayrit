@@ -7,58 +7,69 @@
     <div class="section">
         <h1>
             <%: Model.Username %>'s Profile</h1>
-        <div>
-            <img src="<%: Model.AvatarUrl %>" alt="<%:Model.Username %>" /></div>
-        <div class="display-label">
-            Name</div>
-        <div class="display-field">
-            <%: Model.FirstName %>
-            <%: Model.LastName %></div>
-        <div class="display-label">
-            Birthdate</div>
-        <div class="display-field">
-            <%: String.Format("{0:g}", Model.Birthdate) %></div>
-        <div class="display-label">
-            Description</div>
-        <div class="display-field">
-            <%: Model.Description %></div>
-        <div class="display-label">
-            Reputation</div>
-        <div class="display-field">
-            <%: Model.Reputation %></div>
-        <div class="display-label">
-            Gender</div>
-        <div class="display-field">
-            <%: Model.GenderText %></div>
+        <div class="section">
+            <table style="margin: auto;">
+                <tr>
+                    <td>
+                        <div id="display-pic">
+                            <img src="<%: Model.AvatarUrl %>" alt="<%:Model.Username %>" /></div>
+                    </td>
+                    <td>
+                        <div id="user-info" style="text-align: left !important">
+                            <h2 class="name">
+                                <%: Model.FirstName %>
+                                <%: Model.LastName %></h2>
+                            <!--p>
+            <%if (Model.Birthdate != null) {%>Born <%: String.Format("{0:g}", Model.Birthdate) %>, <%} %>
+            <%: Model.GenderText %></p-->
+                            <p>
+                                <%: Model.Description %></p>
+                            <!--p>
+            Reputation: <%: Model.Reputation %></p-->
+                            <% if (!Page.User.Identity.Name.Equals(""))
+                               {
+                                   if (Model.ViewingOwn)
+                                   { %>
+                            <p>
+                                <%: Html.ActionLink("Edit Profile", "Edit")%></p>
+                            <%}
+                                   else
+                                   {
+                                       if (Model.ViewingFriend)
+                                       {
+                            %>
+                            <p>
+                                <%: Model.Username %>
+                                is your friend.</p>
+                            <%}
+               else if (Model.ThisDudeHasSentAFriendRequestToYou)
+               {
+                            %><p>
+                                <%=Html.ActionLink("Accept", "Accept","Friends", new { id = Model.UserProfileId }, null) %>
+                                or
+                                <%=Html.ActionLink("Reject", "Decline","Friends", new { id = Model.UserProfileId }, null) %>
+                                friend request.</p>
+                            <%
+}
+               else if (Model.FriendRequested)
+               {
+                            %><p>
+                                Friend request pending.</p>
+                            <%
+}
+               else
+               { %>
+                            <p>
+                                <%=Html.ActionLink("Add as Friend", "Add","Friends", new { id = Model.UserProfileId }, null) %></p>
+                            <%}
+           }
+                               } %>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <% if (!Page.User.Identity.Name.Equals(""))
-   {
-       if (Model.ViewingOwn)
-       { %>
-
-<%: Html.ActionLink("edit", "Edit")%>
-<%}
-       else
-       {
-           if (Model.ViewingFriend)
-           {
-               %>
-               <p>Friend. </p>
-               <%}
-           else if (Model.ThisDudeHasSentAFriendRequestToYou)
-           {
-               %><p>Friend request pending. <a href="/Friends/Add/<%=Model.UserProfileId%>">Confirm.</a> Reject.</p><%
-    }
-           else if (Model.FriendRequested)
-           {
-               %><p>Friend request sent!</p><%
-    }
-           else
-           { %>
-       <p><a href="/Friends/Add/<%=Model.UserProfileId%>">Add as friend</a></p>
-    <%}
-       }
-   } %>
     <div class="section">
         <h1>
             Friends</h1>
@@ -87,14 +98,16 @@
             <%: Html.ActionLink("see all", "Friends", "Friends", new { id = Model.Username }, null) %>
         </div>
     </div>
-    <div class="section">
+    <div class="section" id="event-listing">
         <h1>
             Events</h1>
         <% foreach (Omnipresence.Processing.EventModel b in Model.UserEvents)
-           { %><p>
-           <%: b.Title %></p>
+           { %>
+        <p class="event-bar">
+            <%: Html.ActionLink(b.Title+",", "Index", "Event", new{ id = b.EventId }, null)%> <%: b.Location.Name %>, <%:String.Format("{0:D}", b.StartTime)%>.</p>
         <% } %>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
+    <link rel="Stylesheet" href="../../Content/styles/profile.css" />
 </asp:Content>

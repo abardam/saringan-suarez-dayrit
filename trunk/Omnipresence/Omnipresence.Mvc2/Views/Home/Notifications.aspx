@@ -5,7 +5,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
-        Notifications</h2>
+        <%if (Model.PendingFriendRequests.Count() < 1)
+          { %>You have no pending friend requests.<%} %><%else
+          { %>Pending friend requests:<%} %></h2>
     <h3>
         <%: Model.Message %></h3>
         <div style="text-align:center; width:100%; display:block;">
