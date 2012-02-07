@@ -21,6 +21,7 @@ Home
 <td class="menu"><h3><%:Html.ActionLink("Subscriptions", "Subscriptions", "Event", null, null)%></h3></td>
 <td class="menu"><h3><%:Html.ActionLink("All", "All", "Event", null, null)%></h3></td>
 <%} %>
+<td class="menu"><h3><%: Html.ActionLink("Search", "Search", "Home") %></h3></td>
 </tr>
 </table>
 <% if (Model.Events.Count()>0) { %>

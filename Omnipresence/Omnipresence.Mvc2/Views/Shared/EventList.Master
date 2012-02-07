@@ -41,8 +41,6 @@
             <div id="user">
         <h1 class="title"><%:Html.ActionLink("OMNIPRESENCE", "Index", "Home") %></h1>
                 <asp:ContentPlaceHolder ID="SideContent" runat="server" />
-                <p><%: Html.ActionLink("search", "Search", "Home") %></p>
-                <p><%: Html.ActionLink("all events", "All","Event") %></p>
             </div>
             <div id="main">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server" />

@@ -208,7 +208,8 @@ td.menu a
     color: White;
     text-shadow: 0 1px rgba(255, 255, 255, .4);
 }
-td.menu:hover
+td.menu:hover,
+td#select-menu
 {
     background-color: #C00;
 }
