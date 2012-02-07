@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tests\CreateCategoriesTest.cs" />
     <Compile Include="Tests\CreateCommentTest.cs" />
     <Compile Include="Tests\AddFriendTest.cs" />
     <Compile Include="Tests\CreateFriendRequestTest.cs" />

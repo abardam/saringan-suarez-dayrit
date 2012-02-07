@@ -284,6 +284,8 @@
     <None Include="Content\styles\Raleway-font\raleway_thin-webfont.eot" />
     <None Include="Content\styles\Raleway-font\raleway_thin-webfont.ttf" />
     <None Include="Content\styles\Raleway-font\raleway_thin-webfont.woff" />
+    <None Include="Content\Uploads\Images\300_23227151196173433522012421169175233174638024318821996422810923718644419615099121202229219917523117010925513923524684143291011368" />
+    <None Include="Content\Uploads\Images\300_2323531381392242191582502271421122261421447176193195157228117217142101701511891349615514397411921201663815810119394222902171203238717" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Handlers\" />

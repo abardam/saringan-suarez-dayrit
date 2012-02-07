@@ -146,8 +146,9 @@ namespace Omnipresence.Processing
                     ReceipientProfileID = _recipient.UserProfileId
                 };
 
-                
-                if(_event!=null){
+
+                if (_event != null)
+                {
                     mm.EventID = shareEventModel.EventID;
                 }
 
@@ -165,7 +166,7 @@ namespace Omnipresence.Processing
                         Starred = false
                     });*/
             }
-            
+
             db.SaveChanges();
 
             return true;
@@ -369,13 +370,15 @@ namespace Omnipresence.Processing
 
         public MessageModel GetMessage(GetMessageModel getMessageModel)
         {
-            //TODO. the method.
-
+            var b = db.Mails.Where(mail => mail.MailId == getMessageModel.MessageID).FirstOrDefault();
+            if (b == null) return null;
             return new MessageModel
             {
-                Message = "sup ho",
-                ReceipientProfileID = 1,
-                SenderProfileID = 2
+                Message = b.MailMessage,
+                ReceipientProfileID = b.ToUserProfile.UserProfileId,
+                SenderProfileID = b.FromUserProfile.UserProfileId,
+                EventID = b.ReferredEvent.EventId,
+                MessageID = b.MailId
             };
         }
 
