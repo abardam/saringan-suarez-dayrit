@@ -181,6 +181,7 @@
     <Content Include="Views\Map\Index.aspx" />
     <Content Include="Views\Message\Index.aspx" />
     <Content Include="Views\Message\Send.aspx" />
+    <Content Include="Views\Message\ViewMessage.aspx" />
     <Content Include="Views\Notifications\Index.aspx" />
     <Content Include="Views\Profile\Edit.aspx" />
     <Content Include="Views\Profile\Index.aspx" />
@@ -304,7 +305,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1254</DevelopmentServerPort>
+          <DevelopmentServerPort>7199</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
