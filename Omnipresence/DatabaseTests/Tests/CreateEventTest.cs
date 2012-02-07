@@ -8,6 +8,8 @@ namespace DatabaseTests
 {
     public class CreateEventTest : Test
     {
+        private CategoryModel[] categoryModels = CategoryServices.GetInstance().GetAllCategories().ToArray();
+
         public CreateEventTest(string name)
         {
             Name = name;
@@ -20,7 +22,7 @@ namespace DatabaseTests
             c.Description = "This is a test event";
             c.StartTime = DateTime.Now;
             c.EndTime = DateTime.Now;
-            c.CategoryString = "Party";
+            c.CategoryString = categoryModels[random.Next(0, categoryModels.Length -1)].Name;
             c.IsPrivate = false;
             c.Latitude = 3.9 + (15.1*random.NextDouble()); // min : 18.812718 3.973861
             c.Longitude = 117 + (14*random.NextDouble()); // min: 117.13623 ,130.12207
