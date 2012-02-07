@@ -47,5 +47,18 @@ namespace Omnipresence.Processing
 
             return true;
         }
+
+        public IQueryable<CategoryModel> GetAllCategories()
+        {
+            List<CategoryModel> categoryModels = new List<CategoryModel>();
+            IQueryable categories = db.Categories;
+
+            foreach (Category category in categories)
+            {
+                categoryModels.Add(Utilities.CategoryToCategoryModel(category));
+            }
+
+            return categoryModels.AsQueryable();
+        }
     }
 }

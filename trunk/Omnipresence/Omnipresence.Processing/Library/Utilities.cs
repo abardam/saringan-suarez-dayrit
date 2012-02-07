@@ -148,5 +148,23 @@ namespace Omnipresence.Processing
 
             return apiUserModel;
         }
+
+        public static CategoryModel CategoryToCategoryModel(Category category)
+        {
+            if (category != null)
+            {
+                CategoryModel categoryModel = new CategoryModel();
+                categoryModel.CategoryId = category.CategoryId;
+                categoryModel.Name = category.Name;
+                categoryModel.Description = category.Description;
+                categoryModel.IconPath = category.IconPath;
+
+                return categoryModel;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
