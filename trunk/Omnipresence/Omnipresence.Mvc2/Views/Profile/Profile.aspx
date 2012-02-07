@@ -32,6 +32,7 @@
                                    { %>
                             <p>
                                 <%: Html.ActionLink("Edit Profile", "Edit")%></p>
+                                <p><%: Html.ActionLink("Change display pic", "ChangeDisplayPicture", new { id = Model.UserProfileId }, null)%></p>
                             <%}
                                    else
                                    {

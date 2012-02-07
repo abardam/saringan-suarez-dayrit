@@ -183,6 +183,7 @@
     <Content Include="Views\Message\Send.aspx" />
     <Content Include="Views\Message\ViewMessage.aspx" />
     <Content Include="Views\Notifications\Index.aspx" />
+    <Content Include="Views\Profile\ChangeDisplayPicture.aspx" />
     <Content Include="Views\Profile\Edit.aspx" />
     <Content Include="Views\Profile\Index.aspx" />
     <Content Include="Views\Profile\Profile.aspx" />
@@ -290,6 +291,7 @@
   <ItemGroup>
     <Folder Include="Handlers\" />
     <Folder Include="Modules\" />
+    <Folder Include="Uploads\Display\" />
     <Folder Include="Uploads\Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
