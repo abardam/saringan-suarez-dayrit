@@ -382,6 +382,7 @@ namespace Omnipresence.Mvc2.Controllers
             {
                 int profId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
                 eventServices.Vote(new VoteEventModel { UserProfileId = profId, EventId = id, IsDownvote = false });
+                return RedirectToAction("Index", new { id = id });
                 // TODO: UPDATE IFORHDFHRLIUV|UHDRAWI
             }
             return RedirectToAction("Index", "Home");
@@ -392,7 +393,8 @@ namespace Omnipresence.Mvc2.Controllers
             if (id != 0)
             {
                 int profId = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId;
-                eventServices.Vote(new VoteEventModel {UserProfileId = profId, EventId = id, IsDownvote = true });
+                eventServices.Vote(new VoteEventModel { UserProfileId = profId, EventId = id, IsDownvote = true });
+                return RedirectToAction("Index", new { id = id });
                 // TODO: UPDATE IFORHDFHRLIUV|UHDRAWI
             }
             return RedirectToAction("Index", "Home");

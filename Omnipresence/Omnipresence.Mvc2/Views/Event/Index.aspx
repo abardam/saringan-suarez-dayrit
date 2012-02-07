@@ -22,7 +22,7 @@
            { %><%: Html.ActionLink("Edit", "Edit", new { id = Model.EventId })%><%}
            else
            {
-                %>Vote up! <%
+                %><%:Html.ActionLink("Vote up", "VoteUp", new { id = Model.EventId }) %><%:Html.ActionLink("Vote down", "VoteDown", new { id = Model.EventId }) %><%
                               } %>
         <%: Html.ActionLink("Share", "Share", new { id = Model.EventId })%>
 
