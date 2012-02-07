@@ -78,7 +78,7 @@ namespace Omnipresence.Mvc2.Controllers
                 });
             }*/
 
-            return View(new NotificationsViewModel { PendingFriendRequests = pendingRequests, Message = message, UnreadMessages=messageViewList.AsQueryable()});
+            return View(new NotificationsViewModel { PendingFriendRequests = pendingRequests, Message = message, UnreadMessages = messageViewList.AsQueryable() });
         }
 
         public ActionResult Search()
@@ -94,25 +94,41 @@ namespace Omnipresence.Mvc2.Controllers
         {
             if (model.SearchType == SearchType.EVENT)
             {
-
                 return RedirectToAction("All", "Event", new
                 {
                     SeachString = model.SearchString,
                     DateSearch = false
                 });
             }
-            UserProfileModel upm = accountServices.GetUserProfileByUsername(model.SearchString);
 
+            UserProfileModel upm = accountServices.GetUserProfileByUsername(model.SearchString);
             SearchResultModel srm = new SearchResultModel();
 
-
-
-            srm.UserResult = accountServices.QueryUsers(new QueryUserModel
+            if (model.SearchType == SearchType.DATE)
             {
-                FirstName = model.SearchString,
-                LastName = model.SearchString,
-                Username = model.SearchString
-            });
+                try
+                {
+                    DateTime b = DateTime.Parse(model.SearchString);
+                    srm.EventResult = eventService.QueryEventsByDate(b, 1);
+                }
+                catch (FormatException e)
+                {
+                    srm.Message = "Invalid date format.";
+                }
+            }
+            else if (model.SearchType == SearchType.PLACE)
+            {
+                srm.EventResult = eventService.QueryEventsByLocation(model.SearchString);
+            }
+            else if (model.SearchType == SearchType.PERSON)
+            {
+                srm.UserResult = accountServices.QueryUsers(new QueryUserModel
+                {
+                    FirstName = model.SearchString,
+                    LastName = model.SearchString,
+                    Username = model.SearchString
+                });
+            }
             /*
             srm.UserResult = new List<ProfileViewModel>();
             if (upm != null)
