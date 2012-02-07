@@ -15,12 +15,13 @@ Hot
 <% if (!Page.User.Identity.Name.Equals("")) { %>
 <td class="menu"><h3><%:Html.ActionLink("+New", "New", "Event", null, null)%></h3></td>
 <%} %>
-<td class="menu"><h3><%:Html.ActionLink("Hot","Hot","Event",null,null) %></h3></td>
+<td class="menu" id="select-menu"><h3><%:Html.ActionLink("Hot","Hot","Event",null,null) %></h3></td>
 <td class="menu"><h3><%:Html.ActionLink("Top","Top","Event",null,null) %></h3></td>
 <% if (!Page.User.Identity.Name.Equals("")) { %>
 <td class="menu"><h3><%:Html.ActionLink("Subscriptions", "Subscriptions", "Event", null, null)%></h3></td>
 <td class="menu"><h3><%:Html.ActionLink("All", "All", "Event", null, null)%></h3></td>
 <%} %>
+<td class="menu"><h3><%: Html.ActionLink("Search", "Search", "Home") %></h3></td>
 </tr>
 </table>
 <% if (Model.Events.Count()>0) { %>
