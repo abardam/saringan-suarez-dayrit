@@ -351,6 +351,12 @@ namespace Omnipresence.Processing
 
         #endregion
 
+
+        public bool UpdateAvatar(UpdateAvatarModel updateAvatarModel)
+        {
+            return false;
+        }
+
         public bool UpdatePassword(UpdatePasswordModel changePasswordModel)
         {
             User user = db.Users.Where(x => x.Username == changePasswordModel.Username).FirstOrDefault();
