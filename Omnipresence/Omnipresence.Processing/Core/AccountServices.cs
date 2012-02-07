@@ -396,7 +396,7 @@ namespace Omnipresence.Processing
 
             if ((adder != null && added != null) && (adder != added))
             {
-                if (!Utilities.HasPendingFriendRequest(adder, added) && !Utilities.AreFriends(adder, added))
+                if (!Utilities.HasPendingFriendRequest(adder, added) && !Utilities.HasPendingFriendRequest(added, adder) && !Utilities.AreFriends(adder, added))
                 {
                     FriendRequest friendRequest = new FriendRequest();
                     friendRequest.AddingParty = adder;
@@ -406,11 +406,11 @@ namespace Omnipresence.Processing
                     db.SaveChanges();
 
                     return true;
-                }
-                else if (Utilities.HasPendingFriendRequest(adder, added) && !Utilities.AreFriends(adder, added))
+                }/* I don't like this part anymore.
+                else if (Utilities.HasPendingFriendRequest(added, adder) && !Utilities.AreFriends(adder, added))
                 {
                     return ConfirmFriendRequest(new FriendRequestModel { AdderUserProfileId = adder.UserProfileId, AddedUserProfileId = added.UserProfileId });
-                }
+                }*/
                 else
                 {
                     return false;
@@ -537,17 +537,10 @@ namespace Omnipresence.Processing
 
         public bool AreFriends(string username1, string username2)
         {
-            UserProfileModel profile1 = GetUserProfileByUsername(username1);
-            UserProfileModel profile2 = GetUserProfileByUsername(username2);
+            UserProfile profile1 = db.UserProfiles.Where(x=> x.User.Username == username1).FirstOrDefault();
+            UserProfile profile2 = db.UserProfiles.Where(x=> x.User.Username == username2).FirstOrDefault();
 
-            if (profile1 == null)
-                return false;
-
-            IQueryable<UserProfileModel> temp = GetAcceptedFriends(new GetFriendsModel { UserProfileId = profile1.UserProfileId });
-            foreach (UserProfileModel b in temp)
-            {
-                if (b.UserProfileId == profile2.UserProfileId) return true;
-            }
+            if (profile1 != null && profile2 !=null) return Utilities.AreFriends(profile1, profile2);
             return false;
         }
 

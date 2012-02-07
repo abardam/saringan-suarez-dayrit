@@ -23,38 +23,32 @@ namespace Omnipresence.Mvc2.Controllers
         }
 
         [Authorize]
-        public ActionResult Index(int id=0)
+        public ActionResult Index()
         {
-
-            if (id == 0) //meaning list all messages
+            IQueryable<MessageModel> list = eventServices.GetMessages(new GetMessagesModel
             {
-                IQueryable<MessageModel> list = eventServices.GetMessages(new GetMessagesModel
+                UserProfileID = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId,
+                GetUnreadOnly = false
+            });
+
+            List<MessageViewModel> returnValue = new List<MessageViewModel>();
+
+            foreach (MessageModel mm in list)
+            {
+                UserProfileModel sender = accountServices.GetUserProfileByUserProfileId(mm.SenderProfileID);
+
+                returnValue.Add(new MessageViewModel
                 {
-                    UserProfileID = accountServices.GetUserProfileByUsername(User.Identity.Name).UserProfileId,
-                    GetUnreadOnly = false
+                    EventID = mm.EventID != null ? (int)mm.EventID : -1,
+                    EventName = eventServices.GetEventById(mm.EventID != null ? (int)mm.EventID : -1).Title,
+                    Message = mm.Message,
+                    MessageID = mm.MessageID,
+                    SenderName = sender.FirstName + " " + sender.LastName,
+                    SenderProfileID = mm.SenderProfileID
                 });
-
-                List<MessageViewModel> returnValue = new List<MessageViewModel>();
-
-                foreach (MessageModel mm in list)
-                {
-                    UserProfileModel sender = accountServices.GetUserProfileByUserProfileId(mm.SenderProfileID);
-
-                    returnValue.Add(new MessageViewModel
-                    {
-                        EventID = mm.EventID!=null?(int)mm.EventID:-1,
-                        EventName = eventServices.GetEventById(mm.EventID != null ? (int)mm.EventID : -1).Title,
-                        Message = mm.Message,
-                        MessageID = mm.MessageID,
-                        SenderName = sender.FirstName + " " + sender.LastName,
-                        SenderProfileID = mm.SenderProfileID
-                    });
-                }
-
-                return View(returnValue.AsQueryable());
             }
 
-            return null;
+            return View(returnValue.AsQueryable());
         }
 
         [Authorize]
@@ -72,8 +66,9 @@ namespace Omnipresence.Mvc2.Controllers
 
             UserProfileModel friend = accountServices.GetUserProfileByUserProfileId(replyToProfileId);
 
-            if(friend!=null){
-                sevm.SharedUserProfileIDList += ""+ friend.UserProfileId;
+            if (friend != null)
+            {
+                sevm.SharedUserProfileIDList += "" + friend.UserProfileId;
                 sevm.SharedIDList += (friend.FirstName + " " + friend.LastName);
             }
 

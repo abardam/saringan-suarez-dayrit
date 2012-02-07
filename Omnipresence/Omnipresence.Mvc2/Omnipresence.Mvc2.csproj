@@ -147,6 +147,7 @@
     <Content Include="Content\styles\OstrichSans-font\ostrich-rounded-webfont.svg" />
     <Content Include="Content\styles\OstrichSans-font\SIL Open Font License 1.1.txt" />
     <Content Include="Content\styles\OstrichSans-font\stylesheet.css" />
+    <Content Include="Content\styles\profile.css" />
     <Content Include="Content\styles\Raleway-font\raleway_thin-webfont.svg" />
     <Content Include="Content\styles\Raleway-font\stylesheet.css" />
     <Content Include="Global.asax" />

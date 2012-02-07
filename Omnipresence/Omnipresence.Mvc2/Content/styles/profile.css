@@ -1,0 +1,57 @@
+﻿body {
+}
+
+div.section 
+{
+    clear:both;
+    display:block;
+    position:relative;
+    padding-top: 20px;
+}
+
+div.section > *
+{
+    margin:auto;
+}
+
+h2.name 
+{
+    font-style:normal;
+    font-size:1.5em;
+    color:Black;
+}
+
+div#display-pic 
+{
+    width:100px;
+    height:100px;
+    overflow:hidden;
+}
+
+div#display-pic > img 
+{
+    min-width:100px;
+    min-height:100px;
+}
+
+div#user-info, div#user-info p, div#event-listing p
+{
+    font-family: Georgia, Serif;
+    font-style: italic;
+    color:Gray;
+}
+
+div#user-info a 
+{
+    text-transform: lowercase
+}
+div#event-listing p a
+{
+    font-weight:normal;
+    font-style:normal;
+}
+
+div#event-listing p
+{
+    font-size:1em !important;
+}
