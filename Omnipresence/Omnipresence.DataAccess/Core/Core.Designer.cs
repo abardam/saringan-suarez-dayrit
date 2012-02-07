@@ -701,24 +701,24 @@ namespace Omnipresence.DataAccess.Core
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Byte[] Icon
+        public global::System.String IconPath
         {
             get
             {
-                return StructuralObject.GetValidValue(_Icon);
+                return _IconPath;
             }
             set
             {
-                OnIconChanging(value);
-                ReportPropertyChanging("Icon");
-                _Icon = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Icon");
-                OnIconChanged();
+                OnIconPathChanging(value);
+                ReportPropertyChanging("IconPath");
+                _IconPath = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("IconPath");
+                OnIconPathChanged();
             }
         }
-        private global::System.Byte[] _Icon;
-        partial void OnIconChanging(global::System.Byte[] value);
-        partial void OnIconChanged();
+        private global::System.String _IconPath;
+        partial void OnIconPathChanging(global::System.String value);
+        partial void OnIconPathChanged();
 
         #endregion
     
