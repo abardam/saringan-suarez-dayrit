@@ -18,27 +18,27 @@ namespace Omnipresence.Mvc2
 
             routes.MapRoute(
                 "PrettyProfileRoute",
-                "profile/{id}",
+                "p/{id}",
                 new { id = "", controller = "Profile", action = "Profile" }
                 );
             routes.MapRoute(
                 "PrettyEventRoute",
-                "event/{id}",
+                "e/{id}",
                 new { id = 0, controller = "Event", action = "Index" }
                 );
             routes.MapRoute(
                 "PrettyFriendsRoute",
-                "profile/{id}/friends",
+                "p/{id}/friends",
                 new { id = "", controller = "Friends", action = "Friends" }
                 );
             routes.MapRoute(
                 "PrettyNotificationsRoute",
-                "notifications",
+                "n",
                 new { id = "", controller = "Home", action = "Notifications" }
                 );
             routes.MapRoute(
                 "PrettyMessagesRoute",
-                "messages",
+                "m",
                 new { id = "", controller = "Message", action = "Index" }
                 );
             routes.MapRoute(
