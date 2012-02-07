@@ -31,7 +31,7 @@ namespace Omnipresence.Mvc2.Models
             get
             {
 
-                return new SelectList(EventServices.GetInstance().GetCategories());
+                return new SelectList(CategoryServices.GetInstance().GetAllCategories());
             }
         }
 
@@ -99,7 +99,7 @@ namespace Omnipresence.Mvc2.Models
             get
             {
 
-                return new SelectList(EventServices.GetInstance().GetCategories());
+                return new SelectList(CategoryServices.GetInstance().GetAllCategories());
             }
         }
     }
@@ -153,7 +153,7 @@ namespace Omnipresence.Mvc2.Models
             get
             {
 
-                return new SelectList(EventServices.GetInstance().GetCategories());
+                return new SelectList(CategoryServices.GetInstance().GetAllCategories());
             }
         }
     }
