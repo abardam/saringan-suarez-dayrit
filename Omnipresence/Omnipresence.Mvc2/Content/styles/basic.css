@@ -60,7 +60,7 @@ legend
     line-height: 2em;
 }
 
-input[type=text], input[type=password]
+input[type=text], input[type=password], textarea
 {
     width: 90%;
     line-height: 2em;
@@ -140,7 +140,7 @@ form
     text-align: center;
 }
 
-input
+input, textarea
 {
     font-family: 'MetrophobicRegular' , Arial, Verdana, Sans-Serif;
     font-size: 1em;
