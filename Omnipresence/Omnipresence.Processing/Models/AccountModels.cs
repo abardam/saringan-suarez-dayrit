@@ -118,4 +118,11 @@ namespace Omnipresence.Processing
         public string LastName { get; set; }
         public string Email { get; set; }
     }
+
+    public class UpdateAvatarModel
+    {
+        public int UserProfileID { get; set; }
+        public string FileName { get; set; }
+        public string FilePath { get; set; }
+    }
 }
