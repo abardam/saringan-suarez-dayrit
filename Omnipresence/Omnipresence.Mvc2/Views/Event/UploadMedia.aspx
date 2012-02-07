@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Basic.Master" Inherits="System.Web.Mvc.ViewPage<Omnipresence.Mvc2.Models.UploadViewModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	UploadMedia
+	Upload Media
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2>UploadMedia</h2>
+    <h2>Upload Media</h2>
     <% using (Html.BeginForm("UploadMedia", "Event", 
                     FormMethod.Post, new { enctype = "multipart/form-data" }))
         {%>

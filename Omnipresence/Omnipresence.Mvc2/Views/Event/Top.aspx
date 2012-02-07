@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/EventList.Master" Inherits="System.Web.Mvc.ViewPage<Omnipresence.Mvc2.Models.IndexViewModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
+Top
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="SideContent" runat="server">
@@ -25,7 +26,7 @@
     <div class="event-box <%if (!x) { %> selected<%} else {%> unselected<%} %>">
     <div class="map-container" id="map<%: mode.EventId %>" data-lat="<%:mode.Location.Latitude %>" data-lng="<%:mode.Location.Longitude %>" style="width:680px; height:200px;"></div>
     <h3><%: Html.ActionLink(mode.Title, "Index", "Event", new {id = mode.EventId}, null) %></h3>
-    <h5><%=mode.Location.Name%></h5>
+    <h5><%: mode.Location.Name %>, <%:String.Format("{0:D}", mode.StartTime)%>.</h5>
     <p><%=mode.Description%></p>
     </div>
     <% } %>
