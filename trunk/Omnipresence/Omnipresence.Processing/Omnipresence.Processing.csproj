@@ -43,10 +43,12 @@
   <ItemGroup>
     <Compile Include="Core\AccountServices.cs" />
     <Compile Include="Core\ApiServices.cs" />
+    <Compile Include="Core\CategoryServices.cs" />
     <Compile Include="Core\CommentServices.cs" />
     <Compile Include="Core\MediaServices.cs" />
     <Compile Include="Core\ServiceStatuses.cs" />
     <Compile Include="Models\ApiModels.cs" />
+    <Compile Include="Models\CategoryModels.cs" />
     <Compile Include="Models\CommentModels.cs" />
     <Compile Include="Models\EventModels.cs" />
     <Compile Include="Core\EventServices.cs" />
