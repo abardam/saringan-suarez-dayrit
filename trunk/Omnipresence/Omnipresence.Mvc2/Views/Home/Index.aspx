@@ -12,11 +12,14 @@ Home
 <div id="event-list">
 <table>
 <tr>
+<% if (!Page.User.Identity.Name.Equals("")) { %>
+<td class="menu"><h3><%:Html.ActionLink("+New", "New", "Event", null, null)%></h3></td>
+<%} %>
 <td class="menu"><h3><%:Html.ActionLink("Hot","Hot","Event",null,null) %></h3></td>
 <td class="menu"><h3><%:Html.ActionLink("Top","Top","Event",null,null) %></h3></td>
 <% if (!Page.User.Identity.Name.Equals("")) { %>
 <td class="menu"><h3><%:Html.ActionLink("Subscriptions", "Subscriptions", "Event", null, null)%></h3></td>
-<td class="menu"><h3><%:Html.ActionLink("+New", "New", "Event", null, null)%></h3></td>
+<td class="menu"><h3><%:Html.ActionLink("All", "All", "Event", null, null)%></h3></td>
 <%} %>
 </tr>
 </table>
@@ -48,43 +51,4 @@ Home
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
-<style type="text/css">
-    table 
-    {
-        width:100%;
-        text-align:center;
-        border:0px;
-        border-spacing:0px;
-    }
-    td.menu 
-    {
-        border-right: 1px solid white;
-        border-left: 1px solid white;
-        border-top: 2px solid white;
-        border-bottom: 2px solid white;
-        padding: 10px;
-        background-color: Black;
-        color:White;
-    }
-    td.menu a 
-    {
-        color:White;
-    }
-    td.menu:hover 
-    {
-        background-color: #C00;
-    }
-    div.VoteDown 
-    {
-        padding:10px;
-        background-color:Yellow;
-        color:Black;
-    }
-    div.VoteUp 
-    {
-        padding:10px;
-        background-color:Black;
-        color:White;
-    }
-</style>
 </asp:Content>
