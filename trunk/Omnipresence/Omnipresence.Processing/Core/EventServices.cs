@@ -483,14 +483,12 @@ namespace Omnipresence.Processing
 
         public IEnumerable<string> GetCategories()
         {
-            //TODO.
-
+            var b = db.Categories;
             List<string> retval = new List<string>();
-
-            retval.Add("Party");
-            retval.Add("Disaster");
-            retval.Add("Traffic");
-
+            foreach (Category m in b)
+            {
+                retval.Add(m.Name);
+            }
             return retval.AsEnumerable();
         }
 
