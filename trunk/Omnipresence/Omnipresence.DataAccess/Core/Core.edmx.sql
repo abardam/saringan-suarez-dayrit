@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/03/2012 10:41:03
--- Generated from EDMX file: C:\Users\enzo\Documents\Visual Studio 2010\Projects\Omnipresence(2)\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
+-- Date Created: 02/07/2012 23:03:38
+-- Generated from EDMX file: C:\Users\emanuel\Desktop\omni\saringan-suarez-dayrit\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [omnidev];
+USE [Omnipresence];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,26 +17,23 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_Comment_Events]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_Comment_Events];
-GO
 IF OBJECT_ID(N'[dbo].[FK_Event_Category]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_Event_Category];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Comment_Events]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_Comment_Events];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Event_Location]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_Event_Location];
 GO
-IF OBJECT_ID(N'[dbo].[FK_EventEventVotes]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EventVotes] DROP CONSTRAINT [FK_EventEventVotes];
-GO
-IF OBJECT_ID(N'[dbo].[FK_EventMediaItem]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[MediaItems] DROP CONSTRAINT [FK_EventMediaItem];
-GO
-IF OBJECT_ID(N'[dbo].[FK_MailEvent]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Mails] DROP CONSTRAINT [FK_MailEvent];
-GO
 IF OBJECT_ID(N'[dbo].[FK_UserProfile_User]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[UserProfiles] DROP CONSTRAINT [FK_UserProfile_User];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendship]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Friendships] DROP CONSTRAINT [FK_UserProfileFriendship];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendship1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Friendships] DROP CONSTRAINT [FK_UserProfileFriendship1];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserProfileComment]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_UserProfileComment];
@@ -44,8 +41,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UserProfileEvent]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_UserProfileEvent];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UserProfileEventVotes]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EventVotes] DROP CONSTRAINT [FK_UserProfileEventVotes];
+IF OBJECT_ID(N'[dbo].[FK_EventMediaItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MediaItems] DROP CONSTRAINT [FK_EventMediaItem];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendRequest]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[FriendRequests] DROP CONSTRAINT [FK_UserProfileFriendRequest];
@@ -53,11 +50,14 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendRequest1]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[FriendRequests] DROP CONSTRAINT [FK_UserProfileFriendRequest1];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendship]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Friendships] DROP CONSTRAINT [FK_UserProfileFriendship];
+IF OBJECT_ID(N'[dbo].[FK_EventEventVotes]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EventVotes] DROP CONSTRAINT [FK_EventEventVotes];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UserProfileFriendship1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Friendships] DROP CONSTRAINT [FK_UserProfileFriendship1];
+IF OBJECT_ID(N'[dbo].[FK_UserProfileEventVotes]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EventVotes] DROP CONSTRAINT [FK_UserProfileEventVotes];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MailEvent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Mails] DROP CONSTRAINT [FK_MailEvent];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserProfileMail]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Mails] DROP CONSTRAINT [FK_UserProfileMail];
@@ -70,9 +70,6 @@ GO
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[ApiUsers]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ApiUsers];
-GO
 IF OBJECT_ID(N'[dbo].[Categories]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Categories];
 GO
@@ -82,29 +79,32 @@ GO
 IF OBJECT_ID(N'[dbo].[Events]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Events];
 GO
-IF OBJECT_ID(N'[dbo].[EventVotes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[EventVotes];
-GO
-IF OBJECT_ID(N'[dbo].[FriendRequests]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[FriendRequests];
-GO
-IF OBJECT_ID(N'[dbo].[Friendships]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Friendships];
-GO
 IF OBJECT_ID(N'[dbo].[Locations]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Locations];
-GO
-IF OBJECT_ID(N'[dbo].[Mails]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Mails];
-GO
-IF OBJECT_ID(N'[dbo].[MediaItems]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[MediaItems];
 GO
 IF OBJECT_ID(N'[dbo].[UserProfiles]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UserProfiles];
 GO
 IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Users];
+GO
+IF OBJECT_ID(N'[dbo].[Friendships]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Friendships];
+GO
+IF OBJECT_ID(N'[dbo].[ApiUsers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ApiUsers];
+GO
+IF OBJECT_ID(N'[dbo].[MediaItems]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MediaItems];
+GO
+IF OBJECT_ID(N'[dbo].[FriendRequests]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FriendRequests];
+GO
+IF OBJECT_ID(N'[dbo].[EventVotes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EventVotes];
+GO
+IF OBJECT_ID(N'[dbo].[Mails]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Mails];
 GO
 
 -- --------------------------------------------------
@@ -116,7 +116,7 @@ CREATE TABLE [dbo].[Categories] (
     [CategoryId] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(32)  NOT NULL,
     [Description] nvarchar(128)  NULL,
-    [Icon] varbinary(max)  NULL
+    [IconPath] nvarchar(max)  NULL
 );
 GO
 
