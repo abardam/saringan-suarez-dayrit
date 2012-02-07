@@ -57,8 +57,8 @@ namespace Omnipresence.Mvc2.Controllers
                 LastModified = model.LastModified,
                 Rating = model.Rating,
                 NewComment = "",
-                MediaFileNameList = mediasFilesnames.AsEnumerable()/*,
-                CategoryString = model.Category.Description*/,
+                MediaFileNameList = mediasFilesnames.AsEnumerable(),
+                CategoryString = model.Category.Name,
                 CreatorUsername = accountServices.GetUserByUserProfileId(model.CreatedById).Username
             };
 
@@ -223,7 +223,7 @@ namespace Omnipresence.Mvc2.Controllers
             {
                 EventId = id,
                 Address = em.Location.Address,
-                CategoryString = em.Category != null ? em.Category.Description : "",
+                CategoryString = em.Category.Name,
                 Description = em.Description,
                 EndTime = em.EndTime,
                 Latitude = em.Location.Latitude,
@@ -308,6 +308,7 @@ namespace Omnipresence.Mvc2.Controllers
                     Longitude = model.Longitude,
                     StartTime = cem.StartTime,
                     Title = cem.Title,
+                    CategoryString = cem.CategoryString
                 });
             }
             catch (ConstraintException e)

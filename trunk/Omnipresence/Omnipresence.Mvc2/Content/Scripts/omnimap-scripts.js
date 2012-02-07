@@ -20,7 +20,7 @@ var map;
 var mainMarker;
 window.onload = loadScript;
 
-function setMap2(divName, latLng, isNew, all) {
+function setMap2(divName, latLng, isNew, all, title, category) {
     var myOptions = {
         zoom: 16,
         center: latLng,
@@ -34,7 +34,7 @@ function setMap2(divName, latLng, isNew, all) {
 
     if (!all) {
         if (!isNew) {
-            mainMarker = addMarker(latLng);
+            mainMarker = addMarker(latLng, title, category);
 
         }
         else {
@@ -42,7 +42,7 @@ function setMap2(divName, latLng, isNew, all) {
                 if (mainMarker != null) {
                     mainMarker.setMap(null);
                 }
-                mainMarker = addMarker(event.latLng);
+                mainMarker = addMarker(event.latLng, "new", "newevent");
 
                 document.getElementById("Latitude").value = event.latLng.lat();
                 document.getElementById("Longitude").value = event.latLng.lng();
@@ -59,7 +59,16 @@ function setMap2(divName, latLng, isNew, all) {
 
 }
 
-function setMap(divName) {
+function setMap(divName, title, category) {
+
+
+    if(!title)
+        title = "hello";
+    if(!category)
+        category = "party";
+
+
+
     var mapDiv = $("div#" + divName);
     var lat = mapDiv.attr("data-lat");
     var lng = mapDiv.attr("data-lng");
@@ -68,14 +77,17 @@ function setMap(divName) {
     var isNew = mapDiv.attr("new") == "true" || mapDiv.attr("new") != null;
     var all = mapDiv.attr("all") != null;
 
-    setMap2(divName, latlng, isNew, all);
+    setMap2(divName, latlng, isNew, all, title, category);
 }
 function getEventIcon(eventType) {
     return "/Content/Images/" + eventType + ".png";
 }
 
-function addClickableMarker(latlng, title, eventId) {
-    var tempMarker = addMarker(latlng, title);
+function addClickableMarker(latlng, title, eventId, category) {
+
+    if (!category)
+        category = "party";
+    var tempMarker = addMarker(latlng, title, category);
 
     google.maps.event.addListener(tempMarker, 'click', function () {
         goEvent(eventId);
@@ -88,14 +100,19 @@ function mapPanTo(latlng) {
     map.panTo(latlng);
 }
 
-function addMarker(latlng, title) {
+function addMarker(latlng, title, category) {
+
+
+    if(!category)
+        category = "party";
+
         var marker = new google.maps.Marker({
             position: latlng,
             title: title
         });
 
         marker.setMap(map);
-        marker.setIcon(getEventIcon("party"));
+        marker.setIcon(getEventIcon(category));
         /*google.maps.event.addListener(marker, 'click', function () {
 
             //closeBoxes();

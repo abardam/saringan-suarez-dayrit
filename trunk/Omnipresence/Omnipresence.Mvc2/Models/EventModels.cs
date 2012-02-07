@@ -25,6 +25,16 @@ namespace Omnipresence.Mvc2.Models
         public DateTime Created { get; set; }
         public int Rating { get; set; }
         public int CreatedById { get; set; }
+
+        public SelectList Categories
+        {
+            get
+            {
+
+                return new SelectList(EventServices.GetInstance().GetCategories());
+            }
+        }
+
     }
 
     /*public class EditEventViewModel
@@ -83,6 +93,15 @@ namespace Omnipresence.Mvc2.Models
         }
 
         public DateTime EndTime { get; set; }
+
+        public SelectList Categories
+        {
+            get
+            {
+
+                return new SelectList(EventServices.GetInstance().GetCategories());
+            }
+        }
     }
 
     public class EditEventViewModel
@@ -128,6 +147,15 @@ namespace Omnipresence.Mvc2.Models
         }
 
         public DateTime EndTime { get; set; }
+
+        public SelectList Categories
+        {
+            get
+            {
+
+                return new SelectList(EventServices.GetInstance().GetCategories());
+            }
+        }
     }
 
     public class EventCommentViewModel
