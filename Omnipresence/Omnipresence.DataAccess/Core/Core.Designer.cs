@@ -2593,13 +2593,15 @@ namespace Omnipresence.DataAccess.Core
         /// <param name="fileName">Initial value of the FileName property.</param>
         /// <param name="filePath">Initial value of the FilePath property.</param>
         /// <param name="eventId">Initial value of the EventId property.</param>
-        public static MediaItem CreateMediaItem(global::System.Int32 mediaItemId, global::System.String fileName, global::System.String filePath, global::System.Int32 eventId)
+        /// <param name="uploaderUsername">Initial value of the UploaderUsername property.</param>
+        public static MediaItem CreateMediaItem(global::System.Int32 mediaItemId, global::System.String fileName, global::System.String filePath, global::System.Int32 eventId, global::System.String uploaderUsername)
         {
             MediaItem mediaItem = new MediaItem();
             mediaItem.MediaItemId = mediaItemId;
             mediaItem.FileName = fileName;
             mediaItem.FilePath = filePath;
             mediaItem.EventId = eventId;
+            mediaItem.UploaderUsername = uploaderUsername;
             return mediaItem;
         }
 
@@ -2704,6 +2706,30 @@ namespace Omnipresence.DataAccess.Core
         private global::System.Int32 _EventId;
         partial void OnEventIdChanging(global::System.Int32 value);
         partial void OnEventIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String UploaderUsername
+        {
+            get
+            {
+                return _UploaderUsername;
+            }
+            set
+            {
+                OnUploaderUsernameChanging(value);
+                ReportPropertyChanging("UploaderUsername");
+                _UploaderUsername = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("UploaderUsername");
+                OnUploaderUsernameChanged();
+            }
+        }
+        private global::System.String _UploaderUsername;
+        partial void OnUploaderUsernameChanging(global::System.String value);
+        partial void OnUploaderUsernameChanged();
 
         #endregion
     

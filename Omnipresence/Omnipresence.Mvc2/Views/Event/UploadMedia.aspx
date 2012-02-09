@@ -12,7 +12,7 @@
         {%>
 
         <%:Html.HiddenFor(model => model.EventID) %>
-        <input name="uploadFile" type="file" accept="image/*"/>
+        <input name="uploadFile" type="file" accept="video/*|image/*"/>
         <input type="submit" value="Upload File" />
 <%} %>
 

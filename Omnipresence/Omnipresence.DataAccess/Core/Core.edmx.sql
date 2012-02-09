@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/07/2012 23:28:32
+-- Date Created: 02/10/2012 00:54:52
 -- Generated from EDMX file: C:\Users\Mr Suarez\Documents\thesis\Omnipresence\Omnipresence.DataAccess\Core\Core.edmx
 -- --------------------------------------------------
 
@@ -217,7 +217,8 @@ CREATE TABLE [dbo].[MediaItems] (
     [MediaItemId] int IDENTITY(1,1) NOT NULL,
     [FileName] nvarchar(max)  NOT NULL,
     [FilePath] nvarchar(max)  NOT NULL,
-    [EventId] int  NOT NULL
+    [EventId] int  NOT NULL,
+    [UploaderUsername] nvarchar(max)  NOT NULL
 );
 GO
 

@@ -5,418 +5,419 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="OmnipresenceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-  <EntityContainer Name="OmnipresenceModelStoreContainer">
-    <EntitySet Name="Categories" EntityType="OmnipresenceModel.Store.Categories" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Comments" EntityType="OmnipresenceModel.Store.Comments" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Events" EntityType="OmnipresenceModel.Store.Events" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Locations" EntityType="OmnipresenceModel.Store.Locations" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UserProfiles" EntityType="OmnipresenceModel.Store.UserProfiles" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Users" EntityType="OmnipresenceModel.Store.Users" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Friendships" EntityType="OmnipresenceModel.Store.Friendships" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ApiUsers" EntityType="OmnipresenceModel.Store.ApiUsers" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="MediaItems" EntityType="OmnipresenceModel.Store.MediaItems" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="FriendRequests" EntityType="OmnipresenceModel.Store.FriendRequests" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="EventVotes" EntityType="OmnipresenceModel.Store.EventVotes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Mails" EntityType="OmnipresenceModel.Store.Mails" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_Event_Category" Association="OmnipresenceModel.Store.FK_Event_Category">
-      <End Role="Categories" EntitySet="Categories" />
-      <End Role="Events" EntitySet="Events" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Comment_Events" Association="OmnipresenceModel.Store.FK_Comment_Events">
-      <End Role="Events" EntitySet="Events" />
-      <End Role="Comments" EntitySet="Comments" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Event_Location" Association="OmnipresenceModel.Store.FK_Event_Location">
-      <End Role="Locations" EntitySet="Locations" />
-      <End Role="Events" EntitySet="Events" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserProfile_User" Association="OmnipresenceModel.Store.FK_UserProfile_User">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="UserProfiles" EntitySet="UserProfiles" />
-    </AssociationSet>
-    <AssociationSet Name="UserProfileFriendship" Association="OmnipresenceModel.Store.UserProfileFriendship">
-      <End Role="UserProfile" EntitySet="UserProfiles" />
-      <End Role="Friendship" EntitySet="Friendships" />
-    </AssociationSet>
-    <AssociationSet Name="UserProfileFriendship1" Association="OmnipresenceModel.Store.UserProfileFriendship1">
-      <End Role="UserProfile" EntitySet="UserProfiles" />
-      <End Role="Friendship" EntitySet="Friendships" />
-    </AssociationSet>
-    <AssociationSet Name="UserProfileComment" Association="OmnipresenceModel.Store.UserProfileComment">
-      <End Role="UserProfile" EntitySet="UserProfiles" />
-      <End Role="Comment" EntitySet="Comments" />
-    </AssociationSet>
-    <AssociationSet Name="UserProfileEvent" Association="OmnipresenceModel.Store.UserProfileEvent">
-      <End Role="UserProfile" EntitySet="UserProfiles" />
-      <End Role="Event" EntitySet="Events" />
-    </AssociationSet>
-    <AssociationSet Name="EventMediaItem" Association="OmnipresenceModel.Store.EventMediaItem">
-      <End Role="Event" EntitySet="Events" />
-      <End Role="MediaItem" EntitySet="MediaItems" />
-    </AssociationSet>
-    <AssociationSet Name="UserProfileFriendRequest" Association="OmnipresenceModel.Store.UserProfileFriendRequest">
-      <End Role="UserProfile" EntitySet="UserProfiles" />
-      <End Role="FriendRequest" EntitySet="FriendRequests" />
-    </AssociationSet>
-    <AssociationSet Name="UserProfileFriendRequest1" Association="OmnipresenceModel.Store.UserProfileFriendRequest1">
-      <End Role="UserProfile" EntitySet="UserProfiles" />
-      <End Role="FriendRequest" EntitySet="FriendRequests" />
-    </AssociationSet>
-    <AssociationSet Name="EventEventVotes" Association="OmnipresenceModel.Store.EventEventVotes">
-      <End Role="Event" EntitySet="Events" />
-      <End Role="EventVotes" EntitySet="EventVotes" />
-    </AssociationSet>
-    <AssociationSet Name="UserProfileEventVotes" Association="OmnipresenceModel.Store.UserProfileEventVotes">
-      <End Role="UserProfile" EntitySet="UserProfiles" />
-      <End Role="EventVotes" EntitySet="EventVotes" />
-    </AssociationSet>
-    <AssociationSet Name="MailEvent" Association="OmnipresenceModel.Store.MailEvent">
-      <End Role="Mail" EntitySet="Mails" />
-      <End Role="Event" EntitySet="Events" />
-    </AssociationSet>
-    <AssociationSet Name="UserProfileMail" Association="OmnipresenceModel.Store.UserProfileMail">
-      <End Role="UserProfile" EntitySet="UserProfiles" />
-      <End Role="Mail" EntitySet="Mails" />
-    </AssociationSet>
-    <AssociationSet Name="UserProfileMail1" Association="OmnipresenceModel.Store.UserProfileMail1">
-      <End Role="UserProfile" EntitySet="UserProfiles" />
-      <End Role="Mail" EntitySet="Mails" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Categories">
-    <Key>
-      <PropertyRef Name="CategoryId" />
-    </Key>
-    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="32" />
-    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="128" />
-    <Property Name="IconPath" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Comments">
-    <Key>
-      <PropertyRef Name="CommentId" />
-    </Key>
-    <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CommentText" Type="nvarchar" Nullable="false" MaxLength="1024" />
-    <Property Name="Timestamp" Type="datetime" Nullable="false" />
-    <Property Name="UserProfileId" Type="int" Nullable="false" />
-    <Property Name="EventId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Events">
-    <Key>
-      <PropertyRef Name="EventId" />
-    </Key>
-    <Property Name="EventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="64" />
-    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="1024" />
-    <Property Name="Rating" Type="int" Nullable="false" />
-    <Property Name="Created" Type="datetime" Nullable="false" />
-    <Property Name="LastModified" Type="datetime" Nullable="false" />
-    <Property Name="StartTime" Type="datetime" Nullable="false" />
-    <Property Name="EndTime" Type="datetime" Nullable="false" />
-    <Property Name="IsActive" Type="bit" Nullable="false" />
-    <Property Name="VisibilityTypeId" Type="int" Nullable="true" />
-    <Property Name="LocationId" Type="int" Nullable="true" />
-    <Property Name="CategoryId" Type="int" Nullable="true" />
-    <Property Name="IsPrivate" Type="bit" Nullable="false" />
-    <Property Name="CreatedById" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Locations">
-    <Key>
-      <PropertyRef Name="LocationId" />
-    </Key>
-    <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Latitude" Type="float" Nullable="false" />
-    <Property Name="Longitude" Type="float" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="64" />
-    <Property Name="CountryId" Type="int" Nullable="true" />
-    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="64" />
-  </EntityType>
-  <EntityType Name="UserProfiles">
-    <Key>
-      <PropertyRef Name="UserProfileId" />
-    </Key>
-    <Property Name="UserProfileId" Type="int" Nullable="false" />
-    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="Birthdate" Type="datetime" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="1024" />
-    <Property Name="Avatar" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Reputation" Type="int" Nullable="false" />
-    <Property Name="Timezone" Type="int" Nullable="false" />
-    <Property Name="IsFemale" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Users">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="32" />
-    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="AlternateEmail" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-    <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-    <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
-    <Property Name="IsActivated" Type="bit" Nullable="false" />
-    <Property Name="IsLockedOut" Type="bit" Nullable="false" />
-    <Property Name="LastLockedOutDate" Type="datetime" Nullable="false" />
-    <Property Name="SecurityQuestion" Type="nvarchar" Nullable="false" MaxLength="256" />
-    <Property Name="SecurityAnswer" Type="nvarchar" Nullable="true" MaxLength="256" />
-  </EntityType>
-  <EntityType Name="Friendships">
-    <Key>
-      <PropertyRef Name="AdderId" />
-      <PropertyRef Name="AddedId" />
-    </Key>
-    <Property Name="AdderId" Type="int" Nullable="false" />
-    <Property Name="AddedId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ApiUsers">
-    <Key>
-      <PropertyRef Name="ApiUserId" />
-    </Key>
-    <Property Name="ApiUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ApiKey" Type="nchar" Nullable="false" MaxLength="32" />
-    <Property Name="LastCallDate" Type="datetime" Nullable="false" />
-    <Property Name="ApiCallCount" Type="int" Nullable="false" />
-    <Property Name="AppName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ApiCallLimit" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="MediaItems">
-    <Key>
-      <PropertyRef Name="MediaItemId" />
-    </Key>
-    <Property Name="MediaItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="EventId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="FriendRequests">
-    <Key>
-      <PropertyRef Name="AdderId" />
-      <PropertyRef Name="AddedId" />
-    </Key>
-    <Property Name="AdderId" Type="int" Nullable="false" />
-    <Property Name="AddedId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="EventVotes">
-    <Key>
-      <PropertyRef Name="EventId" />
-      <PropertyRef Name="UserProfileId" />
-    </Key>
-    <Property Name="EventId" Type="int" Nullable="false" />
-    <Property Name="UserProfileId" Type="int" Nullable="false" />
-    <Property Name="IsUpVote" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Mails">
-    <Key>
-      <PropertyRef Name="MailId" />
-    </Key>
-    <Property Name="MailId" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MailMessage" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Read" Type="bit" Nullable="false" />
-    <Property Name="Starred" Type="bit" Nullable="false" />
-    <Property Name="DateSent" Type="datetime" Nullable="false" />
-    <Property Name="ReferredEvent_EventId" Type="int" Nullable="true" />
-    <Property Name="FromUserProfile_UserProfileId" Type="int" Nullable="false" />
-    <Property Name="ToUserProfile_UserProfileId" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_Event_Category">
-    <End Role="Categories" Type="OmnipresenceModel.Store.Categories" Multiplicity="0..1" />
-    <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Categories">
-        <PropertyRef Name="CategoryId" />
-      </Principal>
-      <Dependent Role="Events">
-        <PropertyRef Name="CategoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Comment_Events">
-    <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="1" />
-    <End Role="Comments" Type="OmnipresenceModel.Store.Comments" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Events">
-        <PropertyRef Name="EventId" />
-      </Principal>
-      <Dependent Role="Comments">
-        <PropertyRef Name="EventId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Event_Location">
-    <End Role="Locations" Type="OmnipresenceModel.Store.Locations" Multiplicity="0..1" />
-    <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Locations">
-        <PropertyRef Name="LocationId" />
-      </Principal>
-      <Dependent Role="Events">
-        <PropertyRef Name="LocationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserProfile_User">
-    <End Role="Users" Type="OmnipresenceModel.Store.Users" Multiplicity="1" />
-    <End Role="UserProfiles" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="UserProfiles">
-        <PropertyRef Name="UserProfileId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UserProfileFriendship">
-    <End Role="UserProfile" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
-    <End Role="Friendship" Type="OmnipresenceModel.Store.Friendships" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserProfile">
-        <PropertyRef Name="UserProfileId" />
-      </Principal>
-      <Dependent Role="Friendship">
-        <PropertyRef Name="AdderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UserProfileFriendship1">
-    <End Role="UserProfile" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
-    <End Role="Friendship" Type="OmnipresenceModel.Store.Friendships" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserProfile">
-        <PropertyRef Name="UserProfileId" />
-      </Principal>
-      <Dependent Role="Friendship">
-        <PropertyRef Name="AddedId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UserProfileComment">
-    <End Role="UserProfile" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
-    <End Role="Comment" Type="OmnipresenceModel.Store.Comments" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserProfile">
-        <PropertyRef Name="UserProfileId" />
-      </Principal>
-      <Dependent Role="Comment">
-        <PropertyRef Name="UserProfileId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UserProfileEvent">
-    <End Role="UserProfile" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
-    <End Role="Event" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserProfile">
-        <PropertyRef Name="UserProfileId" />
-      </Principal>
-      <Dependent Role="Event">
-        <PropertyRef Name="CreatedById" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="EventMediaItem">
-    <End Role="Event" Type="OmnipresenceModel.Store.Events" Multiplicity="1" />
-    <End Role="MediaItem" Type="OmnipresenceModel.Store.MediaItems" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Event">
-        <PropertyRef Name="EventId" />
-      </Principal>
-      <Dependent Role="MediaItem">
-        <PropertyRef Name="EventId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UserProfileFriendRequest">
-    <End Role="UserProfile" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
-    <End Role="FriendRequest" Type="OmnipresenceModel.Store.FriendRequests" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserProfile">
-        <PropertyRef Name="UserProfileId" />
-      </Principal>
-      <Dependent Role="FriendRequest">
-        <PropertyRef Name="AdderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UserProfileFriendRequest1">
-    <End Role="UserProfile" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
-    <End Role="FriendRequest" Type="OmnipresenceModel.Store.FriendRequests" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserProfile">
-        <PropertyRef Name="UserProfileId" />
-      </Principal>
-      <Dependent Role="FriendRequest">
-        <PropertyRef Name="AddedId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="EventEventVotes">
-    <End Role="Event" Type="OmnipresenceModel.Store.Events" Multiplicity="1" />
-    <End Role="EventVotes" Type="OmnipresenceModel.Store.EventVotes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Event">
-        <PropertyRef Name="EventId" />
-      </Principal>
-      <Dependent Role="EventVotes">
-        <PropertyRef Name="EventId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UserProfileEventVotes">
-    <End Role="UserProfile" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
-    <End Role="EventVotes" Type="OmnipresenceModel.Store.EventVotes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserProfile">
-        <PropertyRef Name="UserProfileId" />
-      </Principal>
-      <Dependent Role="EventVotes">
-        <PropertyRef Name="UserProfileId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="MailEvent">
-    <End Role="Mail" Type="OmnipresenceModel.Store.Mails" Multiplicity="*" />
-    <End Role="Event" Type="OmnipresenceModel.Store.Events" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Event">
-        <PropertyRef Name="EventId" />
-      </Principal>
-      <Dependent Role="Mail">
-        <PropertyRef Name="ReferredEvent_EventId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UserProfileMail">
-    <End Role="UserProfile" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
-    <End Role="Mail" Type="OmnipresenceModel.Store.Mails" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserProfile">
-        <PropertyRef Name="UserProfileId" />
-      </Principal>
-      <Dependent Role="Mail">
-        <PropertyRef Name="FromUserProfile_UserProfileId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UserProfileMail1">
-    <End Role="UserProfile" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
-    <End Role="Mail" Type="OmnipresenceModel.Store.Mails" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserProfile">
-        <PropertyRef Name="UserProfileId" />
-      </Principal>
-      <Dependent Role="Mail">
-        <PropertyRef Name="ToUserProfile_UserProfileId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
+        <EntityContainer Name="OmnipresenceModelStoreContainer">
+          <EntitySet Name="ApiUsers" EntityType="OmnipresenceModel.Store.ApiUsers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Categories" EntityType="OmnipresenceModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Comments" EntityType="OmnipresenceModel.Store.Comments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Events" EntityType="OmnipresenceModel.Store.Events" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EventVotes" EntityType="OmnipresenceModel.Store.EventVotes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FriendRequests" EntityType="OmnipresenceModel.Store.FriendRequests" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Friendships" EntityType="OmnipresenceModel.Store.Friendships" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Locations" EntityType="OmnipresenceModel.Store.Locations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Mails" EntityType="OmnipresenceModel.Store.Mails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MediaItems" EntityType="OmnipresenceModel.Store.MediaItems" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfiles" EntityType="OmnipresenceModel.Store.UserProfiles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="OmnipresenceModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Comment_Events" Association="OmnipresenceModel.Store.FK_Comment_Events">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Category" Association="OmnipresenceModel.Store.FK_Event_Category">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Location" Association="OmnipresenceModel.Store.FK_Event_Location">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventEventVotes" Association="OmnipresenceModel.Store.FK_EventEventVotes">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="EventVotes" EntitySet="EventVotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventMediaItem" Association="OmnipresenceModel.Store.FK_EventMediaItem">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="MediaItems" EntitySet="MediaItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailEvent" Association="OmnipresenceModel.Store.FK_MailEvent">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="Mails" EntitySet="Mails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_User" Association="OmnipresenceModel.Store.FK_UserProfile_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfileComment" Association="OmnipresenceModel.Store.FK_UserProfileComment">
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfileEvent" Association="OmnipresenceModel.Store.FK_UserProfileEvent">
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfileEventVotes" Association="OmnipresenceModel.Store.FK_UserProfileEventVotes">
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+            <End Role="EventVotes" EntitySet="EventVotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfileFriendRequest" Association="OmnipresenceModel.Store.FK_UserProfileFriendRequest">
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+            <End Role="FriendRequests" EntitySet="FriendRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfileFriendRequest1" Association="OmnipresenceModel.Store.FK_UserProfileFriendRequest1">
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+            <End Role="FriendRequests" EntitySet="FriendRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfileFriendship" Association="OmnipresenceModel.Store.FK_UserProfileFriendship">
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+            <End Role="Friendships" EntitySet="Friendships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfileFriendship1" Association="OmnipresenceModel.Store.FK_UserProfileFriendship1">
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+            <End Role="Friendships" EntitySet="Friendships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfileMail" Association="OmnipresenceModel.Store.FK_UserProfileMail">
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+            <End Role="Mails" EntitySet="Mails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfileMail1" Association="OmnipresenceModel.Store.FK_UserProfileMail1">
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+            <End Role="Mails" EntitySet="Mails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ApiUsers">
+          <Key>
+            <PropertyRef Name="ApiUserId" />
+          </Key>
+          <Property Name="ApiUserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ApiKey" Type="nchar" Nullable="false" MaxLength="32" />
+          <Property Name="LastCallDate" Type="datetime" Nullable="false" />
+          <Property Name="ApiCallCount" Type="int" Nullable="false" />
+          <Property Name="AppName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ApiCallLimit" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="Description" Type="nvarchar" MaxLength="128" />
+          <Property Name="IconPath" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CommentText" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="UserProfileId" Type="int" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="LastModified" Type="datetime" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="VisibilityTypeId" Type="int" />
+          <Property Name="LocationId" Type="int" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="IsPrivate" Type="bit" Nullable="false" />
+          <Property Name="CreatedById" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EventVotes">
+          <Key>
+            <PropertyRef Name="EventId" />
+            <PropertyRef Name="UserProfileId" />
+          </Key>
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="UserProfileId" Type="int" Nullable="false" />
+          <Property Name="IsUpVote" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FriendRequests">
+          <Key>
+            <PropertyRef Name="AdderId" />
+            <PropertyRef Name="AddedId" />
+          </Key>
+          <Property Name="AdderId" Type="int" Nullable="false" />
+          <Property Name="AddedId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Friendships">
+          <Key>
+            <PropertyRef Name="AdderId" />
+            <PropertyRef Name="AddedId" />
+          </Key>
+          <Property Name="AdderId" Type="int" Nullable="false" />
+          <Property Name="AddedId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="Mails">
+          <Key>
+            <PropertyRef Name="MailId" />
+          </Key>
+          <Property Name="MailId" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity"/>
+          <Property Name="MailMessage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Read" Type="bit" Nullable="false" />
+          <Property Name="Starred" Type="bit" Nullable="false" />
+          <Property Name="DateSent" Type="datetime" Nullable="false" />
+          <Property Name="ReferredEvent_EventId" Type="int" />
+          <Property Name="FromUserProfile_UserProfileId" Type="int" Nullable="false" />
+          <Property Name="ToUserProfile_UserProfileId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MediaItems">
+          <Key>
+            <PropertyRef Name="MediaItemId" />
+          </Key>
+          <Property Name="MediaItemId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="UploaderUsername" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProfiles">
+          <Key>
+            <PropertyRef Name="UserProfileId" />
+          </Key>
+          <Property Name="UserProfileId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Birthdate" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Avatar" Type="nvarchar(max)" />
+          <Property Name="Reputation" Type="int" Nullable="false" />
+          <Property Name="Timezone" Type="int" Nullable="false" />
+          <Property Name="IsFemale" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="AlternateEmail" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActivated" Type="bit" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+          <Property Name="LastLockedOutDate" Type="datetime" Nullable="false" />
+          <Property Name="SecurityQuestion" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="SecurityAnswer" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <Association Name="FK_Comment_Events">
+          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="1" />
+          <End Role="Comments" Type="OmnipresenceModel.Store.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Category">
+          <End Role="Categories" Type="OmnipresenceModel.Store.Categories" Multiplicity="0..1" />
+          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Location">
+          <End Role="Locations" Type="OmnipresenceModel.Store.Locations" Multiplicity="0..1" />
+          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventEventVotes">
+          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="1" />
+          <End Role="EventVotes" Type="OmnipresenceModel.Store.EventVotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="EventVotes">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventMediaItem">
+          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="1" />
+          <End Role="MediaItems" Type="OmnipresenceModel.Store.MediaItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="MediaItems">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailEvent">
+          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="0..1" />
+          <End Role="Mails" Type="OmnipresenceModel.Store.Mails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="Mails">
+              <PropertyRef Name="ReferredEvent_EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_User">
+          <End Role="Users" Type="OmnipresenceModel.Store.Users" Multiplicity="1" />
+          <End Role="UserProfiles" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserProfiles">
+              <PropertyRef Name="UserProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfileComment">
+          <End Role="UserProfiles" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
+          <End Role="Comments" Type="OmnipresenceModel.Store.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfiles">
+              <PropertyRef Name="UserProfileId" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="UserProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfileEvent">
+          <End Role="UserProfiles" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
+          <End Role="Events" Type="OmnipresenceModel.Store.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfiles">
+              <PropertyRef Name="UserProfileId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="CreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfileEventVotes">
+          <End Role="UserProfiles" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
+          <End Role="EventVotes" Type="OmnipresenceModel.Store.EventVotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfiles">
+              <PropertyRef Name="UserProfileId" />
+            </Principal>
+            <Dependent Role="EventVotes">
+              <PropertyRef Name="UserProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfileFriendRequest">
+          <End Role="UserProfiles" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
+          <End Role="FriendRequests" Type="OmnipresenceModel.Store.FriendRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfiles">
+              <PropertyRef Name="UserProfileId" />
+            </Principal>
+            <Dependent Role="FriendRequests">
+              <PropertyRef Name="AdderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfileFriendRequest1">
+          <End Role="UserProfiles" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
+          <End Role="FriendRequests" Type="OmnipresenceModel.Store.FriendRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfiles">
+              <PropertyRef Name="UserProfileId" />
+            </Principal>
+            <Dependent Role="FriendRequests">
+              <PropertyRef Name="AddedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfileFriendship">
+          <End Role="UserProfiles" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
+          <End Role="Friendships" Type="OmnipresenceModel.Store.Friendships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfiles">
+              <PropertyRef Name="UserProfileId" />
+            </Principal>
+            <Dependent Role="Friendships">
+              <PropertyRef Name="AdderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfileFriendship1">
+          <End Role="UserProfiles" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
+          <End Role="Friendships" Type="OmnipresenceModel.Store.Friendships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfiles">
+              <PropertyRef Name="UserProfileId" />
+            </Principal>
+            <Dependent Role="Friendships">
+              <PropertyRef Name="AddedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfileMail">
+          <End Role="UserProfiles" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
+          <End Role="Mails" Type="OmnipresenceModel.Store.Mails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfiles">
+              <PropertyRef Name="UserProfileId" />
+            </Principal>
+            <Dependent Role="Mails">
+              <PropertyRef Name="FromUserProfile_UserProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfileMail1">
+          <End Role="UserProfiles" Type="OmnipresenceModel.Store.UserProfiles" Multiplicity="1" />
+          <End Role="Mails" Type="OmnipresenceModel.Store.Mails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfiles">
+              <PropertyRef Name="UserProfileId" />
+            </Principal>
+            <Dependent Role="Mails">
+              <PropertyRef Name="ToUserProfile_UserProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OmnipresenceModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -729,6 +730,7 @@
           <Property Type="String" Name="FilePath" Nullable="false" />
           <NavigationProperty Name="Event" Relationship="OmnipresenceModel.EventMediaItem" FromRole="MediaItem" ToRole="Event" />
           <Property Type="Int32" Name="EventId" Nullable="false" />
+          <Property Type="String" Name="UploaderUsername" Nullable="false" />
         </EntityType>
         <Association Name="EventMediaItem">
           <End Type="OmnipresenceModel.Event" Role="Event" Multiplicity="1" />
@@ -958,6 +960,7 @@
           <ScalarProperty Name="FileName" ColumnName="FileName" />
           <ScalarProperty Name="FilePath" ColumnName="FilePath" />
           <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="UploaderUsername" ColumnName="UploaderUsername" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1083,7 +1086,7 @@
           <ConnectorPoint PointX="5.968748" PointY="6.057109375" />
         </AssociationConnector>
         <EntityTypeShape EntityType="OmnipresenceModel.ApiUser" Width="1.5" PointX="0.875" PointY="7.625" Height="2.3648893229166656" />
-        <EntityTypeShape EntityType="OmnipresenceModel.MediaItem" Width="1.5" PointX="9.75" PointY="1" Height="1.9802864583333339" IsExpanded="true" />
+        <EntityTypeShape EntityType="OmnipresenceModel.MediaItem" Width="1.5" PointX="9.75" PointY="1" Height="2.172587890625" IsExpanded="true" />
         <AssociationConnector Association="OmnipresenceModel.EventMediaItem">
           <ConnectorPoint PointX="6.75" PointY="1.40625" />
           <ConnectorPoint PointX="9.75" PointY="1.40625" />

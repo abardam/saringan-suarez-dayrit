@@ -18,17 +18,17 @@ namespace DatabaseTests
             CreateCategoryModel ccm = new CreateCategoryModel();
             ccm.Name = "Party";
             ccm.Description = "This is A Party Event Description";
-            ccm.IconPath = "~";
+            ccm.IconPath = "/Content/Images/party.png";
             categoryServices.CreateCategory(ccm);
 
             ccm.Name = "Disaster";
             ccm.Description = "This is A Disaster Event Description";
-            ccm.IconPath = "~";
+            ccm.IconPath = "/Content/Images/disaster.png";
             categoryServices.CreateCategory(ccm);
 
             ccm.Name = "Traffic";
             ccm.Description = "This is A Traffic Event Description";
-            ccm.IconPath = "~";
+            ccm.IconPath = "/Content/Images/traffic.png";
             categoryServices.CreateCategory(ccm);
 
             return true;
