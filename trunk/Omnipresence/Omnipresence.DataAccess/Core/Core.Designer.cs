@@ -403,8 +403,7 @@ namespace Omnipresence.DataAccess.Core
         /// <param name="apiCallCount">Initial value of the ApiCallCount property.</param>
         /// <param name="appName">Initial value of the AppName property.</param>
         /// <param name="email">Initial value of the Email property.</param>
-        /// <param name="apiCallLimit">Initial value of the ApiCallLimit property.</param>
-        public static ApiUser CreateApiUser(global::System.Int32 apiUserId, global::System.String apiKey, global::System.DateTime lastCallDate, global::System.Int32 apiCallCount, global::System.String appName, global::System.String email, global::System.Int32 apiCallLimit)
+        public static ApiUser CreateApiUser(global::System.Int32 apiUserId, global::System.String apiKey, global::System.DateTime lastCallDate, global::System.Int32 apiCallCount, global::System.String appName, global::System.String email)
         {
             ApiUser apiUser = new ApiUser();
             apiUser.ApiUserId = apiUserId;
@@ -413,7 +412,6 @@ namespace Omnipresence.DataAccess.Core
             apiUser.ApiCallCount = apiCallCount;
             apiUser.AppName = appName;
             apiUser.Email = email;
-            apiUser.ApiCallLimit = apiCallLimit;
             return apiUser;
         }
 
@@ -587,7 +585,7 @@ namespace Omnipresence.DataAccess.Core
                 OnApiCallLimitChanged();
             }
         }
-        private global::System.Int32 _ApiCallLimit;
+        private global::System.Int32 _ApiCallLimit = 100000;
         partial void OnApiCallLimitChanging(global::System.Int32 value);
         partial void OnApiCallLimitChanged();
 
