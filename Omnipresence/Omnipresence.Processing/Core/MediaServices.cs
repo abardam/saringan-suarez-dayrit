@@ -45,7 +45,7 @@ namespace Omnipresence.Processing
             var temp = db.MediaItems.Where(x => x.EventId == eventId);
             foreach (MediaItem b in temp)
             {
-                retVal.Add(new MediaItemModel { EventId = b.EventId, FileName = b.FileName, FilePath = b.FilePath });
+                retVal.Add(new MediaItemModel { EventId = b.EventId, FileName = b.FileName, FilePath = b.FilePath, Type = MediaType.IMAGE, UploaderUsername = "user1" });
             }
             return retVal;
         }

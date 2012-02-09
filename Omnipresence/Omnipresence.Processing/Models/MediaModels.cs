@@ -15,6 +15,13 @@ namespace Omnipresence.Processing
     {
         public string FileName { get; set; }
         public string FilePath { get; set; }
+        public MediaType Type { get; set; }
+        public string UploaderUsername { get; set; }
         public int EventId { get; set; }
+    }
+
+    public enum MediaType {
+        IMAGE,
+        VIDEO
     }
 }

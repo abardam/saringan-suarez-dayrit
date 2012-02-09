@@ -35,7 +35,8 @@ namespace Omnipresence.Mvc2.Controllers
             IEnumerable<MediaItemModel> medias = MediaServices.GetInstance().GetMediaItemsByEvent(model.EventId);
             List<String> mediasFilesnames = new List<String>();
 
-            foreach(MediaItemModel mim in medias){
+            foreach (MediaItemModel mim in medias)
+            {
                 //mediasFilesnames.Add(HttpContext.Server.MapPath("~/Uploads/Images/" + mim.FileName));
                 mediasFilesnames.Add(mim.FileName);
             }
@@ -275,10 +276,6 @@ namespace Omnipresence.Mvc2.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-        // TODO: Wala pang httppost
-
-        // ito na.
-
         [HttpPost]
         public ActionResult Edit(EditEventViewModel model)
         {
@@ -329,7 +326,7 @@ namespace Omnipresence.Mvc2.Controllers
         }
 
 
-        public ActionResult All(String SearchString="", bool DateSearch=false)
+        public ActionResult All(String SearchString = "", bool DateSearch = false)
         {
             IndexViewModel ivm;
 
@@ -368,11 +365,15 @@ namespace Omnipresence.Mvc2.Controllers
         private IndexViewModel generateIndexViewModel(IEnumerable<EventModel> events)
         {
             UserProfileModel profile = accountServices.GetUserProfileByUsername(User.Identity.Name);
-            NotificationsShortList notifications = profile != null ? new NotificationsShortList {
-                UnreadMessages = eventServices.GetMessages(new GetMessagesModel{
+            NotificationsShortList notifications = profile != null ? new NotificationsShortList
+            {
+                UnreadMessages = eventServices.GetMessages(new GetMessagesModel
+                {
                     GetUnreadOnly = true,
-                    UserProfileID = profile.UserProfileId}).Count(),
-                FriendRequests = accountServices.GetFriendRequests(new GetFriendRequestsModel { UserProfileId = profile.UserProfileId }).Count() } : null;
+                    UserProfileID = profile.UserProfileId
+                }).Count(),
+                FriendRequests = accountServices.GetFriendRequests(new GetFriendRequestsModel { UserProfileId = profile.UserProfileId }).Count()
+            } : null;
             if (profile == null) profile = new UserProfileModel { Avatar = "", FirstName = "", LastName = "" };
             IndexSidebarViewModel sidebar = new IndexSidebarViewModel { AvatarUrl = profile.Avatar, Name = profile.FirstName + " " + profile.LastName, Notifications = notifications, Username = User.Identity.Name };
             return (new IndexViewModel { DisplayName = sidebar.Name, Events = events, Sidebar = sidebar });
@@ -428,14 +429,16 @@ namespace Omnipresence.Mvc2.Controllers
             string[] userProfileIDstring = model.SharedUserProfileIDList.Split(',');
             HashSet<int> userProfileIDs = new HashSet<int>();
 
-            foreach(String s in userProfileIDstring){
-                if(!s.Equals(""))
+            foreach (String s in userProfileIDstring)
+            {
+                if (!s.Equals(""))
                     userProfileIDs.Add(Int32.Parse(s));
             }
 
             List<int> userIDs = new List<int>();
 
-            foreach(int i in userProfileIDs){
+            foreach (int i in userProfileIDs)
+            {
                 userIDs.Add(accountServices.GetUserByUserProfileId(i).UserId);
             }
 
@@ -450,9 +453,32 @@ namespace Omnipresence.Mvc2.Controllers
 
             return RedirectToAction("Index", new { id = model.EventID });
         }
+        [Authorize]
+        public ActionResult Media(int id = 0)
+        {
+            IEnumerable<MediaItemModel> media = MediaServices.GetInstance().GetMediaItemsByEvent(id);
+            if (media == null) return RedirectToAction("Index", "Home");
 
+            List<MediaItemModel> image = new List<MediaItemModel>();
+            List<MediaItemModel> video = new List<MediaItemModel>();
 
-        public ActionResult UploadMedia(int id=0)
+            foreach (MediaItemModel b in media)
+            {
+                if (b.Type == MediaType.IMAGE)
+                {
+                    image.Add(b);
+                }
+                else if (b.Type == MediaType.VIDEO)
+                {
+                    video.Add(b);
+                }
+            }
+
+            return View(new MediaPageViewModel { Images = image, Videos = video });
+        }
+
+        [Authorize]
+        public ActionResult UploadMedia(int id = 0)
         {
             return View(new UploadViewModel
             {
@@ -463,7 +489,7 @@ namespace Omnipresence.Mvc2.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult UploadMedia(HttpPostedFileBase uploadFile, UploadViewModel model)
         {
-            
+
 
             if (uploadFile.ContentLength > 0 && uploadFile.ContentType.Contains("image"))
             {
@@ -477,7 +503,8 @@ namespace Omnipresence.Mvc2.Controllers
                     fileName += b;
                 }
 
-                uploadFile.SaveAs(Server.MapPath("../../Uploads/Images/"+fileName));
+                fileName += "." + uploadFile.ContentType.Split('/')[1];
+                uploadFile.SaveAs(Server.MapPath("../../Uploads/Images/" + fileName));
 
                 MediaServices.GetInstance().CreateMediaItem(new CreateMediaItemModel
                 {
