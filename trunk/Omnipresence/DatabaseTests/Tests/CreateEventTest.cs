@@ -8,7 +8,7 @@ namespace DatabaseTests
 {
     public class CreateEventTest : Test
     {
-        private CategoryModel[] categoryModels = CategoryServices.GetInstance().GetAllCategories().ToArray();
+        private CategoryModel[] categoryModels;
 
         public CreateEventTest(string name)
         {
@@ -17,6 +17,7 @@ namespace DatabaseTests
 
         public override bool Execute()
         {
+            categoryModels = CategoryServices.GetInstance().GetAllCategories().ToArray();
             CreateEventModel c = new CreateEventModel();
             c.Title = "Test Event";
             c.Description = "This is a test event";

@@ -13,7 +13,8 @@ namespace DatabaseTests
             List<Test> testSuite = new List<Test>();
             Dictionary<string, int> failed = new Dictionary<string, int>();
 
-            //testSuite.Add(new CreateCategoriesTest("Create Categories Test"));
+            testSuite.Add(new CreateCategoriesTest("Create Categories Test"));
+
             for (int i = 0; i < 100; i++)
             {
                 testSuite.Add(new CreateUserTest("Account Creation Test"));
