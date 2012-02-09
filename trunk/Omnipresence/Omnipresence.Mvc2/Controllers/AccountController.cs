@@ -37,7 +37,7 @@ namespace Omnipresence.Mvc2.Controllers
             {
                 ValidateUserModel vum = new ValidateUserModel();
                 vum.Password = model.Password;
-                vum.Username = model.UserName;
+                vum.Username = model.UserName.Trim();
                 if (accountServices.ValidateUser(vum))
                 {
                     FormsService.SignIn(model.UserName, model.RememberMe);
