@@ -11,6 +11,10 @@ namespace Omnipresence.Processing
         public string Name { get; set; }
         public string Description { get; set; }
         public string IconPath { get; set; }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
     public class CreateCategoryModel
