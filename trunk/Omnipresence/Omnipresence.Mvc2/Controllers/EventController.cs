@@ -474,7 +474,7 @@ namespace Omnipresence.Mvc2.Controllers
                 }
             }
 
-            return View(new MediaPageViewModel { Images = image, Videos = video });
+            return View(new MediaPageViewModel { Images = image, Videos = video, EventID = id });
         }
 
         [Authorize]
@@ -485,11 +485,11 @@ namespace Omnipresence.Mvc2.Controllers
                 EventID = id
             });
         }
-
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult UploadMedia(HttpPostedFileBase uploadFile, UploadViewModel model)
         {
-
+            if (uploadFile == null) return View(model);
 
             if (uploadFile.ContentLength > 0 && uploadFile.ContentType.Contains("image"))
             {
@@ -510,9 +510,36 @@ namespace Omnipresence.Mvc2.Controllers
                 {
                     EventId = model.EventID,
                     FileName = fileName,
-                    FilePath = Server.MapPath("../../Uploads/Images/")
+                    FilePath = Server.MapPath("../../Uploads/Images/"),
+                    UploaderUsername = User.Identity.Name
                 });
+                return RedirectToAction("Media", new { id = model.EventID });
             }
+            else
+                if (uploadFile.ContentLength > 0 && (uploadFile.ContentType.Contains("ogg") || uploadFile.ContentType.Contains("mp4")))
+                {
+                    byte[] randomArray = new byte[50];
+                    new Random().NextBytes(randomArray);
+
+                    String fileName = model.EventID + "_";
+
+                    foreach (byte b in randomArray)
+                    {
+                        fileName += b;
+                    }
+
+                    fileName += "." + uploadFile.ContentType.Split('/')[1];
+                    uploadFile.SaveAs(Server.MapPath("../../Uploads/Videos/" + fileName));
+
+                    MediaServices.GetInstance().CreateMediaItem(new CreateMediaItemModel
+                    {
+                        EventId = model.EventID,
+                        FileName = fileName,
+                        FilePath = Server.MapPath("../../Uploads/Videos/"),
+                        UploaderUsername = User.Identity.Name
+                    });
+                    return RedirectToAction("Media", new { id = model.EventID });
+                }
             return View(model);
         }
 

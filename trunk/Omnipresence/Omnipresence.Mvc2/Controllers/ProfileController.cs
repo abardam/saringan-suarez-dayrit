@@ -153,7 +153,7 @@ namespace Omnipresence.Mvc2.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult ChangeDisplayPicture(HttpPostedFileBase uploadFile, ChangeDisplayPictureModel model)
         {
-
+            if (uploadFile == null) return View(model);
 
             if (uploadFile.ContentLength > 0 && uploadFile.ContentType.Contains("image"))
             {
@@ -170,7 +170,7 @@ namespace Omnipresence.Mvc2.Controllers
                     FilePath = "../../Uploads/Display/"
                 });
 
-
+                return RedirectToAction("Index");
             }
             return View(model);
         }

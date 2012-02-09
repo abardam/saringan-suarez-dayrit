@@ -40,10 +40,6 @@
     <div class="section">
     <h1>
         Media</h1>
-    <% foreach (String s in Model.MediaFileNameList)
-       {%>
-    <img src="<%= Url.Content("~/Uploads/Images/" + s) %>" alt="image" />
-    <%} %>
     <p><%: Html.ActionLink("Upload media", "UploadMedia", new { id = Model.EventId }) %></p>
     <p><%: Html.ActionLink("View all media", "Media", new { id = Model.EventId }) %></p>
     </div>

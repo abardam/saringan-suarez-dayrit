@@ -41,11 +41,22 @@ namespace Omnipresence.Processing
         public IEnumerable<MediaItemModel> GetMediaItemsByEvent(int eventId)
         {
             List<MediaItemModel> retVal = new List<MediaItemModel>();
-            if (eventId <1) return null;
+            if (eventId < 1) return null;
             var temp = db.MediaItems.Where(x => x.EventId == eventId);
             foreach (MediaItem b in temp)
             {
-                retVal.Add(new MediaItemModel { EventId = b.EventId, FileName = b.FileName, FilePath = b.FilePath, Type = MediaType.IMAGE, UploaderUsername = "user1" });
+                var x = b.FileName.Split('.');
+                string type = x[x.Length - 1];
+                MediaType mimeType = MediaType.INVALID;
+                if (type.Equals("mp4", StringComparison.CurrentCultureIgnoreCase)
+                    || type.Equals("ogg", StringComparison.CurrentCultureIgnoreCase))
+                    mimeType = MediaType.VIDEO;
+                else if (type.Equals("jpg", StringComparison.CurrentCultureIgnoreCase)
+                    || type.Equals("jpeg", StringComparison.CurrentCultureIgnoreCase)
+                    || type.Equals("png", StringComparison.CurrentCultureIgnoreCase) 
+                    || type.Equals("gif", StringComparison.CurrentCultureIgnoreCase) )
+                    mimeType = MediaType.IMAGE;
+                retVal.Add(new MediaItemModel { EventId = b.EventId, FileName = b.FileName, FilePath = b.FilePath, Type = mimeType, UploaderUsername = b.UploaderUsername });
             }
             return retVal;
         }
@@ -57,6 +68,7 @@ namespace Omnipresence.Processing
                 MediaItem mi = new MediaItem();
                 mi.FileName = cmim.FileName;
                 mi.FilePath = cmim.FilePath;
+                mi.UploaderUsername = cmim.UploaderUsername;
 
                 Event evt = db.Events.Where(e => e.EventId == cmim.EventId).FirstOrDefault();
 
