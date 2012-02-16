@@ -6,15 +6,15 @@
 
     <fieldset>
         
-        <div class="display-label">SenderName</div>
-        <div class="display-field"><%: Model.SenderName %></div>
-        
-        <div class="display-label">Message</div>
+        <h3><%: Model.SenderName %> said:</h3>
+
         <div class="display-field"><%: Model.Message %></div>
         
-        <div class="display-label">EventName</div>
+
+
         <div class="display-field"><% if (Model.EventName != null)
                { %>
+               Attached event:
                 <%: Html.ActionLink(Model.EventName, "Index", "Event", new { id = Model.EventID }, null)%>
                 <%} %></div>
         

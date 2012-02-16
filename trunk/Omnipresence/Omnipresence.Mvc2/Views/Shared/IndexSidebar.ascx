@@ -12,7 +12,13 @@
                     <%:Html.ActionLink(" (" + Model.Notifications.FriendRequests + " pending)", "Notifications", "Home")%><%} %>
                     <% else if (Model.Notifications.FriendRequests == 1) { %>
                     <%:Html.ActionLink(" (" + Model.Notifications.FriendRequests + " pending)", "Notifications", "Home")%><%} %></p>
+                    
+                    <% if(Model.Notifications.UnreadMessages > 1) { %>
+                    <p><%: Html.ActionLink("messages ("+Model.Notifications.UnreadMessages+" unread)","Index","Message") %></p>
+                    
+                    <%}else{ %>
                     <p><%: Html.ActionLink("messages","Index","Message") %></p>
+                    <%} %>
                     <p><%: Html.ActionLink("logout","LogOff","Account") %></p>
                     <%}else{ %>
                     <p>An error has occurred.</p><!-- will this actually happen? -->

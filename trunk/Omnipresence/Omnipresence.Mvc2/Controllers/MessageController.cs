@@ -14,6 +14,7 @@ namespace Omnipresence.Mvc2.Controllers
         // GET: /Message/
         private AccountServices accountServices;
         private EventServices eventServices;
+        private static int MESSAGE_PREVIEW_LENGTH = 20;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
@@ -44,8 +45,14 @@ namespace Omnipresence.Mvc2.Controllers
                     Message = mm.Message,
                     MessageID = mm.MessageID,
                     SenderName = sender.FirstName + " " + sender.LastName,
-                    SenderProfileID = mm.SenderProfileID
+                    SenderProfileID = mm.SenderProfileID,
+                    Read = mm.Read
                 };
+
+                if (mvm.Message.Length > MESSAGE_PREVIEW_LENGTH)
+                {
+                    mvm.Message = mvm.Message.Substring(0, MESSAGE_PREVIEW_LENGTH) + "...";
+                }
 
                 EventModel em = eventServices.GetEventById(mm.EventID != null ? (int)mm.EventID : -1);
 

@@ -78,7 +78,11 @@ namespace Omnipresence.Mvc2.Controllers
         [HttpPost]
         public ActionResult Register(RegisterModel model)
         {
-            if (AddUser(model)) return RedirectToAction("Index", "Home");
+            if (AddUser(model))
+            {
+                FormsService.SignIn(model.UserName, false);
+                return RedirectToAction("Index", "Home");
+            }
 
             ViewData["PasswordLength"] = 6;
 
