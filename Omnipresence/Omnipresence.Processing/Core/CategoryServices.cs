@@ -52,11 +52,14 @@ namespace Omnipresence.Processing
         {
             List<CategoryModel> categoryModels = new List<CategoryModel>();
             IQueryable categories = db.Categories;
-
-            foreach (Category category in categories)
+            try
             {
-                categoryModels.Add(Utilities.CategoryToCategoryModel(category));
+                foreach (Category category in categories)
+                {
+                    categoryModels.Add(Utilities.CategoryToCategoryModel(category));
+                }
             }
+            catch (Exception e) { }
 
             return categoryModels.AsQueryable();
         }

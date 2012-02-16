@@ -13,5 +13,6 @@ namespace Omnipresence.Mvc2.Models
         public Guid MessageID { get; set; }
         public int EventID { get; set; }
         public String EventName { get; set; }
+        public bool Read { get; set; }
     }
 }

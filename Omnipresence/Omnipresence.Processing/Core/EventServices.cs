@@ -409,7 +409,8 @@ namespace Omnipresence.Processing
                     Message = g.MailMessage,
                     MessageID = g.MailId,
                     ReceipientProfileID = g.ToUserProfile.UserProfileId,
-                    SenderProfileID = g.FromUserProfile.UserProfileId
+                    SenderProfileID = g.FromUserProfile.UserProfileId,
+                    Read = g.Read
                 });
             }
             return retval.AsQueryable();

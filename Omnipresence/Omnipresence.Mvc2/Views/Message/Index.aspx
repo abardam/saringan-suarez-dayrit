@@ -28,7 +28,14 @@
                 <%: Html.ActionLink(item.SenderName, "ProfileById", "Profile", new {id = item.SenderProfileID}, null) %>
             </td>
             <td>
+                <% if (!item.Read)
+                   { %> <b> <%} %>
+                
                 <%: Html.ActionLink(item.Message, "ViewMessage", "Message", new {id = item.MessageID.ToString()}, null) %>
+
+                
+                <% if (!item.Read)
+                   { %> </b> <%} %>
             </td>
             <td>
             <% if (item.EventName != null)
